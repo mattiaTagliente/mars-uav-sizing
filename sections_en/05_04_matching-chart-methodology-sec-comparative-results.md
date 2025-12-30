@@ -82,7 +82,7 @@ Before examining each configuration individually, @fig:ld-comparison through @fi
 
 ![Power requirements comparison. Hover power (3178 W) is identical for rotorcraft and hybrid VTOL. Cruise power varies with aerodynamic efficiency: rotorcraft 460 W, fixed-wing 286 W, hybrid VTOL 318 W.](figures/power_comparison.png){#fig:power-comparison width=85%}
 
-![Endurance comparison against the 60-minute requirement (dashed line). Rotorcraft fails marginally at 57 min. Fixed-wing achieves 121 min (with 20% energy reserve) but cannot satisfy VTOL requirement. Hybrid VTOL achieves 81 min with adequate margin.](figures/endurance_comparison.png){#fig:endurance-comparison width=80%}
+![Endurance comparison against the 60-minute requirement (dashed line). Rotorcraft fails marginally at 57 min. Fixed-wing achieves 121 min (with 20% energy reserve) but cannot satisfy VTOL requirement. Hybrid VTOL achieves 90 min with adequate margin.](figures/endurance_comparison.png){#fig:endurance-comparison width=80%}
 
 #### Rotorcraft constraint analysis
 

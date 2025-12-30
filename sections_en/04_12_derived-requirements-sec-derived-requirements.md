@@ -291,11 +291,12 @@ A 20% energy reserve is maintained in addition to the mission profile energy. Th
 | Phase | Duration | Cumulative | Power mode |
 |:------|:--------:|:----------:|:-----------|
 | Takeoff hover | 1 min | 1 min | Hover |
-| Outbound cruise | 21 min | 22 min | Cruise |
-| Survey operations | 15 min | 37 min | Cruise |
-| Return cruise | 21 min | 58 min | Cruise |
-| Landing hover | 1 min | 59 min | Hover |
-| Contingency | 1 min | 60 min | Hover |
+| Q2P transition | 0.5 min | 1.5 min | Transition |
+| Outbound cruise | 21 min | 22.5 min | Cruise |
+| Survey operations | 15 min | 37.5 min | Cruise |
+| Return cruise | 21 min | 58.5 min | Cruise |
+| P2Q transition | 0.5 min | 59 min | Transition |
+| Landing hover | 1 min | 60 min | Hover |
 | Total flight | 60 min | N.A. | N.A. |
 
 The 60-minute flight time plus 20% energy reserve yields a design endurance requirement of approximately 72 minutes equivalent energy capacity.

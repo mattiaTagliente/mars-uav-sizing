@@ -464,10 +464,11 @@ were removed from inline citations and documented here instead.
   Source: Calculated from P_hover × t_hover
   Calculation: E = 3178 W × (120 s / 3600 s/h) = 106.0 Wh
 
-- "Transition energy E_transition = 25.0 Wh (2 transitions)"
+- "Transition energy E_transition = 10.0 Wh (2 transitions)"
   Source: Scaled from [@goetzendorf-grabowskiOptimizationEnergyConsumption2022]
-  Reference value: ~45 kJ per transition for 10 kg quad-plane
-  Calculation: E = 2 × 45000 J / 3600 J/Wh = 25.0 Wh
+  Reference value: ~45 kJ per transition for PW Chimera (25 kg MTOW)
+  Mass scaling: E_10kg = 45 kJ × (10/25) = 18 kJ per transition
+  Calculation: E = 2 × 18000 J / 3600 J/Wh = 10.0 Wh
   Note: Simplified energy-only model with linear mass scaling;
         does not capture peak power or transition corridor constraints
 
@@ -475,17 +476,17 @@ were removed from inline citations and documented here instead.
   Source: Calculated from P_cruise × t_cruise
   Calculation: E = 317.9 W × (57 min / 60 min/h) = 302.0 Wh
 
-- "Mission energy = 433.0 Wh (hover + transition + cruise)"
+- "Mission energy = 418.0 Wh (hover + transition + cruise)"
   Source: Calculated sum of flight phase energies
-  Calculation: E_mission = 106.0 + 25.0 + 302.0 = 433.0 Wh
+  Calculation: E_mission = 106.0 + 10.0 + 302.0 = 418.0 Wh
 
-- "Required energy with 20% reserve = 519.6 Wh"
+- "Required energy with 20% reserve = 501.6 Wh"
   Source: Calculated from @eq:energy-required-total
-  Calculation: E_req = 1.20 × 433.0 = 519.6 Wh
+  Calculation: E_req = 1.20 × 418.0 = 501.6 Wh
 
-- "Energy margin = 38.2%"
+- "Energy margin = 43.2%"
   Source: Calculated from available vs required energy
-  Calculation: Margin = (718.2 - 519.6) / 519.6 = 0.382 = 38.2%
+  Calculation: Margin = (718.2 - 501.6) / 501.6 = 0.432 = 43.2%
 
 - "Lift system mass penalty = 1.700 kg (17.0% of MTOW)"
   Source: Estimated from commercial QuadPlane reference data
@@ -3394,20 +3395,23 @@ SECTION 5.5: COMPARATIVE RESULTS AND CONFIGURATION SELECTION
 
 ### Quantitative Impact Assessment
 
-- "Transition energy estimate: ~25 Wh (two transitions × 45 kJ each)"
-  Source: Calculated from [@goetzendorf-grabowskiOptimizationEnergyConsumption2022] data
-  Calculation: 2 × 45 kJ × (1 Wh / 3.6 kJ) = 25 Wh
-  Note: Scaled estimate; actual Mars transition would differ
+- "Transition energy estimate: ~10 Wh (two transitions × 18 kJ each)"
+  Source: Scaled from [@goetzendorf-grabowskiOptimizationEnergyConsumption2022] data
+  Reference: PW Chimera (25 kg MTOW) measured ~45 kJ per transition
+  Mass scaling: 45 kJ × (10 kg / 25 kg) = 18 kJ per transition
+  Calculation: 2 × 18 kJ × (1 Wh / 3.6 kJ) = 10 Wh
+  Note: Linear mass scaling is a first-order approximation
 
-- "Transition as fraction of hover energy: ~16%"
+- "Transition as fraction of hover energy: ~9%"
   Source: Calculated
-  Calculation: 25 Wh / 158.9 Wh = 15.7%
+  Calculation: 10 Wh / 106 Wh = 9.4%
 
-- "Impact on total mission energy: ~5% additional"
+- "Impact on total mission energy: ~2.4%"
   Source: Calculated
-  Calculation: 25 Wh / 461.5 Wh = 5.4%
+  Calculation: 10 Wh / 418 Wh = 2.4%
 
-- "Energy margin after transition consideration: ~24-25% (vs 29.7% baseline)"
+- "Energy margin with transition included: 43.2%"
   Source: Calculated
-  Calculation: (718.2 - 553.8 - 25) / 553.8 = 25.2%
+  Calculation: (718.2 - 501.6) / 501.6 = 43.2%
+  Note: Transition energy already included in required energy calculation
   Note: Still comfortably above 20% reserve requirement

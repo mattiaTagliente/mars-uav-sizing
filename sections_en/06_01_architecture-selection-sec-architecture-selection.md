@@ -97,13 +97,13 @@ The hybrid VTOL configuration is selected as the Mars UAV baseline because it is
 
 * **VTOL capability:** Lift rotors provide vertical takeoff and landing without ground infrastructure (✓)
 
-* **Adequate endurance margin:** 81 minutes achieved vs 60 minutes required (+35.7% margin) (✓)
+* **Adequate endurance margin:** 90 minutes achieved vs 60 minutes required (+50% margin) (✓)
 
-* **Adequate range margin:** 188 km achieved vs 100 km required (+88% margin) (✓)
+* **Adequate range margin:** 208 km achieved vs 100 km required (+108% margin) (✓)
 
 * **Degraded-mode capability:** If the cruise motor fails, the aircraft can glide to extend time for emergency VTOL landing, unlike pure rotorcraft which crashes immediately.
 
-* **Energy feasibility:** Required 553.8 Wh vs available 718.2 Wh (+29.7% margin above requirement).
+* **Energy feasibility:** Required 502 Wh vs available 718 Wh (+43% margin above requirement).
 
 The configuration accepts a mass penalty of approximately 17% of MTOW for the dual propulsion system. This penalty is justified because:
 

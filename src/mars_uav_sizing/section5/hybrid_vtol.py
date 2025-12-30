@@ -167,11 +167,13 @@ def transition_energy_estimate() -> Dict[str, float]:
     a conservative estimate based on literature data.
 
     Reference: Goetzendorf-Grabowski (ICAS 2022) measured ~45 kJ per transition
-    for a 10 kg quad-plane on Earth. The energy is scaled for Mars conditions.
+    for the PW Chimera, a 25 kg quad-plane, on Earth. The energy is scaled
+    linearly with mass for the 10 kg Mars UAV: E_trans = E_ref × (m/m_ref).
 
     Note: During transition, hybrid mode can consume MORE power than pure hover
     at certain airspeeds due to the additional forward thrust requirement while
-    lift rotors are still active (Mathur & Atkins 2025).
+    lift rotors are still active (Mathur & Atkins 2025). This peak power effect
+    is not captured by this energy-only model.
 
     Returns
     -------

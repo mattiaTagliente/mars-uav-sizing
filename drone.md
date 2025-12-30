@@ -1080,11 +1080,12 @@ A 20% energy reserve is maintained in addition to the mission profile energy. Th
 | Phase | Duration | Cumulative | Power mode |
 |:------|:--------:|:----------:|:-----------|
 | Takeoff hover | 1 min | 1 min | Hover |
-| Outbound cruise | 21 min | 22 min | Cruise |
-| Survey operations | 15 min | 37 min | Cruise |
-| Return cruise | 21 min | 58 min | Cruise |
-| Landing hover | 1 min | 59 min | Hover |
-| Contingency | 1 min | 60 min | Hover |
+| Q2P transition | 0.5 min | 1.5 min | Transition |
+| Outbound cruise | 21 min | 22.5 min | Cruise |
+| Survey operations | 15 min | 37.5 min | Cruise |
+| Return cruise | 21 min | 58.5 min | Cruise |
+| P2Q transition | 0.5 min | 59 min | Transition |
+| Landing hover | 1 min | 60 min | Hover |
 | Total flight | 60 min | N.A. | N.A. |
 
 The 60-minute flight time plus 20% energy reserve yields a design endurance requirement of approximately 72 minutes equivalent energy capacity.
@@ -1368,7 +1369,7 @@ Lithium batteries lose capacity over charge cycles and in extreme cold. Capacity
 
 If a rotor fails, a multirotor cannot glide to a safe landing.
 
-For comparison, the hybrid VTOL configuration achieves 81 minutes endurance (+35.7% margin), providing greater operating margin. The configuration analysis and selection rationale are presented in @sec:architecture-selection.
+For comparison, the hybrid VTOL configuration achieves 90 minutes endurance (+50% margin), providing greater operating margin. The configuration analysis and selection rationale are presented in @sec:architecture-selection.
 
 ### Rotorcraft configuration conclusion
 
@@ -1818,15 +1819,21 @@ For the Mars UAV, transition dynamics are further complicated by the thin atmosp
 
 Given the complexity of transition modelling and the limited applicability of Earth-based measurements to Mars conditions, a conservative approach is adopted: transition energy is explicitly estimated and added to the energy budget rather than being ignored or absorbed into hover time.
 
-Reference data from @goetzendorf-grabowskiOptimizationEnergyConsumption2022 shows transition energy of approximately 45 kJ per transition for a 10 kg quad-plane under Earth conditions (baseline scenario without optimisation). Optimised transition trajectories achieved approximately 37 kJ per transition, representing a 20-42% reduction through trajectory shaping.
+Reference data from @goetzendorf-grabowskiOptimizationEnergyConsumption2022 shows transition energy of approximately 45 kJ per transition for the PW Chimera, a 25 kg quad-plane tested under Earth conditions (baseline scenario without optimisation). Optimised transition trajectories achieved approximately 37 kJ per transition, representing a 20-42% reduction through trajectory shaping.
 
-For the Mars UAV mission with two transitions (Q2P after takeoff and P2Q before landing), the conservative estimate uses the unoptimised value:
+For the 10 kg Mars UAV, the reference energy is scaled linearly with mass:
+
+$$E_\text{trans,10kg} = E_\text{trans,25kg} \times \frac{m_\text{UAV}}{m_\text{ref}} = 45 \times \frac{10}{25} = 18 \text{ kJ}$$ {#eq:transition-scaling}
+
+Linear mass scaling is a first-order approximation based on the observation that transition energy is dominated by kinetic energy changes ($\tfrac{1}{2}mv^2$) and work against gravity ($mgh$), both proportional to mass. This scaling is conservative: the reference vehicle's higher wing loading (25 kg / 1.2 m² = 20.8 kg/m²) compared to the Mars UAV's lower wing loading (10 kg / 0.91 m² ≈ 11 kg/m²) suggests slower transition speeds may be achievable, potentially reducing energy below the linear scaling estimate.
+
+For the Mars UAV mission with two transitions (Q2P after takeoff and P2Q before landing):
 
 $$E_\text{transition} = n_\text{transitions} \times E_\text{per\_transition}$$ {#eq:transition-energy}
 
-$$E_\text{transition} = 2 \times \frac{45{,}000 \text{ J}}{3600 \text{ J/Wh}} = 25.0 \text{ Wh}$$ {#eq:transition-energy-value}
+$$E_\text{transition} = 2 \times \frac{18{,}000 \text{ J}}{3600 \text{ J/Wh}} = 10.0 \text{ Wh}$$ {#eq:transition-energy-value}
 
-This represents approximately 24% of the pure hover energy (106 Wh) or 6% of the total mission energy (433 Wh). While modest in absolute terms, explicitly accounting for this energy provides a more accurate budget and maintains design margins.
+This represents approximately 9% of the pure hover energy (106 Wh) or 2.4% of the total mission energy. While modest in absolute terms, explicitly accounting for this energy provides a more accurate budget and maintains design margins.
 
 #### Literature context
 
@@ -1868,9 +1875,9 @@ The total required energy is therefore:
 
 $$E_\text{required} = 1.200 \times (E_\text{hover} + E_\text{transition} + E_\text{cruise})$$ {#eq:energy-required-total}
 
-Substituting the calculated values from hover analysis (@eq:hover-energy-value: 106 Wh for 2 min pure hover), transition estimate (@eq:transition-energy-value: 25 Wh), and cruise analysis (@eq:cruise-energy-value: 302.6 Wh):
+Substituting the calculated values from hover analysis (@eq:hover-energy-value: 106 Wh for 2 min pure hover), transition estimate (@eq:transition-energy-value: 10 Wh), and cruise analysis (@eq:cruise-energy-value: 302 Wh):
 
-$$E_\text{required} = 1.200 \times (106.0 + 25.0 + 302.6) = 1.200 \times 433.6 = 520.3 \text{ Wh}$$ {#eq:energy-required-value}
+$$E_\text{required} = 1.200 \times (106.0 + 10.0 + 302.0) = 1.200 \times 418.0 = 501.6 \text{ Wh}$$ {#eq:energy-required-value}
 
 The available energy from the battery is determined by @eq:battery-energy-fraction from @sec:battery-utilisation:
 
@@ -1886,11 +1893,11 @@ The mission is feasible if:
 
 $$E_\text{available} \geq E_\text{required}$$ {#eq:energy-feasibility}
 
-Since 718.2 Wh ≥ 519.6 Wh, the energy constraint is satisfied.
+Since 718.2 Wh ≥ 501.6 Wh, the energy constraint is satisfied.
 
 The energy margin is:
 
-$$\text{Margin} = \frac{E_\text{available} - E_\text{required}}{E_\text{required}} = \frac{718.2 - 519.6}{519.6} = 38.2\%$$
+$$\text{Margin} = \frac{E_\text{available} - E_\text{required}}{E_\text{required}} = \frac{718.2 - 501.6}{501.6} = 43.2\%$$
 
 This margin indicates that the baseline design satisfies the energy constraint with adequate reserve beyond the 20% already included. This margin can be used for extended mission range (beyond 50 km radius), additional contingency operations, increased payload mass, or accommodation of battery degradation.
 
@@ -1902,9 +1909,9 @@ $$f_\text{batt,min} = \frac{1.20 \times (E_\text{hover} + E_\text{transition} + 
 
 Substituting values:
 
-$$f_\text{batt,min} = \frac{519.6}{10.00 \times 270.0 \times 0.8000 \times 0.9500} = \frac{519.6}{2052} = 0.2532$$ {#eq:f-batt-min-value}
+$$f_\text{batt,min} = \frac{501.6}{10.00 \times 270.0 \times 0.8000 \times 0.9500} = \frac{501.6}{2052} = 0.2445$$ {#eq:f-batt-min-value}
 
-The minimum required battery fraction is 25.3%, below the baseline allocation of 35%. This confirms feasibility and provides design flexibility.
+The minimum required battery fraction is 24.4%, below the baseline allocation of 35%. This confirms feasibility and provides design flexibility.
 
 ### Mass penalty analysis
 
@@ -1979,18 +1986,18 @@ The matching chart methodology and constraint diagram analysis are presented in 
 
 | Component | Power (W) | Time (min) | Energy (Wh) | Fraction |
 |:----------|----------:|:----------:|------------:|---------:|
-| Hover (takeoff + landing) | 3178 | 2.00 | 106.0 | 24% |
-| Transition (2 × 30 s) | - | 1.00 | 25.0 | 6% |
-| Cruise (transit + survey) | 318 | 57.00 | 302.0 | 70% |
-| Mission total | - | 60.00 | 433.0 | 100% |
-| Reserve (20%) | - | - | 86.6 | - |
-| Required total | - | - | 519.6 | - |
+| Hover (takeoff + landing) | 3178 | 2.00 | 106.0 | 25% |
+| Transition (2 × 30 s) | - | 1.00 | 10.0 | 2.4% |
+| Cruise (transit + survey) | 318 | 57.00 | 302.0 | 72% |
+| Mission total | - | 60.00 | 418.0 | 100% |
+| Reserve (20%) | - | - | 83.6 | - |
+| Required total | - | - | 501.6 | - |
 | Available | - | - | 718.2 | - |
-| Margin | - | - | 198.6 | 38.2% |
+| Margin | - | - | 216.6 | 43.2% |
 
-![Hybrid VTOL energy budget visualisation showing required energy (hover, transition, cruise, reserve) versus available battery energy. The 38.2% margin provides adequate safety buffer for mission operations.](figures/energy_budget.png){#fig:energy-budget width=80%}
+![Hybrid VTOL energy budget visualisation showing required energy (hover, transition, cruise, reserve) versus available battery energy. The 43% margin provides adequate safety buffer for mission operations.](figures/energy_budget.png){#fig:energy-budget width=80%}
 
-The analysis shows that despite the high power requirement during hover (3178 W), the short hover duration (2 min) limits hover energy to only 24% of the mission total. The transition phases (2 × 30 s) add a modest 6% energy overhead, explicitly accounted for based on literature data. The majority of energy (70%) is consumed during the extended cruise phase, where the fixed-wing configuration operates at moderate power (318 W).
+The analysis shows that despite the high power requirement during hover (3178 W), the short hover duration (2 min) limits hover energy to only 25% of the mission total. The transition phases (2 × 30 s) add a modest 2.4% energy overhead, explicitly accounted for based on literature data scaled from the 25 kg PW Chimera to 10 kg. The majority of energy (72%) is consumed during the extended cruise phase, where the fixed-wing configuration operates at moderate power (318 W).
 
 @tbl:quadplane-feasibility compares the QuadPlane capability against mission requirements:
 
@@ -1999,8 +2006,8 @@ The analysis shows that despite the high power requirement during hover (3178 W)
 | Requirement | Target | QuadPlane capability | Status |
 |:------------|:-------|:---------------------|:------:|
 | VTOL capability | Required | Yes (lift rotors) | PASS |
-| Cruise endurance | ≥60 min | 86.7 min (44.5% margin) | PASS |
-| Operational radius | ≥50 km | 100 km (100% margin) | PASS |
+| Cruise endurance | ≥60 min | 90 min (50% margin) | PASS |
+| Operational radius | ≥50 km | 104 km (108% margin) | PASS |
 | Hover time | 2 min | Limited by battery, not architecture | PASS |
 
 The hybrid VTOL (QuadPlane) configuration satisfies all mission requirements with adequate margin.
@@ -2091,7 +2098,7 @@ Before examining each configuration individually, @fig:ld-comparison through @fi
 
 ![Power requirements comparison. Hover power (3178 W) is identical for rotorcraft and hybrid VTOL. Cruise power varies with aerodynamic efficiency: rotorcraft 460 W, fixed-wing 286 W, hybrid VTOL 318 W.](figures/power_comparison.png){#fig:power-comparison width=85%}
 
-![Endurance comparison against the 60-minute requirement (dashed line). Rotorcraft fails marginally at 57 min. Fixed-wing achieves 121 min (with 20% energy reserve) but cannot satisfy VTOL requirement. Hybrid VTOL achieves 81 min with adequate margin.](figures/endurance_comparison.png){#fig:endurance-comparison width=80%}
+![Endurance comparison against the 60-minute requirement (dashed line). Rotorcraft fails marginally at 57 min. Fixed-wing achieves 121 min (with 20% energy reserve) but cannot satisfy VTOL requirement. Hybrid VTOL achieves 90 min with adequate margin.](figures/endurance_comparison.png){#fig:endurance-comparison width=80%}
 
 #### Rotorcraft constraint analysis
 
@@ -2258,13 +2265,13 @@ The hybrid VTOL configuration is selected as the Mars UAV baseline because it is
 
 * **VTOL capability:** Lift rotors provide vertical takeoff and landing without ground infrastructure (✓)
 
-* **Adequate endurance margin:** 81 minutes achieved vs 60 minutes required (+35.7% margin) (✓)
+* **Adequate endurance margin:** 90 minutes achieved vs 60 minutes required (+50% margin) (✓)
 
-* **Adequate range margin:** 188 km achieved vs 100 km required (+88% margin) (✓)
+* **Adequate range margin:** 208 km achieved vs 100 km required (+108% margin) (✓)
 
 * **Degraded-mode capability:** If the cruise motor fails, the aircraft can glide to extend time for emergency VTOL landing, unlike pure rotorcraft which crashes immediately.
 
-* **Energy feasibility:** Required 553.8 Wh vs available 718.2 Wh (+29.7% margin above requirement).
+* **Energy feasibility:** Required 502 Wh vs available 718 Wh (+43% margin above requirement).
 
 The configuration accepts a mass penalty of approximately 17% of MTOW for the dual propulsion system. This penalty is justified because:
 

@@ -229,7 +229,7 @@ Lithium batteries lose capacity over charge cycles and in extreme cold. Capacity
 
 If a rotor fails, a multirotor cannot glide to a safe landing.
 
-For comparison, the hybrid VTOL configuration achieves 81 minutes endurance (+35.7% margin), providing greater operating margin. The configuration analysis and selection rationale are presented in @sec:architecture-selection.
+For comparison, the hybrid VTOL configuration achieves 90 minutes endurance (+50% margin), providing greater operating margin. The configuration analysis and selection rationale are presented in @sec:architecture-selection.
 
 ### Rotorcraft configuration conclusion
 

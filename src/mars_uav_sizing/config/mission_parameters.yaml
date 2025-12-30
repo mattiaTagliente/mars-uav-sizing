@@ -48,19 +48,27 @@ time:
 # Source: [@mathurMultiModeFlightSimulation2025]
 transition:
   # Reference transition energy from ICAS 2022 paper (Earth conditions)
-  # Baseline ~48 kJ, Optimized ~37 kJ per transition
-  reference_energy_j: 45000    # J (conservative average)
+  # PW Chimera: 25 kg MTOW quad-plane
+  # Baseline ~45-48 kJ, Optimized ~37 kJ per transition
+  reference_energy_j: 45000    # J (conservative unoptimised value)
 
-  # Scaling approach: transition energy scales approximately with
-  # weight and velocity change. For Mars, we apply a scaling factor
-  # based on (W_mars / W_earth_ref) × (v_trans_mars / v_trans_earth)
-  # Reference Earth vehicle: ~10 kg, transition speeds ~2-12 m/s
-  reference_mtow_kg: 10.0      # kg (reference vehicle MTOW)
-  reference_v_trans_m_s: 10.0  # m/s (mid-range transition speed)
+  # Reference vehicle from ICAS 2022 paper
+  # PW Chimera: MTOW 25 kg, wingspan 3.5 m, wing area 1.2 m²
+  reference_mtow_kg: 25.0      # kg (PW Chimera MTOW)
 
-  # Mars scaling factor (computed in code based on actual parameters)
-  # Note: transition dynamics differ on Mars due to thin atmosphere,
-  # but this is partially offset by lower gravity (0.38g)
+  # NOTE: Velocity-based scaling is NOT implemented in code.
+  # The current implementation uses linear mass scaling only:
+  #   E_trans = E_ref × (m_UAV / m_ref) × mars_factor
+  # This is a first-order approximation; velocity effects are absorbed
+  # into the conservative mars_scaling_factor.
+  # reference_v_trans_m_s parameter retained for documentation only.
+  reference_v_trans_m_s: 10.0  # m/s (not used in calculations)
+
+  # Mars scaling factor applied after mass scaling
+  # Set to 1.0 (no adjustment) as a conservative assumption.
+  # Rationale: reduced gravity (0.38g) may reduce transition energy,
+  # but thin atmosphere effects are uncertain. Keeping factor at 1.0
+  # provides margin for unknowns.
   mars_scaling_factor: 1.0     # dimensionless (conservative: no reduction)
 
 # ==============================================================================
