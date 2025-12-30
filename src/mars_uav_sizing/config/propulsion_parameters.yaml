@@ -1,0 +1,37 @@
+# Mars UAV Sizing - Propulsion Parameters
+# =========================================
+# Propulsion system efficiency parameters.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §4.5 Propulsion Characteristics
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# ROTOR EFFICIENCY (from §4.5.1)
+# ==============================================================================
+rotor:
+  # Figure of merit for low-Reynolds Mars conditions
+  # Reference: Leishman (2006), Chapter 7; MAV data shows FM = 0.30-0.50
+  figure_of_merit: 0.40        # FM, dimensionless
+
+# ==============================================================================
+# ELECTROMECHANICAL EFFICIENCIES (from §4.5.2)
+# ==============================================================================
+electromechanical:
+  # Motor efficiency at peak operation
+  # Reference: Industry typical for BLDC motors
+  eta_motor: 0.85              # dimensionless
+  
+  # Electronic Speed Controller efficiency
+  # Reference: Industry typical for high-quality ESCs
+  eta_esc: 0.95                # dimensionless
+  
+  # Propeller efficiency at low-Re Mars conditions
+  # Reference: Sadraey (2020), scaled for Mars
+  eta_prop: 0.55               # dimensionless
+
+# ==============================================================================
+# DERIVED COMBINED EFFICIENCIES (computed, for reference)
+# ==============================================================================
+# eta_hover = FM × eta_motor × eta_esc = 0.40 × 0.85 × 0.95 = 0.323
+# eta_cruise = eta_prop × eta_motor × eta_esc = 0.55 × 0.85 × 0.95 = 0.444

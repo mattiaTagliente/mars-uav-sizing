@@ -1,0 +1,600 @@
+================================================================================
+ANALYSIS OF MATCHING CHARTS METHODOLOGY FOR MARS UAV
+================================================================================
+Version: 3.2
+Date: 2025-12-26
+Previous: matchingcharts_analysis_v3.txt (v3.1)
+Changes: Added load factor section (H), manuscript action items (Part V),
+         structural weight recalculation note, CS-23 reference
+
+================================================================================
+PART I: CONCEPTUAL FRAMEWORK
+================================================================================
+
+i) Difference between "Optimization Variables (Solved)" and "Outputs (Results)"
+
+This is an important conceptual distinction:
+
+OPTIMIZATION VARIABLES (Solved) are the unknowns that the solver (fsolve)
+iteratively adjusts to satisfy the system of constraint equations. These are
+the variables we seek as part of the optimization problem.
+
+In the MATLAB script (lines 8-12), these are defined as optimvar() objects
+that the solver manipulates:
+
+  Variable    Symbol      Description
+  ────────────────────────────────────────────────────────────
+  W           W           Total weight (MTOW)
+  S_W         W/S         Wing loading (weight/wing area)
+  T_S         T/S         Thrust loading (thrust/wing area)
+  lam         λ           Aspect ratio (bounded [6, 12])
+  k           k           Fuel fraction (W_fuel/W)
+
+OUTPUTS (Results) are derived quantities calculated from the solved
+optimization variables AFTER convergence. These are not unknowns—they are
+post-processing computations:
+
+  Output      Formula             Description
+  ────────────────────────────────────────────────────────────
+  S           S = W / (W/S)       Wing area
+  b           b = √(S × λ)        Wingspan
+  c           (MAC formula)       Mean aerodynamic chord
+  T           T = (T/S) × S       Total thrust
+  Cl, Cd, L/D (aerodynamic calcs) Cruise aerodynamics
+
+The distinction is:
+- Optimization variables: Inputs to the solver, iterated to find solution
+- Outputs: Computed from the solution, reported for downstream design
+
+--------------------------------------------------------------------------------
+
+ii) Reynolds Number: Calculation, Output, or Hypothesis?
+
+Examining the MATLAB script (lines 69, 175):
+
+  % Line 69 (before solver):
+  Rewing = V*c/nu;
+
+  % Line 175 (after solver):
+  Rewing = V*c/nu;
+
+The Reynolds number is an OUTPUT, computed from other parameters and the
+solved MAC (c). The calculation chain is:
+
+  1. V (cruise velocity) = 221.2 m/s → INPUT (hypothesis/fixed constant)
+  2. nu (kinematic viscosity) = 2.44×10⁻⁵ m²/s → INPUT (atmosphere property)
+  3. c (MAC) → OUTPUT (computed from solved S, λ, and taper ratio)
+  4. Re = V × c / nu → OUTPUT (computed from 1, 2, 3)
+
+So, for the regional jet:
+- Re is neither a hypothesis nor an input
+- Re is a derived output from wing geometry that emerges from the sizing
+
+This is important for airfoil selection: The sizing script must be run FIRST
+to obtain the wing geometry (S, b, c), and THEN the Reynolds number can be
+calculated to feed into XFOIL or experimental data lookup.
+
+================================================================================
+PART II: ADAPTED PARAMETER LIST FOR MARS UAV
+================================================================================
+
+Based on the original MATLAB script and the Mars UAV mission requirements,
+here is a necessary and sufficient parameter list for the Mars UAV feasibility
+study, highlighting differences from the regional jet case.
+
+================================================================================
+INPUTS (Fixed Constants / Design Hypotheses)
+================================================================================
+
+Inputs are organized into functional categories for clarity.
+
+--------------------------------------------------------------------------------
+A. MISSION PARAMETERS
+--------------------------------------------------------------------------------
+
+Parameter               Symbol          Mars UAV           Regional Jet
+────────────────────────────────────────────────────────────────────────────────
+Payload mass            m_payload       0.5-1.0 kg         ~10,000 kg (100 pax)
+Cruise endurance        t_cruise        60-90 min          — (uses range)
+Hover time              t_hover         0.5-3 min total    — (N/A)
+Range                   R               10-50 km           1852 km (1000 nmi)
+Cruise velocity         V_cruise        40 m/s             221.2 m/s (M=0.7)
+Minimum velocity        V_min           10-15 m/s          — (derived from landing)
+
+Notes:
+- V_cruise is CRITICAL for power and Reynolds calculations
+- V_min sets the stall constraint (minimum safe speed for wing flight)
+- Hover time includes takeoff + landing phases
+
+--------------------------------------------------------------------------------
+B. ATMOSPHERIC CONSTANTS
+--------------------------------------------------------------------------------
+
+Parameter               Symbol          Mars (Arcadia)     Earth (ISA SL)
+────────────────────────────────────────────────────────────────────────────────
+Surface density         ρ               0.015-0.020 kg/m³  1.225 kg/m³
+Gravity                 g               3.711 m/s²         9.81 m/s²
+Kinematic viscosity     ν               5×10⁻⁴ m²/s        1.5×10⁻⁵ m²/s
+Speed of sound          a               ~240 m/s           340 m/s
+Temperature             T               ~210 K (-63°C)     288 K (15°C)
+
+Notes:
+- Mars density varies with elevation; Arcadia Planitia at -3 km gives higher ρ
+- Kinematic viscosity on Mars is ~33× higher than Earth → low Reynolds numbers
+- Speed of sound is lower but still >> cruise speed (incompressible flow)
+
+--------------------------------------------------------------------------------
+C. GEOMETRY INITIAL GUESSES / BOUNDS
+--------------------------------------------------------------------------------
+
+Parameter               Symbol          Mars UAV           Regional Jet
+────────────────────────────────────────────────────────────────────────────────
+Aspect ratio bounds     λ               [10, 14]           [6, 12]
+Thickness ratio         t/c             0.06-0.12          0.14
+Taper ratio             λ_taper         0.5-0.6            0.4
+
+Fixed constants (not optimized):
+Sweep angle             Λ               0°                 25°
+
+Notes:
+- Higher aspect ratio benefits low-Re flight (reduces induced drag)
+- Thinner airfoils (t/c ~0.10) perform better at low Reynolds numbers
+- Zero sweep for simplicity and low-speed efficiency (no compressibility)
+- Sweep is NOT an optimization variable—fixed at 0° for Mars UAV
+
+--------------------------------------------------------------------------------
+D. AERODYNAMIC DATA
+--------------------------------------------------------------------------------
+
+Parameter               Symbol          Mars UAV           Regional Jet
+────────────────────────────────────────────────────────────────────────────────
+Maximum lift coeff.     C_L,max         1.2-1.4            2.3 (with flaps)
+Oswald efficiency       e               0.80-0.85          0.93
+Zero-lift drag coeff.   C_D0            0.02-0.04          ~0.015
+
+Notes:
+- C_L,max is lower for Mars UAV due to:
+  * No high-lift devices (flaps/slats) for simplicity
+  * Low-Re airfoils have reduced max lift capability
+- C_D0 is higher due to low-Re skin friction
+- Values come from airfoil analysis (Section 5) using Selig data
+
+--------------------------------------------------------------------------------
+E. PROPULSION EFFICIENCIES
+--------------------------------------------------------------------------------
+
+Parameter               Symbol          Mars UAV           Regional Jet
+────────────────────────────────────────────────────────────────────────────────
+Lift rotor count        n_lift          4-8                — (N/A)
+Cruise motor count      n_cruise        1-2                2 turbofans
+Disk loading            DL              50-150 N/m²        — (N/A)
+Figure of merit         FM              0.6-0.7            — (N/A)
+Propeller efficiency    η_prop          0.50-0.65          — (gas turbine)
+Motor efficiency        η_motor         0.82-0.88          — (gas turbine)
+ESC efficiency          η_ESC           0.95-0.98          — (N/A)
+
+Combined propulsion efficiency:
+  η_total = η_prop × η_motor × η_ESC ≈ 0.40-0.55
+
+Notes:
+- Figure of merit (FM) relates ideal to actual hover power
+- Low propeller efficiency on Mars due to low-Re blade operation
+- These efficiencies are critical for power calculations
+
+--------------------------------------------------------------------------------
+F. ENERGY SYSTEM
+--------------------------------------------------------------------------------
+
+Parameter               Symbol          Mars UAV           Regional Jet
+────────────────────────────────────────────────────────────────────────────────
+Battery specific energy e_spec          150-270 Wh/kg      — (uses SFC)
+Depth of discharge      DoD             0.80-0.90          — (N/A)
+Energy reserve          —               10-20%             20% fuel reserve
+SFC                     —               ❌ N/A              0.7 kg/(N·h)
+
+Notes:
+- Specific energy is the KEY battery parameter (Wh per kg of battery)
+- Current Li-ion: 150-200 Wh/kg; Future Li-S: 250-400 Wh/kg
+- DoD limits usable energy to protect battery longevity
+- SFC (specific fuel consumption) is irrelevant for electric propulsion
+
+--------------------------------------------------------------------------------
+G. MASS FRACTIONS (Design Hypotheses)
+--------------------------------------------------------------------------------
+
+These are INPUT HYPOTHESES based on reference UAV statistics, NOT optimization
+variables. They constrain the design space.
+
+Parameter               Symbol          Mars UAV           Regional Jet
+────────────────────────────────────────────────────────────────────────────────
+Battery fraction        f_batt          0.30-0.40          — (fuel: k variable)
+Structure fraction      f_struct        0.23-0.35          — (calculated)
+Propulsion fraction     f_prop          0.10-0.15          — (calculated)
+Avionics fraction       f_avionics      0.03-0.05          —
+Payload fraction        f_payload       0.05-0.15          ~22% (pax+cargo)
+
+Constraint: f_batt + f_struct + f_prop + f_avionics + f_payload ≤ 1.0
+
+Notes:
+- These fractions come from statistical analysis of reference UAVs
+- Battery fraction is the dominant term for electric aircraft
+- Unlike fuel fraction (which decreases during flight), battery mass is CONSTANT
+- The mass fractions guide initial MTOW estimation: MTOW ≈ m_payload / f_payload
+
+--------------------------------------------------------------------------------
+H. LOAD FACTORS AND STRUCTURAL DESIGN (NEW SECTION)
+--------------------------------------------------------------------------------
+
+The original regional jet script used load factors from CS-25 (large aircraft):
+
+  Nult = 1.5 × 3.8 = 5.7  (ultimate load factor)
+
+This value was used in structural weight estimation formulas:
+  - Qala (wing mass): Sadraey Eq. 10.3, includes (λ × Nult)^0.6 term
+  - Qfus (fuselage mass): includes Nult × (W/g) × Lfus term
+
+For the Mars UAV, CS-25 is NOT applicable. The appropriate reference is:
+
+  EASA CS-23 Amendment 5 (2017): Certification Specifications for
+  Normal-Category Aeroplanes
+  
+  Reference: [@europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017]
+
+However, CS-23 applies to manned aircraft up to 8,618 kg MTOM. For an
+unmanned Mars aircraft, there is NO regulatory certification requirement.
+The load factor should be selected based on ENGINEERING JUDGMENT considering:
+
+1. Mission profile (expected maneuvers, gust encounters)
+2. Absence of crew (lower safety requirement than manned aircraft)
+3. Mars atmospheric conditions (thin atmosphere → smaller gust loads)
+
+PROPOSED LOAD FACTOR FOR MARS UAV:
+
+Parameter               Symbol          Mars UAV           Regional Jet (CS-25)
+────────────────────────────────────────────────────────────────────────────────
+Positive limit load     n_limit+        +2.5               +3.8
+Negative limit load     n_limit-        -1.0               -1.52
+Factor of safety        SF              1.5                1.5
+Ultimate load factor    n_ult           3.75               5.7
+
+Rationale for n_limit = +2.5:
+- No pilot → no injury risk from high-g maneuvers
+- Autonomous flight → predictable, limited maneuvers
+- Mars atmosphere 60× thinner → gust loads reduced proportionally
+- Value consistent with lightweight UAV practice
+
+Rationale for keeping SF = 1.5:
+- Universal engineering practice for aerospace structures
+- Accounts for material variability and manufacturing tolerances
+- Provides margin for unforeseen loading conditions
+
+STRUCTURAL WEIGHT ESTIMATION NOTE:
+The structural weight estimation formulas (Sadraey, Raymer, etc.) must be
+recalculated using the Mars-appropriate n_ultimate = 3.75 instead of the
+CS-25 value of 5.7. This will reduce estimated structural mass.
+
+================================================================================
+REMOVED INPUTS (Not Applicable to Mars UAV)
+================================================================================
+
+The following inputs from the regional jet script are NOT needed:
+
+  ❌ Take-off runway length (Lto = 1400 m)     → VTOL, no runway
+  ❌ Landing runway length (Lland = 1250 m)   → VTOL, no runway
+  ❌ Braking deceleration (abb = 1.9 m/s²)    → VTOL, no braking
+  ❌ SFC (specific fuel consumption)          → Electric propulsion
+  ❌ Altitude correction factor (ψ)           → Single operating altitude
+  ❌ Throttle setting factor (ζ)              → Electric: power on demand
+  ❌ Mach number constraint                   → Subsonic regime only
+
+================================================================================
+OPTIMIZATION VARIABLES (Unknowns to be Solved)
+================================================================================
+
+These are the variables that the sizing algorithm solves for:
+
+Variable    Mars UAV              Regional Jet           Difference
+────────────────────────────────────────────────────────────────────────────────
+W           Total weight (N)      Total weight (N)       ✅ Same concept
+W/S         Wing loading (N/m²)   Wing loading (N/m²)    ✅ Same concept
+λ           Aspect ratio          Aspect ratio           ✅ Same concept
+P/W         Power loading (W/N)   T/S (thrust loading)   ⚠️ CHANGED to power
+            or (W/kg)
+
+Notes:
+- T/S → P/W: For electric propulsion, POWER loading is more natural than
+  THRUST loading because we size by power consumption, not thrust production.
+  
+  Relationship: P = T × V / η_prop (for cruise)
+                P = T × V_induced / FM (for hover, from momentum theory)
+
+- Units for P/W:
+  * W/N (watts per newton of weight) — dimensionally consistent
+  * W/kg (watts per kilogram) — more intuitive for electric aircraft
+
+- Battery fraction f_batt is NOT an optimization variable for electric aircraft
+  because battery mass is constant. Instead, battery energy E_batt is an OUTPUT
+  that must satisfy the mission energy requirement.
+
+================================================================================
+OUTPUTS (Derived Results)
+================================================================================
+
+These quantities are computed from the optimization solution:
+
+Output                      Mars UAV    Regional Jet    Used For
+────────────────────────────────────────────────────────────────────────────────
+GEOMETRY
+Wing area S                 ✅           ✅              Structure sizing
+Wingspan b                  ✅           ✅              Hangar requirements
+Mean aerodynamic chord c    ✅           ✅              Reynolds calculation
+Root chord c_root           ✅           ✅              Structural sizing
+Tip chord c_tip             ✅           ✅              Structural sizing
+
+AERODYNAMICS
+Reynolds number Re          ✅           ✅              Airfoil data selection
+Cruise C_L                  ✅           ✅              Airfoil operating point
+Cruise C_D                  ✅           ✅              Efficiency verification
+Lift-to-drag ratio L/D      ✅           ✅              Efficiency metric
+
+POWER & THRUST
+Cruise power P_cruise       ✅           ❌ (thrust)     Cruise motor sizing
+Hover power P_hover         ✅           ❌              Lift motor sizing
+Total cruise thrust T       ✅           ✅              Propeller sizing
+Hover thrust (= W)          ✅           ❌              Rotor sizing
+
+PROPELLER/ROTOR
+Lift rotor diameter D_rotor ✅           ❌              VTOL rotor selection
+Cruise propeller diameter   ✅           ❌              Cruise prop selection
+Disk loading DL             ✅           ❌              Hover efficiency check
+
+MASS BREAKDOWN (uses n_ultimate for structural components)
+Wing mass                   ✅           ✅ (Qala)       Structure verification
+Fuselage mass               ✅           ✅ (Qfus)       Structure verification
+Empennage mass              ✅           ✅ (Qimp)       Structure verification
+Propulsion mass             ✅           ✅ (Qmot)       Motor selection
+Battery mass                ✅           ❌ (fuel)       Battery selection
+Battery energy E_batt       ✅           ❌              Mission verification
+Total mass M                ✅           ✅              MTOW verification
+
+NOTE: Wing mass and fuselage mass estimates depend on n_ultimate. The Python
+sizing script must use the Mars UAV value (n_ult = 3.75) not the CS-25 value.
+
+================================================================================
+PART III: CONSTRAINT EQUATIONS FOR MARS UAV
+================================================================================
+
+The Mars UAV requires 5 constraint equations (same count as regional jet):
+
+#   Mars UAV Constraint                              Replaces (Regional Jet)
+────────────────────────────────────────────────────────────────────────────────
+1   Mass balance                                     Mass balance (same structure)
+    Σ(component masses) = MTOW                       Σ(Q terms) × g = W
+
+2   Hover power constraint                           ❌ Take-off runway
+    P_hover ≥ f(W, ρ, A_rotor, FM)                  (momentum theory)
+
+3   Stall constraint                                 ❌ Landing runway
+    W/S ≤ ½ρV_min²C_L,max                           (minimum safe speed)
+
+4   Cruise power constraint                          Cruise thrust (modified)
+    P_cruise = D × V / η = (W/L/D) × V / η          P = T × V / η
+
+5   Energy constraint                                ❌ Breguet range
+    E_batt ≥ P_hover×t_hover + P_cruise×t_cruise    (battery must store
+    + E_reserve                                      mission energy)
+
+--------------------------------------------------------------------------------
+Constraint Equation Details
+--------------------------------------------------------------------------------
+
+1. MASS BALANCE (same concept as regional jet)
+
+   MTOW = m_struct + m_prop + m_batt + m_payload + m_avionics + m_thermal
+
+   Or using fractions:
+   1 = f_struct + f_prop + f_batt + f_payload + f_avionics + f_thermal
+   
+   NOTE: Structural mass (m_struct) is calculated using weight estimation
+   formulas that include n_ultimate. Use n_ult = 3.75 for Mars UAV.
+
+2. HOVER POWER CONSTRAINT (replaces takeoff runway)
+
+   From momentum theory (Leishman):
+   
+   P_hover = T^(3/2) / (FM × √(2ρA))
+   
+   Where:
+   - T = W (thrust = weight in hover)
+   - FM = figure of merit (0.6-0.7)
+   - A = total rotor disk area
+   - ρ = atmospheric density
+
+   For n rotors of diameter D:
+   A = n × π × D² / 4
+
+3. STALL CONSTRAINT (replaces landing runway)
+
+   The wing must generate enough lift at minimum speed:
+   
+   W/S ≤ ½ × ρ × V_min² × C_L,max
+   
+   This sets the MAXIMUM allowable wing loading.
+
+4. CRUISE POWER CONSTRAINT (modified from regional jet)
+
+   Power required to overcome drag at cruise:
+   
+   P_cruise = D × V / η_total = (W / (L/D)) × V / η_total
+   
+   Where:
+   - L/D = lift-to-drag ratio at cruise C_L
+   - η_total = η_prop × η_motor × η_ESC
+
+5. ENERGY CONSTRAINT (replaces Breguet range)
+
+   Total mission energy requirement:
+   
+   E_mission = P_hover × t_hover + P_cruise × t_cruise
+   
+   Battery must provide:
+   
+   E_batt = E_mission / (DoD × (1 - reserve))
+   
+   Battery mass:
+   
+   m_batt = E_batt / e_spec
+
+--------------------------------------------------------------------------------
+NOTE ON TRANSITION (Post-Sizing Verification, NOT a Constraint)
+--------------------------------------------------------------------------------
+
+For hybrid VTOL aircraft (QuadPlane configuration), transition from hover to
+forward flight requires the wing to progressively take over lift from the
+rotors. This is NOT included as a sizing constraint because:
+
+1. Literature review shows that proper transition corridor analysis requires
+   full 6-DOF dynamic modeling with equilibrium equations involving:
+   - Wing lift: L = ½ρV²SC_L
+   - Rotor thrust components (vertical and horizontal)
+   - Pitch angle and angle of attack constraints
+   - Available power limits
+   
+   Reference: Zhao et al. (2023), "Development of Multimode Flight Transition
+   Strategy for Tilt-Rotor VTOL UAVs", Drones 7(9):580, DOI:10.3390/drones7090580
+
+2. No simple "wing lift fraction α" parameter is defined in the literature
+   for preliminary sizing. The α ≈ 0.5-0.7 value previously proposed was
+   not properly sourced and has been removed.
+
+3. The stall constraint (W/S ≤ ½ρV_min²C_L,max) already ensures that the
+   wing CAN generate full lift at the minimum speed V_min.
+
+4. The hover power constraint ensures rotors CAN support full weight in hover.
+
+5. By continuity, if both constraints are satisfied, a feasible transition
+   path exists where lift is progressively transferred from rotors to wing.
+
+POST-SIZING VERIFICATION:
+After sizing, verify that the transition speed satisfies:
+
+   V_transition ≥ 1.2 × V_stall
+
+Where V_stall = V_min from the stall constraint. The factor 1.2 is standard
+aviation practice (similar to 1.2 Vs for takeoff safety speed in conventional
+aircraft). This provides margin for gusts and control authority during the
+transition phase.
+
+If detailed transition corridor analysis is required (for final design), use
+the full equilibrium equations from Zhao et al. (2023) or equivalent methods.
+
+================================================================================
+PART IV: KEY DIFFERENCES SUMMARY
+================================================================================
+
+Aspect                  Regional Jet                Mars UAV
+────────────────────────────────────────────────────────────────────────────────
+Propulsion type         Gas turbine                 Electric (battery)
+Primary constraint      Range (Breguet)             Endurance (energy)
+Takeoff/landing         Runway (1400m/1250m)        VTOL (rotors)
+Mass variation          Fuel burns → mass decreases Battery constant
+Power metric            T/S (thrust loading)        P/W (power loading)
+Atmospheric density     1.225 kg/m³                 0.015-0.020 kg/m³
+Reynolds number         10⁷ - 10⁸                   10⁴ - 10⁵
+Compressibility         M = 0.7 (relevant)          M << 0.1 (irrelevant)
+High-lift devices       Flaps, slats                None (simplicity)
+Number of constraints   5                           5 (same count)
+Load factor n_limit     3.8 (CS-25)                 2.5 (proposed)
+Ultimate load n_ult     5.7                         3.75
+
+================================================================================
+PART V: MANUSCRIPT ACTION ITEMS
+================================================================================
+
+The following items must be addressed in the Mars UAV feasibility manuscript:
+
+--------------------------------------------------------------------------------
+ACTION 1: Define n_limit in Manuscript
+--------------------------------------------------------------------------------
+Location: Section on structural design hypotheses or requirements
+
+Content to add:
+- State that n_limit = 2.5 is adopted for the Mars UAV
+- Justify based on: unmanned operation, limited maneuvering envelope,
+  reduced gust loads in thin Mars atmosphere
+- Reference CS-23 Amendment 5 as methodological guidance (not regulatory)
+- Compute n_ultimate = n_limit × SF = 2.5 × 1.5 = 3.75
+
+Citation: [@europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017]
+
+--------------------------------------------------------------------------------
+ACTION 2: Recalculate Structural Weight Estimation
+--------------------------------------------------------------------------------
+Location: Section on weight estimation methodology
+
+Changes required:
+- Update Sadraey wing weight formula to use n_ult = 3.75
+- Update fuselage weight formula to use n_ult = 3.75
+- Document the sensitivity: lower n_ult → lower structural mass → lower MTOW
+
+Formula impact (Sadraey Eq. 10.3):
+  Qala ∝ (λ × n_ult)^0.6
+  
+  Ratio: (3.75/5.7)^0.6 ≈ 0.76
+  
+  → Wing mass estimate reduced by ~24% compared to CS-25 assumption
+
+Fuselage weight impact:
+  Qfus ∝ n_ult
+  
+  Ratio: 3.75/5.7 ≈ 0.66
+  
+  → Fuselage mass estimate reduced by ~34% compared to CS-25 assumption
+
+--------------------------------------------------------------------------------
+ACTION 3: Update Python Sizing Scripts
+--------------------------------------------------------------------------------
+Location: src/mars_uav_sizing/weights.py (or equivalent)
+
+Changes required:
+- Add n_limit and n_ultimate as configurable parameters
+- Default values: n_limit = 2.5, SF = 1.5, n_ultimate = 3.75
+- Update weight estimation functions to use these parameters
+- Add comments referencing the manuscript section
+
+--------------------------------------------------------------------------------
+ACTION 4: Add V-n Diagram Discussion (Optional)
+--------------------------------------------------------------------------------
+Location: Section on flight envelope or structural design
+
+Content to consider:
+- Define design speeds: V_A, V_C, V_D for Mars UAV
+- Discuss gust loads in Mars atmosphere (60× lower than Earth)
+- Note that flutter analysis may be required for final design
+
+References:
+- CS-23 Amendment 5 for V-n methodology
+- Mars atmosphere model for gust velocity estimation
+
+================================================================================
+PART VI: REFERENCES ADDED TO ZOTERO
+================================================================================
+
+The following references have been added to the Mars_UAV Zotero collection
+as part of this analysis:
+
+1. Zhao, H., Wang, B., et al. (2023). "Development of Multimode Flight
+   Transition Strategy for Tilt-Rotor VTOL UAVs." Drones 7(9):580.
+   DOI: 10.3390/drones7090580
+   Citation key: [@zhaoDevelopmentMultimodeFlight2023]
+   Used for: Transition corridor analysis methodology
+
+2. EASA (2017). "Certification Specifications for Normal-Category Aeroplanes
+   (CS-23) - Amendment 5."
+   URL: https://www.easa.europa.eu/en/document-library/certification-specifications/cs-23-amendment-5
+   Citation key: [@easaCertificationSpecificationsNormalCategory2017]
+   Used for: Load factor methodology, V-n diagram requirements
+
+================================================================================
+END OF DOCUMENT
+================================================================================

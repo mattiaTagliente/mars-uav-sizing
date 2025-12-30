@@ -1,0 +1,60 @@
+# Mars UAV Sizing - Physical Constants
+# =====================================
+# Universal physical constants and fundamental values.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §3 Mission Analysis, Appendix A
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# Universal Constants
+# ==============================================================================
+universal:
+  R_universal: 8.314462        # J/(mol·K), Universal gas constant
+
+# ==============================================================================
+# Earth Reference Values (for comparison)
+# ==============================================================================
+earth:
+  g: 9.80665                   # m/s², Standard gravity
+
+# ==============================================================================
+# Mars Physical Constants
+# ==============================================================================
+mars:
+  g: 3.711                     # m/s², Mars surface gravity [NASA Mars Fact Sheet]
+
+# ==============================================================================
+# Mars Atmospheric Composition
+# ==============================================================================
+mars_atmosphere_composition:
+  # Molar masses (kg/mol)
+  molar_mass:
+    CO2: 44.01e-3              # Carbon dioxide
+    N2: 28.01e-3               # Nitrogen  
+    Ar: 39.95e-3               # Argon
+  
+  # Volume fractions
+  volume_fraction:
+    CO2: 0.9532                # 95.32% CO2
+    N2: 0.027                  # 2.7% N2
+    Ar: 0.016                  # 1.6% Ar
+  
+  # Derived: Mean molar mass = X_CO2×M_CO2 + X_N2×M_N2 + X_Ar×M_Ar
+  # M_mars ≈ 43.34e-3 kg/mol
+  mean_molar_mass: 43.34e-3    # kg/mol
+  
+  # Derived: Specific gas constant R_mars = R_universal / M_mars
+  # R_mars = 8.314462 / 0.04334 ≈ 191.8 J/(kg·K)
+  R_specific: 188.92           # J/(kg·K) [Manuscript value, consistent with sources]
+  
+  # Specific heat ratio (gamma) for CO2-dominated atmosphere
+  gamma: 1.29                  # cp/cv for CO2 at ~200K
+
+# ==============================================================================
+# Sutherland's Law Parameters (for CO2 dynamic viscosity)
+# ==============================================================================
+sutherland:
+  mu_ref: 1.48e-5              # Pa·s, Reference viscosity at T_ref
+  T_ref: 293.0                 # K, Reference temperature
+  C: 240.0                     # K, Sutherland constant for CO2

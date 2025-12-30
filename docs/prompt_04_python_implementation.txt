@@ -1,0 +1,800 @@
+================================================================================
+PROMPT 04: PYTHON IMPLEMENTATION - PHASE B
+================================================================================
+Task: Implement Python scripts that reproduce manuscript EQUATIONS
+Output: Updated/new modules in src/mars_uav_sizing/
+Dependencies: Completed Phase A sections (05_02 through 05_05)
+
+================================================================================
+THREE-PHASE WORKFLOW RECAP
+================================================================================
+
+PHASE A: THEORETICAL DEVELOPMENT ✅ COMPLETED
+   - EQUATIONS researched, cited, and integrated into manuscript
+   - Sections 05_02, 05_03, 05_04, 05_05 contain theoretical framework
+   - Numerical values in manuscript are PLACEHOLDERS (not verified)
+
+PHASE B: PYTHON IMPLEMENTATION (THIS PROMPT)
+   - Implement Python scripts that reproduce manuscript EQUATIONS
+   - Test scripts to verify they run correctly
+   - Produce numerical outputs (but do NOT insert into manuscript)
+   - No new equations invented in code - equations come FROM manuscript
+
+PHASE C: MANUSCRIPT UPDATE (SEPARATE PROMPT - NOT THIS ONE)
+   - Run scripts and capture verified numerical results
+   - Update manuscript with computed values
+   - Update conceptual conclusions based on computed results
+   - Generate and insert figures
+
+================================================================================
+SCOPE OF THIS PROMPT: PHASE B ONLY
+================================================================================
+
+This prompt covers ONLY:
+✓ Creating Python module structure
+✓ Implementing equations from manuscript sections 05_02-05_05
+✓ Testing that modules run without errors
+✓ Verifying output format is correct
+
+This prompt does NOT cover:
+✗ Inserting numerical results into manuscript
+✗ Updating manuscript conclusions
+✗ Generating figures for manuscript
+✗ Updating source_grounding.txt
+✗ Any manuscript modifications whatsoever
+
+================================================================================
+CRITICAL PRINCIPLE: EQUATIONS FROM MANUSCRIPT, VALUES FROM CODE
+================================================================================
+
+                    EQUATIONS                    
+                    ─────────                    
+    Manuscript  ──────────────►  Code  ────►  Console Output
+    (source)                   (implements)     (for Phase C)
+
+1. EQUATIONS come FROM the manuscript
+   - Every equation must be traceable to manuscript sections 05_02-05_05
+   - Use the EXACT mathematical formulations from the manuscript
+   - Include docstring references to manuscript equation numbers
+
+2. CODE computes AUTHORITATIVE values
+   - The manuscript contains PLACEHOLDER values (not verified)
+   - The code computes the correct numerical results
+   - These outputs will be used in Phase C to update manuscript
+
+3. DO NOT update manuscript in this phase
+   - This prompt is ONLY for implementing and testing code
+   - Manuscript updates are handled in Phase C (separate prompt)
+
+================================================================================
+PROJECT CONTEXT
+================================================================================
+
+EXISTING CODE MODULES (src/mars_uav_sizing/):
+- atmosphere.py        : Mars atmospheric model ✅
+- aerodynamics.py      : Drag polar, L/D calculations ✅ (may need updates)
+- constraints.py       : Matching chart equations (NEEDS VERIFICATION)
+- endurance.py         : Energy calculations (NEEDS VERIFICATION)
+- weights.py           : Weight estimation ✅
+- constants.py         : Physical constants ✅
+- plotting.py          : Visualization (NEEDS UPDATES for matching charts)
+- run_sizing.py        : Entry point (NEEDS RESTRUCTURING)
+
+NEW MODULES TO CREATE:
+- analysis/                          : New package for Section 5 analysis
+  - __init__.py
+  - rotorcraft_analysis.py           : Implements §5.2 equations
+  - fixed_wing_analysis.py           : Implements §5.3 equations  
+  - hybrid_vtol_analysis.py          : Implements §5.4 equations
+  - comparative_analysis.py          : Implements §5.5 comparison
+  - matching_chart.py                : Generates constraint diagrams
+
+================================================================================
+MANUSCRIPT EQUATIONS TO IMPLEMENT
+================================================================================
+
+------------------------------------------------------------------------------
+SECTION 5.2: ROTORCRAFT ANALYSIS (05_02_rotorcraft-analysis.md)
+------------------------------------------------------------------------------
+
+Equation ref     | Description                           | For implementation
+-----------------|---------------------------------------|--------------------
+@eq:thrust-momentum     | Thrust from momentum: T = 2ρAv_i²   | Derive v_i
+@eq:induced-velocity    | v_i = sqrt(T/(2ρA))                 | Core function
+@eq:induced-velocity-dl | v_i = sqrt(DL/(2ρ))                 | Alternative form
+@eq:ideal-power         | P_ideal = T^1.5 / sqrt(2ρA)         | Core function
+@eq:ideal-power-weight  | P_ideal = W × sqrt(DL/(2ρ))         | For hover
+@eq:figure-of-merit     | FM = P_ideal / P_actual             | Efficiency
+@eq:hover-power         | P_hover = T^1.5 / (FM×sqrt(2ρA))    | Main hover eq
+@eq:electric-hover      | P_elec = P_hover/(η_mot×η_ESC)      | Battery power
+@eq:electric-hover-full | Full form with W^1.5                | As implemented
+@eq:hover-efficiency    | η_hover = FM × η_mot × η_ESC        | Combined eff
+@eq:hover-power-loading | P/W = (1/FM)×sqrt(DL/(2ρ))          | Constraint line
+@eq:hover-constraint    | With efficiency chain               | For chart
+
+@eq:forward-power-components | P_total = P_i + P_0 + P_p + P_c | Description only
+@eq:equivalent-ld           | (L/D)_eff = W×V / P_total       | Definition
+@eq:forward-power-ld        | P_fwd = W×V / (L/D)_eff         | Forward power
+@eq:forward-electric-power  | With efficiency chain           | Battery power
+
+@eq:battery-energy          | E = m×e_spec×DoD×η              | Energy available
+@eq:battery-energy-fraction | With mass fraction f_batt       | For sizing
+@eq:energy-per-kg           | 71.8 Wh/kg for baseline values  | Verify this!
+@eq:energy-available-value  | 237 Wh for 3.3 kg MTOW          | Verify this!
+@eq:endurance-definition    | t = E / P                       | Basic
+@eq:endurance-simple        | Cancel MTOW terms               | KEY EQUATION
+
+FUNCTIONS REQUIRED (rotorcraft_analysis.py):
+
+def induced_velocity(thrust_n: float, rho: float, disk_area_m2: float) -> float:
+    """Calculate induced velocity from momentum theory.
+    
+    Implements @eq:induced-velocity from §5.2:
+        v_i = sqrt(T / (2ρA))
+    
+    Parameters
+    ----------
+    thrust_n : float
+        Rotor thrust in Newtons
+    rho : float
+        Air density in kg/m³
+    disk_area_m2 : float
+        Total rotor disk area in m²
+    
+    Returns
+    -------
+    float
+        Induced velocity in m/s
+    """
+
+def ideal_hover_power(weight_n: float, rho: float, disk_area_m2: float) -> float:
+    """Calculate ideal (theoretical minimum) hover power.
+    
+    Implements @eq:ideal-power from §5.2:
+        P_ideal = W^1.5 / sqrt(2ρA)
+    """
+
+def actual_hover_power(weight_n: float, rho: float, disk_area_m2: float,
+                       figure_of_merit: float = 0.50) -> float:
+    """Calculate actual hover power including rotor losses.
+    
+    Implements @eq:hover-power from §5.2:
+        P_hover = W^1.5 / (FM × sqrt(2ρA))
+    """
+
+def electric_hover_power(weight_n: float, rho: float, disk_area_m2: float,
+                         figure_of_merit: float = 0.50,
+                         eta_motor: float = 0.85,
+                         eta_esc: float = 0.95) -> float:
+    """Calculate electrical power from battery for hover.
+    
+    Implements @eq:electric-hover-full from §5.2:
+        P_elec = W^1.5 / (FM × η_motor × η_ESC × sqrt(2ρA))
+    """
+
+def hover_power_loading(disk_loading: float, rho: float,
+                        figure_of_merit: float = 0.50,
+                        eta_motor: float = 0.85,
+                        eta_esc: float = 0.95) -> float:
+    """Calculate P/W ratio for hover constraint on matching chart.
+    
+    Implements @eq:hover-constraint from §5.2:
+        P/W = (1/(FM × η_motor × η_ESC)) × sqrt(DL/(2ρ))
+    
+    This value is INDEPENDENT of wing loading (W/S).
+    Returns a horizontal line on the matching chart.
+    """
+
+def forward_flight_power(weight_n: float, velocity: float,
+                         ld_effective: float = 4.0) -> float:
+    """Calculate rotor power in forward flight.
+    
+    Implements @eq:forward-power-ld from §5.2:
+        P_fwd = W × V / (L/D)_eff
+    """
+
+def rotorcraft_endurance(f_batt: float, e_spec_j_kg: float, dod: float,
+                         eta_batt: float, ld_eff: float, eta_motor: float,
+                         eta_esc: float, g_mars: float, v_cruise: float) -> float:
+    """Calculate rotorcraft endurance (MTOW-independent).
+    
+    Implements @eq:endurance-simple from §5.2:
+        t = (f_batt × e_spec × DoD × η_batt × (L/D)_eff × η_motor × η_ESC) / (g × V)
+    
+    Returns endurance in SECONDS.
+    """
+
+def rotorcraft_feasibility_analysis(mtow_kg: float,
+                                    disk_loading: float = 30.0,
+                                    hover_time_s: float = 180.0,
+                                    v_cruise: float = 40.0) -> dict:
+    """Complete rotorcraft feasibility analysis.
+    
+    Returns dictionary with:
+    - hover_power_w: Electrical hover power
+    - cruise_power_w: Forward flight power
+    - usable_energy_wh: Available battery energy
+    - hover_energy_wh: Energy for hover phases
+    - cruise_energy_wh: Remaining for cruise
+    - endurance_min: Achievable endurance
+    - range_km: Achievable range
+    - feasible: Boolean meeting 60 min requirement
+    - margin_percent: Safety margin over requirement
+    """
+
+------------------------------------------------------------------------------
+SECTION 5.3: FIXED-WING ANALYSIS (05_03_fixed-wing-analysis.md)
+------------------------------------------------------------------------------
+
+Equation ref          | Description                         | For implementation
+----------------------|-------------------------------------|--------------------
+@eq:lift-drag-equilibrium | L = W, T = D (level flight)     | Fundamentals
+@eq:lift-equation         | L = 0.5×ρ×V²×S×C_L              | Basic lift
+@eq:cruise-lift-coefficient | C_L = 2×(W/S)/(ρV²)           | From equilibrium
+@eq:parabolic-drag-polar    | C_D = C_D0 + C_L²/(π×AR×e)    | Drag model
+@eq:ld-ratio               | L/D = C_L / C_D                 | Efficiency
+@eq:ld-maximum             | (L/D)_max = 0.5×sqrt(πARe/C_D0) | Optimal
+@eq:cl-optimal             | C_L,opt = sqrt(π×AR×e×C_D0)     | At max L/D
+@eq:ld-max-value           | (L/D)_max = 15.3 for baseline   | VERIFY THIS
+@eq:cruise-power           | P = D×V / η = W×V / (L/D×η)     | Cruise power
+@eq:cruise-power-loading   | P/W = V / (L/D × η)             | For chart
+@eq:fixed-wing-electric    | With efficiency chain           | Battery power
+@eq:stall-speed            | V_stall = sqrt(2W/(ρ×S×C_Lmax)) | Minimum speed
+@eq:wing-loading-constraint| W/S ≤ 0.5×ρ×V_min²×C_Lmax      | Stall limit
+@eq:fixed-wing-endurance   | Full derivation                 | Endurance
+@eq:takeoff-distance       | ~5-6 km for Mars                | Why FW fails
+
+FUNCTIONS REQUIRED (fixed_wing_analysis.py):
+
+def cruise_lift_coefficient(wing_loading: float, rho: float, 
+                            velocity: float) -> float:
+    """Calculate C_L required for level flight.
+    
+    Implements @eq:cruise-lift-coefficient from §5.3:
+        C_L = 2×(W/S) / (ρ×V²)
+    """
+
+def drag_coefficient(c_l: float, c_d0: float, ar: float, e: float) -> float:
+    """Calculate drag coefficient from parabolic polar.
+    
+    Implements @eq:parabolic-drag-polar from §5.3:
+        C_D = C_D0 + C_L² / (π×AR×e)
+    """
+
+def lift_to_drag(c_l: float, c_d0: float, ar: float, e: float) -> float:
+    """Calculate L/D ratio.
+    
+    Implements @eq:ld-ratio from §5.3:
+        L/D = C_L / C_D
+    """
+
+def maximum_ld(c_d0: float, ar: float, e: float) -> tuple:
+    """Calculate maximum L/D and corresponding C_L.
+    
+    Implements @eq:ld-maximum and @eq:cl-optimal from §5.3:
+        (L/D)_max = 0.5 × sqrt(π×AR×e / C_D0)
+        C_L,opt = sqrt(π×AR×e×C_D0)
+    
+    Returns (ld_max, cl_optimal)
+    """
+
+def cruise_power(weight_n: float, velocity: float, ld: float,
+                 eta_prop: float = 0.55, eta_motor: float = 0.85,
+                 eta_esc: float = 0.95) -> float:
+    """Calculate electrical power for cruise.
+    
+    Implements @eq:fixed-wing-electric from §5.3:
+        P = W×V / (L/D × η_prop × η_motor × η_ESC)
+    """
+
+def cruise_power_loading(velocity: float, ld: float,
+                         eta_prop: float = 0.55, eta_motor: float = 0.85,
+                         eta_esc: float = 0.95) -> float:
+    """Calculate P/W for cruise constraint on matching chart.
+    
+    Implements @eq:cruise-power-loading from §5.3:
+        P/W = V / (L/D × η_cruise)
+    """
+
+def stall_speed(wing_loading: float, rho: float, c_l_max: float) -> float:
+    """Calculate stall speed from wing loading.
+    
+    Implements @eq:stall-speed from §5.3:
+        V_stall = sqrt(2×(W/S) / (ρ×C_L,max))
+    """
+
+def stall_wing_loading_limit(rho: float, v_min: float, 
+                             c_l_max: float) -> float:
+    """Calculate maximum allowable wing loading from stall constraint.
+    
+    Implements @eq:wing-loading-constraint from §5.3:
+        (W/S)_max = 0.5 × ρ × V_min² × C_L,max
+    """
+
+def fixed_wing_endurance(f_batt: float, e_spec_wh_kg: float, dod: float,
+                         eta_batt: float, ld: float, eta_prop: float,
+                         eta_motor: float, eta_esc: float,
+                         g_mars: float, v_cruise: float) -> float:
+    """Calculate fixed-wing endurance.
+    
+    Similar to rotorcraft but with higher L/D.
+    Returns endurance in MINUTES.
+    """
+
+def takeoff_ground_roll(mtow_kg: float, wing_area: float, rho: float,
+                        c_l_max: float, thrust_to_weight: float) -> float:
+    """Calculate takeoff ground roll distance.
+    
+    Implements @eq:takeoff-distance from §5.3.
+    Returns distance in METERS (should be ~5000-6000 m for Mars).
+    """
+
+def fixed_wing_feasibility_analysis(mtow_kg: float, wing_loading: float,
+                                    v_cruise: float = 40.0) -> dict:
+    """Complete fixed-wing feasibility analysis.
+    
+    Returns dictionary with:
+    - cruise_power_w: Electrical cruise power
+    - ld_max: Maximum L/D achievable
+    - endurance_min: Achievable endurance  
+    - range_km: Achievable range
+    - takeoff_roll_m: Ground roll distance
+    - can_takeoff: Boolean (should be False!)
+    - feasible: Boolean (should be False due to no VTOL)
+    """
+
+------------------------------------------------------------------------------
+SECTION 5.4: HYBRID VTOL ANALYSIS (05_04_hybrid-vtol-analysis.md)
+------------------------------------------------------------------------------
+
+The hybrid VTOL analysis COMBINES equations from §5.2 and §5.3:
+- Hover equations from rotorcraft analysis
+- Cruise equations from fixed-wing analysis
+- PLUS unique energy constraint
+
+Unique Equations:
+
+@eq:energy-budget          | E_req = E_hover + E_cruise + E_reserve  | Total energy
+@eq:hover-energy           | E_hover = P_hover × t_hover             | Hover phase
+@eq:cruise-energy          | E_cruise = P_cruise × t_cruise          | Cruise phase
+@eq:reserve-energy         | E_reserve = 0.20 × (E_hover + E_cruise) | 20% reserve
+@eq:battery-requirement    | m_batt ≥ E_req / (e_spec × DoD × η)     | Battery sizing
+@eq:mass-penalty           | Dual propulsion adds ~20-25% mass       | Trade-off
+
+FUNCTIONS REQUIRED (hybrid_vtol_analysis.py):
+
+def hybrid_hover_power(weight_n: float, rho: float, disk_area_m2: float,
+                       figure_of_merit: float = 0.50,
+                       eta_motor: float = 0.85,
+                       eta_esc: float = 0.95) -> float:
+    """Calculate hover power for lift rotors.
+    
+    Identical to rotorcraft analysis (§5.2).
+    """
+
+def hybrid_cruise_power(weight_n: float, velocity: float, ld: float,
+                        eta_prop: float = 0.55, eta_motor: float = 0.85,
+                        eta_esc: float = 0.95) -> float:
+    """Calculate cruise power for wing + cruise motor.
+    
+    Same as fixed-wing analysis (§5.3), but L/D may be reduced
+    due to parasitic drag from stopped lift rotors.
+    """
+
+def energy_budget(hover_power_w: float, hover_time_s: float,
+                  cruise_power_w: float, cruise_time_s: float,
+                  reserve_fraction: float = 0.20) -> dict:
+    """Calculate complete energy budget.
+    
+    Implements @eq:energy-budget from §5.4.
+    
+    Returns dictionary with:
+    - hover_energy_wh: Energy for hover phases
+    - cruise_energy_wh: Energy for cruise phase
+    - reserve_energy_wh: 20% reserve
+    - total_energy_wh: Sum of all components
+    """
+
+def required_battery_mass(total_energy_wh: float,
+                          e_spec_wh_kg: float = 270.0,
+                          dod: float = 0.80,
+                          eta: float = 0.95) -> float:
+    """Calculate minimum battery mass for mission.
+    
+    Implements @eq:battery-requirement from §5.4:
+        m_batt = E_total / (e_spec × DoD × η)
+    """
+
+def hybrid_vtol_feasibility(mtow_kg: float,
+                            disk_loading: float = 30.0,
+                            wing_loading: float = 17.0,
+                            hover_time_s: float = 180.0,
+                            cruise_time_s: float = 3600.0,
+                            v_cruise: float = 40.0) -> dict:
+    """Complete hybrid VTOL feasibility analysis.
+    
+    Returns dictionary with:
+    - hover_power_w: Electrical hover power
+    - cruise_power_w: Electrical cruise power
+    - energy_budget: Energy breakdown dict
+    - available_energy_wh: Battery capacity
+    - energy_margin_percent: Margin over required
+    - endurance_min: Achievable cruise minutes
+    - range_km: Achievable range
+    - feasible: Boolean (should be True!)
+    """
+
+------------------------------------------------------------------------------
+SECTION 5.5: COMPARATIVE ANALYSIS (05_05_comparative-results.md)
+------------------------------------------------------------------------------
+
+This section synthesises results from all three analyses.
+
+FUNCTIONS REQUIRED (comparative_analysis.py):
+
+def compare_configurations(mtow_kg: float = 3.3,
+                           disk_loading: float = 30.0,
+                           wing_loading: float = 17.0,
+                           v_cruise: float = 40.0) -> dict:
+    """Run all three analyses and compile comparison.
+    
+    Returns dictionary with structures for:
+    - rotorcraft: Full analysis results
+    - fixed_wing: Full analysis results  
+    - hybrid_vtol: Full analysis results
+    - comparison_table: Summary metrics
+    - recommendation: String with selected config
+    """
+
+def generate_comparison_table(results: dict) -> str:
+    """Generate markdown table matching @tbl:config-comparison.
+    
+    Output should be copy-paste ready for manuscript.
+    """
+
+def print_analysis_report(results: dict) -> None:
+    """Print comprehensive console report.
+    
+    Should match the format and values in manuscript §5.5.
+    """
+
+------------------------------------------------------------------------------
+MATCHING CHART GENERATION (matching_chart.py)
+------------------------------------------------------------------------------
+
+Matching chart plots P/W (vertical) vs W/S (horizontal):
+- Hover constraint: horizontal line
+- Cruise constraint: curve with minimum
+- Stall constraint: vertical line
+- Feasible region: intersection of constraints
+
+FUNCTIONS REQUIRED:
+
+def hover_constraint_line(ws_range: np.ndarray,
+                          disk_loading: float,
+                          rho: float,
+                          eta_hover: float) -> np.ndarray:
+    """Return P/W array for hover constraint.
+    
+    Returns horizontal line (constant P/W independent of W/S).
+    """
+
+def cruise_constraint_curve(ws_range: np.ndarray,
+                            velocity: float,
+                            rho: float,
+                            c_d0: float,
+                            ar: float,
+                            e: float,
+                            eta_cruise: float) -> np.ndarray:
+    """Return P/W array for cruise constraint.
+    
+    This is a curve because L/D varies with C_L (which varies with W/S).
+    """
+
+def stall_constraint_value(rho: float, v_min: float,
+                           c_l_max: float) -> float:
+    """Return maximum W/S from stall constraint.
+    
+    Returns single value (vertical line on chart).
+    """
+
+def plot_matching_chart(config: str,
+                        save_path: Optional[str] = None) -> None:
+    """Generate and optionally save matching chart.
+    
+    Parameters
+    ----------
+    config : str
+        One of 'rotorcraft', 'fixed_wing', 'hybrid_vtol', 'comparison'
+    save_path : str, optional
+        Path to save PNG figure
+    """
+
+def identify_design_point(constraints: dict) -> tuple:
+    """Find optimal design point from constraint intersection.
+    
+    Returns (wing_loading, power_loading) at design point.
+    """
+
+================================================================================
+INPUT PARAMETERS (VERIFIED CONSTANTS)
+================================================================================
+
+These are INPUT CONSTANTS from the research phases (prompts 02a-02i, 03a-03d).
+They are grounded in sources and documented in source_grounding.txt.
+The CODE uses these as inputs and COMPUTES output values.
+
+Physical Constants (from §3.1 Operational environment):
+- g_Mars = 3.711 m/s²          [NASA Mars Fact Sheet]
+- ρ_Arcadia = 0.0209 kg/m³     [Mars atmospheric model at -3 km]
+- ν = 8.0×10⁻⁴ m²/s            [Derived from Mars atmosphere]
+
+Propulsion Efficiencies (from §4.5 Propulsion data):
+- FM = 0.50                     [Leishman Ch.7, MAV rotor data]
+- η_prop = 0.55                 [Low-Re propeller efficiency]
+- η_motor = 0.85                [Typical brushless motor]
+- η_ESC = 0.95                  [Typical ESC]
+- η_hover = COMPUTE: FM × η_motor × η_ESC
+- η_cruise = COMPUTE: η_prop × η_motor × η_ESC
+
+Battery Parameters (from §4.6 Energy storage):
+- e_spec = 270 Wh/kg            [Solid-state Li-ion projection]
+- DoD = 0.80                    [Conservative for cycle life]
+- η_discharge = 0.95            [Typical discharge efficiency]
+
+Mass Fractions (from §4.11 Weight estimate):
+- f_batt = 0.35                 [From reference UAV statistics]
+- f_empty = 0.45                [From reference UAV statistics]
+- f_payload = 0.15              [From reference UAV statistics]
+- MTOW_baseline = 3.3 kg        [Computed from fractions]
+
+Aerodynamic Parameters (from §4.7 Aerodynamic analysis):
+- AR = 12                       [Design choice, justified in §4.12]
+- e = 0.75                      [Oswald efficiency estimate]
+- C_D0 = 0.030                  [Component buildup for low-Re]
+- C_L,max = 1.2                 [From airfoil data, §4.7]
+- (L/D)_eff = 4.0               [Typical rotorcraft, from Leishman]
+
+NOTE: (L/D)_max is an OUTPUT - computed from AR, e, C_D0 by the code.
+The manuscript placeholder value of 15.3 will be replaced with code result.
+
+Geometry Parameters (from §4.12 Derived requirements):
+- DL = 30 N/m²                  [Disk loading design choice]
+- W/S = 17 N/m²                 [Wing loading design choice]
+
+Mission Parameters (from §4.12 Derived requirements):
+- V_cruise = 40 m/s             [Design choice]
+- V_min = 36 m/s                [From stall analysis]
+- t_hover = 180 s               [Mission profile]
+- t_cruise_requirement = 60 min [Mission requirement]
+- Reserve = 20%                 [Standard practice]
+
+================================================================================
+OUTPUT REQUIREMENTS
+================================================================================
+
+Each module should output CLEARLY FORMATTED console text showing:
+1. Input parameters used
+2. Intermediate calculations (if educational)
+3. Final results with units
+4. Comparison against requirements
+5. Pass/Fail status
+
+Example output format (rotorcraft_analysis.py):
+
+NOTE: Values in this example are ILLUSTRATIVE. The actual code will compute
+these values, which then become the authoritative numbers for the manuscript.
+
+```
+================================================================================
+ROTORCRAFT FEASIBILITY ANALYSIS
+Equations from: Manuscript Section 5.2 (Rotorcraft Configuration)
+Values computed: [timestamp]
+================================================================================
+
+INPUT PARAMETERS (verified from sources)
+----------------------------------------
+MTOW:               3.3 kg
+Mars gravity:       3.711 m/s²
+Weight:             12.24 N        [COMPUTED: MTOW × g]
+Disk loading:       30.0 N/m²
+Disk area:          0.408 m²       [COMPUTED: W / DL]
+Air density:        0.0209 kg/m³
+
+PROPULSION EFFICIENCIES (from §4.5)
+-----------------------------------
+Figure of Merit:    0.50
+Motor efficiency:   0.85
+ESC efficiency:     0.95
+Combined η_hover:   0.404          [COMPUTED]
+
+BATTERY PARAMETERS (from §4.6, §4.11)
+-------------------------------------
+Mass fraction:      0.35
+Battery mass:       1.155 kg       [COMPUTED]
+Specific energy:    270 Wh/kg
+Total capacity:     311.9 Wh       [COMPUTED]
+Depth of discharge: 0.80
+Usable energy:      237.0 Wh       [COMPUTED]
+After 20% reserve:  189.6 Wh       [COMPUTED]
+
+HOVER ANALYSIS (@eq:induced-velocity through @eq:hover-constraint)
+------------------------------------------------------------------
+Induced velocity:   [CODE COMPUTES]    m/s
+Ideal power:        [CODE COMPUTES]    W
+Actual power:       [CODE COMPUTES]    W
+Electrical power:   [CODE COMPUTES]    W
+
+FORWARD FLIGHT ANALYSIS (@eq:forward-power-ld, @eq:forward-electric-power)
+--------------------------------------------------------------------------
+Equivalent L/D:     4.0
+Cruise velocity:    40 m/s
+Cruise power:       [CODE COMPUTES]    W
+
+MISSION ENERGY BUDGET
+---------------------
+Hover energy:       [CODE COMPUTES]    Wh
+Cruise energy:      [CODE COMPUTES]    Wh
+Cruise time:        [CODE COMPUTES]    min
+Total endurance:    [CODE COMPUTES]    min
+
+COMPARISON WITH REQUIREMENTS
+----------------------------
+Requirement          Target    Computed    Margin     Status
+Endurance            60 min    [COMPUTED]  [COMPUTED] [COMPUTED]
+Range                100 km    [COMPUTED]  [COMPUTED] [COMPUTED]
+VTOL                 Yes       Yes         —          ✓ PASS
+
+CONCLUSION: [DERIVED FROM COMPUTED VALUES]
+(Code determines feasibility based on computed margins)
+================================================================================
+
+>>> These COMPUTED values will be used to UPDATE the manuscript in Phase C.
+```
+
+================================================================================
+TESTING REQUIREMENTS
+================================================================================
+
+Each function should include:
+1. Docstring with equation reference
+2. Parameter descriptions with units
+3. Type hints
+4. A simple example in docstring (doctest-able)
+
+Each module should include a `if __name__ == "__main__":` block that:
+1. Runs a complete analysis with baseline parameters
+2. Prints formatted output as shown above
+3. Can be run standalone for verification
+
+================================================================================
+FILE STRUCTURE AFTER IMPLEMENTATION
+================================================================================
+
+src/mars_uav_sizing/
+├── __init__.py                    # Package init
+├── constants.py                   # Physical constants (update if needed)
+├── atmosphere.py                  # Mars atmosphere model
+├── aerodynamics.py                # Drag polar model
+├── weights.py                     # Weight estimation
+├── endurance.py                   # Energy calculations (may refactor)
+├── constraints.py                 # Keep for legacy, or refactor
+├── plotting.py                    # General plotting utilities
+├── run_sizing.py                  # Main entry point (update)
+│
+├── analysis/                      # NEW: Section 5 implementation
+│   ├── __init__.py
+│   ├── rotorcraft_analysis.py     # Section 5.2
+│   ├── fixed_wing_analysis.py     # Section 5.3
+│   ├── hybrid_vtol_analysis.py    # Section 5.4
+│   ├── comparative_analysis.py    # Section 5.5
+│   └── matching_chart.py          # Constraint diagram generation
+│
+└── data/                          # NEW: Configuration files
+    └── baseline_parameters.yaml   # All baseline values in one place
+
+================================================================================
+IMPLEMENTATION ORDER
+================================================================================
+
+STEP 1: Create analysis/ package structure
+   [ ] Create analysis/ directory
+   [ ] Create analysis/__init__.py with exports
+
+STEP 2: Create baseline_parameters.yaml
+   [ ] All constants in one file for easy verification against manuscript
+   [ ] Include comments with manuscript section references
+
+STEP 3: Implement rotorcraft_analysis.py
+   [ ] All hover power equations
+   [ ] Forward flight equations
+   [ ] Endurance equation
+   [ ] Feasibility analysis function
+   [ ] Console output function
+   [ ] Verify against §5.2 numerical values
+
+STEP 4: Implement fixed_wing_analysis.py
+   [ ] Lift/drag equations
+   [ ] Maximum L/D calculation (verify 15.3!)
+   [ ] Cruise power equations
+   [ ] Stall constraint
+   [ ] Takeoff ground roll
+   [ ] Feasibility analysis (should show INFEASIBLE)
+   [ ] Console output function
+   [ ] Verify against §5.3 numerical values
+
+STEP 5: Implement hybrid_vtol_analysis.py
+   [ ] Combine hover + cruise
+   [ ] Energy budget equation
+   [ ] Battery sizing
+   [ ] Feasibility analysis (should show FEASIBLE)
+   [ ] Console output function
+   [ ] Verify against §5.4 numerical values
+
+STEP 6: Implement comparative_analysis.py
+   [ ] Call all three analysis functions
+   [ ] Generate comparison table
+   [ ] Comprehensive report
+   [ ] Verify against §5.5 summary tables
+
+STEP 7: Implement matching_chart.py
+   [ ] Constraint line/curve generators
+   [ ] Plotting functions
+   [ ] Design point identification
+   [ ] Save figures for manuscript
+
+STEP 8: Update run_sizing.py
+   [ ] Import new analysis modules
+   [ ] Add command-line interface for running analyses
+   [ ] Generate all figures
+
+STEP 9: Verification
+   [ ] Run all modules standalone
+   [ ] Compare console output against manuscript values
+   [ ] Document any discrepancies in manuscript vs code
+
+================================================================================
+QUALITY CRITERIA (PHASE B COMPLETION)
+================================================================================
+
+The implementation is complete when:
+
+[ ] All EQUATIONS from §5.2-5.5 are implemented with docstring citations
+[ ] All INPUT PARAMETERS from verified sources are correctly used
+[ ] Each module has a working `if __name__ == "__main__":` block
+[ ] Running each module produces formatted console output
+[ ] Console output includes:
+    - All input parameters with units
+    - All computed intermediate values
+    - Final results (endurance, range, power, etc.)
+    - Comparison against requirements (pass/fail)
+[ ] Code runs without errors for all three configurations
+[ ] Matching chart plotting functions work correctly
+[ ] Code is well-documented with docstrings
+[ ] No equations exist in code that aren't in manuscript
+
+NOTE: Verifying numerical accuracy and updating manuscript is Phase C scope.
+
+================================================================================
+OUT OF SCOPE: PHASE C TASKS
+================================================================================
+
+The following tasks are explicitly OUT OF SCOPE for this prompt.
+They will be handled in a separate Phase C prompt:
+
+✗ Running scripts to capture final numerical results
+✗ Comparing code output to manuscript placeholder values
+✗ Updating numerical values in manuscript sections
+✗ Updating feasibility conclusions in manuscript
+✗ Generating PNG figures for matching charts
+✗ Inserting figures into manuscript with @fig: references
+✗ Updating summary tables in manuscript
+✗ Updating source_grounding.txt
+✗ Any modification to manuscript files whatsoever
+
+This prompt ends when the code is implemented, tested, and runs correctly.
+A separate prompt (Phase C) will handle manuscript integration.
+
+================================================================================
+END OF PROMPT
+================================================================================

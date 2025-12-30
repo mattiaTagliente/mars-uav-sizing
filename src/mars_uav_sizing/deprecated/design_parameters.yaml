@@ -1,0 +1,117 @@
+# Mars UAV Sizing - Design Parameters
+# ====================================
+# All design parameters for the Mars UAV, organized by manuscript section.
+# These values form the single source of truth for all calculations.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §4 Reference Data, §4.12 Derived Requirements
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# SECTION 4.5: Propulsion Characteristics
+# ==============================================================================
+propulsion:
+  # Rotor efficiency
+  figure_of_merit: 0.40        # FM, Low-Reynolds Mars rotor [Leishman Ch.7, MAV data 0.30-0.50]
+  
+  # Electromechanical efficiencies
+  eta_motor: 0.85              # BLDC motor efficiency [Industry typical at peak operation]
+  eta_esc: 0.95                # ESC efficiency [Industry typical for high-quality ESCs]
+  eta_prop: 0.55               # Propeller efficiency at low-Re Mars conditions [Sadraey 2020]
+  
+  # DERIVED combined efficiencies (computed, not inputs)
+  # eta_hover = FM × eta_motor × eta_esc = 0.40 × 0.85 × 0.95 = 0.323
+  # eta_cruise = eta_prop × eta_motor × eta_esc = 0.55 × 0.85 × 0.95 = 0.444
+
+# ==============================================================================
+# SECTION 4.6: Energy Storage Characteristics
+# ==============================================================================
+battery:
+  specific_energy_Wh_kg: 270   # Wh/kg, Solid-state Li-ion [CGBT SLD1-6S27Ah]
+  depth_of_discharge: 0.80     # DoD for cycle life [Industry practice]
+  discharge_efficiency: 0.95   # Round-trip efficiency [Industry typical]
+
+# ==============================================================================
+# SECTION 4.7: Aerodynamic Analysis
+# ==============================================================================
+aerodynamics:
+  # Drag polar parameters
+  aspect_ratio: 6              # AR, Design choice [§4.12, Mars precedents]
+  
+  # CORRECTED Oswald efficiency from Sadraey correlation:
+  # e = 1.78 × (1 - 0.045 × AR^0.68) - 0.64
+  # For AR = 6: e = 1.78 × (1 - 0.045 × 6^0.68) - 0.64 = 0.869
+  oswald_efficiency: 0.869     # e [Sadraey correlation for AR=6]
+  
+  cd0: 0.030                   # Zero-lift drag coefficient [Equivalent friction method]
+  cl_max: 1.20                 # Maximum lift coefficient [E387 at Re=60,000, UIUC Vol.1]
+  
+  # Rotorcraft-specific
+  ld_eff_rotorcraft: 4.0       # Equivalent L/D for rotorcraft forward flight [Leishman Ch.1]
+  
+  # DERIVED aerodynamic parameters (computed from above)
+  # k = 1/(π × AR × e) = 1/(π × 6 × 0.869) = 0.0612
+  # (L/D)_max = 0.5 × sqrt(π × AR × e / CD0) = 0.5 × sqrt(π × 6 × 0.869 / 0.030) = 11.68
+  # C_L* = sqrt(π × AR × e × CD0) = sqrt(π × 6 × 0.869 × 0.030) = 0.701
+
+# ==============================================================================
+# SECTION 4.11: Initial Mass Estimate
+# ==============================================================================
+mass_fractions:
+  battery: 0.35                # f_batt, Battery mass fraction [Reference UAV statistics]
+  empty: 0.30                  # f_empty, Structure mass fraction
+  payload: 0.10                # f_payload, Payload mass fraction
+  propulsion: 0.20             # f_propulsion, Dual system (lift + cruise)
+  avionics: 0.05               # f_avionics, Avionics and thermal control
+  # Sum = 1.00
+
+mass_estimate:
+  payload_kg: 1.0              # kg, Camera + radio [§4.1]
+  mtow_kg: 10.0                # kg, Baseline MTOW [Computed: payload / f_payload]
+
+# ==============================================================================
+# SECTION 4.12: Derived Requirements - Geometry
+# ==============================================================================
+geometry:
+  disk_loading_N_m2: 30.0      # N/m², DL design choice [Compromise power vs size]
+  taper_ratio: 0.5             # λ = c_tip/c_root [Near-elliptical loading]
+  thickness_ratio: 0.09        # t/c [Structural depth]
+  sweep_angle_deg: 0           # Λ [Low Mach, no benefit]
+
+# ==============================================================================
+# SECTION 4.12: Derived Requirements - Mission
+# ==============================================================================
+mission:
+  v_cruise_m_s: 40.0           # m/s, Cruise velocity [Mach, Re constraints]
+  v_stall_m_s: 29.2            # m/s, Stall speed at W/S = 10 N/m² [CORRECTED]
+  v_min_factor: 1.2            # V_min = 1.2 × V_stall [Safety margin]
+  
+  t_hover_s: 180               # s, Total hover time (takeoff 60s + landing 60s + margin 60s)
+  t_cruise_min: 57             # min, Cruise time [Outbound + survey + return]
+  t_total_min: 60              # min, Total flight time requirement
+  
+  operational_radius_km: 50    # km, Minimum operational radius
+  energy_reserve: 0.20         # 20% energy reserve [Mission profile, §4.12]
+
+# ==============================================================================
+# SECTION 4.12: Derived Requirements - Structural
+# ==============================================================================
+structural:
+  n_limit: 2.5                 # Limit load factor [CS-23 lower bound, unmanned]
+  safety_factor: 1.5           # Factor of safety [CS-23 standard]
+  n_ultimate: 3.75             # n_ult = n_limit × SF [For weight estimation]
+
+# ==============================================================================
+# QuadPlane-Specific Parameters
+# ==============================================================================
+quadplane:
+  ld_penalty_factor: 0.90      # L/D reduction due to stopped rotors (~10% drag penalty)
+  # Resulting L/D ≈ 0.90 × 11.68 ≈ 10.51 for QuadPlane cruise
+
+# ==============================================================================
+# Requirements (from §3.3 User Needs)
+# ==============================================================================
+requirements:
+  endurance_min: 60            # min, Minimum endurance requirement
+  range_km: 100                # km, Minimum range (round trip for 50 km radius)
+  vtol_required: true          # VTOL capability mandatory (no runway)

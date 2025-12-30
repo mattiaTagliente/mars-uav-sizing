@@ -1,0 +1,411 @@
+================================================================================
+PROMPT 02H: GEOMETRY BOUNDS AND RATIONALE
+================================================================================
+Task: Research and justify geometry parameter bounds for Mars UAV design
+Output: Manuscript content for 04_12_derived-requirements.md (geometry section)
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The constraint analysis
+requires bounds on key geometry parameters:
+
+1. Aspect ratio (AR) - affects induced drag and structural weight
+2. Thickness ratio (t/c) - from airfoil selection, affects waves and structure
+3. Taper ratio (λ) - affects lift distribution and structural weight
+4. Sweep angle (Λ) - affects compressibility (not relevant at Mars Mach)
+
+These parameters define the wing planform and are inputs to:
+- Drag polar calculation (AR, e dependency)
+- Weight estimation (AR, t/c, λ in weight equations)
+- Stall speed calculation (via C_L,max and wing area)
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. EVERY BOUND MUST BE JUSTIFIED:
+   - Cite source for recommended ranges
+   - Explain trade-offs that define the bounds
+   - Document any Mars-specific considerations
+
+2. SEARCH ZOTERO FIRST:
+   - Look for aircraft design textbooks (Raymer, Roskam, Nicolai)
+   - Look for UAV design references
+   - Look for Mars UAV studies
+
+3. CROSS-REFERENCE WITH EXISTING DATA:
+   - Check commercial VTOL reference data for actual values
+   - Check Mars UAV concepts for design choices
+   - Validate bounds against real designs
+
+================================================================================
+PARAMETERS TO RESEARCH
+================================================================================
+
+------------------------------------------------------------------------------
+1. ASPECT RATIO (AR) - [10, 14]
+------------------------------------------------------------------------------
+
+Definition: AR = b² / S = b / c_mean
+
+Where:
+- b = wingspan (m)
+- S = wing area (m²)
+- c_mean = mean chord (m)
+
+TRADE-OFFS:
+
+a) INDUCED DRAG (favors HIGH AR):
+   C_D,induced = C_L² / (π × AR × e)
+   
+   Higher AR → lower induced drag → higher L/D → better efficiency
+   At Mars low density, lift coefficient is high → induced drag dominates
+   
+   RESEARCH: Optimal AR for maximum L/D at given C_D0 and e
+
+b) STRUCTURAL WEIGHT (favors LOW AR):
+   Wing weight ∝ AR^β (typical β ≈ 0.5-0.7)
+   Higher AR → longer span → higher bending moment → heavier spar
+   
+   RESEARCH: AR exponent in Sadraey/Raymer weight equations
+
+c) REYNOLDS NUMBER (favors MODERATE AR):
+   For fixed wing area: c = S / b = S / sqrt(AR × S) = sqrt(S / AR)
+   Higher AR → smaller chord → lower Reynolds number
+   At very low Re, airfoil performance degrades
+   
+   Constraint: Re = ρVc/μ ≥ 50,000 (for good airfoil performance)
+
+d) STRUCTURAL STIFFNESS (favors LOW AR):
+   Higher AR → more flexible wing → flutter concerns
+   For small UAVs, this is less critical
+
+BOUNDS SELECTION:
+
+| Bound | Value | Rationale |
+|-------|-------|-----------|
+| Lower | AR = 10 | Minimum for good L/D at high C_L |
+| Upper | AR = 14 | Maximum before structural penalty dominates |
+
+SOURCES TO FIND:
+- Raymer: AR optimization charts or equations
+- Mars UAV studies: What AR values are used?
+- Ingenuity: AR of blades (for reference)
+- ARES: AR value from publications
+
+COMMERCIAL VTOL REFERENCE:
+Extract AR from reference_drones.yaml:
+- Calculate AR = wingspan² / wing_area for each UAV
+- Or AR = wingspan / chord if chord available
+- Report range for validation
+
+------------------------------------------------------------------------------
+2. THICKNESS RATIO (t/c) - [0.08, 0.12]
+------------------------------------------------------------------------------
+
+Definition: t/c = maximum_thickness / chord
+
+This parameter comes from airfoil selection and affects:
+- Structural height (spar depth)
+- Wave drag (negligible at low Mach)
+- Maximum lift coefficient
+
+VALUES FROM AIRFOIL ANALYSIS:
+
+| Airfoil | t/c | Source |
+|---------|-----|--------|
+| E387 | 0.091 | Selig Vol. 1 |
+| S7055 | 0.10 | Selig Vol. 1 |
+| SD8000 | 0.10 | Selig Vol. 1 |
+| SD7037 | 0.10 | Selig Vol. 1 |
+| AG455ct | 0.12 | Selig Vol. 5 |
+| AG35-r | ~0.10 | Selig Vol. 5 |
+| AG12 | ~0.08 | Selig Vol. 5 |
+
+TRADE-OFFS:
+
+a) STRUCTURAL WEIGHT (favors HIGH t/c):
+   Wing weight ∝ (t/c)^(-0.3) in Raymer equation
+   Thicker airfoil → deeper spar → stiffer, lighter structure
+   
+b) PROFILE DRAG (favors LOW t/c):
+   Thicker airfoil → more form drag → lower L/D
+   At low Re, this effect is moderated by transition behavior
+
+c) MAXIMUM LIFT (varies):
+   At low Re, thin airfoils may have better C_L,max
+   But some thickness needed for structural practicality
+
+BOUNDS SELECTION:
+
+| Bound | Value | Rationale |
+|-------|-------|-----------|
+| Lower | t/c = 0.08 | Minimum for structural practicality |
+| Upper | t/c = 0.12 | Maximum from candidate airfoils |
+
+DOCUMENT:
+- Source for structural weight dependency on t/c
+- Confirm t/c values from airfoil analysis
+
+------------------------------------------------------------------------------
+3. TAPER RATIO (λ) - [0.4, 0.6]
+------------------------------------------------------------------------------
+
+Definition: λ = c_tip / c_root
+
+Where:
+- c_tip = chord at wing tip
+- c_root = chord at wing root
+
+TRADE-OFFS:
+
+a) LIFT DISTRIBUTION (favors λ ≈ 0.4-0.5):
+   For elliptical (minimum induced drag) lift distribution:
+   λ_optimal ≈ 0.4 (for unswept wings)
+   
+   RESEARCH: Schrenk method or Prandtl lifting line theory
+   Source: Anderson "Fundamentals of Aerodynamics" or Raymer
+
+b) STRUCTURAL WEIGHT (favors LOW λ):
+   Low taper → larger root chord → deeper spar at root
+   Low taper → more material near root → efficient structure
+   But very low λ → tip stall tendency
+
+c) TIP STALL (favors HIGH λ):
+   Low taper → spanwise flow toward tip → tip stall first
+   For safety, want root to stall before tip
+   Geometric washout can mitigate this
+
+d) MANUFACTURING (favors HIGH λ):
+   λ = 1.0 (rectangular) is easiest to build
+   Tapered wing requires more complex molds
+
+SOURCES TO FIND:
+- Optimal taper for minimum induced drag (theory)
+- Raymer or Roskam recommended ranges
+- Commercial UAV typical values
+
+COMMERCIAL VTOL REFERENCE:
+From reference_drones.yaml or manufacturer specs:
+- What taper ratios do commercial VTOLs use?
+- Note: many use rectangular wings (λ = 1.0) for simplicity
+
+BOUNDS SELECTION:
+
+| Bound | Value | Rationale |
+|-------|-------|-----------|
+| Lower | λ = 0.4 | Near optimal for minimum induced drag |
+| Upper | λ = 0.6 | Compromise toward structural simplicity |
+
+RECOMMENDED: λ = 0.5 (compromise value)
+
+------------------------------------------------------------------------------
+4. SWEEP ANGLE (Λ) - [0°]
+------------------------------------------------------------------------------
+
+Definition: Λ = angle of quarter-chord line relative to perpendicular to fuselage
+
+For Mars UAV: Λ = 0° (no sweep)
+
+JUSTIFICATION:
+
+a) MACH NUMBER:
+   Mars UAV cruise Mach: M = V / a ≈ 40 / 230 ≈ 0.17
+   Sweep is used to delay compressibility effects (M > 0.7)
+   At M = 0.17, compressibility is completely negligible
+   
+   Source: Anderson "Fundamentals of Aerodynamics" - sweep chapter
+
+b) REYNOLDS NUMBER:
+   Sweep increases effective chord for pressure distribution
+   But does NOT increase chord-based Reynolds number
+   No benefit for low-Re performance
+
+c) STRUCTURAL WEIGHT:
+   Sweep increases bending-torsion coupling
+   Sweep complicates structural design
+   Adds weight without benefit at low Mach
+
+d) STALL CHARACTERISTICS:
+   Swept wings have poor stall characteristics (tip stall)
+   Unswept wing has more benign stall behavior
+
+CONCLUSION:
+Λ = 0° is the only sensible choice for Mars UAV
+
+DOCUMENT:
+- Source stating sweep is for transonic/supersonic
+- Confirm Mars Mach number is well below critical Mach
+
+================================================================================
+OUTPUT: MANUSCRIPT CONTENT
+================================================================================
+
+Draft content for 04_12_derived-requirements.md:
+
+------------------------------------------------------------------------------
+### Geometry parameter bounds {#sec:geometry-bounds}
+------------------------------------------------------------------------------
+
+This section defines the geometry parameters used in the constraint analysis
+and weight estimation.
+
+#### Aspect ratio
+
+The aspect ratio is bounded as:
+
+$$AR \in [10, 14]$$
+
+**Lower bound (AR = 10):** Minimum value for acceptable lift-to-drag ratio at
+the high lift coefficients required in Mars conditions.
+
+**Upper bound (AR = 14):** Maximum value before structural weight penalty
+dominates. Wing weight scales approximately as $AR^{0.6}$ [@raymer...], and
+higher aspect ratio also reduces chord, pushing Reynolds number toward the
+lower acceptable limit.
+
+Commercial VTOL UAVs in the reference database exhibit aspect ratios of
+[X] to [X], with median [X] (@sec:commercial-vtol).
+
+#### Thickness ratio
+
+The thickness ratio is determined by the airfoil selection:
+
+$$t/c \in [0.08, 0.12]$$
+
+Candidate airfoils from @sec:aerodynamic-analysis have thickness ratios of
+0.08-0.12 (@tbl:airfoil-thickness). This range provides adequate structural
+depth while maintaining good low-Reynolds aerodynamic performance.
+
+| Airfoil | t/c |
+|---------|-----|
+| E387 | 0.091 |
+| S7055 | 0.10 |
+| SD8000 | 0.10 |
+| AG12 | ~0.08 |
+
+: Candidate airfoil thickness ratios {#tbl:airfoil-thickness}
+
+#### Taper ratio
+
+The taper ratio is constrained to:
+
+$$\lambda \in [0.4, 0.6]$$
+
+A taper ratio of approximately 0.4 minimizes induced drag by approaching
+elliptical lift distribution [@anderson...]. The upper bound of 0.6 represents
+a compromise toward manufacturing simplicity. A nominal value of $\lambda = 0.5$
+is adopted for baseline sizing.
+
+#### Sweep angle
+
+The quarter-chord sweep angle is:
+
+$$\Lambda = 0°$$
+
+Wing sweep is used to delay compressibility effects at transonic speeds.
+At the Mars UAV cruise Mach number of $M ≈ 0.17$, compressibility is negligible,
+and sweep provides no aerodynamic benefit [@anderson...]. An unswept wing is
+structurally simpler and has better stall characteristics.
+
+#### Geometry summary
+
+@tbl:geometry-summary consolidates the geometry parameters for constraint analysis.
+
+| Parameter | Symbol | Value/Range | Rationale |
+|-----------|--------|-------------|-----------|
+| Aspect ratio | AR | 10-14 | L/D vs. structure trade-off |
+| Thickness ratio | t/c | 0.08-0.12 | Airfoil selection |
+| Taper ratio | λ | 0.4-0.6 | Near-elliptical loading |
+| Sweep angle | Λ | 0° | Low Mach, no benefit |
+
+: Geometry parameter summary {#tbl:geometry-summary}
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After completing the research, update source_grounding.txt:
+
+```
+## Section: 4.12 Derived requirements - Geometry bounds
+
+- "Wing weight scales as AR^0.6"
+  Source: [@raymerAircraftDesignConceptual20XX] or [@sadraeyAircraftDesignSystems2013]
+  Location: Chapter on weight estimation, wing weight equation
+
+- "Optimal taper ratio λ ≈ 0.4 for minimum induced drag"
+  Source: [@andersonFundamentalsAerodynamics20XX]
+  Location: Chapter on finite wings, elliptical loading
+
+- "Sweep used to delay compressibility effects at M > 0.7"
+  Source: [@andersonFundamentalsAerodynamics20XX]
+  Location: Chapter on compressibility
+
+- "E387 thickness ratio t/c = 0.091"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: Volume 1, airfoil coordinates
+
+- "S7055 thickness ratio t/c = 0.10"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: Volume 1, airfoil coordinates
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] AR bounds [10,14] justified with sources
+[ ] Trade-offs documented (L/D vs. weight vs. Re)
+[ ] t/c values verified from airfoil analysis
+[ ] Taper ratio λ optimal value sourced (Prandtl/Schrenk)
+[ ] Sweep Λ = 0° justified for low Mach
+[ ] Commercial VTOL AR values extracted for validation
+[ ] All bounds summarized in table
+[ ] Manuscript content drafted for 04_12
+[ ] source_grounding.txt updated
+
+================================================================================
+REFERENCE DATA TO EXTRACT
+================================================================================
+
+From sources/reference_drones.yaml, extract wing geometry:
+
+For each UAV with wing data:
+- Wingspan (m)
+- Wing area (m²) - if available
+- Mean chord (m) - if available
+- Calculate AR = b² / S or AR = b / c
+
+Expected format:
+
+| UAV | Wingspan (m) | Area (m²) | AR | Taper | Sweep |
+|-----|--------------|-----------|-----|-------|-------|
+| AirMobi V25 | 2.5 | [calc] | [calc] | [obs] | [obs] |
+| DeltaQuad Evo | [val] | [val] | [calc] | [obs] | [obs] |
+| ... | ... | ... | ... | ... | ... |
+
+================================================================================
+SEARCH QUERIES
+================================================================================
+
+Zotero searches:
+- "aspect ratio optimization"
+- "Raymer aircraft design"
+- "Anderson aerodynamics"
+- "wing taper induced drag"
+- "Schrenk lift distribution"
+
+Web searches (if needed):
+- "optimal aspect ratio sailplane UAV"
+- "Mars UAV aspect ratio"
+- "ARES Mars airplane wing"
+- "low Reynolds number wing design"
+
+================================================================================
+END OF PROMPT
+================================================================================

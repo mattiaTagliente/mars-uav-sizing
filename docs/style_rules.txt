@@ -1,0 +1,93 @@
+## Character Encoding and Special Symbols
+
+* All markdown files must be encoded in UTF-8 to properly support Italian characters (à, è, é, ì, ò, ù) and common scientific symbols (Greek letters, degree symbol °, mathematical operators, etc.).
+
+* Use Unicode characters directly for common symbols: degree symbol (°), multiplication sign (×), Greek letters (α, β, γ, λ, μ, etc.), superscripts, subscripts, and other scientific notation when appropriate.
+
+* For complex mathematical expressions, use LaTeX syntax within dollar signs. For simple symbols and units, use Unicode characters directly in text.
+
+## Mathematical and Technical Formatting
+
+* always use 4 significant figures for reporting calculation results
+
+* For open-ended ranges, use mathematical inequality notation (e.g., "> 40") instead of plus notation (e.g., "40+"). This applies to tables, prose, and all numerical contexts.
+
+* Use LaTeX syntax for math expressions: `$...$` for inline math and `$$...$$` for display equations.
+
+* **Subscripts and superscripts in running text**: ALWAYS use LaTeX inline math syntax for subscripts and superscripts, even for simple symbols. Plain underscore notation (e.g., `T_ref`, `μ_max`) does NOT render correctly in Word output via Pandoc. Use instead:
+  - `$T_\text{ref}$` for reference temperature (renders as T with subscript "ref")
+  - `$\mu_\text{ref}$` for reference viscosity
+  - `$C_{L,\text{max}}$` for maximum lift coefficient
+  - `$W_\text{Mars}$` for Mars weight
+  - `$A_\text{rotor}$` for rotor area
+  - For numeric subscripts: `$T_0$`, `$p_0$`, `$C_{D,0}$`
+  - For Greek letter subscripts or superscripts: `$C_L$`, `$C_D$`, `$R_{CO_2}$`
+
+* For table headers with subscripts, use LaTeX inline math: `$C_L$` instead of `C_L`.
+
+* Format centered equations with blank lines before and after. Place the equation and its cross-reference label on the same line in the format `$$equation$$ {#eq:label}`. For long equations, place the label on the next line as `{#eq:label}`.
+
+* Escape special characters for markdown, e.g., `6 \> 5`.
+
+## Typography and Punctuation
+
+* Use sentence case throughout, including titles. Capitalize only after full stops, for proper nouns, chemical compounds, and acronyms. Do not capitalize after colons, semicolons, or in list items.
+
+* Avoid unnecessary bold or italic formatting. Do not use bold or italic to highlight words, acronyms, or new concepts.
+
+* Never use em-dashes. Use commas to separate concepts and phrases, or hyphens (-) to separate letters or words.
+
+* Write "and" instead of "&", except in "R&D".
+
+* it's a scientific document, never use ✓/❌ indicators
+
+## Lists and Paragraph Structure
+
+* Always use asterisks (*) for bulleted lists, never hyphens (-). This convention ensures consistent formatting and correct conversion of the document via pandoc.
+
+* Limit vertical (bulleted or numbered) lists to cases strictly necessary for quick reference. Otherwise, use run-in lists integrated into paragraph flow. Separate short items with commas; separate complex items or those with internal punctuation with semicolons.
+
+* Make ALL lists tight by removing ALL blank lines/extra paragraphs between list items. This rule applies WITHOUT EXCEPTIONS to:
+- Bulleted lists with an asterisk (*)
+- Bulleted lists with a bullet point (•)
+- Numbered lists (1, 2, 3)
+- Lists in ALL files in the document
+
+## Tables, Figures, and Cross-References
+
+* Format tables using pipe table syntax with captions before the table: `: Caption text {#tbl:label}` followed by a blank line, then header row, separator row, and data rows. Use sentence case throughout. Consolidate multi-line entries into single lines with proper pipe delimiter alignment.
+
+* Use concise, single-word or single-concept table headers. For example: use "Metric" instead of "Metric/Aspect", use "Platform" instead of "Platform / Device".
+
+* Format images using standard markdown: `![Caption text](path/to/image.png){#fig:label}`. Place images inline with blank lines before and after. Specify width and height within curly braces when needed.
+
+* Format subfigures using a wrapping Div with the main figure ID. Each subfigure image must have its own ID with `.nocaption` class. Place the complete caption after all subfigures. Example:
+  ```
+  ::: {#fig:main-label}
+  ![](path/image1.png){#fig:main-label-a width=49% .nocaption}
+  ![](path/image2.png){#fig:main-label-b width=49% .nocaption}
+  
+  Caption text describing (a) first subfigure and (b) second subfigure
+  :::
+  ```
+  Reference the whole figure with `@fig:main-label` and individual subfigures with `@fig:main-label-a`, `@fig:main-label-b`.
+
+* Use cross-reference labels for equations, tables, and figures: `{#eq:label}`, `{#tbl:label}`, `{#fig:label}` for labeling; `@eq:label`, `@tbl:label`, `@fig:label` for citing. Capitalize the first letter of the reference token for capitalized references: `@Eq:label`, `@Tbl:label`, `@Fig:label`. Never hard-code references like "Table 3.1".
+
+## Voice and Perspective
+
+* Maintain an objective, third-person perspective. Avoid first- and second-person pronouns (e.g., "I," "we," "you"). Use impersonal or passive constructions to focus on methodology and results.
+
+## Language Precision and Objectivity
+
+* Avoid subjective evaluative adjectives expressing opinion rather than measurable properties (e.g., "clever," "innovative," "significant," "remarkable," "promising"). Present objective facts, quantitative data, or functional descriptions instead.
+
+* Replace hyperbolic necessity terms with modest alternatives. Avoid "crucial," "critical," "vital," or "essential." Use "important," "necessary," or "relevant" instead.
+
+* Avoid speculative claims and colloquial expressions. Do not use predictive phrases like "poised to," "set to," or "will play a key role." Avoid idiomatic expressions like "workhorse," "cornerstone," or "backbone." Describe current demonstrated capabilities, existing applications, or factual usage patterns instead.
+
+* Avoid rhetorical figures and literary devices. Maintain plain, direct language without metaphors, similes, personification, or rhetorical questions. Do not use phrases like "paves the way," "holds promise," "sheds light on," "bridges the gap," or "opens the door to."
+
+## Citations
+
+* Use implicit citations only, placing citation tags at the end of the logical statement. Never use explicit attribution phrases like "reported by," "demonstrated by," "shown by," or author names as sentence subjects. State facts directly and append citations: `[@imHybridIntegratedSilicon2021]`.

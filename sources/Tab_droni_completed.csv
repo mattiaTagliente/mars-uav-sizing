@@ -1,0 +1,10 @@
+Velivolo,Source URL,Payload cap [kg],W [kg],Wmto [kg],n-eliche,Vmax [m/s],Vcruise [m/s],Autonomia carico [min],Autonomia volo [km],b [m],Lfus [m],D_prop_lift [in],D_prop_cruise [in],L_Engine_Model,L_Engine_Manuf,L_Engine_Power_W,L_Engine_Weight_kg,L_Engine_Eff,C_Engine_Model,C_Engine_Manuf,C_Engine_Power_W,C_Engine_Weight_kg,C_Engine_Eff,Battery_Tech,Battery_Manuf,Battery_Model,Battery_Mass_kg,Battery_Capacity_mAh,Battery_Op_Temp_C
+V13-5 Sentinel,https://spideruav.com/product/industrial-drone/v13-5/,7.5,,26.5,5,44,44,160,100,3.5,1.88,,,V13L KV65,T-Motor,6000,1.68,,,,,,,,,,,,
+AirMobi V25,https://www.airmobi.com/product/airmobi-v25-full-electric-vtol-drone/,2.5,3.45,14,5,34,20,180,140,2.5,1.26,16-17,15-18,MN505-S KV260,T-Motor,2500,0.225,,AT4130 KV230,T-Motor,2500,0.408,,HV LiPo,Tattu,6S 25000mAh HV,5.05,50000,-20 to 45
+AirMobi V32,https://www.airmobi.com/product/airmobi-v32-full-electric-long-endurance-vtol-drone/,5,6.45,23.5,5,34,20,195,120,3.2,1.26,22-24,19-21,T-Motor 8-series,T-Motor,,,,,,,,,HV LiPo,,6S 32000mAh x2,,64000,-20 to 45
+UAVMODEL X2400,https://www.uavmodel.com/collections/uav,2,6.5,8.5,5,30,16,220,210,2.4,1.2,15,14,Sunnysky 4112 485KV,Sunnysky,550,0.153,,Sunnysky 3525 465KV,Sunnysky,2100,0.259,,LiPo,,6S 30000mAh,2.5,30000,
+JOUAV CW-15,https://www.jouav.com/zh/products/cw-15.html,3,,14.5,5,25,17,180,183,3.54,2.06,,,,,,,,,,,,,LiPo,,CB100S Series,,,Low temp support
+JOUAV CW-25E,https://www.jouav.com/zh/products/cw-25e.html,6,,31.58,5,,20,210,250,4.35,2.18,,,,,,,,,,,,,,,,,,
+DeltaQuad Evo Enterprise,https://docs.deltaquad.com/evo/vehicle-specifications,3,4.8,10,5,,17,272,270,2.69,0.75,,15,,,,,,,,,,,Semi-Solid Li-ion,DeltaQuad,Custom,4.0,44000,-20 to 45
+RTV320 E,https://www.uavfordrone.com/product/6-hours-endurance-flight-long-range-vtol-for-mapping-and-surveillance/,2.5,,24,5,30,21,180,,3.2,2,24,20,,,,,,,,,,,Solid-state Li-ion,CGBT,6S 27000mAh x4,9.36,108000,-20 to 60
+Elevon X Sierra,https://www.elevonx.com/products/sierra-vtol/,1.5,,13.5,5,,20,150,,3,1.58,,,,,,,,,,,,,,,,,,

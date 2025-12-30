@@ -1,0 +1,68 @@
+# Mars UAV Sizing - Mars Environment Parameters
+# ==============================================
+# Site-specific environmental conditions for Arcadia Planitia.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §3.1 Operational Environment
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# Mars Reference Atmosphere (at Datum, 0 km)
+# ==============================================================================
+reference_atmosphere:
+  T_surface: 210.0             # K, Mean surface temperature
+  P_surface: 610.0             # Pa, Mean surface pressure (~6.10 mbar)
+  # Derived: rho_surface = P_surface / (R × T_surface)
+  # rho_surface = 610 / (188.92 × 210) ≈ 0.0154 kg/m³
+  rho_surface: 0.0154          # kg/m³ (computed)
+  
+  # Scale height H = R×T/g = 188.92×210/3.711 ≈ 10.7 km
+  scale_height_km: 10.7        # km
+  
+  # Temperature lapse rate (approximate, varies by season)
+  lapse_rate: 0.00222          # K/m (2.22 K/km)
+
+# ==============================================================================
+# Arcadia Planitia Site Parameters
+# ==============================================================================
+arcadia_planitia:
+  elevation_km: -3.0           # km below datum (higher pressure)
+  latitude_deg: 47.2           # degrees North
+  longitude_deg: 185.0         # degrees East
+  operating_altitude_agl_m: 50 # m, Operating altitude above ground level
+  
+  # Temperature variations (seasonal)
+  temperature:
+    summer: 220.0              # K, Summer daytime
+    winter: 180.0              # K, Winter
+    mean: 210.0                # K, Annual mean (design value)
+  
+  # COMPUTED atmospheric properties at operating altitude
+  # Using POLYTROPIC barometric formula: P = P0 × (T/T0)^(g/(R×L))
+  # At operating altitude: -2.95 km (surface -3.0 km + 50 m AGL)
+  # Temperature: T = 210 - 0.00222 × (-2950) = 216.549 K
+  # Pressure: P = 610 × (216.549/210)^8.85 = 800.5 Pa
+  # Density: rho = P / (R × T) = 800.5 / (188.92 × 216.549) = 0.01957 kg/m³
+  # Viscosity: Sutherland with S = 240 K: mu = 1.098e-5 Pa·s
+  # 
+  # These values match manuscript @tbl:atmosphere (computed by Python script)
+  pressure_Pa: 800.5           # Pa [COMPUTED from polytropic formula]
+  density_kg_m3: 0.01957       # kg/m³ [Ideal gas law]
+  viscosity_Pa_s: 1.098e-5     # Pa·s [Sutherland's law with S = 240 K]
+  speed_of_sound_m_s: 229.7    # m/s [sqrt(γ×R×T)]
+
+# ==============================================================================
+# Wind Conditions at Arcadia Planitia
+# ==============================================================================
+wind:
+  mean: 10.0                   # m/s, Average wind speed
+  gust_max: 45.0               # m/s, Maximum recorded gusts
+  dust_devil: 30.0             # m/s, Typical dust devil wind speed
+
+# ==============================================================================
+# Solar Irradiance on Mars
+# ==============================================================================
+solar:
+  constant_mars: 589.0         # W/m², Solar constant at 1.52 AU
+  surface_clear: 500.0         # W/m², At noon, clear day
+  surface_dusty: 300.0         # W/m², During dusty conditions

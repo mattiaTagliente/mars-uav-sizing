@@ -1,0 +1,471 @@
+================================================================================
+PROMPT 02E: MASS FRACTIONS FROM REFERENCE DATA
+================================================================================
+Task: Calculate mass fractions from commercial VTOL reference data
+Output: YAML file sources/reference_drones_mass_fractions.yaml
+        Manuscript content for 04_11_weight-estimate.md
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. This task calculates mass
+fractions from the existing reference UAV database to:
+
+1. Establish realistic mass fraction ranges for initial MTOW estimation
+2. Provide empirical basis for the weight estimation methodology
+3. Support the constraint analysis with bounded parameter ranges
+
+The mass fraction approach is standard in aircraft conceptual design:
+- MTOW = payload / payload_fraction
+- Each major component has a characteristic fraction of MTOW
+
+INPUT DATA:
+- Primary source: sources/reference_drones.yaml (existing database)
+- Contains: 9+ commercial VTOL UAVs with specifications
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. DATA VERIFICATION:
+   - All calculations use data from reference_drones.yaml
+   - Each reference UAV has citations to manufacturer sources
+   - Verify source_key exists for each UAV before using data
+
+2. CALCULATION TRANSPARENCY:
+   - Document every calculation step
+   - Note when data is missing (use null, not estimates)
+   - Flag any inconsistencies in source data
+
+3. STATISTICAL RIGOR:
+   - Report min, max, mean, median for each fraction
+   - Note sample size and data completeness
+   - Identify outliers and explain them
+
+================================================================================
+MASS FRACTIONS TO CALCULATE
+================================================================================
+
+For each reference UAV in reference_drones.yaml, calculate the following
+fractions using available data:
+
+------------------------------------------------------------------------------
+1. BATTERY FRACTION (f_batt)
+------------------------------------------------------------------------------
+
+Definition: f_batt = m_battery / MTOW
+
+DATA NEEDED:
+- m_battery: Total battery mass (kg)
+- MTOW: Maximum takeoff weight (kg)
+
+EXPECTED RANGE (from literature):
+- Electric UAVs: f_batt = 0.25-0.45
+- Higher for endurance-optimized designs
+- Lower for payload-optimized designs
+
+CALCULATION:
+For each UAV with battery mass data:
+f_batt = battery.total_mass_kg / mass.mtow_kg
+
+------------------------------------------------------------------------------
+2. PAYLOAD FRACTION (f_payload)
+------------------------------------------------------------------------------
+
+Definition: f_payload = m_payload_max / MTOW
+
+DATA NEEDED:
+- m_payload_max: Maximum payload capacity (kg)
+- MTOW: Maximum takeoff weight (kg)
+
+EXPECTED RANGE:
+- Mapping UAVs: f_payload = 0.10-0.25
+- Heavy-lift UAVs: f_payload = 0.25-0.40
+
+CALCULATION:
+f_payload = mass.payload_max_kg / mass.mtow_kg
+
+------------------------------------------------------------------------------
+3. EMPTY WEIGHT FRACTION (f_empty)
+------------------------------------------------------------------------------
+
+Definition: f_empty = m_empty / MTOW
+
+DATA NEEDED:
+- m_empty: Empty weight (structure + propulsion + avionics, no payload/battery)
+- MTOW: Maximum takeoff weight
+
+NOTE: Empty weight may not be directly available. Calculate as:
+m_empty = MTOW - m_battery - m_payload_max
+
+If m_empty data exists directly, use that value.
+
+EXPECTED RANGE:
+- Fixed-wing UAV: f_empty = 0.40-0.55
+- VTOL hybrid: f_empty = 0.35-0.50 (heavier propulsion)
+
+------------------------------------------------------------------------------
+4. PROPULSION FRACTION (f_prop)
+------------------------------------------------------------------------------
+
+Definition: f_prop = (m_motors + m_ESCs + m_propellers) / MTOW
+
+DATA NEEDED (if available):
+- Lift motor mass × number of motors
+- Cruise motor mass × number
+- ESC mass (often not listed)
+- Propeller mass (often not listed)
+
+NOTE: This data is often incomplete. Calculate only where full data exists.
+
+EXPECTED RANGE:
+- Pure rotorcraft: f_prop = 0.08-0.12
+- Hybrid VTOL: f_prop = 0.12-0.18 (dual propulsion)
+
+------------------------------------------------------------------------------
+5. STRUCTURE FRACTION (f_struct)
+------------------------------------------------------------------------------
+
+Definition: f_struct = m_structure / MTOW
+
+NOTE: Structure mass is rarely reported directly. 
+Estimate as: f_struct = f_empty - f_prop - f_avionics
+
+Where f_avionics ≈ 0.03-0.05 (typical assumption)
+
+This fraction is less reliable due to derived calculation.
+
+EXPECTED RANGE:
+- Composite UAV: f_struct = 0.20-0.30
+- Metal/mixed: f_struct = 0.25-0.35
+
+================================================================================
+REFERENCE DRONES TO ANALYZE
+================================================================================
+
+From sources/reference_drones.yaml, analyze ALL UAVs with sufficient data:
+
+Tier 1 (likely complete data):
+1. AirMobi V25
+2. DeltaQuad Evo
+3. Wingtra WingtraOne Gen II
+4. Event 38 E400
+
+Tier 2 (partial data expected):
+5. JOUAV CW-15
+6. JOUAV CW-25E
+7. RTV320 E
+8. Trinity F90+
+9. Quantum Tron
+
+For each UAV, document:
+- What data is available
+- What data is missing
+- Calculated fractions (or null if cannot calculate)
+
+================================================================================
+OUTPUT FILE FORMAT
+================================================================================
+
+Create file: sources/reference_drones_mass_fractions.yaml
+
+```yaml
+# Mass Fractions Calculated from Reference UAV Database
+# Generated: [DATE]
+# Purpose: Empirical basis for Mars UAV weight estimation
+# 
+# Source data: sources/reference_drones.yaml
+# All values derived from manufacturer specifications
+# See source_grounding.txt for original data citations
+
+metadata:
+  generated_date: "2025-12-26"
+  purpose: "Mass fraction analysis for Mars UAV feasibility study"
+  source_database: "sources/reference_drones.yaml"
+  number_of_uavs_analyzed: 9
+  
+# -----------------------------------------------------------------------------
+# INDIVIDUAL UAV ANALYSIS
+# -----------------------------------------------------------------------------
+uav_analysis:
+
+  - name: "AirMobi V25"
+    source_key: "@airmobiAirmobiV25Full2024"
+    
+    # Raw data from reference_drones.yaml
+    raw_data:
+      mtow_kg: 14.0
+      empty_kg: 3.45
+      payload_max_kg: 2.5
+      battery_total_mass_kg: 5.05
+      lift_motor_mass_kg: 0.225
+      lift_motor_count: 4
+      cruise_motor_mass_kg: 0.408
+      cruise_motor_count: 1
+      # Note any missing data
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    # Calculated fractions
+    fractions:
+      f_battery: 0.361  # 5.05 / 14.0
+      f_payload: 0.179  # 2.5 / 14.0
+      f_empty: 0.246    # 3.45 / 14.0
+      f_propulsion: null  # Cannot calculate, missing ESC/prop mass
+      f_structure: null   # Cannot calculate
+    
+    # Data quality notes
+    notes: "Complete battery and payload data. Propulsion incomplete."
+    data_completeness: "partial"
+
+  - name: "DeltaQuad Evo"
+    source_key: "@deltaquadDeltaQuadEvo2024"
+    
+    raw_data:
+      mtow_kg: null  # Fill from reference_drones.yaml
+      # ... etc
+    
+    fractions:
+      f_battery: null
+      f_payload: null
+      f_empty: null
+      f_propulsion: null
+      f_structure: null
+    
+    notes: ""
+    data_completeness: ""
+
+  # ... repeat for all UAVs ...
+
+# -----------------------------------------------------------------------------
+# STATISTICAL SUMMARY
+# -----------------------------------------------------------------------------
+statistics:
+  
+  battery_fraction:
+    sample_size: 0  # Number of UAVs with valid data
+    min: null
+    max: null
+    mean: null
+    median: null
+    std_dev: null
+    data_points: []  # List of (UAV_name, value) tuples
+    notes: ""
+  
+  payload_fraction:
+    sample_size: 0
+    min: null
+    max: null
+    mean: null
+    median: null
+    std_dev: null
+    data_points: []
+    notes: ""
+  
+  empty_fraction:
+    sample_size: 0
+    min: null
+    max: null
+    mean: null
+    median: null
+    std_dev: null
+    data_points: []
+    notes: ""
+  
+  propulsion_fraction:
+    sample_size: 0
+    min: null
+    max: null
+    mean: null
+    median: null
+    std_dev: null
+    data_points: []
+    notes: "Limited data available for complete propulsion mass"
+
+# -----------------------------------------------------------------------------
+# RECOMMENDED VALUES FOR MARS UAV DESIGN
+# -----------------------------------------------------------------------------
+recommendations:
+  
+  battery_fraction:
+    recommended_value: 0.35
+    recommended_range: [0.30, 0.40]
+    rationale: "Based on reference UAV median, adjusted for Mars mission needs"
+    
+  payload_fraction:
+    recommended_value: 0.15
+    recommended_range: [0.10, 0.20]
+    rationale: "Conservative for mapping payload (~0.5 kg for 3-4 kg UAV)"
+    
+  empty_fraction:
+    recommended_value: 0.45
+    recommended_range: [0.40, 0.50]
+    rationale: "Higher than pure fixed-wing due to VTOL systems"
+    
+  propulsion_fraction:
+    recommended_value: 0.15
+    recommended_range: [0.12, 0.18]
+    rationale: "Dual propulsion system (lift + cruise)"
+
+# -----------------------------------------------------------------------------
+# MTOW ESTIMATION
+# -----------------------------------------------------------------------------
+mtow_estimation:
+  
+  method: "payload_fraction"
+  formula: "MTOW = m_payload / f_payload"
+  
+  example_calculation:
+    payload_mass_kg: 0.5
+    payload_fraction: 0.15
+    calculated_mtow_kg: 3.33
+    
+  sensitivity:
+    - payload_fraction: 0.10
+      mtow_kg: 5.0
+    - payload_fraction: 0.15
+      mtow_kg: 3.33
+    - payload_fraction: 0.20
+      mtow_kg: 2.5
+```
+
+================================================================================
+MANUSCRIPT CONTENT TO DRAFT
+================================================================================
+
+Draft content for 04_11_weight-estimate.md:
+
+## 4.11 Initial weight estimate {#sec:weight-estimate}
+
+### Mass fraction methodology
+
+The initial MTOW estimate uses the mass fraction approach, a standard technique
+in aircraft conceptual design [@raymerAircraftDesignConceptual20XX]. The total
+aircraft mass is decomposed into fractions:
+
+$$MTOW = m_{payload} + m_{battery} + m_{structure} + m_{propulsion} + m_{avionics}$$
+
+Each component mass can be expressed as a fraction of MTOW:
+
+$$f_i = \frac{m_i}{MTOW}$$
+
+Since the sum of fractions equals unity:
+
+$$f_{payload} + f_{battery} + f_{structure} + f_{propulsion} + f_{avionics} = 1$$
+
+Given the payload mass $m_{payload}$ (a mission requirement), the MTOW can be
+estimated if the payload fraction is known:
+
+$$MTOW = \frac{m_{payload}}{f_{payload}}$$ {#eq:mtow-from-payload}
+
+### Reference data analysis
+
+Mass fractions were calculated from a database of [N] commercial hybrid VTOL
+UAVs (see @sec:commercial-vtol). @tbl:reference-mass-fractions summarizes the
+results.
+
+| Fraction | Min | Max | Mean | Median | Sample size |
+|----------|-----|-----|------|--------|-------------|
+| Battery | [X] | [X] | [X] | [X] | [N] |
+| Payload | [X] | [X] | [X] | [X] | [N] |
+| Empty | [X] | [X] | [X] | [X] | [N] |
+
+: Mass fractions from reference VTOL UAV database {#tbl:reference-mass-fractions}
+
+### Recommended design values
+
+Based on the reference data analysis and Mars mission requirements, the
+following mass fractions are adopted:
+
+| Fraction | Symbol | Design Value | Range | Rationale |
+|----------|--------|--------------|-------|-----------|
+| Battery | f_batt | 0.35 | 0.30-0.40 | High endurance requirement |
+| Payload | f_payload | 0.15 | 0.10-0.20 | Mapping camera system |
+| Empty | f_empty | 0.45 | 0.40-0.50 | VTOL hybrid configuration |
+| Propulsion | f_prop | 0.15 | 0.12-0.18 | Dual propulsion system |
+| Avionics | f_avionics | 0.05 | 0.03-0.05 | Standard estimate |
+
+: Recommended mass fractions for Mars UAV {#tbl:design-mass-fractions}
+
+### MTOW baseline estimate
+
+Using the payload fraction method with:
+- Payload mass: m_payload = 0.5 kg (camera + radio relay, from @sec:payload-systems)
+- Payload fraction: f_payload = 0.15 (from @tbl:design-mass-fractions)
+
+$$MTOW = \frac{0.5}{0.15} = 3.3 \text{ kg}$$
+
+A baseline MTOW of **3-4 kg** is adopted for initial sizing. This value will
+be refined through the constraint analysis in @sec:constraint-analysis.
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After completing the analysis, update source_grounding.txt:
+
+```
+## Section: 4.11 Initial weight estimate - Mass fractions
+
+- "Battery fraction for commercial VTOL UAVs: 0.30-0.40"
+  Source: Calculated from reference UAV database
+  Location: sources/reference_drones_mass_fractions.yaml, statistics section
+
+- "Payload fraction for mapping UAVs: 0.10-0.20"
+  Source: Calculated from reference UAV database
+  Location: sources/reference_drones_mass_fractions.yaml
+
+- "MTOW estimation: MTOW = m_payload / f_payload"
+  Source: Standard mass fraction method, [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter X, Section on preliminary weight estimation
+
+- "AirMobi V25 battery mass: 5.05 kg, MTOW: 14 kg"
+  Source: [@airmobiAirmobiV25Full2024]
+  Location: Manufacturer specifications page
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] YAML file created at sources/reference_drones_mass_fractions.yaml
+[ ] All available UAVs from reference_drones.yaml analyzed
+[ ] Calculations shown for each fraction
+[ ] Missing data clearly marked as null (not estimated)
+[ ] Statistical summary includes min, max, mean, median
+[ ] Sample size documented for each statistic
+[ ] Recommended values provided with rationale
+[ ] MTOW baseline calculated using payload fraction method
+[ ] Manuscript content drafted for 04_11
+[ ] source_grounding.txt updated
+
+================================================================================
+CALCULATION EXAMPLE
+================================================================================
+
+For AirMobi V25 (from reference_drones.yaml):
+
+Raw data:
+- MTOW: 14.0 kg
+- Empty weight: 3.45 kg
+- Max payload: 2.5 kg
+- Battery mass: 5.05 kg (2 × 25000 mAh HV LiPo)
+- Lift motors: 4 × 0.225 kg = 0.90 kg
+- Cruise motor: 1 × 0.408 kg = 0.408 kg
+
+Calculations:
+- f_battery = 5.05 / 14.0 = 0.361 (36.1%)
+- f_payload = 2.5 / 14.0 = 0.179 (17.9%)
+- f_empty = 3.45 / 14.0 = 0.246 (24.6%)
+- f_prop = (0.90 + 0.408) / 14.0 = 0.093 (9.3%) [incomplete, missing ESC/props]
+
+Consistency check:
+- f_battery + f_payload + f_empty = 0.361 + 0.179 + 0.246 = 0.786
+- Remaining 21.4% is propulsion + avionics (roughly consistent)
+
+================================================================================
+END OF PROMPT
+================================================================================

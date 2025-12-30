@@ -1,0 +1,446 @@
+================================================================================
+PROMPT 02D: AERODYNAMIC COEFFICIENTS ESTIMATION
+================================================================================
+Task: Research and document aerodynamic coefficient estimation methods and values
+Output: Manuscript content for 04_07_aerodynamic-analysis.md (C_D0, Oswald e)
+        Consolidation of C_L,max from existing airfoil analysis
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. This task addresses the
+aerodynamic coefficients needed for the constraint analysis (Section 5):
+
+1. Maximum lift coefficient (C_L,max) - for stall constraint
+2. Oswald efficiency factor (e) - for induced drag calculation
+3. Zero-lift drag coefficient (C_D0) - for parasite drag calculation
+
+These coefficients are used in:
+- Drag polar: C_D = C_D0 + C_L² / (π × AR × e)
+- Lift-to-drag ratio: L/D = C_L / C_D
+- Stall speed: V_stall = sqrt(2W / (ρ × S × C_L,max))
+
+OPERATING CONDITIONS:
+- Reynolds number: Re ≈ 60,000 (based on chord ~0.25m, V ~40 m/s, Mars ρ/μ)
+- Mach number: M ≈ 0.17 (subsonic, compressibility negligible)
+- Aspect ratio range: AR = 10-14
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+EVERY equation and value must be traced to a primary source and properly cited.
+
+1. EQUATION SOURCING:
+   - Search Zotero Mars_UAV collection FIRST
+   - If not found, search full Zotero library
+   - If not found, search web for authoritative sources:
+     * Textbooks (Raymer, Anderson, Nicolai)
+     * Peer-reviewed papers
+   - Add new sources to Zotero before citing
+   - Verify citation key exists in Mars_UAV.bib
+
+2. REGISTRATION (Zotero):
+   - Add each new source to the Mars_UAV Zotero collection
+   - Use the Zotero Web API:
+     - User ID: 10348042
+     - API Key: s8qR5N0A7GSQxZfkW1NAcmjZ
+     - Collection Key: 2BQEVWT7
+
+3. NO UNVERIFIED CLAIMS:
+   - If an equation source cannot be found, note "source needed"
+   - If a value cannot be verified, use null
+
+================================================================================
+PARAMETERS TO RESEARCH
+================================================================================
+
+------------------------------------------------------------------------------
+1. MAXIMUM LIFT COEFFICIENT (C_L,max)
+------------------------------------------------------------------------------
+
+This parameter is ALREADY AVAILABLE from the airfoil selection analysis.
+The task is to CONSOLIDATE and VERIFY the values.
+
+SOURCE DATA:
+- Location: draft/airfoil_selection/airfoil_selection_analysis.md
+- Data: sources/airfoil_data.yaml
+- Primary source: Selig "Summary of Low-Speed Airfoil Data"
+
+AIRFOILS TO INCLUDE:
+| Airfoil | C_L,max at Re=60,000 | Source Volume |
+|---------|---------------------|---------------|
+| E387    | ~1.05               | Volume 1      |
+| S7055   | ~1.00               | Volume 1      |
+| SD8000  | ~0.95               | Volume 1      |
+| SD7037  | ~1.05               | Volume 1      |
+| AG455ct | ~1.20 (estimated)   | Volume 5      |
+| AG35-r  | ~1.10 (estimated)   | Volume 5      |
+| AG12    | ~1.05 (estimated)   | Volume 5      |
+
+TASK:
+a) Verify C_L,max values against Selig data
+b) Note which values are experimental (Vol 1) vs. extrapolated (Vol 5)
+c) Recommend design value for sizing:
+   - Conservative: C_L,max = 1.0 (lower bound of candidates)
+   - Nominal: C_L,max = 1.1 (average)
+d) Document Reynolds number sensitivity if data available
+
+OUTPUT FOR MANUSCRIPT:
+- Summary table of C_L,max for all candidate airfoils
+- Recommended design value with rationale
+- Citation to Selig volumes
+
+------------------------------------------------------------------------------
+2. OSWALD EFFICIENCY FACTOR (e)
+------------------------------------------------------------------------------
+
+Definition: The Oswald efficiency factor accounts for non-elliptical lift
+distribution and additional induced drag sources. It appears in:
+
+C_D_induced = C_L² / (π × AR × e)
+
+SEARCH STRATEGY:
+
+a) Primary source - Raymer "Aircraft Design: A Conceptual Approach":
+   - Search Zotero: "Raymer aircraft design"
+   - Look for Chapter 12 (Aerodynamics) or equivalent
+   - Raymer provides empirical correlations for e
+   
+   RAYMER'S CORRELATION (to verify):
+   For straight wings (Λ = 0°):
+   e = 1.78 × (1 - 0.045 × AR^0.68) - 0.64
+   
+   Alternative simpler form:
+   e ≈ 0.80 - 0.85 for well-designed straight wings
+
+b) Secondary source - Nicolai "Fundamentals of Aircraft Design":
+   - Alternative source for Oswald factor estimation
+   - May have different correlation
+
+c) Tertiary source - Anderson "Introduction to Flight":
+   - Basic textbook treatment
+   - Typical values cited
+
+d) Check for low-Re specific data:
+   - Search: "Oswald efficiency low Reynolds"
+   - At low Re, e may degrade due to thicker boundary layers
+
+DATA TO COLLECT:
+| Field                    | Description                          | Expected   |
+|--------------------------|--------------------------------------|------------|
+| e_correlation            | Empirical correlation formula        | equation   |
+| e_correlation_source     | Citation for correlation             | Raymer     |
+| e_straight_wing_typical  | Typical e for straight, unswept wing | 0.80-0.85  |
+| e_low_re_adjustment      | Adjustment for low Re (if any)       | -0.05?     |
+| e_recommended            | Design value for Mars UAV            | 0.80       |
+| AR_range_for_correlation | AR range where correlation is valid  | 4-16       |
+
+MANUSCRIPT CONTENT TO DRAFT:
+
+a) Present the Oswald factor definition:
+   "The Oswald efficiency factor e accounts for the deviation from ideal
+   elliptical lift distribution and other induced drag effects. Empirical
+   correlations provide e as a function of wing geometry."
+
+b) Present the correlation equation with citation:
+   "For unswept wings of moderate aspect ratio, Raymer [@raymer...] provides:
+   $$e = 1.78 \times (1 - 0.045 \times AR^{0.68}) - 0.64$$ {#eq:oswald-raymer}"
+   
+   Note: Verify this is the EXACT equation from Raymer.
+
+c) Calculate e for AR = 10, 12, 14:
+   | AR | e (Raymer) |
+   |----|------------|
+   | 10 | [calculate]|
+   | 12 | [calculate]|
+   | 14 | [calculate]|
+
+d) Discuss low-Re effects:
+   - State whether correlation is validated at low Re
+   - If no low-Re data, note uncertainty
+   - May apply conservative reduction (e.g., e_design = e_correlation - 0.05)
+
+e) Recommend design value:
+   e = 0.80 (conservative for low-Re operation)
+
+------------------------------------------------------------------------------
+3. ZERO-LIFT DRAG COEFFICIENT (C_D0)
+------------------------------------------------------------------------------
+
+Definition: The zero-lift drag coefficient is the drag at C_L = 0, consisting
+of skin friction and form drag from all aircraft components.
+
+ESTIMATION METHODS:
+
+a) COMPONENT BUILDUP METHOD (preferred for accuracy):
+   
+   C_D0 = Σ (C_f × FF × Q × S_wet,i) / S_ref
+   
+   Where:
+   - C_f = skin friction coefficient
+   - FF = form factor (accounts for pressure drag)
+   - Q = interference factor
+   - S_wet,i = wetted area of component i
+   - S_ref = wing reference area
+   
+   SOURCE: Raymer Chapter 12 "Drag"
+   
+b) WETTED AREA METHOD (simpler):
+   
+   C_D0 = C_f × (S_wet / S_ref)
+   
+   Where C_f is an equivalent skin friction coefficient for the whole aircraft.
+   
+   Typical values:
+   - Clean sailplane: C_f,equiv ≈ 0.003
+   - Light aircraft: C_f,equiv ≈ 0.004-0.005
+   - Small UAV: C_f,equiv ≈ 0.005-0.008
+   
+   SOURCE: Search for wetted area drag method
+
+c) STATISTICAL/EMPIRICAL METHOD:
+   
+   For similar aircraft class, C_D0 falls in a range:
+   - High-performance sailplane: C_D0 ≈ 0.010-0.015
+   - Light aircraft: C_D0 ≈ 0.020-0.030
+   - Small UAV with fixed landing gear: C_D0 ≈ 0.025-0.040
+
+SEARCH STRATEGY:
+
+a) Primary source - Raymer:
+   - Search Zotero: "Raymer aircraft design"
+   - Look for: Skin friction coefficient (C_f) equations
+   - Look for: Form factor (FF) correlations
+   - Look for: Interference factors (Q)
+   
+   KEY EQUATIONS TO FIND:
+   
+   Skin friction for laminar flow:
+   C_f = 1.328 / sqrt(Re_L)  [Blasius]
+   
+   Skin friction for turbulent flow:
+   C_f = 0.455 / (log10(Re_L))^2.58  [Prandtl-Schlichting]
+   
+   Or Raymer's correlation:
+   C_f = 0.455 / ((log10(Re))^2.58 × (1 + 0.144 × M²)^0.65)
+
+b) Secondary source - Hoerner "Fluid Dynamic Drag":
+   - Comprehensive drag data
+   - May be in Zotero or online
+
+c) LOW REYNOLDS NUMBER CONSIDERATION:
+   - At Re ~ 60,000, flow is in transition region
+   - May be partially laminar, partially turbulent
+   - C_f higher than pure turbulent at same Re
+   - Search for "skin friction low Reynolds transition"
+
+DATA TO COLLECT:
+| Field                    | Description                          | Expected   |
+|--------------------------|--------------------------------------|------------|
+| cf_laminar_formula       | Laminar skin friction formula        | Blasius    |
+| cf_turbulent_formula     | Turbulent skin friction formula      | P-S        |
+| cf_at_re_60000_laminar   | C_f value at Re=60,000 (laminar)     | ~0.0054    |
+| cf_at_re_60000_turbulent | C_f value at Re=60,000 (turbulent)   | ~0.0063    |
+| ff_wing_formula          | Form factor for wing                 | equation   |
+| ff_fuselage_formula      | Form factor for fuselage             | equation   |
+| swet_sref_typical_uav    | Typical S_wet/S_ref for small UAV    | 3-5        |
+| cd0_estimated_range      | Expected C_D0 range for Mars UAV     | 0.025-0.040|
+| cd0_recommended          | Design value for constraint analysis | 0.030      |
+
+MANUSCRIPT CONTENT TO DRAFT:
+
+a) Present the drag polar equation with citation:
+   "The aircraft drag polar is expressed as:
+   $$C_D = C_{D0} + \frac{C_L^2}{\pi \cdot AR \cdot e}$$ {#eq:drag-polar}
+   where $C_{D0}$ is the zero-lift drag coefficient and $e$ is the Oswald
+   efficiency factor [@raymer...]."
+
+b) Present C_D0 estimation methodology:
+   - Component buildup OR equivalent skin friction method
+   - State which method is used and why
+   - Cite source for method
+
+c) Calculate or estimate C_D0:
+   - If using component buildup: show calculation
+   - If using statistical: cite comparable aircraft
+
+d) Low-Re considerations:
+   - Discuss skin friction at Re ~ 60,000
+   - Note transition effects
+   - Justify chosen value
+
+e) Recommend design value:
+   C_D0 = 0.030 (or calculated value)
+   
+   With rationale:
+   "A conservative value of $C_{D0}$ = 0.030 is adopted, accounting for
+   low Reynolds number effects and fixed-rotor installation drag."
+
+------------------------------------------------------------------------------
+4. FULL DRAG POLAR SUMMARY
+------------------------------------------------------------------------------
+
+After determining e and C_D0, present the complete drag polar:
+
+C_D = 0.030 + C_L² / (π × 12 × 0.80)  [for AR = 12]
+C_D = 0.030 + C_L² / 30.16
+C_D = 0.030 + 0.0332 × C_L²
+
+Calculate key performance metrics:
+
+a) Maximum L/D:
+   (L/D)_max = 0.5 × sqrt(π × AR × e / C_D0)
+   (L/D)_max = 0.5 × sqrt(π × 12 × 0.80 / 0.030)
+   (L/D)_max ≈ [calculate]
+
+b) C_L at (L/D)_max:
+   C_L* = sqrt(π × AR × e × C_D0)
+   C_L* = sqrt(30.16 × 0.030)
+   C_L* ≈ [calculate]
+
+c) Plot drag polar:
+   - Generate C_D vs C_L curve
+   - Mark (L/D)_max point
+   - This will be a figure in 04_07
+
+================================================================================
+OUTPUT FOR MANUSCRIPT
+================================================================================
+
+Draft content for 04_07_aerodynamic-analysis.md with the following structure:
+
+## 4.7 Aerodynamic analysis and airfoil data {#sec:aerodynamic-analysis}
+
+### Low Reynolds number characteristics
+
+[Content from existing 05_01_low-reynolds-number-flight.md]
+- Describe challenges of low-Re flight
+- Laminar separation bubbles
+- Transition effects
+
+### Airfoil experimental data
+
+[Content from existing airfoil selection analysis]
+- Summary of candidate airfoils from Selig wind tunnel data
+- C_L,max values at Re = 60,000
+- L/D performance comparison
+- Table: Airfoil comparison with key metrics
+
+### Drag polar model
+
+[NEW CONTENT from this prompt]
+
+#### Oswald efficiency factor
+
+- Definition and physical meaning
+- Estimation method (Raymer correlation)
+- Calculation for AR = 10-14
+- Recommended value: e = [X]
+- Citation: [@raymer...]
+
+#### Zero-lift drag coefficient
+
+- Estimation methodology
+- Component breakdown OR equivalent skin friction
+- Consideration of low Reynolds number effects
+- Recommended value: C_D0 = [X]
+- Citation: [@raymer...]
+
+#### Complete drag polar
+
+- Full drag polar equation: C_D = C_D0 + C_L²/(π × AR × e)
+- Calculated (L/D)_max
+- Drag polar curve (figure placeholder)
+
+#### Aerodynamic coefficients summary
+
+Table summarizing all values for use in constraint analysis:
+
+| Parameter | Symbol  | Value | Uncertainty | Source |
+|-----------|---------|-------|-------------|--------|
+| Max lift coeff. | C_L,max | 1.0 | ±0.1 | Selig Vol. 1 |
+| Oswald factor | e | 0.80 | ±0.05 | Raymer |
+| Zero-lift drag | C_D0 | 0.030 | ±0.005 | Calculated |
+| Aspect ratio | AR | 12 | design choice | from §4.12 |
+| Max L/D | (L/D)_max | [X] | ±1 | Calculated |
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After drafting the content, update source_grounding.txt:
+
+```
+## Section: 4.7 Aerodynamic analysis - Oswald efficiency
+
+- "Oswald efficiency correlation for unswept wings: e = 1.78(1-0.045×AR^0.68)-0.64"
+  Source: [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 12, Equation 12.XX
+
+- "Recommended Oswald factor e = 0.80 for conservative low-Re estimate"
+  Source: Analysis based on [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 12
+
+## Section: 4.7 Aerodynamic analysis - Zero-lift drag
+
+- "Turbulent skin friction: C_f = 0.455/(log10(Re))^2.58"
+  Source: [@raymerAircraftDesignConceptual20XX] or [@hoernerFluidDynamicDrag1965]
+  Location: Chapter X, Equation X.XX
+
+- "Zero-lift drag coefficient C_D0 = 0.030 for Mars UAV"
+  Source: Calculated using method from [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 12
+
+## Section: 4.7 Aerodynamic analysis - Drag polar
+
+- "Parabolic drag polar: C_D = C_D0 + C_L²/(π×AR×e)"
+  Source: Standard aerodynamic formulation, see [@andersonIntroductionFlight20XX]
+  Location: Chapter X
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] C_L,max values consolidated from airfoil analysis
+[ ] Oswald efficiency correlation sourced and cited (Raymer or equivalent)
+[ ] Oswald factor calculated for AR = 10, 12, 14
+[ ] C_D0 estimation method documented with source
+[ ] C_D0 value justified for low-Re conditions
+[ ] Complete drag polar equation presented
+[ ] (L/D)_max calculated from drag polar
+[ ] All equations have citations verified in Mars_UAV.bib
+[ ] New sources added to Zotero if needed
+[ ] source_grounding.txt updated
+[ ] Manuscript content drafted for 04_07
+
+================================================================================
+BOOKS TO SEARCH/ADD TO ZOTERO
+================================================================================
+
+If not already in Zotero, add these key references:
+
+1. Raymer, D.P. "Aircraft Design: A Conceptual Approach"
+   - AIAA Education Series
+   - Latest edition preferred
+   - Essential for drag estimation methods
+
+2. Anderson, J.D. "Introduction to Flight"
+   - McGraw-Hill
+   - Good for fundamental aerodynamics
+
+3. Nicolai, L.M. "Fundamentals of Aircraft and Airship Design"
+   - AIAA
+   - Alternative source for coefficients
+
+4. Hoerner, S.F. "Fluid-Dynamic Drag"
+   - Classic reference for drag data
+   - May be harder to source
+
+================================================================================
+END OF PROMPT
+================================================================================

@@ -1,0 +1,451 @@
+# Mass Fractions Calculated from Reference UAV Database
+# ======================================================
+# Generated: 2025-12-27
+# Purpose: Empirical basis for Mars UAV weight estimation
+# 
+# Source data: sources/reference_drones.yaml
+# All values derived from manufacturer specifications
+# See source_grounding.txt for original data citations
+#
+# Methodology: Standard mass fraction approach
+#   f_i = m_i / MTOW
+# References: [@roskamAirplaneDesign12005a; @sadraeyAircraftDesignSystems2013]
+
+metadata:
+  generated_date: "2025-12-27"
+  purpose: "Mass fraction analysis for Mars UAV feasibility study"
+  source_database: "sources/reference_drones.yaml"
+  methodology: "Component mass divided by MTOW"
+  number_of_uavs_analyzed: 9
+
+# =============================================================================
+# INDIVIDUAL UAV ANALYSIS
+# =============================================================================
+uav_analysis:
+
+  # ---------------------------------------------------------------------------
+  - name: "V13-5 Sentinel"
+    source_key: "@spideruavV135SentinelVTOL2024"
+    
+    # Raw data from reference_drones.yaml
+    raw_data:
+      mtow_kg: 26.5
+      empty_kg: null           # Not specified
+      payload_max_kg: 7.5
+      battery_total_mass_kg: null
+      lift_motor_mass_kg: 1.68
+      lift_motor_count: 4
+      cruise_motor_mass_kg: null
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    # Calculated fractions
+    fractions:
+      f_battery: null          # Cannot calculate, missing battery mass
+      f_payload: 0.283         # 7.5 / 26.5
+      f_empty: null            # Cannot calculate, empty weight not specified
+      f_propulsion: null       # Cannot calculate, incomplete motor data
+      f_structure: null        # Cannot calculate
+    
+    notes: "Only payload and partial propulsion data available. Heavy lift capacity (7.5 kg)."
+    data_completeness: "partial"
+
+  # ---------------------------------------------------------------------------
+  - name: "AirMobi V25"
+    source_key: "@airmobiAirmobiV25Full2024"
+    
+    raw_data:
+      mtow_kg: 14.0
+      empty_kg: 3.45
+      payload_max_kg: 2.5
+      battery_total_mass_kg: 5.05
+      lift_motor_mass_kg: 0.225
+      lift_motor_count: 4
+      cruise_motor_mass_kg: 0.408
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: 0.361         # 5.05 / 14.0
+      f_payload: 0.179         # 2.5 / 14.0
+      f_empty: 0.246           # 3.45 / 14.0
+      f_propulsion: 0.093      # (4×0.225 + 1×0.408) / 14.0 = 1.308 / 14.0 (motors only)
+      f_structure: null        # Cannot calculate (f_empty includes motors)
+    
+    notes: "Complete battery and payload data. Propulsion fraction is motors only (missing ESC/props). Empty weight includes avionics and structure."
+    data_completeness: "good"
+    
+    # Consistency check
+    consistency_check:
+      sum_known: 0.786         # f_battery + f_payload + f_empty
+      remainder: 0.214         # 1 - 0.786 = unaccounted (additional components, rounding)
+
+  # ---------------------------------------------------------------------------
+  - name: "AirMobi V32"
+    source_key: "@airmobiAirmobiV32Full2024"
+    
+    raw_data:
+      mtow_kg: 23.5
+      empty_kg: 6.45
+      payload_max_kg: 5.0
+      battery_total_mass_kg: null  # Battery model given but not total mass
+      lift_motor_mass_kg: null
+      lift_motor_count: 4
+      cruise_motor_mass_kg: null
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: null          # Battery mass not specified
+      f_payload: 0.213         # 5.0 / 23.5
+      f_empty: 0.274           # 6.45 / 23.5
+      f_propulsion: null       # Motor masses not specified
+      f_structure: null
+    
+    notes: "Payload and empty fractions available. Battery mass not specified despite model number given."
+    data_completeness: "partial"
+
+  # ---------------------------------------------------------------------------
+  - name: "UAVMODEL X2400"
+    source_key: "@uavmodelUAVMODELX2400VTOL2024"
+    
+    raw_data:
+      mtow_kg: 8.5
+      empty_kg: 6.5
+      payload_max_kg: 2.0
+      battery_total_mass_kg: 2.5
+      lift_motor_mass_kg: 0.153
+      lift_motor_count: 4
+      cruise_motor_mass_kg: 0.259
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: 0.294         # 2.5 / 8.5
+      f_payload: 0.235         # 2.0 / 8.5
+      f_empty: 0.765           # 6.5 / 8.5
+      f_propulsion: 0.103      # (4×0.153 + 1×0.259) / 8.5 = 0.871 / 8.5 (motors only)
+      f_structure: null
+    
+    notes: "High empty weight fraction (76.5%) suggests empty mass includes battery. Data may have inconsistent definitions. Sum exceeds 1.0 - anomaly."
+    data_completeness: "good - but anomaly"
+    
+    # Consistency check - ANOMALY
+    consistency_check:
+      sum_known: 1.294         # f_battery + f_payload + f_empty = exceeds 1.0!
+      note: "Empty weight likely includes battery in this datasheet. Exclude from statistics."
+      exclude_from_stats: true
+
+  # ---------------------------------------------------------------------------
+  - name: "JOUAV CW-15"
+    source_key: "@jouavJOUAVCW15Multipurpose2024"
+    
+    raw_data:
+      mtow_kg: 14.5
+      empty_kg: null
+      payload_max_kg: 3.0
+      battery_total_mass_kg: null
+      lift_motor_mass_kg: null
+      lift_motor_count: 4
+      cruise_motor_mass_kg: null
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: null
+      f_payload: 0.207         # 3.0 / 14.5
+      f_empty: null
+      f_propulsion: null
+      f_structure: null
+    
+    notes: "Only MTOW and payload data available."
+    data_completeness: "minimal"
+
+  # ---------------------------------------------------------------------------
+  - name: "JOUAV CW-25E"
+    source_key: "@jouavJOUAVCW25ELong2024"
+    
+    raw_data:
+      mtow_kg: 31.58
+      empty_kg: null
+      payload_max_kg: 6.0
+      battery_total_mass_kg: null
+      lift_motor_mass_kg: null
+      lift_motor_count: 4
+      cruise_motor_mass_kg: null
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: null
+      f_payload: 0.190         # 6.0 / 31.58
+      f_empty: null
+      f_propulsion: null
+      f_structure: null
+    
+    notes: "Only MTOW and payload data available."
+    data_completeness: "minimal"
+
+  # ---------------------------------------------------------------------------
+  - name: "DeltaQuad Evo Enterprise"
+    source_key: "@deltaquadDeltaQuadEvoEnterprise2024"
+    
+    raw_data:
+      mtow_kg: 10.0
+      empty_kg: 4.8
+      payload_max_kg: 3.0
+      battery_total_mass_kg: 4.0  # Derived from weight comparison
+      lift_motor_mass_kg: null
+      lift_motor_count: 4
+      cruise_motor_mass_kg: null
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: 0.400         # 4.0 / 10.0
+      f_payload: 0.300         # 3.0 / 10.0
+      f_empty: 0.480           # 4.8 / 10.0
+      f_propulsion: null
+      f_structure: null
+    
+    notes: "Battery mass derived from documentation. High payload fraction due to 3 kg max capacity at only 10 kg MTOW."
+    data_completeness: "good"
+    
+    # Consistency check - slight anomaly
+    consistency_check:
+      sum_known: 1.180         # f_battery + f_payload + f_empty exceeds 1.0
+      note: "Empty weight includes battery. Different definition from other UAVs. Exclude battery fraction from stats."
+      exclude_battery_from_stats: true
+
+  # ---------------------------------------------------------------------------
+  - name: "RTV320 E"
+    source_key: "@uavfordroneRTV320ElectricVTOL2024"
+    
+    raw_data:
+      mtow_kg: 24.0
+      empty_kg: null
+      payload_max_kg: 2.5
+      battery_total_mass_kg: 9.36  # 4 × 2.34 kg CGBT batteries
+      lift_motor_mass_kg: null
+      lift_motor_count: 4
+      cruise_motor_mass_kg: null
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: 0.390         # 9.36 / 24.0
+      f_payload: 0.104         # 2.5 / 24.0
+      f_empty: null
+      f_propulsion: null
+      f_structure: null
+    
+    notes: "Battery mass calculated from CGBT solid-state battery specs. Low payload fraction for high endurance focus."
+    data_completeness: "partial"
+
+  # ---------------------------------------------------------------------------
+  - name: "Elevon X Sierra"
+    source_key: "@elevonxElevonXSierraVTOL2024"
+    
+    raw_data:
+      mtow_kg: 13.5
+      empty_kg: null
+      payload_max_kg: 1.5
+      battery_total_mass_kg: null
+      lift_motor_mass_kg: null
+      lift_motor_count: 4
+      cruise_motor_mass_kg: null
+      cruise_motor_count: 1
+      esc_mass_kg: null
+      propeller_mass_kg: null
+    
+    fractions:
+      f_battery: null
+      f_payload: 0.111         # 1.5 / 13.5
+      f_empty: null
+      f_propulsion: null
+      f_structure: null
+    
+    notes: "Only MTOW and payload data available. Low payload fraction."
+    data_completeness: "minimal"
+
+# =============================================================================
+# STATISTICAL SUMMARY
+# =============================================================================
+statistics:
+  
+  battery_fraction:
+    sample_size: 3             # AirMobi V25, RTV320 E, DeltaQuad Evo (see notes)
+    min: 0.361
+    max: 0.400
+    mean: 0.384
+    median: 0.390
+    std_dev: 0.020
+    data_points:
+      - name: "AirMobi V25"
+        value: 0.361
+      - name: "RTV320 E"
+        value: 0.390
+      - name: "DeltaQuad Evo"
+        value: 0.400
+    notes: "UAVMODEL X2400 excluded (data anomaly). DeltaQuad included despite overlap with empty weight."
+    valid_sample_note: "Actually only 2 clean samples (V25, RTV320). DeltaQuad may double-count."
+    revised_values:
+      # Excluding DeltaQuad due to potential double-counting
+      sample_size: 2
+      min: 0.361
+      max: 0.390
+      mean: 0.376
+      median: 0.376
+  
+  payload_fraction:
+    sample_size: 9             # All UAVs have payload data
+    min: 0.104                 # RTV320 E
+    max: 0.300                 # DeltaQuad Evo
+    mean: 0.202
+    median: 0.207              # JOUAV CW-15
+    std_dev: 0.062
+    data_points:
+      - name: "RTV320 E"
+        value: 0.104
+      - name: "Elevon X Sierra"
+        value: 0.111
+      - name: "AirMobi V25"
+        value: 0.179
+      - name: "JOUAV CW-25E"
+        value: 0.190
+      - name: "JOUAV CW-15"
+        value: 0.207
+      - name: "AirMobi V32"
+        value: 0.213
+      - name: "UAVMODEL X2400"
+        value: 0.235
+      - name: "V13-5 Sentinel"
+        value: 0.283
+      - name: "DeltaQuad Evo"
+        value: 0.300
+    notes: "Complete data for all UAVs. Higher values reflect heavy-lift designs; lower values reflect endurance-optimized designs."
+  
+  empty_fraction:
+    sample_size: 2             # Only V25 and V32 have clean empty weight data
+    min: 0.246                 # AirMobi V25
+    max: 0.274                 # AirMobi V32
+    mean: 0.260
+    median: 0.260
+    std_dev: 0.020
+    data_points:
+      - name: "AirMobi V25"
+        value: 0.246
+      - name: "AirMobi V32"
+        value: 0.274
+    notes: "Limited data. UAVMODEL X2400 and DeltaQuad excluded due to inconsistent weight definitions (empty weight appears to include battery)."
+  
+  propulsion_fraction:
+    sample_size: 2             # Motors-only data for V25 and X2400
+    min: 0.093                 # AirMobi V25
+    max: 0.103                 # UAVMODEL X2400
+    mean: 0.098
+    median: 0.098
+    std_dev: 0.007
+    data_points:
+      - name: "AirMobi V25"
+        value: 0.093
+        note: "Motors only (4×lift + 1×cruise = 1.308 kg)"
+      - name: "UAVMODEL X2400"
+        value: 0.103
+        note: "Motors only (4×lift + 1×cruise = 0.871 kg)"
+    notes: "Very limited data. Missing ESC and propeller masses. Actual propulsion fraction likely 0.12-0.18 with complete data."
+    estimated_complete_range:
+      low: 0.12
+      high: 0.18
+      rationale: "ESCs typically add 5 g/A capacity; propellers add 50-150 g each"
+
+# =============================================================================
+# RECOMMENDED VALUES FOR MARS UAV DESIGN
+# =============================================================================
+recommendations:
+  
+  battery_fraction:
+    recommended_value: 0.35
+    recommended_range: [0.30, 0.40]
+    rationale: "Based on reference UAV data (mean 0.38). Slightly conservative for Mars due to need for robust power margins in extreme environment."
+    source: "Derived from commercial VTOL database (sources/reference_drones.yaml)"
+    
+  payload_fraction:
+    recommended_value: 0.15
+    recommended_range: [0.10, 0.20]
+    rationale: "Median 0.21, but Mars UAV is mapping-focused with lightweight camera (~0.3-0.5 kg). Conservative value accounts for thermal enclosure and other margins."
+    source: "Derived from commercial VTOL database"
+    
+  empty_fraction:
+    recommended_value: 0.45
+    recommended_range: [0.40, 0.50]
+    rationale: "Reference data shows 0.25-0.27 for commercial UAVs, but Mars conditions require additional margins for thermal management, radiation hardening, and structural reinforcement. Value doubled from terrestrial baseline."
+    source: "Estimated - reference data limited"
+    note: "High uncertainty. Mars-specific factors include thermal insulation, radiation shielding, dust protection."
+    
+  propulsion_fraction:
+    recommended_value: 0.15
+    recommended_range: [0.12, 0.18]
+    rationale: "Motors-only data shows ~10%. Complete propulsion (motors + ESCs + propellers) estimated at 15% for dual propulsion system (lift + cruise)."
+    source: "Estimated from partial data + engineering judgment"
+    
+  avionics_fraction:
+    recommended_value: 0.05
+    recommended_range: [0.03, 0.07]
+    rationale: "Standard estimate for small UAVs. May be higher for Mars due to additional sensors and radiation-tolerant electronics."
+    source: "Standard aerospace practice [@sadraeyAircraftDesignSystems2013]"
+
+# =============================================================================
+# MASS BUDGET CONSISTENCY CHECK
+# =============================================================================
+mass_budget_check:
+  
+  sum_of_fractions: 1.15      # 0.35 + 0.15 + 0.45 + 0.15 + 0.05 = 1.15
+  status: "OVER-ALLOCATED"
+  note: "Sum exceeds 1.0 by 15%, indicating conservative estimates. During detailed design, these fractions will be refined with actual component selections."
+  
+  interpretation: |
+    The over-allocation is expected for several reasons:
+    1. Empty fraction includes propulsion in some reference definitions
+    2. Conservative Mars-specific margins applied to each category
+    3. Actual design will use constraint analysis to find consistent solution
+    
+    For initial MTOW estimation, use payload fraction method only:
+    MTOW = m_payload / f_payload
+
+# =============================================================================
+# MTOW ESTIMATION
+# =============================================================================
+mtow_estimation:
+  
+  method: "payload_fraction"
+  formula: "MTOW = m_payload / f_payload"
+  reference: "Standard preliminary sizing approach [@roskamAirplaneDesign12005a; @sadraeyAircraftDesignSystems2013]"
+  
+  baseline_calculation:
+    payload_mass_kg: 0.5       # Camera (~300 g) + radio (~150 g) + margins
+    payload_fraction: 0.15
+    calculated_mtow_kg: 3.33   # 0.5 / 0.15
+    
+  sensitivity_analysis:
+    - scenario: "High payload fraction"
+      payload_fraction: 0.20
+      mtow_kg: 2.50
+    - scenario: "Baseline"
+      payload_fraction: 0.15
+      mtow_kg: 3.33
+    - scenario: "Low payload fraction"
+      payload_fraction: 0.10
+      mtow_kg: 5.00
+    
+  recommended_baseline:
+    mtow_range_kg: [3.0, 4.0]
+    rationale: "Central estimate 3.3 kg with ±20% margin for uncertainty"

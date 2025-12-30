@@ -1,0 +1,373 @@
+================================================================================
+PROMPT 02G: LOAD FACTOR SELECTION AND JUSTIFICATION
+================================================================================
+Task: Research and justify load factor selection for Mars UAV design
+Output: Manuscript content for 04_12_derived-requirements.md (load factor section)
+        Verify/add CS-23 to Zotero
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The structural weight
+estimation requires the ultimate load factor (n_ult), which significantly
+affects wing and fuselage weights.
+
+PROBLEM:
+- Traditional aircraft weight estimation uses CS-25 load factors (n_ult ≈ 5.7)
+- These are conservative values designed for manned passenger aircraft
+- Mars UAV is unmanned, autonomous, and operates in thin atmosphere
+- Using lower n_ult reduces structural weight substantially
+
+PROPOSED VALUES:
+- Limit load factor: n_limit = 2.5
+- Safety factor: SF = 1.5
+- Ultimate load factor: n_ult = n_limit × SF = 3.75
+
+This prompt documents the rationale and sources for this decision.
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. VERIFY CS-23 IN ZOTERO:
+   - Search Zotero: "CS-23" or "certification specifications small aircraft"
+   - Expected citation: @europeanunionaviationsafetyagencyCertificationSpecifications...
+   - If not present, add via Zotero Web API
+
+2. RESEARCH METHODOLOGY:
+   - CS-23 is used as METHODOLOGY REFERENCE, not regulatory requirement
+   - Mars UAV is not certified under any Earth regulations
+   - We use CS-23 approach to establish consistent, justifiable load factors
+
+3. DOCUMENT ALL CLAIMS:
+   - Every load factor value must have a source
+   - Rationale must be clearly stated
+   - Update source_grounding.txt
+
+================================================================================
+CONTENT TO RESEARCH
+================================================================================
+
+------------------------------------------------------------------------------
+1. CS-23 LOAD FACTOR METHODOLOGY
+------------------------------------------------------------------------------
+
+Research EASA CS-23 (Certification Specifications for Normal Category Aircraft)
+Amendment 5 or later.
+
+KEY SECTIONS TO FIND:
+
+a) CS-23.301 - Loads
+   - General requirements for structural loads
+   - Definition of limit loads vs. ultimate loads
+
+b) CS-23.303 - Factor of Safety
+   - Standard factor of safety = 1.5
+   - Relationship: n_ult = n_limit × SF
+
+c) CS-23.337 - Limit Maneuvering Load Factor
+   - How n_limit is determined for different aircraft categories
+   - Expected formula: n_limit = 2.1 + (24000 / (W + 10000))
+   - Or simplified n_limit = 3.8 for normal category, 2.5 for utility
+
+d) CS-23.341 - Gust Load Factor
+   - Gust load factor equation
+   - Gust velocity requirements
+
+DOCUMENT:
+- Exact section numbers
+- Key equations
+- Load factor values for different categories
+- How aircraft weight affects n_limit
+
+------------------------------------------------------------------------------
+2. LOAD FACTOR CATEGORIES
+------------------------------------------------------------------------------
+
+Document the standard load factor categories from CS-23 or equivalent:
+
+| Category    | n_limit (positive) | n_limit (negative) | Typical Use |
+|-------------|-------------------|-------------------|-------------|
+| Normal      | +3.8 to +2.5      | -1.52 to -1.0     | General aviation |
+| Utility     | +4.4              | -1.76             | Light aerobatics |
+| Aerobatic   | +6.0              | -3.0              | Full aerobatics |
+
+Note: CS-23 Amendment 5 may have simplified this to single "normal category"
+
+DOCUMENT:
+- Source for each category
+- How weight affects the values
+- Which category is most applicable to UAV
+
+------------------------------------------------------------------------------
+3. JUSTIFICATION FOR n_limit = 2.5
+------------------------------------------------------------------------------
+
+The Mars UAV uses n_limit = 2.5, which is at the lower bound of normal category
+aircraft. Document the justification:
+
+a) UNMANNED OPERATION:
+   - No pilot or passengers on board
+   - Structural failure does not risk human lives
+   - Lower safety margins are acceptable
+   - Source: Search for UAV load factor literature
+
+b) AUTONOMOUS FLIGHT:
+   - Flight control system limits maneuvers
+   - Maximum bank angle and g-loads are software-limited
+   - No pilot-induced oscillations or panic maneuvers
+   - Typical UAV autopilots limit to 2-3 g
+
+c) THIN MARS ATMOSPHERE:
+   - Atmospheric density ~1/60 of Earth sea level
+   - Gust loads scale with density: Δn_gust ∝ ρ
+   - Mars gusts produce ~60× lower load than Earth gusts
+   - Gust velocity on Mars (from requirements): 10 m/s
+
+   Calculate gust load reduction:
+   - Earth: Δn = K × U × V × a / (2 × (W/S))
+   - Mars: Same formula but ρ_Mars / ρ_Earth ≈ 1/60
+   - Gust contribution to n_limit is negligible on Mars
+
+d) PRECEDENTS:
+   - Search for published Mars UAV load factor values
+   - Ingenuity: What load factors were used?
+   - ARES: What load factors were assumed?
+   - MSH: Any published structural requirements?
+
+DOCUMENT:
+- Each justification with source if possible
+- Quantitative gust load calculation
+- Any UAV or Mars-specific load factor precedents
+
+------------------------------------------------------------------------------
+4. SAFETY FACTOR
+------------------------------------------------------------------------------
+
+Document the universal aerospace safety factor:
+
+SF = 1.5
+
+This factor accounts for:
+- Material property variations
+- Manufacturing tolerances
+- Fatigue considerations
+- Damage tolerance
+
+SOURCES:
+- CS-23.303
+- FAR Part 23
+- Any aerospace design textbook (Raymer, Niu, etc.)
+
+DOCUMENT:
+- Source citation for SF = 1.5
+- Brief explanation of purpose
+
+------------------------------------------------------------------------------
+5. ULTIMATE LOAD FACTOR CALCULATION
+------------------------------------------------------------------------------
+
+Calculate and document:
+
+n_ult = n_limit × SF = 2.5 × 1.5 = 3.75
+
+COMPARISON WITH OTHER VALUES:
+
+| Aircraft Type | n_limit | SF | n_ult |
+|--------------|---------|-----|-------|
+| CS-25 transport | 3.0 (at high W) | 1.5 | 4.5 |
+| CS-25 transport (low W) | 3.8 | 1.5 | 5.7 |
+| CS-23 normal category | 2.5-3.8 | 1.5 | 3.75-5.7 |
+| Mars UAV (this study) | 2.5 | 1.5 | 3.75 |
+
+DOCUMENT:
+- Source for each comparison value
+- Rationale for Mars UAV being at lower bound
+
+------------------------------------------------------------------------------
+6. STRUCTURAL WEIGHT IMPACT
+------------------------------------------------------------------------------
+
+Quantify the weight reduction from using n_ult = 3.75 instead of 5.7:
+
+WING WEIGHT:
+From Sadraey (2013) or similar, wing weight contains n_ult dependency:
+W_wing ∝ n_ult^0.49 (approximate exponent, verify from actual equation)
+
+Weight ratio = (3.75 / 5.7)^0.49 = 0.658^0.49 ≈ 0.82
+Result: ~18% wing weight reduction
+
+FUSELAGE WEIGHT:
+From Sadraey (2013), fuselage weight dependency on n_ult:
+W_fus ∝ n_ult^α (find exponent from equation)
+
+Calculate weight ratio for fuselage.
+
+TOTAL STRUCTURAL WEIGHT:
+Combined effect: estimate total structural weight reduction.
+
+DOCUMENT:
+- Exact exponents from Sadraey equations
+- Calculated weight reduction percentages
+- Net MTOW impact
+
+================================================================================
+OUTPUT: ZOTERO ENTRY (if needed)
+================================================================================
+
+If CS-23 is not in Zotero, add it:
+
+```json
+[{
+  "itemType": "document",
+  "title": "Certification Specifications for Normal-Category Aeroplanes (CS-23 Amendment 5)",
+  "creators": [
+    {
+      "creatorType": "author",
+      "name": "European Union Aviation Safety Agency"
+    }
+  ],
+  "date": "2017-08-01",
+  "url": "https://www.easa.europa.eu/en/document-library/certification-specifications/cs-23-amendment-5",
+  "accessDate": "2025-12-26",
+  "abstractNote": "Certification specifications establishing airworthiness requirements for normal category aircraft, including load factor requirements and structural design criteria.",
+  "collections": ["2BQEVWT7"],
+  "tags": [
+    {"tag": "certification"},
+    {"tag": "load factors"},
+    {"tag": "structural design"},
+    {"tag": "CS-23"}
+  ]
+}]
+```
+
+================================================================================
+OUTPUT: MANUSCRIPT CONTENT
+================================================================================
+
+Draft content for 04_12_derived-requirements.md:
+
+------------------------------------------------------------------------------
+### Load factor selection {#sec:load-factor-selection}
+------------------------------------------------------------------------------
+
+#### Definitions
+
+The *limit load factor* ($n_{limit}$) is the maximum load factor expected in
+normal operation. The *ultimate load factor* ($n_{ult}$) is the limit load
+factor multiplied by a factor of safety:
+
+$$n_{ult} = n_{limit} \times SF$$ {#eq:n-ult-definition}
+
+where $SF = 1.5$ is the standard aerospace factor of safety
+[@europeanunionaviationsafetyagency...].
+
+#### Load factor selection rationale
+
+For the Mars UAV, a limit load factor of $n_{limit}$ = 2.5 is adopted, yielding:
+
+$$n_{ult} = 2.5 \times 1.5 = 3.75$$
+
+This value is at the lower bound of CS-23 normal category requirements
+[@europeanunionaviationsafetyagency...] and is justified by:
+
+1. **Unmanned operation**: The absence of crew reduces the consequence of
+   structural failure, allowing reduced safety margins compared to manned
+   aircraft.
+
+2. **Autonomous flight**: The flight control system enforces maneuver limits,
+   preventing pilot-induced loads exceeding design values. Typical autopilots
+   limit bank angle to 60° and load factor to 2-3 g.
+
+3. **Reduced gust loads**: Gust-induced load factors scale with atmospheric
+   density. At Mars density (~0.020 kg/m³), gust loads are approximately 60×
+   lower than Earth sea level, making the maneuvering load factor dominant.
+
+@tbl:load-factor-comparison compares the Mars UAV load factors with other
+aircraft categories.
+
+| Aircraft Type | n_limit | SF | n_ult |
+|--------------|---------|-----|-------|
+| CS-25 transport (high W) | 3.0 | 1.5 | 4.5 |
+| CS-23 normal (low W) | 3.8 | 1.5 | 5.7 |
+| Mars UAV (this study) | 2.5 | 1.5 | 3.75 |
+
+: Load factor comparison {#tbl:load-factor-comparison}
+
+#### Structural weight impact
+
+The reduced ultimate load factor significantly decreases structural weight.
+Using the weight estimation correlations from @sec:weight-estimate:
+
+- Wing weight reduction: [X]% (scaling as $n_{ult}^{0.49}$)
+- Fuselage weight reduction: [X]% (scaling as $n_{ult}^{[exp]}$)
+
+This weight savings is a key enabler for achieving mission feasibility.
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After completing the research, update source_grounding.txt:
+
+```
+## Section: 4.12 Derived requirements - Load factors
+
+- "Factor of safety SF = 1.5 for aerospace structures"
+  Source: [@europeanunionaviationsafetyagencyCS23] CS-23.303
+  Location: Subpart C - Structure, Section 23.303
+
+- "Limit maneuvering load factor methodology"
+  Source: [@europeanunionaviationsafetyagencyCS23] CS-23.337
+  Location: Subpart C - Structure, Section 23.337
+
+- "n_limit = 2.5 at lower bound of CS-23 normal category"
+  Source: [@europeanunionaviationsafetyagencyCS23]
+  Location: Section 23.337, for aircraft > 4000 lb
+
+- "Gust load factor reduces with atmospheric density"
+  Source: Standard gust load formulation, see [@andersonIntroductionFlight20XX]
+  Location: Chapter on loads
+
+- "Unmanned aircraft structural requirements"
+  Source: [UAV literature if found]
+  Location: [page]
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] CS-23 presence in Zotero verified (or added)
+[ ] Citation key documented
+[ ] SF = 1.5 sourced with section number
+[ ] n_limit methodology from CS-23.337 documented
+[ ] Justification for n_limit = 2.5 includes all four points
+[ ] Gust load reduction quantified for Mars
+[ ] n_ult = 3.75 calculated and compared to alternatives
+[ ] Structural weight impact quantified
+[ ] Manuscript content drafted for 04_12
+[ ] source_grounding.txt updated
+
+================================================================================
+SEARCH QUERIES
+================================================================================
+
+Zotero searches:
+- "CS-23"
+- "certification specifications"
+- "load factor small aircraft"
+- "EASA"
+
+Web searches (if not in Zotero):
+- "CS-23 Amendment 5 PDF"
+- "UAV load factor requirements"
+- "Ingenuity Mars helicopter load factor"
+- "unmanned aircraft structural requirements"
+
+================================================================================
+END OF PROMPT
+================================================================================

@@ -1,0 +1,19 @@
+# Project configuration file
+# Multilanguage configuration for Drone Marte project
+
+# Language configurations
+languages:
+  en:
+    main_document: "drone.md"
+    sections_dir: "sections_en"
+    docx_defaults: "docx.defaults.en.yaml"
+    output_file: "drone_en.docx"
+  it:
+    main_document: "drone_it.md"
+    sections_dir: "sections_it"
+    docx_defaults: "docx.defaults.it.yaml"
+    output_file: "drone_it.docx"
+
+# Shared settings
+bibliography: "Mars_UAV.bib"
+front_matter_file: "front_matter.yaml"

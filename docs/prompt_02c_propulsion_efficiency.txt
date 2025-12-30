@@ -1,0 +1,502 @@
+================================================================================
+PROMPT 02C: PROPULSION EFFICIENCY DATA COLLECTION
+================================================================================
+Task: Research and document propulsion efficiency parameters for Mars UAV
+Output: YAML file sources/propulsion_efficiency_data.yaml with full citations
+        Manuscript content for inclusion in 04_05_propulsion-data.md
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The UAV uses a hybrid VTOL
+(QuadPlane) configuration with:
+- Lift rotors for hover (low-Re, thin atmosphere)
+- Cruise propeller for fixed-wing flight
+
+This task collects verified efficiency data for the constraint analysis in
+Section 5. The efficiencies directly impact:
+- Hover power calculation (FM, η_motor, η_ESC)
+- Cruise power calculation (η_prop, η_motor, η_ESC)
+- Energy budget and endurance calculations
+
+OPERATING CONDITIONS:
+- Mars atmosphere: ρ = 0.020 kg/m³ (1/60 of Earth sea level)
+- Blade Reynolds numbers: Re = 10,000 - 100,000 (very low)
+- Tip speeds: subsonic (M < 0.7 due to low speed of sound a ≈ 230 m/s)
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+EVERY piece of data must be traced to a primary source and properly cited.
+
+1. VERIFICATION (Primary Source Rule):
+   - Search Zotero Mars_UAV collection FIRST
+   - If not found, search full Zotero library
+   - If not found, search web for authoritative sources:
+     * Peer-reviewed journal papers
+     * NASA/JPL technical reports
+     * Manufacturer datasheets
+   - Do NOT use aggregator sites, blogs, or Wikipedia
+
+2. REGISTRATION (Zotero):
+   - Add each new source to the Mars_UAV Zotero collection
+   - Use the Zotero Web API:
+     - User ID: 10348042
+     - API Key: s8qR5N0A7GSQxZfkW1NAcmjZ
+     - Collection Key: 2BQEVWT7
+   - Required metadata: Author, Title, Date, URL/DOI
+
+3. CITATION KEY:
+   - After adding to Zotero, wait for BetterBibTeX sync
+   - Verify the citation key exists in Mars_UAV.bib
+   - Use the EXACT key in the YAML file
+
+4. NO UNVERIFIED DATA:
+   - If a value cannot be sourced, use null
+   - Do NOT estimate or guess values
+   - Document the uncertainty range when multiple sources exist
+
+================================================================================
+PARAMETERS TO RESEARCH
+================================================================================
+
+------------------------------------------------------------------------------
+1. FIGURE OF MERIT (FM) - Rotor Hover Efficiency
+------------------------------------------------------------------------------
+
+Definition: FM = P_ideal / P_actual = (ideal induced power) / (total hover power)
+
+SEARCH STRATEGY:
+a) Primary source - Mars Science Helicopter study:
+   - Search Zotero: "Johnson Mars Science Helicopter"
+   - Expected citation: @johnsonMarsScienceHelicopter2020
+   - Location: Look for FM values in rotor performance section
+   
+b) Secondary source - Leishman textbook:
+   - Search Zotero: "Leishman helicopter"
+   - Expected citation: @leishmanPrinciplesHelicopterAerodynamics2006
+   - Location: Chapter 2 or 3, rotor performance section
+   - This source provides FM theory and typical values
+
+c) Tertiary - Ingenuity performance data:
+   - Search for NASA JPL Ingenuity technical reports
+   - Balaram et al., Grip et al. papers
+
+DATA TO COLLECT:
+| Field              | Description                                    | Expected Range |
+|--------------------|------------------------------------------------|----------------|
+| fm_typical_earth   | FM for conventional helicopter (Earth, high Re)| 0.70-0.80      |
+| fm_small_rotor     | FM for small rotors (Earth, moderate Re)       | 0.60-0.70      |
+| fm_mars_estimate   | FM estimate for Mars conditions (low Re)       | 0.50-0.65      |
+| fm_ingenuity       | FM achieved by Ingenuity (if available)        | ~0.50-0.60     |
+| fm_msh_design      | FM used in Mars Science Helicopter design      | value          |
+| source_theory      | Citation for FM definition and theory          | Leishman       |
+| source_mars_data   | Citation for Mars-specific FM values           | Johnson/Balaram|
+
+NOTES:
+- FM degrades at low Reynolds numbers due to increased profile drag
+- Mars rotors operate at blade Re ~ 10,000-50,000 vs Earth Re > 500,000
+- Document the Re range for each FM value
+
+------------------------------------------------------------------------------
+2. PROPELLER EFFICIENCY (η_prop) - Cruise Propulsion
+------------------------------------------------------------------------------
+
+Definition: η_prop = (thrust power) / (shaft power) = T×V / P_shaft
+
+SEARCH STRATEGY:
+a) Primary source - Bertani Mars propeller study:
+   - Search Zotero: "Bertani Mars propeller" or "Bertani fixed-wing"
+   - Expected citation: @bertaniPreliminaryDesignFixedwing2023
+   - Look for propeller efficiency at Mars Reynolds numbers
+   
+b) Secondary source - McCormick textbook:
+   - Search Zotero: "McCormick aerodynamics"
+   - Or search web for propeller efficiency low Reynolds
+   - Classic reference for propeller theory
+
+c) Tertiary - UIUC propeller database:
+   - Low Reynolds propeller data from wind tunnel tests
+   - Search: "UIUC propeller low Reynolds"
+
+DATA TO COLLECT:
+| Field                | Description                                  | Expected Range |
+|----------------------|----------------------------------------------|----------------|
+| eta_prop_earth_high  | Propeller η at Earth, high Re (Re > 500k)    | 0.80-0.85      |
+| eta_prop_earth_low   | Propeller η at Earth, low Re (Re ~ 100k)     | 0.70-0.75      |
+| eta_prop_mars_est    | Propeller η estimate for Mars (Re ~ 50-100k) | 0.50-0.65      |
+| eta_prop_mars_source | Citation for Mars propeller efficiency       | Bertani        |
+| re_range_mars        | Reynolds number range for Mars propeller     | 50,000-100,000 |
+| degradation_factor   | η reduction factor vs Earth high-Re          | 0.65-0.80      |
+| source_theory        | Citation for propeller efficiency theory     | McCormick      |
+
+NOTES:
+- Propeller efficiency strongly degrades below Re ~ 100,000
+- Laminar separation bubbles cause performance loss at low Re
+- Document the specific Re range for each efficiency value
+
+------------------------------------------------------------------------------
+3. MOTOR EFFICIENCY (η_motor) - Electric Motors
+------------------------------------------------------------------------------
+
+Definition: η_motor = (mechanical shaft power) / (electrical input power)
+
+SEARCH STRATEGY:
+a) Primary source - Motor datasheets:
+   - Search Zotero for T-Motor specifications
+   - Expected: MN505-S, AT4130 specifications
+   - Look in reference_drones.yaml for motor models used
+   
+b) Secondary source - Commercial VTOL specifications:
+   - AirMobi, DeltaQuad, Wingtra motor specifications
+   - Search manufacturer websites via Jina Reader if blocked
+
+c) Tertiary - Academic literature:
+   - Search: "brushless motor efficiency UAV"
+   - Look for efficiency curves vs. load
+
+DATA TO COLLECT:
+| Field                | Description                                  | Expected Range |
+|----------------------|----------------------------------------------|----------------|
+| eta_motor_peak       | Peak efficiency (at optimal load point)      | 0.88-0.92      |
+| eta_motor_cruise     | Efficiency at cruise power (~50% load)       | 0.85-0.88      |
+| eta_motor_hover      | Efficiency at hover power (~80-100% load)    | 0.82-0.88      |
+| eta_motor_typical    | Typical value for sizing calculations        | 0.85           |
+| source_datasheet     | Citation for motor datasheet                 | T-Motor        |
+| load_dependency      | Note about efficiency variation with load    | text           |
+
+NOTES:
+- Motor efficiency varies with load (torque and speed)
+- Peak efficiency typically at 70-80% of maximum power
+- Temperature affects efficiency (Mars cold start issue)
+
+------------------------------------------------------------------------------
+4. ESC EFFICIENCY (η_ESC) - Electronic Speed Controllers
+------------------------------------------------------------------------------
+
+Definition: η_ESC = (motor input power) / (battery output power)
+
+SEARCH STRATEGY:
+a) Primary source - ESC datasheets:
+   - Search for ESC specifications from reference UAVs
+   - Flame, T-Motor, Castle Creations ESCs
+   
+b) Secondary source - Academic literature:
+   - Search: "ESC efficiency brushless motor"
+
+c) Note: ESC efficiency is typically very high and well-documented
+
+DATA TO COLLECT:
+| Field                | Description                                  | Expected Range |
+|----------------------|----------------------------------------------|----------------|
+| eta_esc_typical      | Typical ESC efficiency                       | 0.95-0.98      |
+| eta_esc_conservative | Conservative value for sizing                | 0.95           |
+| source                | Citation for ESC efficiency                 | datasheet/lit  |
+
+NOTES:
+- ESC efficiency is relatively constant over operating range
+- Lower efficiency at very low throttle settings
+- Negligible temperature variation in typical range
+
+================================================================================
+OUTPUT FILE FORMAT
+================================================================================
+
+Create file: sources/propulsion_efficiency_data.yaml
+
+```yaml
+# Propulsion Efficiency Data for Mars UAV Feasibility Study
+# Generated: [DATE]
+# Purpose: Input parameters for constraint analysis (Section 5)
+# 
+# CITATION PROTOCOL:
+# Each value includes source_key which references Mars_UAV.bib
+# All specifications are from primary authoritative sources
+# 
+# See source_grounding.txt for detailed claim-to-source mapping
+
+metadata:
+  generated_date: "2025-12-26"
+  purpose: "Propulsion efficiency parameters for Mars UAV constraint analysis"
+  operating_conditions:
+    mars_density_kg_m3: 0.020
+    blade_reynolds_range: "10,000 - 100,000"
+    tip_mach_limit: 0.7
+
+# -----------------------------------------------------------------------------
+# FIGURE OF MERIT (Rotor Hover Efficiency)
+# -----------------------------------------------------------------------------
+figure_of_merit:
+  definition: "FM = P_ideal / P_actual"
+  
+  # Theory and reference values
+  theory:
+    source_key: "@leishmanPrinciplesHelicopterAerodynamics2006"
+    source_location: "Chapter 2, Section 2.X"
+    description: "Actuator disk theory defines ideal hover power"
+  
+  # Earth reference values (high Reynolds number)
+  earth_conventional:
+    value: 0.75
+    reynolds_number: "> 1,000,000"
+    source_key: "@leishmanPrinciplesHelicopterAerodynamics2006"
+    source_location: "Table X.X"
+    notes: "Large helicopters, optimized rotors"
+  
+  # Small rotor values (moderate Reynolds)
+  small_rotor_earth:
+    value: 0.65
+    reynolds_number: "100,000 - 500,000"
+    source_key: "[source_key]"
+    source_location: "[location]"
+    notes: "Small UAV rotors on Earth"
+  
+  # Mars-specific values
+  mars_estimated:
+    value: 0.60
+    value_range: [0.55, 0.65]
+    reynolds_number: "20,000 - 60,000"
+    source_key: "@johnsonMarsScienceHelicopter2020"
+    source_location: "Page X, Section X"
+    notes: "Mars Science Helicopter design study"
+  
+  # Ingenuity actual performance (if available)
+  ingenuity:
+    value: null  # Fill if data found
+    source_key: null
+    source_location: null
+    notes: "Ingenuity flight data FM"
+  
+  # Recommended value for sizing
+  recommended:
+    value: 0.60
+    rationale: "Conservative estimate for Mars low-Re conditions"
+    uncertainty: 0.05
+
+# -----------------------------------------------------------------------------
+# PROPELLER EFFICIENCY (Cruise)
+# -----------------------------------------------------------------------------
+propeller_efficiency:
+  definition: "η_prop = T×V / P_shaft"
+  
+  # Theory reference
+  theory:
+    source_key: "[McCormick or similar]"
+    source_location: "[Chapter/Section]"
+    description: "Propeller momentum and blade element theory"
+  
+  # Earth reference (high Re)
+  earth_high_re:
+    value: 0.82
+    reynolds_number: "> 500,000"
+    source_key: "[source_key]"
+    source_location: "[location]"
+    notes: "Optimized propellers at high Re"
+  
+  # Earth low Re
+  earth_low_re:
+    value: 0.72
+    reynolds_number: "100,000 - 200,000"
+    source_key: "[source_key]"
+    source_location: "[location]"
+    notes: "Small propellers showing Re effects"
+  
+  # Mars conditions
+  mars_estimated:
+    value: 0.55
+    value_range: [0.50, 0.65]
+    reynolds_number: "50,000 - 100,000"
+    source_key: "@bertaniPreliminaryDesignFixedwing2023"
+    source_location: "Page X, Table X"
+    notes: "Mars propeller efficiency estimate"
+  
+  # Recommended value for sizing
+  recommended:
+    value: 0.55
+    rationale: "Conservative for Mars low-Re propeller"
+    uncertainty: 0.10
+
+# -----------------------------------------------------------------------------
+# MOTOR EFFICIENCY
+# -----------------------------------------------------------------------------
+motor_efficiency:
+  definition: "η_motor = P_shaft / P_electrical"
+  
+  # Typical values
+  peak_efficiency:
+    value: 0.90
+    load_point: "70-80% of max power"
+    source_key: "[T-Motor datasheet]"
+    source_location: "[datasheet URL]"
+  
+  cruise_efficiency:
+    value: 0.87
+    load_point: "40-60% of max power"
+    source_key: "[source_key]"
+    source_location: "[location]"
+  
+  hover_efficiency:
+    value: 0.85
+    load_point: "80-100% of max power"
+    source_key: "[source_key]"
+    source_location: "[location]"
+  
+  # Recommended value for sizing
+  recommended:
+    value: 0.85
+    rationale: "Conservative average across operating envelope"
+    uncertainty: 0.03
+
+# -----------------------------------------------------------------------------
+# ESC EFFICIENCY
+# -----------------------------------------------------------------------------
+esc_efficiency:
+  definition: "η_ESC = P_motor_in / P_battery_out"
+  
+  typical_value:
+    value: 0.96
+    range: [0.95, 0.98]
+    source_key: "[ESC datasheet]"
+    source_location: "[datasheet URL]"
+    notes: "High-quality brushless ESC"
+  
+  # Recommended value for sizing
+  recommended:
+    value: 0.95
+    rationale: "Conservative for sizing calculations"
+    uncertainty: 0.02
+
+# -----------------------------------------------------------------------------
+# COMBINED EFFICIENCIES (for constraint analysis)
+# -----------------------------------------------------------------------------
+combined_efficiency:
+  hover_chain:
+    formula: "η_hover = FM × η_motor × η_ESC"
+    components: ["FM", "η_motor", "η_ESC"]
+    calculated_value: null  # To be calculated: 0.60 × 0.85 × 0.95 = 0.485
+    notes: "Total efficiency from battery to hover thrust"
+  
+  cruise_chain:
+    formula: "η_cruise = η_prop × η_motor × η_ESC"
+    components: ["η_prop", "η_motor", "η_ESC"]
+    calculated_value: null  # To be calculated: 0.55 × 0.85 × 0.95 = 0.444
+    notes: "Total efficiency from battery to cruise thrust"
+
+# -----------------------------------------------------------------------------
+# SUMMARY
+# -----------------------------------------------------------------------------
+summary:
+  parameters_collected: 4
+  fully_sourced: 0  # Update after research
+  partially_sourced: 0
+  needs_research: 4
+  
+  key_findings:
+    - "FM degrades from ~0.75 (Earth) to ~0.60 (Mars) due to low Re"
+    - "Propeller efficiency degrades from ~0.82 to ~0.55 at Mars Re"
+    - "Motor and ESC efficiencies are relatively unaffected by Mars conditions"
+    - "Combined hover efficiency ~0.48, cruise efficiency ~0.44"
+```
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After creating the YAML file, update source_grounding.txt with entries:
+
+```
+## Section: 4.5 Propulsion characteristics - Efficiency data
+
+- "Figure of Merit for Mars rotors: FM = 0.60 (range 0.55-0.65)"
+  Source: [@johnsonMarsScienceHelicopter2020]
+  Location: Page X, Section on rotor performance
+  
+- "Figure of Merit degrades at low Reynolds numbers (Re < 100,000)"
+  Source: [@leishmanPrinciplesHelicopterAerodynamics2006]
+  Location: Chapter 2, Section X
+
+- "Propeller efficiency at Mars Re ~50,000-100,000: η_prop = 0.55"
+  Source: [@bertaniPreliminaryDesignFixedwing2023]
+  Location: Page X, Table X
+
+- "Motor efficiency for brushless DC motors: η_motor = 0.85"
+  Source: [datasheet citation]
+  Location: [URL]
+
+- "ESC efficiency: η_ESC = 0.95-0.98"
+  Source: [datasheet citation]
+  Location: [URL]
+
+## Section: 4.12 Derived requirements - Efficiency parameters
+
+- "Combined hover efficiency chain: η = FM × η_motor × η_ESC"
+  Source: Standard power chain analysis, see [@leishmanPrinciplesHelicopterAerodynamics2006]
+```
+
+================================================================================
+MANUSCRIPT CONTENT TO DRAFT
+================================================================================
+
+After completing the YAML file, draft content for 04_05_propulsion-data.md
+that includes:
+
+1. EFFICIENCY OVERVIEW:
+   - Explain the efficiency chain from battery to thrust
+   - Define each efficiency parameter
+   - Cite theory sources
+
+2. MARS-SPECIFIC CONSIDERATIONS:
+   - Low Reynolds number effects on FM and η_prop
+   - Comparison with Earth performance
+   - Cite Mars studies (Johnson, Bertani)
+
+3. RECOMMENDED VALUES TABLE:
+   | Parameter | Symbol    | Value | Range       | Source |
+   |-----------|-----------|-------|-------------|--------|
+   | Figure of Merit | FM | 0.60 | 0.55-0.65 | [@johnson...] |
+   | Propeller efficiency | η_prop | 0.55 | 0.50-0.65 | [@bertani...] |
+   | Motor efficiency | η_motor | 0.85 | 0.82-0.88 | [datasheet] |
+   | ESC efficiency | η_ESC | 0.95 | 0.95-0.98 | [datasheet] |
+
+4. CROSS-REFERENCE:
+   - Forward reference to constraint analysis (§5) where values are used
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] YAML file created at sources/propulsion_efficiency_data.yaml
+[ ] All four efficiency parameters documented (FM, η_prop, η_motor, η_ESC)
+[ ] Each parameter has at least one authoritative source citation
+[ ] Mars-specific values distinguished from Earth reference values
+[ ] Sources verified in Mars_UAV.bib BEFORE use
+[ ] New sources added to Zotero Mars_UAV collection
+[ ] source_grounding.txt updated with all data points
+[ ] YAML is valid and parseable
+[ ] Manuscript content drafted for 04_05_propulsion-data.md
+[ ] Uncertainty ranges documented for each parameter
+
+================================================================================
+SEARCH QUERIES TO TRY
+================================================================================
+
+Zotero searches:
+- "Johnson Mars helicopter"
+- "Leishman helicopter"
+- "Bertani Mars"
+- "propeller efficiency low Reynolds"
+- "figure of merit rotor"
+
+Web searches (if not in Zotero):
+- "NASA Mars Science Helicopter rotor performance"
+- "Ingenuity helicopter blade Reynolds number efficiency"
+- "low Reynolds number propeller efficiency wind tunnel"
+- "T-Motor MN505-S efficiency datasheet"
+
+================================================================================
+END OF PROMPT
+================================================================================

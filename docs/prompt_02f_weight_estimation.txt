@@ -1,0 +1,435 @@
+================================================================================
+PROMPT 02F: WEIGHT ESTIMATION METHODOLOGY
+================================================================================
+Task: Research and document weight estimation methodology for small electric UAVs
+Output: Add Sadraey 2020 to Zotero
+        Manuscript content for weight estimation in 04_11 and 05_02/05_xx
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The current weight estimation
+approach uses Sadraey's "Aircraft Design: A Systems Engineering Approach" (2013),
+which was designed for conventional manned aircraft.
+
+PROBLEM:
+- Sadraey 2013 equations may not be appropriate for small UAVs (<50 kg)
+- Formulas use n_ult (ultimate load factor) implicitly at CS-25 values (~5.7)
+- Mars UAV should use n_ult = 3.75 (per CS-23 methodology analysis)
+- Electric propulsion weight estimation differs from fuel-burning aircraft
+
+SOLUTION:
+- Research Sadraey's newer book "Design of Unmanned Aerial Systems" (2020)
+- This book has dedicated methodology for electric UAVs
+- Adapt weight equations for Mars-specific conditions (n_ult = 3.75)
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. ADD SADRAEY 2020 TO ZOTERO:
+   - Use Zotero Web API to add the book
+   - User ID: 10348042
+   - API Key: s8qR5N0A7GSQxZfkW1NAcmjZ
+   - Collection Key: 2BQEVWT7
+
+   Required metadata:
+   - itemType: "book"
+   - title: "Design of Unmanned Aerial Systems"
+   - creators: [{"creatorType": "author", "firstName": "Mohammad H.", "lastName": "Sadraey"}]
+   - publisher: "Wiley"
+   - date: "2020"
+   - ISBN: "978-1-119-50871-8"
+   - place: "Hoboken, NJ"
+
+2. VERIFY IN MARS_UAV.BIB:
+   - Wait for BetterBibTeX sync
+   - Check citation key (likely: @sadraeyDesignUnmannedAerial2020)
+   - Document the exact key for use in manuscript
+
+3. RESEARCH CHAPTER 2 (Preliminary Design):
+   - Focus on MTOW estimation for electric UAVs
+   - Document the battery weight equation
+   - Find the empty weight estimation method
+
+4. COMPARE WITH SADRAEY 2013:
+   - Note which equations are the same
+   - Note which equations are different for UAVs
+   - Document the differences
+
+================================================================================
+CONTENT TO RESEARCH
+================================================================================
+
+------------------------------------------------------------------------------
+1. SADRAEY 2020 - ELECTRIC UAV MTOW BREAKDOWN
+------------------------------------------------------------------------------
+
+From Chapter 2 "Preliminary Design", research the MTOW breakdown for electric
+UAVs. The expected decomposition is:
+
+MTOW = m_payload + m_autopilot + m_battery + m_empty
+
+Where:
+- m_payload: Mission payload mass (mapping camera, radio relay)
+- m_autopilot: Autopilot/avionics system mass
+- m_battery: Battery pack mass
+- m_empty: Empty weight (structure + propulsion)
+
+DIFFERENCES FROM FUEL-BURNING:
+- m_battery replaces m_fuel
+- Battery mass is NOT consumed during flight (unlike fuel)
+- This affects the mission energy calculation
+
+DOCUMENT:
+- Exact equation from Sadraey 2020 (with equation number)
+- Page number for citation
+- Any iteration procedure described
+
+------------------------------------------------------------------------------
+2. BATTERY MASS ESTIMATION
+------------------------------------------------------------------------------
+
+Research how Sadraey 2020 estimates battery mass for given mission requirements.
+
+EXPECTED APPROACH:
+The battery mass is sized by energy requirements:
+
+m_batt = E_required / (e_spec × DoD × η_discharge)
+
+Where:
+- E_required = energy needed for mission (including reserve)
+- e_spec = specific energy of battery (Wh/kg)
+- DoD = depth of discharge (0.8-0.9)
+- η_discharge = discharge efficiency (~0.95)
+
+DOCUMENT:
+- Exact equation from Sadraey 2020
+- How E_required is calculated (mission profile integration)
+- Any specific battery technology assumptions
+
+------------------------------------------------------------------------------
+3. EMPTY WEIGHT ESTIMATION - SADRAEY 2013 EQUATIONS
+------------------------------------------------------------------------------
+
+Document the current wing and fuselage weight equations from Sadraey 2013
+that are used in the manuscript:
+
+WING WEIGHT (Sadraey 2013, Chapter 10):
+Locate the equation for wing weight. Expected form:
+
+W_wing = k × S^a × AR^b × (t/c)^c × λ^d × (W_TO × n_ult)^e × ...
+
+Where n_ult appears explicitly or implicitly.
+
+FUSELAGE WEIGHT (Sadraey 2013, Chapter 10):
+Locate the equation for fuselage weight. Expected form:
+
+W_fus = k × L^a × (W + H)^b × (W_TO × n_ult)^c × ...
+
+DOCUMENT FOR EACH:
+- Exact equation with equation number
+- Page number in Sadraey 2013
+- How n_ult appears in the equation
+- What value of n_ult is assumed (if stated)
+
+------------------------------------------------------------------------------
+4. LOAD FACTOR IMPACT ANALYSIS
+------------------------------------------------------------------------------
+
+Research how n_ult affects structural weight. From the equations above:
+
+WING WEIGHT SENSITIVITY:
+If wing weight ~ n_ult^0.6 (typical exponent):
+- At n_ult = 5.7: W_wing = baseline
+- At n_ult = 3.75: W_wing = baseline × (3.75/5.7)^0.6 = baseline × 0.76
+- Result: 24% wing weight reduction
+
+FUSELAGE WEIGHT SENSITIVITY:
+If fuselage weight ~ n_ult^1.0 (typical for pressurized):
+- At n_ult = 5.7: W_fus = baseline
+- At n_ult = 3.75: W_fus = baseline × (3.75/5.7) = baseline × 0.66
+- Result: 34% fuselage weight reduction
+
+DOCUMENT:
+- Verify the exponents from Sadraey's equations
+- Calculate actual weight reduction for n_ult = 3.75
+- Note if Sadraey provides guidance for small aircraft
+
+------------------------------------------------------------------------------
+5. SADRAEY 2020 - UAV-SPECIFIC ADAPTATIONS
+------------------------------------------------------------------------------
+
+Research whether Sadraey 2020 provides different equations for small UAVs.
+
+Questions to answer:
+1. Does Sadraey 2020 have different structural weight equations for UAVs?
+2. Are there size-specific correlations (micro, small, tactical, large)?
+3. Does the book discuss load factors for unmanned aircraft?
+4. Are there calibration factors for composite construction?
+
+DOCUMENT:
+- Any UAV-specific equations or modifications
+- Recommended load factors for UAVs (if stated)
+- Guidance on composite structures
+
+------------------------------------------------------------------------------
+6. ALTERNATIVE SOURCES FOR SMALL UAV WEIGHT ESTIMATION
+------------------------------------------------------------------------------
+
+If Sadraey 2020 does not fully address small UAV weight estimation, search for:
+
+a) Gundlach "Designing Unmanned Aircraft Systems" (2012):
+   - AIAA Education Series
+   - Has UAV-specific weight estimation methods
+   - Check if in Zotero library
+
+b) Academic papers on UAV weight estimation:
+   - Search: "small UAV weight estimation statistical"
+   - Search: "composite UAV structural mass"
+   - Look for correlations specific to <50 kg MTOW
+
+c) NASA/industry reports:
+   - Search for Mars UAV weight estimation studies
+   - Ingenuity design papers
+
+DOCUMENT:
+- Any alternative methods found
+- How they compare to Sadraey
+- Which method is most appropriate for Mars UAV
+
+================================================================================
+OUTPUT: ZOTERO ENTRY
+================================================================================
+
+Add Sadraey 2020 to Zotero using the Web API:
+
+Step 1: Write JSON to file:
+
+```json
+[{
+  "itemType": "book",
+  "title": "Design of Unmanned Aerial Systems",
+  "creators": [
+    {
+      "creatorType": "author",
+      "firstName": "Mohammad H.",
+      "lastName": "Sadraey"
+    }
+  ],
+  "publisher": "Wiley",
+  "place": "Hoboken, NJ",
+  "date": "2020",
+  "ISBN": "978-1-119-50871-8",
+  "numPages": "896",
+  "abstractNote": "Comprehensive textbook covering unmanned aerial systems design including preliminary design for electric UAVs, MTOW estimation, and UAV-specific weight estimation methods.",
+  "collections": ["2BQEVWT7"],
+  "tags": [
+    {"tag": "UAV"},
+    {"tag": "weight estimation"},
+    {"tag": "electric propulsion"},
+    {"tag": "conceptual design"}
+  ]
+}]
+```
+
+Step 2: Execute PowerShell API call:
+
+```powershell
+$headers = @{
+    "Zotero-API-Key" = "s8qR5N0A7GSQxZfkW1NAcmjZ"
+    "Content-Type" = "application/json"
+}
+$body = Get-Content -Path "temp_zotero_item.json" -Raw
+Invoke-RestMethod -Uri "https://api.zotero.org/users/10348042/items" -Method Post -Headers $headers -Body $body
+```
+
+Step 3: Verify citation key in Mars_UAV.bib
+
+================================================================================
+OUTPUT: MANUSCRIPT CONTENT
+================================================================================
+
+Draft the following content for the manuscript:
+
+------------------------------------------------------------------------------
+FOR 04_11_WEIGHT-ESTIMATE.MD (add after mass fractions section):
+------------------------------------------------------------------------------
+
+### Weight estimation methodology
+
+The component weight estimation follows the methodology of Sadraey
+[@sadraeyDesignUnmannedAerial2020], adapted for the Mars UAV operating
+conditions.
+
+#### Electric UAV weight decomposition
+
+For battery-electric UAVs, the MTOW decomposes as:
+
+$$MTOW = m_{payload} + m_{avionics} + m_{battery} + m_{empty}$$ {#eq:mtow-decomposition}
+
+where:
+- $m_{payload}$ = mission payload (camera, radio relay)
+- $m_{avionics}$ = autopilot, sensors, communication systems
+- $m_{battery}$ = battery pack mass
+- $m_{empty}$ = empty weight (structure, propulsion, wiring)
+
+#### Battery mass sizing
+
+The battery mass is determined by mission energy requirements:
+
+$$m_{battery} = \frac{E_{required}}{e_{spec} \times DoD \times \eta}$$ {#eq:battery-mass}
+
+where:
+- $E_{required}$ = total mission energy including reserve (Wh)
+- $e_{spec}$ = battery specific energy ([VALUE] Wh/kg)
+- $DoD$ = depth of discharge ([VALUE])
+- $\eta$ = discharge efficiency ([VALUE])
+
+The mission energy is calculated from the energy budget in @sec:hybrid-vtol-analysis.
+
+#### Structural weight estimation
+
+Structural component weights are estimated using semi-empirical correlations
+from [@sadraeyAircraftDesignSystems2013], adapted for the Mars UAV with
+reduced ultimate load factor.
+
+**Load factor adaptation:**
+
+The ultimate load factor is:
+
+$$n_{ult} = n_{limit} \times SF = 2.5 \times 1.5 = 3.75$$ {#eq:n-ult}
+
+This is lower than the CS-25 value of 5.7 used in manned aircraft design,
+reflecting:
+- Unmanned operation (no crew injury risk)
+- Autonomous flight with limited maneuvering
+- Reduced gust loads in thin Mars atmosphere
+
+The load factor appears in structural weight equations, and reducing n_ult
+from 5.7 to 3.75 reduces estimated structural weight by approximately:
+- Wing: [X]% reduction ($\propto n_{ult}^{0.6}$)
+- Fuselage: [X]% reduction ($\propto n_{ult}$)
+
+#### Limitations for small UAVs
+
+The weight estimation equations from [@sadraeyAircraftDesignSystems2013] were
+developed for conventional manned aircraft and may overestimate weights for
+small composite UAVs. To address this:
+
+1. **Mass fraction validation**: Estimated component weights are cross-checked
+   against the empirical mass fractions from @tbl:design-mass-fractions.
+
+2. **Conservative approach**: Where uncertainty exists, conservative (higher)
+   weight estimates are used.
+
+3. **Iteration**: The weight estimate is refined after component selection
+   (@sec:component-verification) with actual manufacturer data.
+
+------------------------------------------------------------------------------
+FOR CONSTRAINT ANALYSIS SECTIONS (05_02, 05_03, 05_04):
+------------------------------------------------------------------------------
+
+Include in the weight assumptions section:
+
+"Weight estimation follows the methodology of @sec:weight-estimate, using
+Sadraey's correlations [@sadraeyAircraftDesignSystems2013] adapted for
+$n_{ult}$ = 3.75 and validated against commercial UAV mass fractions."
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After completing the research, update source_grounding.txt:
+
+```
+## Section: 4.11 Weight estimation methodology
+
+- "Electric UAV MTOW decomposition: payload + avionics + battery + empty"
+  Source: [@sadraeyDesignUnmannedAerial2020]
+  Location: Chapter 2, Section on Preliminary Design
+
+- "Battery mass equation: m_batt = E_required / (e_spec × DoD × η)"
+  Source: [@sadraeyDesignUnmannedAerial2020]
+  Location: Chapter 2, Equation X.XX
+
+- "Wing weight correlation for conceptual design"
+  Source: [@sadraeyAircraftDesignSystems2013]
+  Location: Chapter 10, Equation 10.XX
+
+- "Fuselage weight correlation for conceptual design"
+  Source: [@sadraeyAircraftDesignSystems2013]
+  Location: Chapter 10, Equation 10.XX
+
+- "Ultimate load factor n_ult = 3.75 for Mars UAV"
+  Source: Analysis per CS-23 methodology, see @sec:derived-requirements
+  Location: docs/prompt_02g_load_factors.txt
+
+- "Wing weight scales as n_ult^0.6"
+  Source: [@sadraeyAircraftDesignSystems2013] or derived from equation
+  Location: Chapter 10
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] Sadraey 2020 added to Zotero Mars_UAV collection
+[ ] Citation key verified in Mars_UAV.bib
+[ ] Electric UAV MTOW decomposition documented with equation number
+[ ] Battery mass equation documented with source
+[ ] Sadraey 2013 wing weight equation documented with n_ult dependency
+[ ] Sadraey 2013 fuselage weight equation documented with n_ult dependency
+[ ] Load factor impact calculated (weight reduction percentages)
+[ ] Limitations for small UAVs acknowledged
+[ ] Manuscript content drafted for 04_11
+[ ] source_grounding.txt updated with all equations and sources
+[ ] Alternative sources researched if gaps remain
+
+================================================================================
+COMPARISON TABLE
+================================================================================
+
+Document the comparison between Sadraey 2013 and Sadraey 2020:
+
+| Aspect | Sadraey 2013 | Sadraey 2020 |
+|--------|--------------|--------------|
+| Target aircraft | Manned aircraft | UAVs all sizes |
+| Propulsion type | Fuel-burning primary | Includes electric |
+| MTOW breakdown | Fuel + payload + empty | Battery + payload + empty |
+| Structural weight | Detailed correlations | [Research] |
+| Load factors | CS-25 implicit | [Research] |
+| Size range | General aviation to transport | Micro to large UAV |
+
+================================================================================
+SADRAEY 2013 EQUATIONS TO DOCUMENT
+================================================================================
+
+From current manuscript 06_02_weight-estimation.md, verify and document:
+
+WING WEIGHT (Sadraey 2013):
+[Find exact equation in Chapter 10]
+Note:
+- Equation number
+- All parameters
+- Where n_ult appears
+- Units
+
+FUSELAGE WEIGHT (Sadraey 2013):
+[Find exact equation in Chapter 10]
+Note:
+- Equation number
+- All parameters
+- Where n_ult appears
+- Units
+
+Typical form (verify):
+W_wing = 0.036 × S^0.758 × (AR/cos²Λ)^0.6 × q^0.006 × λ^0.04 × 
+         (100 × t/c / cos Λ)^-0.3 × (n_ult × W_TO)^0.49
+
+================================================================================
+END OF PROMPT
+================================================================================

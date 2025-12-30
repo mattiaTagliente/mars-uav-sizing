@@ -1,0 +1,391 @@
+================================================================================
+PROMPT 03: DERIVED REQUIREMENTS AND INITIAL WEIGHT ESTIMATE
+================================================================================
+Task: Create Section 3.3 (Derived Requirements) and Section 3.4 (Initial 
+      Weight Estimate) with proper theoretical framework and citations
+Output: 2 section files with complete analytical content
+
+================================================================================
+WORKFLOW: MANUSCRIPT FIRST, THEN CODE
+================================================================================
+
+This task follows a THREE-PHASE workflow:
+
+PHASE 1: THEORETICAL DEVELOPMENT (this prompt)
+   - Develop the methodology for deriving requirements
+   - Present weight fraction analysis methodology with citations
+   - Establish the analytical framework for MTOW estimation
+   - Complete all research and citations FIRST
+
+PHASE 2: PYTHON IMPLEMENTATION (subsequent task)
+   - Scripts read reference_drones.yaml and calculate statistics
+   - Scripts implement the methodology described in the manuscript
+   - No new methodology - code follows manuscript
+
+PHASE 3: NUMERICAL RESULTS (subsequent task)
+   - Run scripts to get actual weight fraction values
+   - Insert calculated results into manuscript
+   - Verify all numbers trace to data sources
+
+THIS PROMPT COVERS PHASE 1 ONLY.
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The document structure 
+separates:
+- Section 2.3 "Mission needs": Qualitative capabilities
+- Section 3.3 "Derived requirements": Numerical targets, derived from analysis
+- Section 3.4 "Initial weight estimate": MTOW baseline from weight fractions
+
+IMPORTANT: "Single-fault tolerance" is a NEED (qualitative), NOT a requirement.
+It belongs in Section 2.3, not here. Section 3.3 contains ONLY numerical values.
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. METHODOLOGY CITATION: Cite sources for requirement derivation methods
+   - How do established design methodologies derive requirements?
+   - Reference aircraft design textbooks (Raymer, Sadraey, Roskam)
+
+2. WEIGHT FRACTION SOURCES: Research weight fraction methodologies
+   - Statistical methods from aircraft design literature
+   - Historical data approaches
+
+3. NO HARDCODED VALUES: Present the methodology for calculating values
+   - Actual numbers will come from Python analysis in Phase 2
+   - Use placeholders like "[CALCULATED FROM REFERENCE DATA]"
+
+4. TRACEABILITY: Every requirement must link to:
+   - The mission need it addresses
+   - The derivation methodology
+   - The data source (to be calculated)
+
+================================================================================
+SECTION 3.3: DERIVED REQUIREMENTS
+================================================================================
+
+------------------------------------------------------------------------------
+FILE: sections_en/03_03_derived-requirements.md
+------------------------------------------------------------------------------
+
+STRUCTURE:
+
+### Introduction
+- Explain the purpose: translate qualitative needs into measurable targets
+- Cite methodology for requirement derivation
+  - How do aerospace engineers derive requirements?
+  - Reference ECSS or NASA standards if applicable
+- State that values are derived from reference data analysis
+
+### Requirement derivation methodology
+
+Present the general approach:
+1. Identify the mission need (from §2.3)
+2. Analyze reference data to establish achievable ranges
+3. Apply mission-specific constraints
+4. Set requirement value with margin
+
+CITE sources for this methodology.
+
+### Performance requirements
+
+For EACH requirement, present:
+- Requirement ID and name
+- Derivation methodology
+- Placeholder for calculated value (will come from Phase 2)
+
+#### REQ-P01: Cruise endurance
+
+1. State the mission need: "Extended flight for mapping/relay operations"
+
+2. Present derivation methodology:
+   ```
+   Total time = Transit time + Mission time + Reserve
+   Transit time = (2 × Operational radius) / Cruise speed
+   Reserve = X% of subtotal (CITE standard for reserve requirements)
+   ```
+
+3. CITE source for reserve requirement methodology
+   - FAA regulations?
+   - UAV operational standards?
+
+4. Value: [TO BE CALCULATED based on mission profile]
+
+#### REQ-P02: Cruise speed
+
+1. Present stall margin methodology:
+   - Cruise speed typically 1.2-1.4 × stall speed
+   - CITE source for this design practice
+   
+2. Present efficiency considerations:
+   - Trade-off between speed and power
+   - Reference to drag polar analysis
+
+3. Value: [TO BE DERIVED from stall analysis]
+
+#### REQ-P03: Operational radius
+
+1. Link to mission objectives:
+   - Mapping: coverage area around habitat
+   - Telecom relay: extend EVA communication range
+   
+2. Present methodology for determining radius:
+   - Reference Ingenuity operational experience if applicable
+   - Cite any Mars surface operations planning documents
+
+3. Value: [TO BE DETERMINED from mission analysis]
+
+### Mass requirements
+
+#### REQ-M01: Maximum takeoff mass (MTOW)
+
+1. Present methodology:
+   - MTOW is derived in §3.4 from weight fraction analysis
+   - Cross-reference only, value comes from §3.4
+
+#### REQ-M02: Payload mass capacity
+
+1. Link to mission needs: camera + radio systems
+2. Present methodology:
+   - Survey available payload systems (reference §3.1.3)
+   - Add margin for integration hardware
+   
+3. Value: [TO BE CALCULATED from payload survey data]
+
+### Environmental requirements
+
+#### REQ-E01: Operating temperature range
+
+1. Research Mars surface temperature data
+   - Diurnal variation at Arcadia Planitia
+   - Seasonal variation
+   - CITE source (NASA Mars fact sheets, climate models)
+
+2. Present the requirement derivation:
+   - Must survive storage at minimum temperature
+   - Must operate during mission (likely daytime)
+
+#### REQ-E02: Operating pressure
+
+1. Research Mars atmospheric pressure at Arcadia Planitia
+   - Cite atmospheric model (§2.1)
+   - Account for seasonal and elevation variation
+
+### Operational requirements
+
+Present methodology for deriving:
+- Hover time budget (energy trade-off analysis)
+- Autonomous operation requirements (communication delay analysis)
+
+### Requirements summary table
+
+| ID | Requirement | Value | Derivation Method | Source |
+|----|-------------|-------|-------------------|--------|
+| REQ-P01 | Cruise endurance | [TBD] min | Mission profile analysis | §2.2 |
+| REQ-P02 | Cruise speed | [TBD] m/s | Stall margin + efficiency | §5 |
+| ... | ... | ... | ... | ... |
+
+Note: Values marked [TBD] will be calculated from reference data in Phase 2.
+
+================================================================================
+SECTION 3.4: INITIAL WEIGHT ESTIMATE
+================================================================================
+
+------------------------------------------------------------------------------
+FILE: sections_en/03_04_initial-weight-estimate.md
+------------------------------------------------------------------------------
+
+STRUCTURE:
+
+### Introduction
+
+- State the purpose: establish preliminary MTOW for constraint analysis
+- Explain this is configuration-independent (applies before architecture selection)
+- Note that MTOW will be refined during detailed sizing
+
+### Weight fraction methodology
+
+1. Present the statistical weight fraction approach:
+   - Aircraft design uses historical data to estimate component masses
+   - CITE source for this methodology (Raymer, Sadraey, Roskam)
+   
+2. Explain how fractions are extracted from reference data:
+   - Payload fraction = payload_mass / MTOW
+   - Battery fraction = battery_mass / MTOW
+   - etc.
+
+3. Discuss applicability to Mars UAV:
+   - Reference data from commercial VTOL UAVs (§3.1.2)
+   - Scaling considerations for Mars environment
+
+### Weight fraction analysis
+
+Present the methodology for analyzing reference data:
+
+1. Data source: Reference VTOL UAVs from @sec:reference-designs
+
+2. Parameters to extract:
+   - Payload fraction: $f_{payload} = m_{payload} / m_{MTOW}$
+   - Battery fraction: $f_{battery} = m_{battery} / m_{MTOW}$
+   - Propulsion fraction: $f_{propulsion} = m_{propulsion} / m_{MTOW}$
+   
+3. Statistical analysis:
+   - Calculate min, max, mean, median for each fraction
+   - [VALUES TO BE CALCULATED FROM reference_drones.yaml]
+
+4. Present PLACEHOLDER table:
+
+| Component | Fraction Range | Mean | Median | n |
+|-----------|---------------|------|--------|---|
+| Payload | [CALCULATED] | [CALCULATED] | [CALCULATED] | [N] |
+| Battery | [CALCULATED] | [CALCULATED] | [CALCULATED] | [N] |
+| Propulsion | [CALCULATED] | [CALCULATED] | [CALCULATED] | [N] |
+
+### MTOW derivation from payload
+
+1. Present the inverse relationship:
+   $$m_{MTOW} = \frac{m_{payload}}{f_{payload}}$$ {#eq:mtow-from-payload}
+
+2. Explain the range:
+   - Using minimum payload fraction → maximum MTOW estimate
+   - Using maximum payload fraction → minimum MTOW estimate
+
+3. Calculate range:
+   - With $m_{payload}$ from payload survey (§3.1.3)
+   - With $f_{payload}$ range from reference analysis
+   - [VALUES TO BE CALCULATED]
+
+4. Baseline selection criteria:
+   - Select conservative (higher) estimate for initial sizing
+   - Provides margin for mass growth during detailed design
+   - CITE source for mass growth margins in aircraft design
+
+### Preliminary mass budget
+
+1. Present methodology:
+   - Apply reference fractions to selected MTOW
+   - Sum must equal MTOW (closure check)
+   
+2. Present PLACEHOLDER budget table:
+
+| Component | Fraction | Mass (kg) | Notes |
+|-----------|----------|-----------|-------|
+| Payload | [f%] | [calculated] | From §3.1.3 survey |
+| Battery | [f%] | [calculated] | For 60 min cruise target |
+| Propulsion | [f%] | [calculated] | Lift + cruise systems |
+| Structure | [f%] | [calculated] | Wing + fuselage + tail |
+| Avionics | [f%] | [calculated] | Flight controller, sensors |
+| Other | [f%] | [calculated] | Thermal, wiring, etc. |
+| Margin | [f%] | [calculated] | Design contingency |
+| **TOTAL** | **100%** | **[MTOW]** | |
+
+### Comparison with reference vehicles
+
+Present PLACEHOLDER comparison:
+
+| Vehicle | MTOW (kg) | Payload (kg) | Payload Fraction | Source |
+|---------|-----------|--------------|------------------|--------|
+| Ingenuity | 1.8 | 0 | 0% | [@nasa...] |
+| MSH concepts | 20-30 | 2-5 | 10-17% | [@johnson...] |
+| This estimate | [TBD] | [TBD] | [TBD] | Derived |
+| Reference UAVs | [range] | [range] | [range] | §3.1.2 |
+
+### Sensitivity analysis
+
+1. Discuss sensitivity to key parameters:
+   - Payload mass variation
+   - Battery specific energy assumptions
+   - Structural efficiency
+
+2. Present methodology for sensitivity:
+   - Partial derivatives or parametric analysis
+   - CITE methodology if applicable
+
+### Use of this estimate
+
+1. State how this MTOW will be used:
+   - Input to constraint analysis (§6)
+   - Starting point for iterative sizing (§8)
+   
+2. Note that estimate will be refined:
+   - After architecture selection
+   - After component selection
+   - With actual component data
+
+================================================================================
+SOURCES TO RESEARCH
+================================================================================
+
+| Topic | Needed For | Likely Sources |
+|-------|------------|----------------|
+| Requirement derivation methodology | §3.3 intro | ECSS standards, NASA handbooks |
+| Reserve fuel/energy requirements | REQ-P01 | FAA regulations, UAV standards |
+| Stall margin design practice | REQ-P02 | Raymer, FAR regulations |
+| Weight fraction methodology | §3.4 | Raymer Ch. 3, Sadraey, Roskam |
+| Mass growth margins | §3.4 | Raymer, project management lit |
+| Mars temperature data | REQ-E01 | NASA Mars fact sheets |
+
+================================================================================
+SOURCE GROUNDING UPDATES
+================================================================================
+
+After writing content, update source_grounding.txt:
+
+```
+## Section: 3.3 Derived requirements
+
+- "Derivation methodology: identify need, analyze data, set value with margin"
+  Source: [@raymerAircraftDesignConceptual2018]
+  Location: Chapter 3, Section 3.1
+
+- "Cruise speed typically 1.2-1.4 × stall speed"
+  Source: [TO BE FOUND]
+  Location: [TO BE FOUND]
+
+## Section: 3.4 Initial weight estimate
+
+- "Statistical weight fraction approach"
+  Source: [@raymerAircraftDesignConceptual2018]
+  Location: Chapter 3, Table 3.1
+
+- "MTOW = payload / payload_fraction relationship"
+  Source: [BASIC DEFINITION, cite if formal source found]
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] Both section files created with complete methodology
+[ ] Derivation methods are CITED, not invented
+[ ] Placeholder values clearly marked "[CALCULATED]" or "[TBD]"
+[ ] Single-fault tolerance is NOT present (it's a NEED, not requirement)
+[ ] Weight fraction methodology properly sourced
+[ ] Equations have labels for cross-referencing
+[ ] Tables structured for easy insertion of calculated values
+[ ] source_grounding.txt updated
+
+================================================================================
+WHAT COMES NEXT (NOT part of this prompt)
+================================================================================
+
+After Phase 1 (this prompt) is complete:
+
+PHASE 2: Python Implementation
+- Create scripts that read reference_drones.yaml
+- Calculate weight fraction statistics
+- Output values for insertion into manuscript
+
+PHASE 3: Numerical Results
+- Run scripts
+- Replace [CALCULATED] and [TBD] placeholders with actual values
+- Verify all numbers trace to data sources
+
+================================================================================
+END OF PROMPT
+================================================================================

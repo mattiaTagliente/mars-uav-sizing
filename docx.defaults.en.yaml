@@ -1,0 +1,36 @@
+from: markdown
+to: docx
+standalone: true
+reference-doc: reference.docx
+
+# JSON/Lua filters
+filters:
+    - pandoc-crossref
+    - strip_section_numbers.lua
+    - table_body_style.lua
+    - after_table_spacer.lua
+    - equation_block_style.lua
+    - subfig_grid_tblstyle.lua
+    - citeproc
+
+# pandoc-crossref configuration (English)
+metadata:
+    tableTitle: "Table"
+    tableTitlePlural: "Tables"
+    figureTitle: "Figure"
+    figureTitlePlural: "Figures"
+    tblPrefix: ["Table", "Tables"]
+    figPrefix: ["Figure", "Figures"]
+    eqnPrefix: ["Equation", "Equations"]
+    secPrefix: ["Section", "Sections"]
+    numberSections: true
+    sectionsDepth: -1
+    subfigGrid: true
+
+csl: ieee.csl
+
+number-sections: false
+figure-caption-position: below
+table-caption-position: above
+
+# Note: bibliography and output-file are set dynamically by build_docx.py

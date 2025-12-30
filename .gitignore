@@ -1,0 +1,78 @@
+# Mars UAV Sizing Project .gitignore
+
+# =============================================================================
+# Python
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# =============================================================================
+# Generated/Build outputs
+# =============================================================================
+# Generated DOCX files (large, regeneratable)
+*.docx
+!reference.docx
+
+# Build logs
+*.log
+
+# Automatic backups from reconstruct script
+backups/
+backup/
+
+# Intermediate build files
+intermediate/
+
+# =============================================================================
+# Editor/IDE
+# =============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*~
+
+# =============================================================================
+# OS-specific
+# =============================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =============================================================================
+# Temporary files
+# =============================================================================
+*.tmp
+*.temp
+temp_*.json
+temp_*.ps1
+
+# =============================================================================
+# Project-specific exclusions
+# =============================================================================
+# Old/backup section directories
+sections_en_backup_*/
+sections_en_OLD/
+
+# Lock files (regeneratable)
+uv.lock
+
+# Gemini AI context (if any sensitive data)
+.gemini/
+
+# Draft working files
+draft/
+
+# Downloaded source PDFs (copyright)
+new_sources/*.pdf
+sources/*.pdf

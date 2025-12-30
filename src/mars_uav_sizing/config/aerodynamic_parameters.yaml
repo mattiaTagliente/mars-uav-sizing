@@ -1,0 +1,73 @@
+# Mars UAV Sizing - Aerodynamic Parameters
+# ==========================================
+# Aerodynamic analysis parameters.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §4.7 Aerodynamic Analysis
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# WING GEOMETRY (from §4.7.1)
+# ==============================================================================
+wing:
+  # Aspect ratio (design choice for Mars conditions)
+  # Reference: Mars precedents, structural considerations
+  aspect_ratio: 6              # AR, dimensionless
+  
+  # Oswald span efficiency from Sadraey correlation:
+  # e = 1.78 × (1 - 0.045 × AR^0.68) - 0.64
+  # For AR = 6: e = 1.78 × (1 - 0.045 × 6^0.68) - 0.64 = 0.869
+  # Reference: Sadraey (2013), Section 5.3.2
+  oswald_efficiency: 0.869     # e, dimensionless
+  
+  # Mean aerodynamic chord (derived from Re = 60,000 target)
+  # c = Re × μ / (ρ × V) = 60000 × 1.097e-5 / (0.01963 × 40) = 0.838 m
+  # Reference: Section 4.12, @eq:reynolds-definition
+  mean_chord_m: 0.838          # c̄, meters
+
+# ==============================================================================
+# DRAG POLAR (from §4.7.2)
+# ==============================================================================
+drag_polar:
+  # Zero-lift drag coefficient
+  # Reference: Equivalent friction method, small UAV
+  cd0: 0.030                   # CD0, dimensionless
+  
+  # DERIVED: Induced drag factor K = 1/(π × AR × e)
+  # K = 1/(π × 6 × 0.869) = 0.0612
+  # Note: This is computed, not an input
+
+# ==============================================================================
+# AIRFOIL CHARACTERISTICS (from §4.7.3)
+# ==============================================================================
+airfoil:
+  # Maximum lift coefficient at Re = 60,000
+  # Reference: UIUC Low-Speed Airfoil Tests, Vol.1 (E387 data)
+  cl_max: 1.20                 # CL_max, dimensionless
+  
+  # Selected airfoil
+  name: "E387"
+  source: "UIUC"
+
+# ==============================================================================
+# ROTORCRAFT-SPECIFIC (from §4.7.4)
+# ==============================================================================
+rotorcraft:
+  # Equivalent L/D for rotorcraft forward flight
+  # Reference: Leishman (2006), Chapter 1
+  ld_effective: 4.0            # (L/D)_eff, dimensionless
+
+# ==============================================================================
+# QUADPLANE-SPECIFIC
+# ==============================================================================
+quadplane:
+  # L/D reduction due to stopped rotor drag (~10% penalty)
+  ld_penalty_factor: 0.90      # dimensionless
+  # Resulting L/D ≈ 0.90 × (L/D)_max
+
+# ==============================================================================
+# DERIVED PARAMETERS (computed, for reference)
+# ==============================================================================
+# k = 1/(π × AR × e) = 1/(π × 6 × 0.869) = 0.0612
+# (L/D)_max = 0.5 × sqrt(π × AR × e / CD0) = 0.5 × sqrt(π × 6 × 0.869 / 0.030) = 11.68
+# C_L* = sqrt(π × AR × e × CD0) = sqrt(π × 6 × 0.869 × 0.030) = 0.701

@@ -1,0 +1,453 @@
+# Reference UAV Database for Mars UAV Feasibility Study
+# =======================================================
+# This file contains specifications for commercial VTOL drones used as
+# references for the Mars UAV design. Data is verified and attributed
+# to primary sources per the Universal Data Verification & Attribution Protocol.
+#
+# Source grounding: see source_grounding.txt for detailed attribution mapping
+# Last updated: 2025-12-22
+
+reference_drones:
+
+  # ============================================================================
+  - name: V13-5 Sentinel
+    manufacturer: SpiderUAV
+    source:
+      url: https://spideruav.com/product/industrial-drone/v13-5/
+      citation_key: "@spideruavV135SentinelVTOL2024"
+    
+    mass:
+      empty_kg: ~  # Not specified
+      mtow_kg: 26.5
+      payload_max_kg: 7.5
+    
+    geometry:
+      wingspan_m: 3.5
+      fuselage_length_m: 1.88
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: 44
+      v_cruise_ms: 44
+      endurance_min: 160  # at payload
+      range_km: 100
+    
+    propulsion:
+      lift_motor:
+        model: V13L KV65
+        manufacturer: T-Motor
+        power_w: 6000
+        weight_kg: 1.68
+        efficiency: ~
+      cruise_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      propeller_lift_in: ~
+      propeller_cruise_in: ~
+    
+    battery:
+      technology: ~
+      manufacturer: ~
+      model: ~
+      total_mass_kg: ~
+      total_capacity_mah: ~
+      operating_temp_c: ~
+      source_key: ~
+
+  # ============================================================================
+  - name: AirMobi V25
+    manufacturer: AirMobi
+    source:
+      url: https://www.airmobi.com/product/airmobi-v25-full-electric-vtol-drone/
+      citation_key: "@airmobiAirmobiV25Full2024"
+    
+    mass:
+      empty_kg: 3.45
+      mtow_kg: 14
+      payload_max_kg: 2.5
+    
+    geometry:
+      wingspan_m: 2.5
+      fuselage_length_m: 1.26
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: 34
+      v_cruise_ms: 20
+      endurance_min: 180  # at 2kg payload
+      range_km: 140
+    
+    propulsion:
+      lift_motor:
+        model: MN505-S KV260
+        manufacturer: T-Motor
+        power_w: 2500
+        weight_kg: 0.225
+        efficiency: ~
+      cruise_motor:
+        model: AT4130 KV230
+        manufacturer: T-Motor
+        power_w: 2500
+        weight_kg: 0.408
+        efficiency: ~
+      propeller_lift_in: "16-17"
+      propeller_cruise_in: "15-18"
+    
+    battery:
+      technology: HV LiPo
+      manufacturer: Tattu
+      model: 6S 25000mAh HV
+      count: 2
+      total_mass_kg: 5.05
+      total_capacity_mah: 50000
+      operating_temp_c: "-20 to 45"
+      source_key: "@gensace/tattuTattu25000mAh228V2024"
+
+  # ============================================================================
+  - name: AirMobi V32
+    manufacturer: AirMobi
+    source:
+      url: https://www.airmobi.com/product/airmobi-v32-full-electric-long-endurance-vtol-drone/
+      citation_key: "@airmobiAirmobiV32Full2024"
+    
+    mass:
+      empty_kg: 6.45
+      mtow_kg: 23.5
+      payload_max_kg: 5
+    
+    geometry:
+      wingspan_m: 3.2
+      fuselage_length_m: 1.26
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: 34
+      v_cruise_ms: 20
+      endurance_min: 195  # at payload
+      range_km: 120
+    
+    propulsion:
+      lift_motor:
+        model: T-Motor 8-series
+        manufacturer: T-Motor
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      cruise_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      propeller_lift_in: "22-24"
+      propeller_cruise_in: "19-21"
+    
+    battery:
+      technology: HV LiPo
+      manufacturer: ~
+      model: 6S 32000mAh x2
+      count: 2
+      total_mass_kg: ~
+      total_capacity_mah: 64000
+      operating_temp_c: "-20 to 45"
+      source_key: ~
+      note: "Alternative config: 4x 25000mAh = 100000mAh total"
+
+  # ============================================================================
+  - name: UAVMODEL X2400
+    manufacturer: UAVModel
+    source:
+      url: https://www.uavmodel.com/collections/uav
+      citation_key: "@uavmodelUAVMODELX2400VTOL2024"
+    
+    mass:
+      empty_kg: 6.5
+      mtow_kg: 8.5
+      payload_max_kg: 2
+    
+    geometry:
+      wingspan_m: 2.4
+      fuselage_length_m: 1.2
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: 30
+      v_cruise_ms: 16
+      endurance_min: 220  # unloaded/light load
+      range_km: 210
+    
+    propulsion:
+      lift_motor:
+        model: Sunnysky 4112 485KV
+        manufacturer: Sunnysky
+        power_w: 550
+        weight_kg: 0.153
+        efficiency: ~
+      cruise_motor:
+        model: Sunnysky 3525 465KV
+        manufacturer: Sunnysky
+        power_w: 2100
+        weight_kg: 0.259
+        efficiency: ~
+      propeller_lift_in: "15"
+      propeller_cruise_in: "14"
+    
+    battery:
+      technology: LiPo
+      manufacturer: ~
+      model: 6S 30000mAh
+      count: 1
+      total_mass_kg: 2.5
+      total_capacity_mah: 30000
+      operating_temp_c: ~
+      source_key: ~
+
+  # ============================================================================
+  - name: JOUAV CW-15
+    manufacturer: JOUAV
+    source:
+      url: https://www.jouav.com/zh/products/cw-15.html
+      citation_key: "@jouavJOUAVCW15Multipurpose2024"
+    
+    mass:
+      empty_kg: ~
+      mtow_kg: 14.5
+      payload_max_kg: 3
+    
+    geometry:
+      wingspan_m: 3.54
+      fuselage_length_m: 2.06
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: 25
+      v_cruise_ms: 17
+      endurance_min: 180
+      range_km: 183
+    
+    propulsion:
+      lift_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      cruise_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      propeller_lift_in: ~
+      propeller_cruise_in: ~
+    
+    battery:
+      technology: LiPo
+      manufacturer: ~
+      model: CB100S Series
+      count: ~
+      total_mass_kg: ~
+      total_capacity_mah: ~
+      operating_temp_c: "Low temp support"
+      source_key: ~
+
+  # ============================================================================
+  - name: JOUAV CW-25E
+    manufacturer: JOUAV
+    source:
+      url: https://www.jouav.com/zh/products/cw-25e.html
+      citation_key: "@jouavJOUAVCW25ELong2024"
+    
+    mass:
+      empty_kg: ~
+      mtow_kg: 31.58
+      payload_max_kg: 6
+    
+    geometry:
+      wingspan_m: 4.35
+      fuselage_length_m: 2.18
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: ~
+      v_cruise_ms: 20
+      endurance_min: 210
+      range_km: 250
+    
+    propulsion:
+      lift_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      cruise_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      propeller_lift_in: ~
+      propeller_cruise_in: ~
+    
+    battery:
+      technology: ~
+      manufacturer: ~
+      model: ~
+      count: ~
+      total_mass_kg: ~
+      total_capacity_mah: ~
+      operating_temp_c: ~
+      source_key: ~
+
+  # ============================================================================
+  - name: DeltaQuad Evo Enterprise
+    manufacturer: DeltaQuad
+    source:
+      url: https://docs.deltaquad.com/evo/vehicle-specifications
+      citation_key: "@deltaquadDeltaQuadEvoEnterprise2024"
+    
+    mass:
+      empty_kg: 4.8
+      mtow_kg: 10
+      payload_max_kg: 3
+    
+    geometry:
+      wingspan_m: 2.69
+      fuselage_length_m: 0.75
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: ~
+      v_cruise_ms: 17
+      endurance_min: 272  # dual battery, 1kg payload
+      range_km: 270
+    
+    propulsion:
+      lift_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      cruise_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      propeller_lift_in: ~
+      propeller_cruise_in: "15"
+    
+    battery:
+      technology: Semi-Solid Li-ion
+      manufacturer: DeltaQuad
+      model: Custom
+      count: 2
+      total_mass_kg: 4.0  # 2.0 kg per battery
+      total_capacity_mah: 44000  # 22Ah per battery
+      operating_temp_c: "-20 to 45"
+      source_key: "@deltaquadDeltaQuadEvoEnterprise2024"
+      note: "Battery mass derived from empty weight vs empty+1battery weight"
+
+  # ============================================================================
+  - name: RTV320 E
+    manufacturer: UAVForDrone (Ramoton Tech)
+    source:
+      url: https://www.uavfordrone.com/product/6-hours-endurance-flight-long-range-vtol-for-mapping-and-surveillance/
+      citation_key: "@uavfordroneRTV320ElectricVTOL2024"
+    
+    mass:
+      empty_kg: ~
+      mtow_kg: 24
+      payload_max_kg: 2.5
+    
+    geometry:
+      wingspan_m: 3.2
+      fuselage_length_m: 2
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: 30
+      v_cruise_ms: 21
+      endurance_min: 180
+      range_km: ~
+    
+    propulsion:
+      lift_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      cruise_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      propeller_lift_in: "24"
+      propeller_cruise_in: "20"
+    
+    battery:
+      technology: Solid-state Li-ion
+      manufacturer: CGBT
+      model: 6S 27000mAh x4
+      count: 4
+      total_mass_kg: 9.36  # 2.34 kg per battery (CGBT SLD1-6S27Ah)
+      total_capacity_mah: 108000
+      operating_temp_c: "-20 to 60"
+      source_key: "@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025"
+      note: "Battery specs from CGBT SLD1-6S27Ah: 270Wh/kg, 2340g per unit"
+
+  # ============================================================================
+  - name: Elevon X Sierra
+    manufacturer: ElevonX
+    source:
+      url: https://www.elevonx.com/products/sierra-vtol/
+      citation_key: "@elevonxElevonXSierraVTOL2024"
+    
+    mass:
+      empty_kg: ~
+      mtow_kg: 13.5
+      payload_max_kg: 1.5
+    
+    geometry:
+      wingspan_m: 3
+      fuselage_length_m: 1.58
+      n_rotors: 5
+    
+    performance:
+      v_max_ms: ~
+      v_cruise_ms: 20
+      endurance_min: 150
+      range_km: ~
+    
+    propulsion:
+      lift_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      cruise_motor:
+        model: ~
+        manufacturer: ~
+        power_w: ~
+        weight_kg: ~
+        efficiency: ~
+      propeller_lift_in: ~
+      propeller_cruise_in: ~
+    
+    battery:
+      technology: ~
+      manufacturer: ~
+      model: ~
+      count: ~
+      total_mass_kg: ~
+      total_capacity_mah: ~
+      operating_temp_c: ~
+      source_key: ~

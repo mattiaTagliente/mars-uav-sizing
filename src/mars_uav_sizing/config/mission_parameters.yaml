@@ -1,0 +1,137 @@
+# Mars UAV Sizing - Mission Parameters
+# =====================================
+# Mission profile and operational requirements.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §3.2 Mission Profile, §3.3 User Needs, §4.12 Derived Requirements
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# VELOCITY REQUIREMENTS (from §4.12)
+# ==============================================================================
+velocity:
+  # Cruise velocity (constrained by Mach and Reynolds number)
+  v_cruise_m_s: 40.0           # m/s
+  
+  # Stall speed at wing loading W/S = 10 N/m²
+  # V_stall = sqrt(2×(W/S) / (ρ×C_L,max))
+  # V_stall = sqrt(2×10 / (0.0196×1.20)) = 29.2 m/s
+  v_stall_m_s: 29.2            # m/s (CORRECTED)
+  
+  # Minimum flight speed safety factor
+  v_min_factor: 1.2            # V_min = 1.2 × V_stall
+
+# ==============================================================================
+# TIME ALLOCATIONS (from §3.2 Mission Profile)
+# ==============================================================================
+time:
+  # Hover time allocation (takeoff + landing, excluding transition)
+  # Takeoff hover: 60s, Landing hover: 60s
+  t_hover_s: 120               # s (2 minutes of pure hover)
+
+  # Transition time allocation (2 transitions per flight)
+  # Q2P transition: ~30s, P2Q transition: ~30s
+  # Reference: [@mathurMultiModeFlightSimulation2025]
+  t_transition_s: 60           # s (total: 2 × 30s)
+  n_transitions: 2             # Number of transitions per flight
+
+  # Cruise time (outbound + survey + return)
+  t_cruise_min: 57             # min
+
+  # Total flight time requirement
+  t_total_min: 60              # min
+
+# ==============================================================================
+# TRANSITION PHASE PARAMETERS (from literature review)
+# ==============================================================================
+# Source: [@goetzendorf-grabowskiOptimizationEnergyConsumption2022]
+# Source: [@mathurMultiModeFlightSimulation2025]
+transition:
+  # Reference transition energy from ICAS 2022 paper (Earth conditions)
+  # Baseline ~48 kJ, Optimized ~37 kJ per transition
+  reference_energy_j: 45000    # J (conservative average)
+
+  # Scaling approach: transition energy scales approximately with
+  # weight and velocity change. For Mars, we apply a scaling factor
+  # based on (W_mars / W_earth_ref) × (v_trans_mars / v_trans_earth)
+  # Reference Earth vehicle: ~10 kg, transition speeds ~2-12 m/s
+  reference_mtow_kg: 10.0      # kg (reference vehicle MTOW)
+  reference_v_trans_m_s: 10.0  # m/s (mid-range transition speed)
+
+  # Mars scaling factor (computed in code based on actual parameters)
+  # Note: transition dynamics differ on Mars due to thin atmosphere,
+  # but this is partially offset by lower gravity (0.38g)
+  mars_scaling_factor: 1.0     # dimensionless (conservative: no reduction)
+
+# ==============================================================================
+# RANGE REQUIREMENTS (from §3.3 User Needs)
+# ==============================================================================
+range:
+  # Minimum operational radius (one-way distance)
+  operational_radius_km: 50    # km
+  
+  # Minimum range (round trip = 2 × radius)
+  range_km: 100                # km
+
+# ==============================================================================
+# ENERGY MANAGEMENT (from §4.12)
+# ==============================================================================
+energy:
+  # Energy reserve for contingencies
+  reserve_fraction: 0.20       # 20%
+
+# ==============================================================================
+# MASS FRACTIONS (from §4.11)
+# ==============================================================================
+mass_fractions:
+  # Battery mass fraction
+  f_battery: 0.35              # 35%
+  
+  # Empty (structure) mass fraction
+  f_empty: 0.30                # 30%
+  
+  # Payload mass fraction
+  f_payload: 0.10              # 10%
+  
+  # Propulsion mass fraction (dual system)
+  f_propulsion: 0.20           # 20%
+  
+  # Avionics mass fraction
+  f_avionics: 0.05             # 5%
+  # Sum = 100%
+
+# ==============================================================================
+# MASS ESTIMATE (from §4.11)
+# ==============================================================================
+mass:
+  # Payload mass (camera + radio)
+  payload_kg: 1.0              # kg
+  
+  # Baseline MTOW (computed: payload / f_payload = 1.0 / 0.10)
+  mtow_kg: 10.0                # kg
+
+# ==============================================================================
+# REQUIREMENTS SUMMARY (from §3.3)
+# ==============================================================================
+requirements:
+  # Minimum endurance
+  endurance_min: 60            # min
+  
+  # VTOL capability (mandatory)
+  vtol_required: true
+  
+  # Minimum payload capacity
+  payload_min_kg: 1.0          # kg
+
+# ==============================================================================
+# STRUCTURAL REQUIREMENTS (from §4.12)
+# ==============================================================================
+structural:
+  # Limit load factor (CS-23 lower bound for unmanned)
+  n_limit: 2.5                 # g's
+  
+  # Factor of safety
+  safety_factor: 1.5           # dimensionless
+  
+  # Ultimate load factor (n_ult = n_limit × SF)
+  n_ultimate: 3.75             # g's

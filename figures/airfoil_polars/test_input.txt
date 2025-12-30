@@ -1,0 +1,24 @@
+LOAD e387.dat
+PPAR
+N
+200
+
+
+
+PANE
+OPER
+ITER
+200
+VISC
+50000
+PACC
+test_polar.txt
+
+ASEQ
+-5.00
+15.00
+1.00
+PACC
+
+
+QUIT

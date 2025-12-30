@@ -1,0 +1,510 @@
+================================================================================
+PROMPT 03A: ROTORCRAFT CONSTRAINT EQUATIONS (THEORETICAL)
+================================================================================
+Task: Develop complete theoretical analysis for rotorcraft configuration
+Output: Manuscript content for 05_02_rotorcraft-analysis.md
+Dependencies: Phase 2 outputs (efficiencies, mass fractions, derived requirements)
+
+================================================================================
+WORKFLOW: MANUSCRIPT FIRST
+================================================================================
+
+This prompt follows the THREE-PHASE workflow:
+
+PHASE A: THEORETICAL DEVELOPMENT (THIS PROMPT)
+   - Research and cite ALL equations from authoritative sources
+   - Present complete derivations with assumptions stated
+   - Build the analytical framework in the manuscript
+   - Use [TO BE CALCULATED] placeholders for numerical results
+
+PHASE B: PYTHON IMPLEMENTATION (subsequent task)
+   - Implement scripts that EXACTLY reproduce manuscript equations
+   - No new equations - code follows manuscript
+
+PHASE C: NUMERICAL RESULTS (subsequent task)
+   - Run scripts, insert results, generate figures
+
+THIS PROMPT COVERS PHASE A ONLY.
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are developing Section 5.2 of the Mars UAV feasibility study:
+"Rotorcraft configuration analysis"
+
+This section analyzes whether a pure rotorcraft (helicopter/multicopter)
+configuration can satisfy the Mars UAV mission requirements:
+- 50 km operational radius
+- 60-90 minute cruise endurance
+- VTOL capability
+
+SPOILER: The analysis will show that rotorcraft CANNOT meet the endurance
+requirement due to:
+- High hover power in thin Mars atmosphere
+- Low effective L/D in forward flight (3-5 vs 10-15 for fixed-wing)
+- Battery energy limitation
+
+The section must provide the QUANTITATIVE JUSTIFICATION for this conclusion.
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. EQUATION SOURCING:
+   - EVERY equation must be cited to an authoritative source
+   - Search Zotero Mars_UAV collection first
+   - Add new sources if needed
+
+2. DERIVATION REQUIREMENTS:
+   - State all assumptions explicitly
+   - Show intermediate steps
+   - Define all symbols
+
+3. PARAMETER VALUES:
+   - Reference values from earlier sections (@sec:derived-requirements)
+   - Do NOT invent values - use placeholders if not yet determined
+
+4. CONCLUSIONS:
+   - State feasibility conclusion clearly
+   - Identify the limiting constraint
+
+================================================================================
+THEORETICAL CONTENT REQUIRED
+================================================================================
+
+------------------------------------------------------------------------------
+SECTION 1: HOVER POWER FROM MOMENTUM THEORY
+------------------------------------------------------------------------------
+
+SOURCE: Leishman "Principles of Helicopter Aerodynamics" (Chapter 2)
+Check Zotero: @leishmanPrinciplesHelicopterAerodynamics2006
+
+1.1 ACTUATOR DISK MODEL
+
+Present the idealized actuator disk model with assumptions:
+- Uniform flow through disk
+- No swirl in wake
+- Ideal fluid (inviscid)
+
+"The actuator disk model treats the rotor as an infinitely thin disk that
+imparts momentum to the air passing through it [@leishmanPrinciplesHelicopterAerodynamics2006]."
+
+1.2 INDUCED VELOCITY
+
+Derive the induced velocity in hover:
+
+Conservation of momentum:
+T = ṁ × ΔV = ρ × A × v_i × 2v_i = 2ρAv_i²
+
+Solving for induced velocity:
+$$v_i = \sqrt{\frac{T}{2\rho A}}$$ {#eq:induced-velocity}
+
+Where:
+- T = thrust (N)
+- ρ = air density (kg/m³)
+- A = rotor disk area (m²)
+- v_i = induced velocity (m/s)
+
+CITE: Leishman Chapter 2, Equation 2.XX
+
+1.3 IDEAL HOVER POWER
+
+The ideal power is thrust times induced velocity:
+$$P_{ideal} = T \times v_i = T \times \sqrt{\frac{T}{2\rho A}}$$ {#eq:ideal-power-1}
+
+Rearranging:
+$$P_{ideal} = \frac{T^{3/2}}{\sqrt{2\rho A}}$$ {#eq:ideal-power-2}
+
+Or in terms of disk loading (DL = T/A):
+$$P_{ideal} = T \times \sqrt{\frac{DL}{2\rho}}$$ {#eq:ideal-power-3}
+
+CITE: Leishman Chapter 2, Equation 2.XX
+
+1.4 FIGURE OF MERIT
+
+The Figure of Merit (FM) accounts for non-ideal effects:
+- Tip losses
+- Profile drag
+- Non-uniform inflow
+
+Definition:
+$$FM = \frac{P_{ideal}}{P_{actual}} = \frac{P_{ideal}}{P_{hover}}$$ {#eq:figure-of-merit}
+
+Typical values:
+- Large helicopters (high Re): FM = 0.75-0.80
+- Small rotors (moderate Re): FM = 0.60-0.70
+- Mars conditions (low Re): FM = 0.55-0.65
+
+CITE: Leishman for definition
+CITE: Johnson MSH paper for Mars FM values (@johnsonMarsScienceHelicopter2020)
+
+1.5 ACTUAL HOVER POWER
+
+From FM definition:
+$$P_{hover} = \frac{P_{ideal}}{FM} = \frac{T^{3/2}}{FM \times \sqrt{2\rho A}}$$ {#eq:hover-power}
+
+For hover, T = W (weight):
+$$P_{hover} = \frac{W^{3/2}}{FM \times \sqrt{2\rho A}}$$ {#eq:hover-power-weight}
+
+IMPORTANT: Note the W^(3/2) dependency - hover power scales strongly with weight.
+
+1.6 DISK LOADING FORMULATION
+
+Express hover power in terms of disk loading:
+$$P_{hover} = W \times \sqrt{\frac{W/A}{2\rho}} \times \frac{1}{FM}$$
+
+$$P_{hover} = W \times \sqrt{\frac{DL}{2\rho}} \times \frac{1}{FM}$$ {#eq:hover-power-dl}
+
+Where DL = W/A = disk loading (N/m²)
+
+The power loading (P/W) for hover is:
+$$\frac{P}{W} = \frac{1}{FM} \times \sqrt{\frac{DL}{2\rho}}$$ {#eq:hover-power-loading}
+
+This is the HOVER CONSTRAINT on the matching chart.
+
+------------------------------------------------------------------------------
+SECTION 2: ELECTRICAL POWER CHAIN
+------------------------------------------------------------------------------
+
+2.1 EFFICIENCY CHAIN
+
+The electrical power from the battery must overcome:
+- Motor losses (η_motor)
+- ESC losses (η_ESC)
+
+$$P_{electric} = \frac{P_{hover}}{\eta_{motor} \times \eta_{ESC}}$$ {#eq:electric-hover}
+
+Combined with hover power:
+$$P_{electric} = \frac{W^{3/2}}{FM \times \eta_{motor} \times \eta_{ESC} \times \sqrt{2\rho A}}$$ {#eq:electric-hover-full}
+
+VALUES (from @sec:propulsion-data):
+- FM = 0.60 (from prompt 02C)
+- η_motor = 0.85 (from prompt 02C)
+- η_ESC = 0.95 (from prompt 02C)
+- Combined: FM × η_motor × η_ESC = 0.60 × 0.85 × 0.95 = 0.485
+
+2.2 EXAMPLE CALCULATION
+
+For Mars UAV in hover:
+- W = [MTOW] × g_Mars = [TO BE CALCULATED] N
+- ρ = 0.020 kg/m³
+- A = [TO BE DETERMINED] m² (depends on rotor size)
+
+Placeholder result:
+P_electric,hover = [TO BE CALCULATED] W
+
+------------------------------------------------------------------------------
+SECTION 3: FORWARD FLIGHT POWER
+------------------------------------------------------------------------------
+
+For rotorcraft in forward flight, power requirements include:
+- Induced power (reduced from hover due to forward speed)
+- Profile power (blade drag)
+- Parasite power (fuselage drag)
+
+SOURCE: Leishman Chapter 5 or Prouty "Helicopter Aerodynamics"
+
+3.1 FORWARD FLIGHT POWER COMPONENTS
+
+Total power in forward flight:
+$$P_{total} = P_{induced} + P_{profile} + P_{parasite}$$ {#eq:forward-power}
+
+For simplified analysis, use equivalent lift-to-drag ratio concept:
+
+$$\left(\frac{L}{D}\right)_{eff} = \frac{W \times V}{P_{total}}$$ {#eq:equivalent-ld}
+
+3.2 ROTORCRAFT EQUIVALENT L/D
+
+Research typical equivalent L/D for rotorcraft:
+
+| Aircraft Type | (L/D)_eff | Source |
+|--------------|-----------|--------|
+| Conventional helicopter | 4-6 | Leishman |
+| Optimized compound | 6-8 | Literature |
+| Pure multirotor | 3-5 | Low, no translational lift |
+
+For Mars rotorcraft estimate: (L/D)_eff ≈ 4
+
+CITE: Find source for rotorcraft L/D values in Leishman or Johnson
+
+3.3 FORWARD FLIGHT POWER
+
+From equivalent L/D:
+$$P_{forward} = \frac{W \times V}{(L/D)_{eff}}$$ {#eq:forward-power-ld}
+
+Electrical power:
+$$P_{electric,forward} = \frac{W \times V}{(L/D)_{eff} \times \eta_{motor} \times \eta_{ESC}}$$ {#eq:forward-electric}
+
+------------------------------------------------------------------------------
+SECTION 4: BATTERY ENERGY AND ENDURANCE
+------------------------------------------------------------------------------
+
+4.1 AVAILABLE BATTERY ENERGY
+
+The usable battery energy is:
+$$E_{available} = m_{batt} \times e_{spec} \times DoD \times \eta_{discharge}$$ {#eq:battery-energy}
+
+Where:
+- m_batt = battery mass (kg)
+- e_spec = specific energy (Wh/kg), typically 200-250 for Li-ion
+- DoD = depth of discharge (0.80-0.90)
+- η_discharge = discharge efficiency (~0.95)
+
+Using battery mass fraction:
+$$E_{available} = f_{batt} \times MTOW \times e_{spec} \times DoD \times \eta$$ {#eq:battery-energy-fraction}
+
+VALUES (from prompts 02C, 02E):
+- f_batt = 0.35 (from mass fractions analysis)
+- e_spec = 250 Wh/kg (LiPo, optimistic)
+- DoD = 0.80
+- η = 0.95
+
+Combined: E_available = 0.35 × MTOW × 250 × 0.80 × 0.95 = 66.5 × MTOW Wh
+
+For MTOW = 4 kg: E_available = 266 Wh
+
+4.2 HOVER ENERGY CONSUMPTION
+
+Energy consumed during hover:
+$$E_{hover} = P_{electric,hover} \times t_{hover}$$ {#eq:hover-energy}
+
+4.3 FORWARD FLIGHT ENERGY
+
+For rotorcraft traversing distance D at velocity V:
+$$E_{forward} = P_{electric,forward} \times \frac{D}{V} = \frac{W \times D}{(L/D)_{eff} \times \eta}$$ {#eq:forward-energy}
+
+4.4 TOTAL MISSION ENERGY
+
+$$E_{mission} = E_{hover} + E_{forward} + E_{reserve}$$ {#eq:mission-energy}
+
+Where E_reserve = 0.20 × (E_hover + E_forward) for 20% reserve
+
+4.5 ENDURANCE CALCULATION
+
+For pure rotorcraft mission (all forward flight):
+
+$$t_{endurance} = \frac{E_{available}}{P_{electric,forward}}$$ {#eq:endurance}
+
+Substituting:
+$$t_{endurance} = \frac{f_{batt} \times MTOW \times e_{spec} \times DoD \times \eta_{batt}}{W \times V / ((L/D)_{eff} \times \eta_{prop})}$$
+
+Simplifying (W = MTOW × g):
+$$t_{endurance} = \frac{f_{batt} \times e_{spec} \times DoD \times \eta_{batt} \times (L/D)_{eff} \times \eta_{prop}}{g \times V}$$ {#eq:endurance-simple}
+
+THIS IS THE KEY EQUATION: Endurance depends on battery fraction, specific
+energy, and equivalent L/D, but is INDEPENDENT of MTOW (for given fractions).
+
+------------------------------------------------------------------------------
+SECTION 5: FEASIBILITY ANALYSIS
+------------------------------------------------------------------------------
+
+5.1 ENDURANCE CALCULATION FOR ROTORCRAFT
+
+Using the values:
+- f_batt = 0.35
+- e_spec = 250 Wh/kg = 900,000 J/kg
+- DoD = 0.80
+- η_batt = 0.95 (discharge efficiency)
+- (L/D)_eff = 4 (rotorcraft)
+- η_motor × η_ESC = 0.85 × 0.95 = 0.81
+- g = 3.711 m/s² (Mars)
+- V = 40 m/s
+
+Endurance:
+t = (0.35 × 900000 × 0.80 × 0.95 × 4 × 0.81) / (3.711 × 40)
+t = [TO BE CALCULATED] seconds
+
+EXPECTED RESULT: t ≈ 20-30 minutes (insufficient for 60-min requirement)
+
+5.2 COMPARISON WITH REQUIREMENT
+
+| Parameter | Requirement | Rotorcraft Capability |
+|-----------|-------------|----------------------|
+| Endurance | 60-90 min | [TO BE CALCULATED] min |
+| Range | 100 km | [TO BE CALCULATED] km |
+| VTOL | Required | ✓ Achieved |
+
+5.3 SENSITIVITY ANALYSIS
+
+What would need to change to achieve 60-min endurance?
+
+a) Improve (L/D)_eff:
+   Required: (L/D)_eff = [TO BE CALCULATED]
+   Feasibility: NOT possible for pure rotorcraft
+
+b) Increase battery fraction:
+   Required: f_batt = [TO BE CALCULATED]
+   Feasibility: Would require f_batt > 0.50, unrealistic
+
+c) Improve specific energy:
+   Required: e_spec = [TO BE CALCULATED] Wh/kg
+   Feasibility: Beyond current battery technology
+
+5.4 CONCLUSION
+
+The pure rotorcraft configuration CANNOT meet the 60-minute endurance
+requirement. The fundamental limitation is the low equivalent lift-to-drag
+ratio ((L/D)_eff ≈ 4) compared to fixed-wing aircraft ((L/D) ≈ 12-15).
+
+No realistic improvement in battery technology or mass fractions can overcome
+this aerodynamic limitation.
+
+------------------------------------------------------------------------------
+SECTION 6: CONSTRAINT FORMULATION FOR MATCHING CHART
+------------------------------------------------------------------------------
+
+6.1 HOVER POWER LOADING CONSTRAINT
+
+From @eq:hover-power-loading, the hover constraint is:
+
+$$\left(\frac{P}{W}\right)_{hover} \geq \frac{1}{FM \times \eta_{motor} \times \eta_{ESC}} \times \sqrt{\frac{DL}{2\rho}}$$
+
+On matching chart (P/W vs W/S axes):
+- This is a HORIZONTAL line (independent of W/S)
+- For given disk loading, P/W is fixed
+
+6.2 ENERGY CONSTRAINT
+
+The energy constraint for achieving endurance t is:
+
+$$\frac{E_{available}}{MTOW} \geq \frac{P/W \times t}{3600}$$ (for t in hours)
+
+This couples power loading to battery fraction and mission time.
+
+================================================================================
+OUTPUT: MANUSCRIPT STRUCTURE
+================================================================================
+
+File: 05_02_rotorcraft-analysis.md
+
+```markdown
+## 5.2 Rotorcraft configuration {#sec:rotorcraft-analysis}
+
+### Hover power analysis
+
+#### Momentum theory fundamentals
+
+[Content from Section 1 above]
+- Actuator disk assumptions
+- Induced velocity derivation
+- Ideal power equation
+- Figure of Merit
+
+#### Electrical power requirements
+
+[Content from Section 2 above]
+- Efficiency chain
+- Combined efficiency
+- Numerical example (placeholder)
+
+### Forward flight performance
+
+#### Power components
+
+[Content from Section 3 above]
+- Forward flight power breakdown
+- Equivalent L/D concept
+
+#### Rotorcraft aerodynamic efficiency
+
+[Comparison of L/D values]
+- Helicopter: 4-6
+- Comparison to fixed-wing: 12-15
+
+### Endurance analysis
+
+#### Battery energy model
+
+[Content from Section 4 above]
+- Available energy equation
+- Mission energy breakdown
+
+#### Endurance calculation
+
+[Endurance equation and result]
+- Key result: [XX] minutes achievable
+- FAILS 60-minute requirement
+
+### Feasibility conclusion
+
+The pure rotorcraft configuration is **NOT FEASIBLE** for the Mars UAV mission.
+The fundamental limitation is the low aerodynamic efficiency inherent to
+rotorcraft in forward flight.
+
+| Requirement | Capability | Status |
+|-------------|-----------|--------|
+| 60-90 min endurance | ~[XX] min | ❌ FAIL |
+| 50 km radius | ~[XX] km | ❌ FAIL |
+| VTOL | Yes | ✓ PASS |
+```
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After completing the content, update source_grounding.txt:
+
+```
+## Section: 5.2 Rotorcraft configuration
+
+- "Induced velocity: v_i = sqrt(T / (2ρA))"
+  Source: [@leishmanPrinciplesHelicopterAerodynamics2006]
+  Location: Chapter 2, Equation 2.XX
+
+- "Ideal hover power: P = T^1.5 / sqrt(2ρA)"
+  Source: [@leishmanPrinciplesHelicopterAerodynamics2006]
+  Location: Chapter 2, Equation 2.XX
+
+- "Figure of Merit definition: FM = P_ideal / P_actual"
+  Source: [@leishmanPrinciplesHelicopterAerodynamics2006]
+  Location: Chapter 2, Section on rotor efficiency
+
+- "Figure of Merit for Mars rotors: FM = 0.55-0.65"
+  Source: [@johnsonMarsScienceHelicopter2020]
+  Location: Rotor performance section
+
+- "Helicopter equivalent L/D = 4-6"
+  Source: [@leishmanPrinciplesHelicopterAerodynamics2006]
+  Location: Chapter 5, forward flight analysis
+
+- "Battery energy: E = m × e_spec × DoD × η"
+  Source: Standard formulation, see [@sadraeyDesignUnmannedAerial2020]
+  Location: Chapter on energy systems
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] All equations have citations with equation numbers
+[ ] Momentum theory derivation is complete and clear
+[ ] Figure of Merit values sourced (Johnson MSH, Leishman)
+[ ] Forward flight L/D for rotorcraft sourced
+[ ] Battery energy equation sourced
+[ ] Endurance equation derived correctly
+[ ] Numerical placeholders [TO BE CALCULATED] used appropriately
+[ ] Feasibility conclusion is clear: rotorcraft NOT feasible
+[ ] Limiting constraint identified (L/D, not power)
+[ ] Manuscript structure provided
+[ ] source_grounding.txt entries specified
+
+================================================================================
+KEY EQUATIONS SUMMARY
+================================================================================
+
+For Python implementation (Phase B), these equations must be verified:
+
+1. Induced velocity: v_i = sqrt(T / (2ρA))
+2. Ideal power: P_ideal = T^1.5 / sqrt(2ρA)
+3. Actual hover power: P_hover = P_ideal / FM
+4. Electrical power: P_elec = P_hover / (η_motor × η_ESC)
+5. Forward flight power: P_fwd = W × V / (L/D)_eff
+6. Battery energy: E = m_batt × e_spec × DoD × η
+7. Endurance: t = E / P
+
+================================================================================
+END OF PROMPT
+================================================================================

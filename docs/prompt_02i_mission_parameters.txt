@@ -1,0 +1,402 @@
+================================================================================
+PROMPT 02I: MISSION PARAMETERS DERIVATION
+================================================================================
+Task: Derive and justify mission velocity and time parameters for Mars UAV
+Output: Manuscript content for 04_12_derived-requirements.md (mission section)
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The constraint analysis
+requires quantified mission parameters:
+
+1. Cruise velocity (V_cruise) - drives power and Reynolds number
+2. Minimum velocity (V_min) - for stall margin
+3. Hover time allocation - for energy budget
+4. Cruise endurance target - mission capability
+
+These parameters must be:
+- Derived from mission requirements (@sec:user-needs)
+- Consistent with atmospheric conditions (@sec:operational-environment)
+- Compatible with airfoil Reynolds number constraints
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. TRACE TO REQUIREMENTS:
+   - Each parameter links to user needs or derived requirement
+   - Document the derivation chain
+
+2. PHYSICAL CONSISTENCY:
+   - Check Reynolds number compatibility
+   - Check Mach number limits
+   - Verify power/energy feasibility
+
+3. CITE SOURCES:
+   - Methodology for optimal velocity
+   - Any precedent values from Mars UAV studies
+
+================================================================================
+PARAMETERS TO DERIVE
+================================================================================
+
+------------------------------------------------------------------------------
+1. CRUISE VELOCITY (V_cruise)
+------------------------------------------------------------------------------
+
+The cruise velocity must satisfy multiple constraints simultaneously.
+
+CONSTRAINT 1: REYNOLDS NUMBER COMPATIBILITY
+
+For the airfoil analysis to be valid, the wing chord Reynolds number must
+match the experimental data range:
+
+Re = ρ × V × c / μ ≈ 60,000
+
+Given Mars atmospheric properties at operating altitude:
+- ρ = 0.020 kg/m³ (from @sec:operational-environment)
+- μ = 1.1 × 10⁻⁵ Pa·s (dynamic viscosity)
+
+The Reynolds number constraint gives:
+V × c = Re × μ / ρ = 60,000 × 1.1 × 10⁻⁵ / 0.020 = 33 m²/s
+
+For different chord lengths:
+| Chord (m) | Required V (m/s) | Notes |
+|-----------|------------------|-------|
+| 0.25 | 132 | Too fast, Mach limit |
+| 0.30 | 110 | Still too fast |
+| 0.40 | 82.5 | High but possible |
+| 0.50 | 66 | Reasonable |
+| 0.60 | 55 | Good |
+| 0.80 | 41 | Good |
+| 1.00 | 33 | Large chord |
+
+For Re = 60,000 exactly with V ≈ 40 m/s → c ≈ 0.83 m
+
+CONSTRAINT 2: MACH NUMBER LIMIT
+
+The cruise Mach number should be low enough to avoid compressibility:
+
+M = V / a
+
+Where a = speed of sound on Mars:
+a = sqrt(γ × R × T) ≈ sqrt(1.29 × 188 × 210) ≈ 226 m/s
+
+At V = 40 m/s: M = 40 / 226 = 0.18 (acceptable, well below critical Mach)
+
+CONSTRAINT 3: OPTIMAL CRUISE FOR ENDURANCE
+
+For battery-electric aircraft, maximum endurance occurs at maximum L/D.
+However, for maximum RANGE, the optimal speed is different.
+
+For maximum range (mission objective):
+V_max_range = sqrt(2W / (ρ × S × C_L*))
+
+Where C_L* is the lift coefficient for minimum drag.
+
+RESEARCH:
+- Find optimal cruise speed methodology for electric aircraft
+- Source: Raymer or Anderson
+- Compare endurance-optimal vs range-optimal speeds
+
+CONSTRAINT 4: OPERATIONAL RADIUS
+
+Mission requirement: 50 km operational radius (100 km round trip)
+Target cruise time: reasonable fraction of total endurance
+
+At V = 40 m/s:
+- Round trip distance: 100 km
+- Cruise time: 100,000 / 40 = 2500 s ≈ 42 minutes
+- With reserves and loiter: ~60 minutes total cruise
+
+RECOMMENDED VALUE:
+V_cruise = 40 m/s (with sensitivity range 35-45 m/s)
+
+RATIONALE:
+- Re ≈ 60,000 with chord ≈ 0.8 m
+- M ≈ 0.18 (well subsonic)
+- Achieves 50 km radius in ~21 minutes each way
+
+------------------------------------------------------------------------------
+2. MINIMUM VELOCITY (V_min)
+------------------------------------------------------------------------------
+
+The minimum velocity defines the stall margin for safe flight.
+
+STALL SPEED:
+V_stall = sqrt(2W / (ρ × S × C_L,max))
+
+The stall speed depends on wing loading (W/S) which is a constraint analysis
+output. However, we can estimate bounds:
+
+Example calculation:
+- MTOW = 4 kg → W = 4 × 3.711 = 14.8 N
+- Wing area S = 0.15 m² (estimate)
+- W/S = 14.8 / 0.15 = 99 N/m² = 99 Pa
+- ρ = 0.020 kg/m³
+- C_L,max = 1.0 (from airfoil)
+
+V_stall = sqrt(2 × 99 / (0.020 × 1.0)) = sqrt(9900) = 99.5 m/s
+
+This is HIGHER than cruise velocity! This indicates:
+- Either wing area must be larger
+- Or W/S must be lower
+- This is exactly what the constraint analysis will determine
+
+STALL MARGIN:
+V_min ≥ 1.2 × V_stall (20% margin typical)
+Or V_min ≥ 1.3 × V_stall (30% margin for safety-critical)
+
+RECOMMENDED APPROACH:
+- Do NOT fix V_min numerically
+- Express as constraint: V_min ≥ 1.2 × V_stall
+- Let constraint analysis determine compatible W/S
+
+For initial sizing, assume:
+V_min ≈ 0.4 × V_cruise = 0.4 × 40 = 16 m/s (placeholder)
+
+This will be refined when W/S is determined.
+
+------------------------------------------------------------------------------
+3. HOVER TIME ALLOCATION
+------------------------------------------------------------------------------
+
+For hybrid VTOL, hover time is limited to takeoff, landing, and contingency.
+
+TAKEOFF PHASE:
+- Vertical climb to safe altitude: 20-30 m
+- Climb rate assumption: 1-2 m/s
+- Transition to forward flight: 10-20 seconds
+- Total takeoff hover: 30-60 seconds
+
+LANDING PHASE:
+- Transition from forward flight: 10-20 seconds
+- Vertical descent and touchdown: 20-30 seconds
+- Total landing hover: 30-60 seconds
+
+CONTINGENCY:
+- Unexpected hover (abort, obstacle): 30-60 seconds
+- Wind hover for precision landing: 30 seconds
+- Total contingency: 30-60 seconds
+
+TOTAL HOVER TIME:
+t_hover = t_takeoff + t_landing + t_contingency
+t_hover = 60 + 60 + 60 = 180 seconds (conservative)
+t_hover = 30 + 30 + 30 = 90 seconds (optimistic)
+
+RECOMMENDED VALUE:
+t_hover = 120-180 seconds (2-3 minutes total)
+
+For energy calculations, use t_hover = 180 s (conservative)
+
+INGENUITY REFERENCE:
+- Search for Ingenuity hover times
+- Typical flight: 90-120 seconds total
+- But Ingenuity is pure rotorcraft, all flight is "hover"
+
+------------------------------------------------------------------------------
+4. CRUISE ENDURANCE TARGET
+------------------------------------------------------------------------------
+
+The cruise endurance must satisfy the operational radius requirement.
+
+MISSION REQUIREMENT:
+- Operational radius: 50 km (from @sec:user-needs)
+- Cruise velocity: 40 m/s
+
+MINIMUM CRUISE TIME:
+- Outbound: 50,000 / 40 = 1250 s = 20.8 min
+- Return: 50,000 / 40 = 1250 s = 20.8 min
+- Total cruise: 2500 s = 41.7 min
+
+MARGINS:
+- Headwind margin: 20% (winds up to ~10 m/s)
+- Loiter time for survey: 10-15 min at target area
+- Navigation margin: 10%
+
+CALCULATION:
+- Basic cruise: 42 min
+- Headwind: +8 min
+- Loiter: +10 min
+- Navigation: +4 min
+- Total: 64 min
+
+RECOMMENDED VALUE:
+t_cruise = 60-90 minutes (target: 75 min nominal)
+
+ENERGY RESERVE:
+In addition to cruise time, 20% energy reserve is maintained.
+
+Total flight time budget:
+t_total = t_hover + t_cruise + reserve
+t_total = 3 + 75 + (implied in battery sizing) = 78 min flight + reserve
+
+------------------------------------------------------------------------------
+5. MISSION PROFILE SUMMARY
+------------------------------------------------------------------------------
+
+| Phase | Duration | Power | Notes |
+|-------|----------|-------|-------|
+| Takeoff hover | 60 s | P_hover | Vertical climb + transition |
+| Outbound cruise | 21 min | P_cruise | 50 km at 40 m/s |
+| Survey/loiter | 15 min | P_cruise | Mapping operations |
+| Return cruise | 21 min | P_cruise | 50 km at 40 m/s |
+| Landing hover | 60 s | P_hover | Transition + descent |
+| Contingency | 60 s | P_hover | Reserve hover time |
+| **Total** | **~60 min** | — | Plus 20% reserve |
+
+================================================================================
+OUTPUT: MANUSCRIPT CONTENT
+================================================================================
+
+Draft content for 04_12_derived-requirements.md:
+
+------------------------------------------------------------------------------
+### Mission velocity and time parameters {#sec:mission-parameters}
+------------------------------------------------------------------------------
+
+#### Cruise velocity
+
+The cruise velocity is selected based on multiple constraints:
+
+1. **Reynolds number compatibility**: The wing chord Reynolds number should
+   match the experimental airfoil data at Re ≈ 60,000. With Mars atmospheric
+   viscosity and density, this constraint gives:
+   
+   $$V \times c = \frac{Re \times \mu}{\rho} ≈ 33 \text{ m}^2/\text{s}$$
+   
+   For a chord of approximately 0.8 m, the required velocity is ~40 m/s.
+
+2. **Mach number limit**: At V = 40 m/s and Mars speed of sound a ≈ 226 m/s,
+   the cruise Mach number is M ≈ 0.18, well below the critical Mach number.
+
+3. **Mission requirement**: The 50 km operational radius requires approximately
+   42 minutes of cruise time at 40 m/s (round trip).
+
+The cruise velocity is therefore:
+
+$$V_{cruise} = 40 \text{ m/s}$$ {#eq:cruise-velocity}
+
+with a sensitivity range of 35-45 m/s for constraint analysis.
+
+#### Minimum velocity
+
+The minimum operating velocity provides a margin above stall:
+
+$$V_{min} \geq 1.2 \times V_{stall}$$ {#eq:v-min}
+
+where the stall speed is determined by the wing loading constraint
+(@sec:constraint-analysis). The factor 1.2 provides a 20% safety margin,
+consistent with standard practice [@raymer...].
+
+#### Hover time allocation
+
+For the hybrid VTOL configuration, hover time is limited to vertical takeoff,
+landing, and contingency operations:
+
+| Phase | Duration (s) |
+|-------|-------------|
+| Takeoff (climb + transition) | 60 |
+| Landing (transition + descent) | 60 |
+| Contingency reserve | 60 |
+| **Total hover** | **180** |
+
+: Hover time allocation {#tbl:hover-allocation}
+
+The total hover time of 180 seconds (3 minutes) is used for energy calculations.
+
+#### Cruise endurance
+
+The cruise endurance requirement is derived from the 50 km operational radius:
+
+$$t_{cruise} = \frac{2 \times R_{op}}{V_{cruise}} + t_{loiter} + t_{margin}$$
+
+With 15 minutes of loiter time and 20% margin:
+
+$$t_{cruise} = \frac{2 \times 50,000}{40} + 15 \times 60 + 0.2 \times t_{cruise}$$
+
+Solving: $t_{cruise}$ ≈ 75 minutes (nominal)
+
+The target cruise endurance is:
+
+$$t_{cruise} = 60-90 \text{ min}$$ {#eq:cruise-endurance}
+
+#### Mission profile
+
+@tbl:mission-profile summarizes the complete mission timeline.
+
+| Phase | Duration | Cumulative |
+|-------|----------|------------|
+| Takeoff hover | 1 min | 1 min |
+| Outbound cruise | 21 min | 22 min |
+| Survey operations | 15 min | 37 min |
+| Return cruise | 21 min | 58 min |
+| Landing hover | 1 min | 59 min |
+| Contingency | 1 min | 60 min |
+
+: Nominal mission profile {#tbl:mission-profile}
+
+A 20% energy reserve is maintained in addition to the above timeline.
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After completing the research, update source_grounding.txt:
+
+```
+## Section: 4.12 Derived requirements - Mission parameters
+
+- "Cruise velocity V = 40 m/s for Re ≈ 60,000 at c ≈ 0.8 m"
+  Source: Reynolds number calculation, ρ and μ from @sec:operational-environment
+  Location: Derived from Re = ρVc/μ
+
+- "Mars speed of sound a ≈ 226 m/s"
+  Source: a = sqrt(γRT) with Mars atmosphere parameters
+  Location: @sec:operational-environment
+
+- "Minimum velocity margin: V_min ≥ 1.2 × V_stall"
+  Source: [@raymerAircraftDesignConceptual20XX] or equivalent
+  Location: Chapter on performance, stall speed margin
+
+- "Operational radius: 50 km"
+  Source: Mission requirement from @sec:user-needs
+  Location: Previous section of manuscript
+
+- "Hover time allocation: 180 s total"
+  Source: Mission profile analysis, this study
+  Location: Based on VTOL flight phase estimates
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] Cruise velocity derived from Re constraint
+[ ] Mach number check completed (M < 0.3)
+[ ] Minimum velocity expressed as margin above stall
+[ ] Hover time broken down by flight phase
+[ ] Cruise endurance derived from operational radius
+[ ] Mission profile table complete
+[ ] All values consistent with each other
+[ ] Manuscript content drafted for 04_12
+[ ] source_grounding.txt updated
+
+================================================================================
+CROSS-CHECKS
+================================================================================
+
+Verify consistency:
+
+1. Re check: Does V × c give Re ≈ 60,000 with Mars ρ and μ?
+2. Mach check: Is V / a < 0.3?
+3. Mission time: Does outbound + return = 2 × R / V?
+4. Energy feasibility: Is t_hover + t_cruise achievable? (check in §5)
+
+================================================================================
+END OF PROMPT
+================================================================================

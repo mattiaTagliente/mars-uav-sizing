@@ -1,0 +1,24 @@
+NACA 0012
+PPAR
+N
+200
+
+
+
+PANE
+OPER
+ITER
+200
+VISC
+75000
+PACC
+NACA_0012_Re8e+04_M0.00.txt
+
+ASEQ
+-5.00
+25.00
+1.00
+PACC
+
+
+QUIT

@@ -1,0 +1,580 @@
+================================================================================
+PROMPT 03C: HYBRID VTOL CONSTRAINT EQUATIONS (THEORETICAL)
+================================================================================
+Task: Develop complete theoretical analysis for hybrid VTOL (QuadPlane)
+Output: Manuscript content for 05_04_hybrid-vtol-analysis.md
+Dependencies: Prompts 03A (rotorcraft) and 03B (fixed-wing) for referenced equations
+
+================================================================================
+WORKFLOW: MANUSCRIPT FIRST
+================================================================================
+
+This prompt follows the THREE-PHASE workflow:
+
+PHASE A: THEORETICAL DEVELOPMENT (THIS PROMPT)
+   - Combine hover analysis (from §5.2) and cruise analysis (from §5.3)
+   - Develop the UNIQUE energy storage constraint
+   - Analyze the mass penalty trade-off
+   - Use [TO BE CALCULATED] placeholders for numerical results
+
+PHASE B: PYTHON IMPLEMENTATION (subsequent task)
+   - Implement scripts that EXACTLY reproduce manuscript equations
+
+PHASE C: NUMERICAL RESULTS (subsequent task)
+   - Run scripts, insert results, generate figures
+
+THIS PROMPT COVERS PHASE A ONLY.
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are developing Section 5.4 of the Mars UAV feasibility study:
+"Hybrid VTOL configuration analysis"
+
+This section analyzes whether a hybrid VTOL (QuadPlane) configuration can
+satisfy ALL Mars UAV mission requirements:
+- 50 km operational radius ✓
+- 60-90 minute cruise endurance ✓
+- VTOL capability ✓
+
+The QuadPlane combines:
+- Lift rotors (from rotorcraft) → VTOL capability
+- Wing + cruise motor (from fixed-wing) → Efficient cruise
+
+SPOILER: The analysis will show that hybrid VTOL IS FEASIBLE, but requires
+careful energy budget management and accepts a mass penalty for dual propulsion.
+
+This is the ONLY configuration that satisfies all constraints.
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. REFERENCE EARLIER SECTIONS:
+   - Hover equations → reference @sec:rotorcraft-analysis
+   - Cruise equations → reference @sec:fixed-wing-analysis
+   - Do NOT repeat full derivations, just reference
+
+2. UNIQUE CONTENT:
+   - Energy storage constraint (new)
+   - Mass penalty analysis (new)
+   - Combined matching chart (new)
+
+3. CITE SOURCES:
+   - Any hybrid VTOL references (DeltaQuad, Pipistrel Nuuva, Bertani 2023)
+   - Standard aircraft design for methodology
+
+================================================================================
+THEORETICAL CONTENT REQUIRED
+================================================================================
+
+------------------------------------------------------------------------------
+SECTION 1: QUADPLANE ARCHITECTURE
+------------------------------------------------------------------------------
+
+1.1 CONFIGURATION DESCRIPTION
+
+The QuadPlane configuration consists of:
+
+LIFT SYSTEM (for hover):
+- 4+ electric rotors (quadcopter layout)
+- Sized for hover ONLY (short duration)
+- Positioned to minimize interference with wing
+
+CRUISE SYSTEM (for forward flight):
+- Wing for lift generation
+- Single pusher or tractor propeller
+- Sized for efficient cruise
+
+DECOUPLED OPTIMIZATION:
+- Lift rotors: optimized for thrust, not forward flight
+- Wing + cruise prop: optimized for L/D, not hover
+- Each system operates in its optimal regime
+
+CITE: Search for QuadPlane or hybrid VTOL references:
+- Bertani 2023 Mars VTOL paper (@bertaniPreliminaryDesignFixedwing2023)
+- Commercial QuadPlane documentation (DeltaQuad, Wingtra)
+
+1.2 FLIGHT PHASES
+
+| Phase | Propulsion | Lift Source | Duration |
+|-------|-----------|-------------|----------|
+| Takeoff | Lift rotors | Rotor thrust | ~30s |
+| Transition | Both | Rotors → Wing | ~30s |
+| Cruise | Cruise motor | Wing | ~60 min |
+| Transition | Both | Wing → Rotors | ~30s |
+| Landing | Lift rotors | Rotor thrust | ~30s |
+
+Total hover time: ~2-3 minutes
+Total cruise time: ~57-58 minutes
+
+------------------------------------------------------------------------------
+SECTION 2: HOVER CONSTRAINT (LIFT SYSTEM)
+------------------------------------------------------------------------------
+
+2.1 REFERENCE TO ROTORCRAFT ANALYSIS
+
+The hover power equations are identical to those in @sec:rotorcraft-analysis.
+
+From @eq:hover-power:
+$$P_{hover} = \frac{W^{3/2}}{FM \times \sqrt{2\rho A_{rotor}}}$$
+
+Electrical power:
+$$P_{electric,hover} = \frac{P_{hover}}{\eta_{motor,lift} \times \eta_{ESC}}$$
+
+2.2 KEY DIFFERENCE: HOVER DURATION
+
+For rotorcraft: hover duration = entire mission (60+ min)
+For QuadPlane: hover duration = t_hover ≈ 180 s (takeoff + landing + contingency)
+
+This dramatically reduces the energy required for hover.
+
+2.3 HOVER ENERGY
+
+Energy consumed during hover phases:
+$$E_{hover} = P_{electric,hover} \times t_{hover}$$ {#eq:hover-energy-qp}
+
+EXAMPLE (placeholder):
+- P_hover = [TO BE CALCULATED] W
+- t_hover = 180 s = 0.05 h
+- E_hover = [TO BE CALCULATED] Wh
+
+------------------------------------------------------------------------------
+SECTION 3: CRUISE CONSTRAINT (WING SYSTEM)
+------------------------------------------------------------------------------
+
+3.1 REFERENCE TO FIXED-WING ANALYSIS
+
+The cruise power equations are identical to those in @sec:fixed-wing-analysis.
+
+From @eq:cruise-power:
+$$P_{cruise} = \frac{W \times V}{(L/D) \times \eta_{prop}}$$
+
+Electrical power:
+$$P_{electric,cruise} = \frac{P_{cruise}}{\eta_{motor,cruise} \times \eta_{ESC}}$$
+
+3.2 QUADPLANE AERODYNAMIC EFFICIENCY
+
+The QuadPlane achieves fixed-wing L/D during cruise because:
+- Lift rotors are stopped/folded (no drag penalty)
+- Or: Minor drag penalty from stationary rotors
+
+Expected L/D: 12-15 (similar to pure fixed-wing)
+
+If rotors add parasite drag:
+(L/D)_QuadPlane ≈ 0.90 × (L/D)_pure = 0.90 × 15 = 13.5
+
+3.3 CRUISE ENERGY
+
+Energy consumed during cruise:
+$$E_{cruise} = P_{electric,cruise} \times t_{cruise}$$ {#eq:cruise-energy-qp}
+
+EXAMPLE (placeholder):
+- P_cruise = [TO BE CALCULATED] W
+- t_cruise = 3600 s = 1.0 h (60 min)
+- E_cruise = [TO BE CALCULATED] Wh
+
+------------------------------------------------------------------------------
+SECTION 4: ENERGY STORAGE CONSTRAINT (CRITICAL)
+------------------------------------------------------------------------------
+
+THIS IS THE UNIQUE CONSTRAINT FOR HYBRID VTOL.
+
+4.1 TOTAL ENERGY REQUIREMENT
+
+The battery must provide energy for ALL phases:
+$$E_{required} = E_{hover} + E_{cruise} + E_{reserve}$$ {#eq:energy-required}
+
+Expanding:
+$$E_{required} = P_{hover} \times t_{hover} + P_{cruise} \times t_{cruise} + E_{reserve}$$ {#eq:energy-required-expanded}
+
+4.2 RESERVE POLICY
+
+The energy reserve accounts for:
+- Navigation uncertainty
+- Headwinds
+- Contingency operations
+- Battery degradation margin
+
+Standard reserve: 20% of mission energy
+$$E_{reserve} = 0.20 \times (E_{hover} + E_{cruise})$$ {#eq:reserve}
+
+Total with reserve:
+$$E_{required} = 1.20 \times (E_{hover} + E_{cruise})$$ {#eq:energy-with-reserve}
+
+CITE: Search for UAV energy reserve requirements. If no source, state "20%
+reserve is adopted as a conservative margin consistent with aviation practice."
+
+4.3 AVAILABLE ENERGY
+
+From battery:
+$$E_{available} = m_{batt} \times e_{spec} \times DoD \times \eta_{batt}$$ {#eq:energy-available}
+
+Using battery mass fraction:
+$$E_{available} = f_{batt} \times MTOW \times e_{spec} \times DoD \times \eta_{batt}$$
+
+4.4 ENERGY CONSTRAINT
+
+The mission is feasible if:
+$$E_{available} \geq E_{required}$$ {#eq:energy-constraint}
+
+Expanding:
+$$f_{batt} \times MTOW \times e_{spec} \times DoD \times \eta_{batt} \geq 1.20 \times (P_{hover} \times t_{hover} + P_{cruise} \times t_{cruise})$$
+
+4.5 BATTERY FRACTION CONSTRAINT
+
+Rearranging to find minimum battery fraction:
+$$f_{batt} \geq \frac{1.20 \times (P_{hover} \times t_{hover} + P_{cruise} \times t_{cruise})}{MTOW \times e_{spec} \times DoD \times \eta_{batt}}$$ {#eq:f-batt-min}
+
+This constraint couples:
+- Power requirements (P_hover, P_cruise)
+- Mission profile (t_hover, t_cruise)
+- Battery technology (e_spec)
+- Mass allocation (f_batt)
+
+4.6 CONSTRAINT ON MATCHING CHART
+
+The energy constraint can be expressed as:
+$$\left(\frac{E}{W}\right)_{required} \leq \left(\frac{E}{W}\right)_{available}$$
+
+This is an ADDITIONAL constraint beyond hover and cruise power constraints.
+
+On matching chart, it manifests as a FEASIBLE REGION boundary.
+
+------------------------------------------------------------------------------
+SECTION 5: MASS PENALTY ANALYSIS
+------------------------------------------------------------------------------
+
+5.1 DUAL PROPULSION MASS
+
+The QuadPlane carries mass for BOTH propulsion systems:
+
+LIFT SYSTEM MASS:
+- Lift motors: N_lift × m_motor,lift
+- Lift ESCs: N_lift × m_ESC,lift
+- Lift propellers: N_lift × m_prop,lift
+- Mounting structure: m_mount
+
+$$m_{lift,system} = N_{lift} \times (m_{motor} + m_{ESC} + m_{prop}) + m_{mount}$$
+
+CRUISE SYSTEM MASS:
+- Cruise motor: m_motor,cruise
+- Cruise ESC: m_ESC,cruise
+- Cruise propeller: m_prop,cruise
+
+$$m_{cruise,system} = m_{motor,cruise} + m_{ESC,cruise} + m_{prop,cruise}$$
+
+5.2 MASS PENALTY CALCULATION
+
+For a pure fixed-wing, only cruise system is needed.
+The QuadPlane adds the entire lift system.
+
+Mass penalty:
+$$\Delta m = m_{lift,system}$$ {#eq:mass-penalty}
+
+As fraction of MTOW:
+$$f_{penalty} = \frac{m_{lift,system}}{MTOW}$$
+
+EXPECTED VALUES (from reference UAV data):
+- N_lift = 4 motors
+- m_motor,lift ≈ 0.2-0.3 kg each
+- m_ESC,lift ≈ 0.05-0.1 kg each
+- Total lift motors + ESC: 1.0-1.6 kg for 4 units
+- Mounting structure: 0.2-0.5 kg
+- Total m_lift,system ≈ 1.5-2.5 kg
+
+For MTOW = 4 kg:
+f_penalty = 1.5 / 4 = 0.375 (37.5%) ← significant!
+
+For MTOW = 10 kg:
+f_penalty = 2.0 / 10 = 0.20 (20%) ← more reasonable
+
+RESEARCH: Extract propulsion mass from reference_drones.yaml for calibration.
+
+5.3 MASS PENALTY TRADE-OFF
+
+The mass penalty is ACCEPTABLE because:
+1. Enables VTOL capability (critical requirement)
+2. Distributed over entire MTOW
+3. Does not prevent mission feasibility
+
+Without VTOL: mission is impossible (no takeoff)
+With VTOL: mission is possible with penalty
+
+"The dual propulsion mass penalty of approximately [X]% of MTOW is accepted
+as the enabling factor for the Mars UAV mission, which has no alternative
+means of vertical takeoff and landing."
+
+------------------------------------------------------------------------------
+SECTION 6: COMBINED CONSTRAINT ANALYSIS
+------------------------------------------------------------------------------
+
+6.1 CONSTRAINTS SUMMARY
+
+The QuadPlane must satisfy ALL constraints simultaneously:
+
+| Constraint | Equation | Type |
+|------------|----------|------|
+| Hover power | P/W ≥ f(DL, FM, ρ) | Minimum P/W |
+| Cruise power | P/W ≥ f(V, L/D, η) | Minimum P/W |
+| Stall | W/S ≤ f(ρ, V_min, C_L,max) | Maximum W/S |
+| Energy | E ≥ E_required | Coupling constraint |
+
+6.2 MATCHING CHART CONSTRUCTION
+
+The matching chart for QuadPlane plots:
+- X-axis: Wing loading W/S (N/m²)
+- Y-axis: Power loading P/W (W/N or W/kg)
+
+Constraints on chart:
+1. Hover constraint: HORIZONTAL LINE (independent of W/S)
+   - Determined by disk loading of lift rotors
+   
+2. Cruise constraint: CURVE
+   - Higher P/W at very low W/S (high C_L, induced drag)
+   - Higher P/W at very high W/S (flying fast to maintain lift)
+   - Minimum P/W at optimal W/S
+
+3. Stall constraint: VERTICAL LINE
+   - Maximum W/S for given V_min, C_L,max, ρ
+
+4. Energy constraint: REGION BOUNDARY
+   - Couples P/W and mission time
+   - May exclude otherwise feasible regions
+
+FEASIBLE REGION:
+- Above hover constraint
+- Above cruise constraint
+- Left of stall constraint
+- Within energy constraint
+
+DESIGN POINT:
+- Minimum P/W within feasible region
+- Or: Maximum W/S (smallest wing) satisfying all constraints
+
+6.3 EXPECTED DESIGN POINT
+
+Based on preliminary analysis, expect:
+- W/S ≈ 5-10 N/m² (very low, Mars constraint)
+- P/W ≈ 20-40 W/kg (high, Mars hover constraint)
+- Hover-dominated: P/W set by hover, not cruise
+
+------------------------------------------------------------------------------
+SECTION 7: FEASIBILITY ANALYSIS
+------------------------------------------------------------------------------
+
+7.1 ENERGY BUDGET EXAMPLE
+
+For MTOW = 4 kg:
+
+A) Available energy:
+   E_avail = 0.35 × 4 × 250 × 0.80 × 0.95 = 266 Wh
+
+B) Hover energy:
+   P_hover = [TO BE CALCULATED] W
+   t_hover = 180 s = 0.05 h
+   E_hover = [TO BE CALCULATED] Wh
+
+C) Cruise energy:
+   P_cruise = [TO BE CALCULATED] W
+   t_cruise = 3600 s = 1.0 h
+   E_cruise = [TO BE CALCULATED] Wh
+
+D) Required energy (with 20% reserve):
+   E_required = 1.20 × (E_hover + E_cruise) = [TO BE CALCULATED] Wh
+
+E) Feasibility check:
+   E_avail ≥ E_required → [TO BE VERIFIED]
+
+7.2 SENSITIVITY ANALYSIS
+
+What if E_required > E_available?
+
+Options to restore feasibility:
+a) Reduce cruise time (smaller radius)
+b) Increase battery fraction (reduce payload)
+c) Reduce MTOW (iterate design)
+d) Improve (L/D) (aerodynamic refinement)
+e) Increase battery specific energy (future technology)
+
+7.3 DESIGN ITERATIONS
+
+The QuadPlane design is inherently coupled:
+- MTOW affects P_hover and P_cruise
+- Wing area affects W/S and stall
+- Battery fraction affects range and MTOW
+
+Iteration procedure:
+1. Assume MTOW
+2. Check constraints
+3. Adjust parameters
+4. Repeat until converged
+
+------------------------------------------------------------------------------
+SECTION 8: FEASIBILITY CONCLUSION
+------------------------------------------------------------------------------
+
+8.1 SUMMARY TABLE
+
+| Requirement | QuadPlane Capability | Status |
+|-------------|---------------------|--------|
+| 60-90 min endurance | ~[TO BE CALCULATED] min | ✓ PASS |
+| 50 km radius | ~[TO BE CALCULATED] km | ✓ PASS |
+| VTOL | Yes (lift rotors) | ✓ PASS |
+
+8.2 CONCLUSION
+
+The hybrid VTOL (QuadPlane) configuration IS FEASIBLE for the Mars UAV mission.
+
+It is the ONLY configuration that satisfies all three critical requirements:
+1. **VTOL capability** from lift rotors (unlike fixed-wing)
+2. **Cruise endurance** from efficient wing (unlike pure rotorcraft)
+3. **Energy feasibility** through decoupled optimization
+
+The configuration accepts a mass penalty of approximately [X]% for the dual
+propulsion system. This penalty is the enabling cost of mission feasibility.
+
+**Recommendation: Select hybrid VTOL (QuadPlane) as the baseline configuration
+for detailed design in Section 6.**
+
+================================================================================
+OUTPUT: MANUSCRIPT STRUCTURE
+================================================================================
+
+File: 05_04_hybrid-vtol-analysis.md
+
+```markdown
+## 5.4 Hybrid VTOL configuration {#sec:hybrid-vtol-analysis}
+
+### QuadPlane architecture
+
+#### Configuration description
+[Lift rotors + wing + cruise motor]
+
+#### Flight phases
+[Takeoff → transition → cruise → transition → landing]
+
+### Hover constraint
+
+#### Reference to rotorcraft analysis
+[Hover power from @sec:rotorcraft-analysis]
+
+#### Hover duration
+[Key difference: only 2-3 minutes, not entire mission]
+
+#### Hover energy
+[E_hover = P_hover × t_hover]
+
+### Cruise constraint
+
+#### Reference to fixed-wing analysis
+[Cruise power from @sec:fixed-wing-analysis]
+
+#### QuadPlane L/D
+[Approximately equal to pure fixed-wing: 12-15]
+
+#### Cruise energy
+[E_cruise = P_cruise × t_cruise]
+
+### Energy storage constraint
+
+#### Total energy requirement
+[E_required = E_hover + E_cruise + E_reserve]
+
+#### Reserve policy
+[20% reserve for contingencies]
+
+#### Available energy
+[From battery: f_batt × MTOW × e_spec × DoD × η]
+
+#### Energy constraint formulation
+[E_available ≥ E_required]
+
+### Mass penalty analysis
+
+#### Dual propulsion mass
+[Lift system + cruise system]
+
+#### Mass penalty trade-off
+[Acceptable for enabling VTOL capability]
+
+### Combined constraint analysis
+
+#### Matching chart construction
+[P/W vs W/S with all constraints]
+
+#### Design point
+[Intersection of constraints]
+
+### Feasibility conclusion
+
+The hybrid VTOL (QuadPlane) configuration is **FEASIBLE** for the Mars UAV
+mission. It is the **ONLY** configuration that satisfies all requirements.
+
+| Requirement | Capability | Status |
+|-------------|-----------|--------|
+| 60-90 min endurance | ~[XX] min | ✓ PASS |
+| 50 km radius | ~[XX] km | ✓ PASS |
+| VTOL | Yes | ✓ PASS |
+```
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+```
+## Section: 5.4 Hybrid VTOL configuration
+
+- "QuadPlane architecture combines lift rotors with wing and cruise motor"
+  Source: [@bertaniPreliminaryDesignFixedwing2023] or commercial documentation
+  Location: Configuration description section
+
+- "Energy reserve of 20% for contingencies"
+  Source: Aviation practice, see [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter on mission analysis, or stated as engineering practice
+
+- "Hover equations from momentum theory"
+  Source: Reference to @sec:rotorcraft-analysis
+  Location: This document, Section 5.2
+
+- "Cruise equations from steady flight analysis"
+  Source: Reference to @sec:fixed-wing-analysis
+  Location: This document, Section 5.3
+
+- "Mass penalty for dual propulsion: ~15-25% of MTOW"
+  Source: Calculated from reference UAV data
+  Location: sources/reference_drones.yaml analysis
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+[ ] References §5.2 and §5.3 for hover and cruise equations
+[ ] Energy constraint equation derived and explained
+[ ] Reserve policy documented (20%)
+[ ] Mass penalty calculated from reference data
+[ ] Trade-off clearly stated (penalty enables mission)
+[ ] All four constraints listed for matching chart
+[ ] Feasibility conclusion is clear: QuadPlane IS FEASIBLE
+[ ] Identified as ONLY feasible configuration
+[ ] Manuscript structure provided
+[ ] source_grounding.txt entries specified
+
+================================================================================
+KEY EQUATIONS SUMMARY
+================================================================================
+
+For Python implementation (Phase B):
+
+1. Hover energy: E_hover = P_hover × t_hover
+2. Cruise energy: E_cruise = P_cruise × t_cruise
+3. Total energy: E_required = 1.20 × (E_hover + E_cruise)
+4. Available energy: E_available = f_batt × MTOW × e_spec × DoD × η
+5. Feasibility: E_available ≥ E_required
+6. Mass penalty: Δm = N_lift × (m_motor + m_ESC) + m_mount
+
+================================================================================
+END OF PROMPT
+================================================================================

@@ -1,0 +1,247 @@
+================================================================================
+PROMPT 01A: CAMERA SYSTEMS DATA COLLECTION
+================================================================================
+Task: Collect reference data on UAV-compatible camera systems for Mars mission
+Output: YAML file sources/camera_systems.yaml with full citations
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The UAV has a MAPPING mission
+objective requiring aerial reconnaissance and geological survey capability.
+
+This task collects reference data on existing camera systems to:
+- Understand what types of cameras are suitable for UAV mapping missions
+- Establish realistic mass ranges for camera payloads
+- Provide grounded data for initial MTOW estimation
+
+The YAML output will be used by another LLM agent to:
+- Write the manuscript content for Section 3.1 (Payload systems survey)
+- Justify payload mass allocation in Section 3.4 (Initial weight estimate)
+- Inform component selection in Section 11.4 (after preliminary sizing)
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+EVERY piece of data must be traced to a primary source and properly cited.
+
+1. VERIFICATION (Primary Source Rule):
+   - Use ONLY manufacturer specification pages as sources
+   - If blocked by anti-bot protection, use Jina Reader:
+     https://r.jina.ai/[original-url]
+   - Do NOT use aggregator sites, review sites, or Wikipedia
+
+2. REGISTRATION (Zotero):
+   - Add each manufacturer page to the Mars_UAV Zotero collection
+   - Use the Zotero Web API:
+     - User ID: 10348042
+     - API Key: s8qR5N0A7GSQxZfkW1NAcmjZ
+     - Collection Key: 2BQEVWT7
+   - Required metadata: Title, Manufacturer (as author), Date, URL
+
+3. CITATION KEY:
+   - After adding to Zotero, wait for BetterBibTeX sync
+   - Verify the citation key exists in Mars_UAV.bib
+   - Use the EXACT key in the YAML file
+
+4. NO UNVERIFIED DATA:
+   - If a specification is not available, use null
+   - Do NOT estimate or guess values
+
+================================================================================
+CAMERAS TO RESEARCH
+================================================================================
+
+Collect data on 6-8 cameras from the following categories:
+
+RGB MAPPING CAMERAS (Primary - collect 4-5):
+(examples)
+1. DJI Zenmuse P1 (full-frame photogrammetry camera)
+2. Sony Alpha 7C II or similar compact full-frame
+3. Phase One iXM-100 (high-end reference, likely too heavy)
+4. Ricoh GR III or GR IIIx (compact, lightweight)
+5. Sony RX1R II (compact full-frame)
+
+MULTISPECTRAL CAMERAS (Secondary - collect 1-2):
+(examples)
+6. MicaSense RedEdge-P
+7. Sentera 6X Multispectral
+
+THERMAL CAMERAS (Optional - collect 1):
+(examples)
+8. FLIR Vue Pro R
+9. DJI Zenmuse H20T (thermal component specs)
+
+================================================================================
+DATA FIELDS TO COLLECT
+================================================================================
+
+For each camera, collect ALL of the following fields.
+Use null for any field where data is not available from the primary source.
+
+| Field                | Description                              | Unit    |
+|----------------------|------------------------------------------|---------|
+| model                | Full product model name                  | string  |
+| manufacturer         | Company name                             | string  |
+| type                 | "rgb" or "multispectral" or "thermal"    | string  |
+| mass_body_g          | Camera body mass only                    | grams   |
+| mass_with_lens_g     | Mass including standard lens             | grams   |
+| mass_total_system_g  | Mass with gimbal if commonly paired      | grams   |
+| sensor_type          | e.g., "CMOS", "CCD"                      | string  |
+| sensor_size          | e.g., "Full Frame", "1-inch", "4/3"      | string  |
+| sensor_dimensions_mm | e.g., "35.9 x 24.0"                      | string  |
+| resolution_mp        | Megapixels                               | number  |
+| image_dimensions     | e.g., "9504 x 6336"                      | string  |
+| lens_focal_length_mm | Focal length or range                    | string  |
+| lens_fov_deg         | Field of view in degrees                 | number  |
+| aperture_range       | e.g., "f/2.8 - f/11"                     | string  |
+| shutter_speed_range  | e.g., "1/8000 - 30s"                     | string  |
+| iso_range            | e.g., "100 - 51200"                      | string  |
+| power_consumption_w  | Watts (if available)                     | number  |
+| operating_temp_min_c | Minimum operating temperature            | number  |
+| operating_temp_max_c | Maximum operating temperature            | number  |
+| storage_temp_min_c   | Minimum storage temperature              | number  |
+| storage_temp_max_c   | Maximum storage temperature              | number  |
+| dimensions_mm        | "L x W x H"                              | string  |
+| interface            | e.g., "USB-C", "Ethernet", "proprietary" | string  |
+| video_capability     | e.g., "4K 60fps", "none"                 | string  |
+| gsd_at_100m          | Ground sample distance at 100m AGL       | string  |
+| source_url           | Primary manufacturer URL                 | string  |
+| source_key           | Zotero citation key                      | string  |
+| access_date          | Date accessed (YYYY-MM-DD)               | string  |
+| notes                | Any relevant notes                       | string  |
+
+================================================================================
+OUTPUT FILE FORMAT
+================================================================================
+
+Create file: sources/camera_systems.yaml
+
+```yaml
+# Camera Systems Database for Mars UAV Feasibility Study
+# Generated: [DATE]
+# Purpose: Reference data for payload mass estimation and component selection
+# 
+# CITATION PROTOCOL:
+# Each entry includes source_key which references Mars_UAV.bib
+# All specifications are from primary manufacturer sources
+# 
+# See source_grounding.txt for detailed claim-to-source mapping
+
+metadata:
+  generated_date: "2025-12-25"
+  purpose: "Payload systems survey for Mars UAV feasibility study"
+  data_source: "Primary manufacturer specification pages"
+  
+camera_systems:
+  - model: "Zenmuse P1"
+    manufacturer: "DJI"
+    type: "rgb"
+    
+    # Mass properties (source: source_key field)
+    mass_body_g: 800
+    mass_with_lens_g: 1350  # with DJI DL 35mm F2.8 LS ASPH
+    mass_total_system_g: null  # gimbal sold separately
+    
+    # Sensor specifications
+    sensor_type: "CMOS"
+    sensor_size: "Full Frame"
+    sensor_dimensions_mm: "35.9 x 24.0"
+    resolution_mp: 45
+    image_dimensions: "8192 x 5460"
+    
+    # Lens specifications
+    lens_focal_length_mm: "35"  # for DL 35mm lens
+    lens_fov_deg: 63.5
+    aperture_range: "f/2.8 - f/16"
+    
+    # Imaging parameters
+    shutter_speed_range: "1/8000 - 8s"
+    iso_range: "100 - 25600"
+    
+    # Environmental specifications
+    operating_temp_min_c: -20
+    operating_temp_max_c: 50
+    storage_temp_min_c: null
+    storage_temp_max_c: null
+    
+    # Physical specifications  
+    dimensions_mm: "155.7 x 128.8 x 172.5"
+    power_consumption_w: 18  # typical
+    interface: "DJI Skyport V2"
+    
+    # Performance
+    video_capability: "none"
+    gsd_at_100m: "0.76 cm"  # with 35mm lens
+    
+    # Source citation
+    source_url: "https://www.dji.com/zenmuse-p1/specs"
+    source_key: "@djiZenmuseP1Specifications2024"
+    access_date: "2025-12-25"
+    notes: "Professional photogrammetry camera for DJI drones"
+
+  - model: "RedEdge-P"
+    manufacturer: "MicaSense"
+    type: "multispectral"
+    # ... (similar structure)
+
+  # ... (additional cameras)
+
+summary:
+  total_cameras: 8
+  mass_range_body_g:
+    min: 227  # example: Ricoh GR III
+    max: 1350  # example: Phase One with lens
+  mass_range_system_g:
+    min: 300
+    max: 2500
+  recommended_for_mars_uav:
+    category: "Compact RGB"
+    rationale: "Balance of mass, resolution, and temperature tolerance"
+```
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After creating the YAML file, update source_grounding.txt with entries:
+
+```
+## Section: 3.1.3 Payload systems - Camera survey
+
+- "DJI Zenmuse P1 mass with 35mm lens: 1350 g"
+  Source: [@djiZenmuseP1Specifications2024]
+  Location: https://www.dji.com/zenmuse-p1/specs
+
+- "DJI Zenmuse P1 resolution: 45 MP"
+  Source: [@djiZenmuseP1Specifications2024]
+  Location: https://www.dji.com/zenmuse-p1/specs
+
+- "MicaSense RedEdge-P mass: XXX g"
+  Source: [@micasenseRedEdgePSpecifications2024]
+  Location: [URL]
+
+# ... (one entry per key data point)
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] YAML file created at sources/camera_systems.yaml
+[ ] At least 6 camera systems documented
+[ ] All mass values verified from primary sources (no estimates)
+[ ] At least one camera from each category (RGB, multispectral, thermal)
+[ ] All sources added to Zotero Mars_UAV collection
+[ ] All source_key values verified in Mars_UAV.bib
+[ ] source_grounding.txt updated with all data points
+[ ] YAML is valid and parseable
+[ ] Summary section includes calculated mass ranges
+
+================================================================================
+END OF PROMPT
+================================================================================

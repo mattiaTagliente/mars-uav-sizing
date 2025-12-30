@@ -1,0 +1,310 @@
+# Radio Systems Database for Mars UAV Feasibility Study
+# Generated: 2025-12-26
+# Purpose: Reference data for payload mass estimation and component selection
+# 
+# CITATION PROTOCOL:
+# Each entry includes source_key which references Mars_UAV.bib
+# All specifications are from primary manufacturer sources
+#
+# NOTE: For Mars application, frequency bands will differ from Earth usage
+# but mass and power specifications remain valid for estimation
+# 
+# See source_grounding.txt for detailed claim-to-source mapping
+
+metadata:
+  generated_date: "2025-12-26"
+  purpose: "Payload systems survey for Mars UAV feasibility study"
+  data_source: "Primary manufacturer specification pages and datasheets"
+  mars_note: "Frequency bands not directly applicable to Mars; mass/power data used for estimation"
+
+radio_systems:
+  # ============================================================================
+  # MESH RADIO SYSTEMS
+  # ============================================================================
+  
+  - model: "StreamCaster 4200E+"
+    manufacturer: "Silvus Technologies"
+    type: "mesh"
+    
+    # Mass properties
+    mass_radio_g: 425
+    mass_antenna_g: null  # external antennas, varies
+    mass_total_g: 425  # radio unit only, excludes antennas
+    
+    # RF specifications
+    frequency_band: "300 MHz to 6 GHz"
+    frequency_range_mhz: "300-6000"
+    channel_bandwidth_mhz: "1.25, 2.5, 5, 10, 20"
+    output_power_dbm: 36  # SC4240: 30 dBm native, up to 36 dBm effective with beamforming (4W native, 8W effective)
+    output_power_w: 4.0  # SC4240 native, 10W for SC42A0
+    
+    # Data performance
+    data_rate_mbps: 100
+    data_rate_typical_mbps: null
+    range_los_km: null  # varies with antenna and environment
+    range_nlos_km: null
+    latency_ms: 7  # average at 20 MHz BW
+    
+    # Power requirements
+    voltage_input_v: "9-20 VDC"
+    power_consumption_w: 16  # 5-16W at 1W TX
+    power_consumption_max_w: 48  # at 10W TX (SC42A0)
+    
+    # Environmental specifications
+    operating_temp_min_c: -40
+    operating_temp_max_c: 85
+    ip_rating: "IP68"
+    
+    # Physical specifications
+    dimensions_mm: "101.6 x 66.8 x 38.35"
+    interface: "Ethernet, RS232, USB 2.0"
+    antenna_connectors: "2x TNC(f)"
+    mimo_config: "2x2"
+    encryption: "AES-256 (optional), FIPS 140-3 Level 2"
+    certifications: "FCC, CE, MIL-STD-810G"
+    
+    # Source citation
+    source_url: "https://silvustechnologies.com/products/streamcaster-radios/streamcaster-4200/"
+    source_key: "@silvustechnologiesStreamCaster4200SC42002025"
+    access_date: "2025-12-26"
+    notes: "2x2 MIMO mesh radio with MN-MIMO waveform technology. Enhanced Plus version. Submersible to 20m for 30 minutes."
+
+  - model: "MPU5"
+    manufacturer: "Persistent Systems"
+    type: "mesh"
+    
+    # Mass properties
+    mass_radio_g: 391  # chassis only
+    mass_antenna_g: null
+    mass_total_g: 726  # with battery (1.6 lbs)
+    
+    # RF specifications
+    frequency_band: "Multiple bands available"
+    frequency_range_mhz: null  # varies by configuration
+    channel_bandwidth_mhz: null
+    output_power_dbm: null
+    output_power_w: null
+    
+    # Data performance
+    data_rate_mbps: null  # varies
+    data_rate_typical_mbps: null
+    range_los_km: 209  # 130 miles max between nodes
+    range_nlos_km: null
+    latency_ms: null
+    
+    # Power requirements
+    voltage_input_v: "8-28 VDC"
+    power_consumption_w: null
+    power_consumption_max_w: null
+    
+    # Environmental specifications
+    operating_temp_min_c: -40
+    operating_temp_max_c: 85
+    ip_rating: "IP68"
+    
+    # Physical specifications
+    dimensions_mm: "38 x 66 x 117"  # 1.5 x 2.6 x 4.6 in converted
+    interface: "Ethernet 10/100, RS232, USB, 3G-SDI video"
+    antenna_connectors: "3x RP-TNC(f), 1x SMA(f) GPS"
+    mimo_config: null
+    encryption: "CTR-AES-256, SHA-256 HMAC, CNSA algorithms"
+    certifications: "MIL-STD-810G, MIL-STD-461F, FCC"
+    
+    # Source citation
+    source_url: "https://persistentsystems.com/mpu5-specs/"
+    source_key: "@persistentsystemsMPU5TechnicalSpecifications2025"
+    access_date: "2025-12-26"
+    notes: "Smart Radio with integrated 1 GHz quad-core processor, 2GB RAM, 128GB flash. Wave Relay MANET. 12-14 hour battery life. Manufactured in USA."
+
+  - model: "BreadCrumb ES1"
+    manufacturer: "Rajant Corporation"
+    type: "mesh"
+    
+    # Mass properties
+    mass_radio_g: 455  # +/- 25g
+    mass_antenna_g: null  # external
+    mass_total_g: 455
+    
+    # RF specifications
+    frequency_band: "2.4 GHz and 5 GHz"
+    frequency_range_mhz: "2402-2482 / 4940-5850"
+    channel_bandwidth_mhz: "20, 40"
+    output_power_dbm: 29  # +/- 2 dB
+    output_power_w: 0.8  # approximately
+    
+    # Data performance
+    data_rate_mbps: 300  # physical layer, throughput varies
+    data_rate_typical_mbps: null
+    range_los_km: null
+    range_nlos_km: null
+    latency_ms: null
+    
+    # Power requirements
+    voltage_input_v: "9-30 VDC"
+    power_consumption_w: 2.8  # average, idle
+    power_consumption_max_w: 15  # peak at 24V
+    
+    # Environmental specifications
+    operating_temp_min_c: -40
+    operating_temp_max_c: 60
+    ip_rating: "IP67"
+    
+    # Physical specifications
+    dimensions_mm: "155 x 149 x 41"
+    interface: "Ethernet 10/100/1000, USB"
+    antenna_connectors: "4x Type N(f)"
+    mimo_config: "2x2"
+    encryption: "AES-256-GCM, multiple options including NSA Suite B algorithms"
+    certifications: "FCC, IC, CE, EN 61000-4-2/4-4/4-5"
+    
+    # Source citation
+    source_url: "https://rajant.com/products/breadcrumb-wireless-nodes/es-series/"
+    source_key: "@rajantcorporationBreadCrumbES1Specifications2025"
+    access_date: "2025-12-26"
+    notes: "Kinetic Mesh network node. Dual transceivers, InstaMesh self-forming/healing. IIoT grade."
+
+  # ============================================================================
+  # POINT-TO-POINT / DATA LINKS
+  # ============================================================================
+  
+  - model: "RFD900x"
+    manufacturer: "RFDesign"
+    type: "point-to-point"
+    
+    # Mass properties
+    mass_radio_g: 14.5
+    mass_antenna_g: null  # external, varies
+    mass_total_g: 14.5  # modem only
+    
+    # RF specifications
+    frequency_band: "900 MHz"
+    frequency_range_mhz: "902-928"
+    channel_bandwidth_mhz: null  # FHSS
+    output_power_dbm: 30  # 1W, adjustable 0-30 dBm
+    output_power_w: 1.0
+    
+    # Data performance
+    data_rate_mbps: 0.75  # 750 kbps max air data rate
+    data_rate_typical_mbps: 0.064  # 64 kbps default
+    range_los_km: 40  # or more depending on antennas
+    range_nlos_km: null
+    latency_ms: null
+    
+    # Power requirements
+    voltage_input_v: "5 VDC"
+    power_consumption_w: 5  # ~1A peak at max power x 5V
+    power_consumption_max_w: 5
+    
+    # Environmental specifications
+    operating_temp_min_c: -40
+    operating_temp_max_c: 85
+    ip_rating: null  # not specified, OEM module
+    
+    # Physical specifications
+    dimensions_mm: "30 x 57 x 12.8"
+    interface: "TTL Serial (+3.3V), GPIO"
+    antenna_connectors: "2x RP-SMA"
+    mimo_config: null  # diversity switched
+    encryption: "AES (hardware accelerated)"
+    certifications: "FCC Part 15.247, AS/NZS 4268:2012, NDAA compliant"
+    
+    # Source citation
+    source_url: "https://store.rfdesign.com.au/rfd-900x-modem/"
+    source_key: "@rfdesignRFD900xModemSpecifications2024"
+    access_date: "2025-12-26"
+    notes: "Very lightweight telemetry modem. Open source SiK firmware. Popular in UAV community. Tested -73 to +123 deg C operational."
+
+  - model: "pMDDL2450"
+    manufacturer: "Microhard"
+    type: "point-to-point"
+    
+    # Mass properties
+    mass_radio_g: 7  # OEM module only
+    mass_antenna_g: null
+    mass_total_g: 165  # enclosed version (pMDDL2450-ENC)
+    
+    # RF specifications
+    frequency_band: "2.4 GHz"
+    frequency_range_mhz: "2402-2478"
+    channel_bandwidth_mhz: "4, 8"
+    output_power_dbm: 30  # total TX power
+    output_power_w: 1.0
+    
+    # Data performance
+    data_rate_mbps: 25  # IPerf throughput at 8 MHz
+    data_rate_typical_mbps: 12  # mid-range modulation
+    range_los_km: null  # not specified
+    range_nlos_km: null
+    latency_ms: null
+    
+    # Power requirements
+    voltage_input_v: "7-30 VDC"  # motherboard version
+    power_consumption_w: null
+    power_consumption_max_w: null
+    
+    # Environmental specifications
+    operating_temp_min_c: -40
+    operating_temp_max_c: 85
+    ip_rating: null  # OEM module
+    
+    # Physical specifications
+    dimensions_mm: "27 x 33 x 4"  # OEM module
+    dimensions_enclosed_mm: "77 x 55 x 28"  # enclosed version
+    interface: "Serial RS232, Dual Ethernet 10/100, USB 2.0"
+    antenna_connectors: "2x UFL"
+    mimo_config: "2x2"
+    encryption: "128-bit AES, 256-bit AES optional"
+    certifications: "FCC, IC, CE, Japan MIC, KC"
+    
+    # Source citation
+    source_url: "https://microhardcorp.com/pmddl2450.php"
+    source_key: "@microhardPMDDL2450MiniatureMIMO2025"
+    access_date: "2025-12-26"
+    notes: "Ultra-lightweight OEM module. Supports mesh, relay, point-to-multipoint modes. MRC and ML decoding. LDPC error correction."
+
+# ==============================================================================
+# SUMMARY
+# ==============================================================================
+
+summary:
+  total_systems: 5
+  
+  mass_range_radio_only_g:
+    min: 7      # Microhard pMDDL2450 OEM
+    max: 455    # Rajant ES1
+    
+  mass_range_complete_g:
+    min: 14.5   # RFD900x (modem only, no enclosure)
+    max: 726    # Persistent Systems MPU5 with battery
+    
+  power_range_w:
+    min: 2.8    # Rajant ES1 idle
+    max: 48     # Silvus SC4200 at max TX
+    
+  categories:
+    mesh_radios:
+      count: 3
+      examples: ["Silvus SC4200E+", "Persistent Systems MPU5", "Rajant ES1"]
+      mass_range_g: "391-455"
+      
+    lightweight_telemetry:
+      count: 2
+      examples: ["RFD900x", "Microhard pMDDL2450"]
+      mass_range_g: "7-165"
+      
+  recommended_for_mars_uav:
+    primary_category: "Lightweight telemetry link"
+    primary_candidates: ["RFD900x", "Microhard pMDDL2450"]
+    rationale: |
+      For a mass-constrained Mars UAV, lightweight point-to-point links offer 
+      the best mass-to-capability ratio. The RFD900x at 14.5g provides 40+ km 
+      range with proven UAV integration. The Microhard pMDDL2450 at 7g (OEM) 
+      offers higher bandwidth (25 Mbps vs 0.75 Mbps) for video relay applications.
+      Full mesh capability is not required for a single UAV relay mission.
+      
+    secondary_category: "Mesh radio (if multi-UAV or complex network required)"
+    secondary_candidates: ["Rajant ES1"]
+    secondary_rationale: |
+      If mesh networking is required for multi-asset coordination, the Rajant ES1
+      offers the best mass-to-capability ratio among mesh radios at 455g with
+      IP67 rating and -40 to +60 deg C operation.

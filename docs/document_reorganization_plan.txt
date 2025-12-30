@@ -1,0 +1,1480 @@
+================================================================================
+MARS UAV FEASIBILITY STUDY - DOCUMENT REORGANIZATION PLAN
+================================================================================
+Date: 2025-12-26 (v3 - Final streamlined structure)
+Status: APPROVED FOR IMPLEMENTATION
+
+This plan reorganizes the manuscript for a feasibility study with:
+1. Streamlined, flat structure (no unnecessary hierarchy)
+2. Methodology presented upfront (after introduction)
+3. Mission-driven design: payload first, then architecture context
+4. All constraint inputs prepared before analysis
+5. Aerodynamic analysis integrated with airfoil data
+6. Appropriate scope for feasibility study (e.g., avionics recognized but not selected)
+
+================================================================================
+DESIGN PHILOSOPHY
+================================================================================
+
+The logical flow:
+  1. Introduction (context and objectives)
+  2. Methodology (how we approach the problem - sets expectations)
+  3. Mission analysis (environment, profile, user needs)
+  4. Reference data and trade-off analysis:
+     - Payload first (mission-driven: UAV is built around it)
+     - Architecture comparison (context for understanding designs)
+     - Specific reference platforms and subsystem data
+     - Analysis and synthesis (weight estimate, derived requirements)
+  5. Constraint analysis (comparative, for three configurations)
+  6. Design decisions (based on analysis results)
+  7. Component selection and verification
+  8. Infrastructure requirements
+  9. Conclusions
+
+================================================================================
+PART 1: TARGET DOCUMENT STRUCTURE (FINAL)
+================================================================================
+
+NOTE ON FILE NAMING:
+The split/reconstruct scripts support two levels:
+- Level 1: NN_00_slug.md (section header)
+- Level 2: NN_XX_slug.md (subsections)
+
+--------------------------------------------------------------------------------
+1. Introduction {#sec:introduction}
+--------------------------------------------------------------------------------
+   File: 01_00_introduction.md
+   Content: Context, objectives, scope of feasibility study
+
+--------------------------------------------------------------------------------
+2. Design methodology {#sec:methodology}
+--------------------------------------------------------------------------------
+   2.1 Iterative sizing approach {#sec:iterative-sizing}
+   2.2 Role of constraint-based sizing {#sec:constraint-role}
+   
+   Files:
+   - 02_00_design-methodology.md
+   - 02_01_iterative-sizing.md
+   - 02_02_constraint-role.md
+
+--------------------------------------------------------------------------------
+3. Mission analysis {#sec:mission-analysis}
+--------------------------------------------------------------------------------
+   3.1 Operational environment {#sec:operational-environment}
+   3.2 Mission profile {#sec:mission-profile}
+   3.3 User needs {#sec:user-needs}
+   
+   Files:
+   - 03_00_mission-analysis.md
+   - 03_01_operational-environment.md
+   - 03_02_mission-profile.md
+   - 03_03_user-needs.md
+
+--------------------------------------------------------------------------------
+4. Reference data and trade-off analysis {#sec:reference-data}
+--------------------------------------------------------------------------------
+   4.1 Payload systems {#sec:payload-systems}
+       Content: Camera systems, radio relay systems
+       Rationale: Payload is the focal point - UAV is built around it
+       
+   4.2 Architecture comparison {#sec:architecture-comparison}
+       Content: Rotorcraft vs. fixed-wing vs. hybrid VTOL trade-offs
+       Rationale: Gives context for understanding the designs that follow
+       
+   4.3 Mars UAV concepts {#sec:mars-uav-concepts}
+       Content: Ingenuity, ARES, Mars Science Helicopter, hybrid concepts
+       
+   4.4 Commercial VTOL benchmarks {#sec:commercial-vtol}
+       Content: Specifications table (9 UAVs), trends analysis
+       
+   4.5 Propulsion characteristics {#sec:propulsion-data}
+       Content: Motors, power ratings, efficiency data
+       
+   4.6 Energy storage characteristics {#sec:energy-data}
+       Content: Battery technologies, specific energy, temperature range
+       
+   4.7 Aerodynamic analysis and airfoil data {#sec:aerodynamic-analysis}
+       Content: (MERGED with old Section 5)
+       - Low Reynolds number characteristics
+       - Airfoil experimental data (E387, S7055, SD8000, etc.)
+       - Drag polar model (C_D0, Oswald efficiency estimation)
+       
+   4.8 Fuselage geometry {#sec:fuselage-data}
+       Content: Length/span ratios, payload bay sizing
+       
+   4.9 Tail configurations {#sec:tail-data}
+       Content: Configuration types, trade-off summary
+       
+   4.10 Structural materials {#sec:materials-data}
+        Content: CFRP, thermal considerations, Mars-specific factors
+        
+   4.11 Initial mass estimate {#sec:initial-mass-estimate}
+         Content: Mass fraction methodology, MTOW baseline range (3-4 kg)
+         Rationale: Provides MTOW range for constraint analysis; detailed weight
+                    estimation methodology moved to §6.5 after constraint analysis
+        
+   4.12 Derived requirements {#sec:derived-requirements}
+        Content: ALL numerical inputs for constraint analysis
+        - Cruise velocity (V = 38-40 m/s)
+        - Minimum velocity (V_min for stall constraint)
+        - Geometry bounds (AR, t/c, taper, sweep)
+        - Aerodynamic coefficients (C_L,max, e, C_D0)
+        - Propulsion efficiencies (FM, η_prop, η_motor, η_ESC)
+        - Energy parameters (DoD, reserve)
+        - Load factor selection (n_limit=2.5, n_ult=3.75)
+        Rationale: Final synthesis - last subsection, prepares analysis inputs
+   
+   Files:
+   - 04_00_reference-data.md
+   - 04_01_payload-systems.md
+   - 04_02_architecture-comparison.md
+   - 04_03_mars-uav-concepts.md
+   - 04_04_commercial-vtol.md
+   - 04_05_propulsion-data.md
+   - 04_06_energy-data.md
+   - 04_07_aerodynamic-analysis.md
+   - 04_08_fuselage-geometry.md
+   - 04_09_tail-configurations.md
+   - 04_10_structural-materials.md
+   - 04_11_weight-estimate.md
+   - 04_12_derived-requirements.md
+
+--------------------------------------------------------------------------------
+5. Constraint analysis {#sec:constraint-analysis}
+--------------------------------------------------------------------------------
+   5.1 Common inputs summary {#sec:common-inputs}
+       Content: Tables consolidating all inputs from §4.12
+       
+   5.2 Rotorcraft configuration {#sec:rotorcraft-analysis}
+       Content: Hover power, forward flight, endurance, matching chart
+       
+   5.3 Fixed-wing configuration {#sec:fixed-wing-analysis}
+       Content: Cruise power, stall constraint, matching chart
+       
+   5.4 Hybrid VTOL configuration {#sec:hybrid-vtol-analysis}
+       Content: Combined analysis, energy budget, matching chart
+       
+   5.5 Matching chart methodology {#sec:comparative-results}
+        Content: Matching chart fundamentals, constraint lines, feasible design
+                 space, design point determination
+        Note: Configuration comparison and selection moved to §6.1
+   
+   Files:
+   - 05_00_constraint-analysis.md
+   - 05_01_common-inputs.md
+   - 05_02_rotorcraft-analysis.md
+   - 05_03_fixed-wing-analysis.md
+   - 05_04_hybrid-vtol-analysis.md
+   - 05_05_comparative-results.md
+
+--------------------------------------------------------------------------------
+6. Design decisions {#sec:design-decisions}
+--------------------------------------------------------------------------------
+   6.1 Architecture selection {#sec:architecture-selection}
+        Content: (EXPANDED - consolidates comparison from §5)
+        - Configuration comparison summary table
+        - Elimination of rotorcraft (inadequate margin)
+        - Elimination of fixed-wing (no VTOL capability)
+        - Selection of hybrid VTOL (QuadPlane)
+        - Design point summary from matching chart
+        - QuadPlane configuration rationale
+        - Tail, fuselage, material selection summaries
+        
+   6.2 Airfoil selection {#sec:airfoil-selection}
+        Content: Selection justified by §5 results
+        
+   6.3 Geometry selection {#sec:geometry-selection}
+        Content: Tail configuration, fuselage geometry choices
+        
+   6.4 Material selection {#sec:material-selection}
+        Content: CFRP selection, thermal management approach
+
+   6.5 Mass breakdown {#sec:mass-breakdown}
+        Content: (NEW - moved from §4.11)
+        - Sadraey weight estimation methodology
+        - Battery mass sizing (with Mars gravity)
+        - Structural weight estimation (wing, fuselage)
+        - Load factor adaptation (n_ult = 3.75)
+        - Component mass breakdown table
+        - Verification against mass fractions
+    
+   Files:
+   - 06_00_design-decisions.md
+   - 06_01_architecture-selection.md
+   - 06_02_airfoil-selection.md
+   - 06_03_geometry-selection.md
+   - 06_04_material-selection.md
+   - 06_05_mass-breakdown.md
+
+--------------------------------------------------------------------------------
+7. Component selection and verification {#sec:component-verification}
+--------------------------------------------------------------------------------
+   7.1 Airfoil profile {#sec:profile-selection}
+       Content: Profile selection, 3D wing effects considerations
+
+   7.2 Propulsion components {#sec:propulsion-selection}
+       Content: Motor selection, ESC, propellers
+       
+   7.3 Energy storage {#sec:energy-selection}
+       Content: Battery selection (solid-state Li-ion)
+       
+   7.4 Payload {#sec:payload-selection}
+       Content: Camera and radio relay selection
+       
+   7.5 Design verification {#sec:design-verification}
+       Content: Mass breakdown, power budget, requirements compliance
+       Note: Avionics mass included as fraction, not selected in detail
+   
+   Files:
+   - 07_00_component-verification.md
+   - 07_01_propulsion-selection.md
+   - 07_02_energy-selection.md
+   - 07_03_payload-selection.md
+   - 07_04_design-verification.md
+
+--------------------------------------------------------------------------------
+8. Infrastructure requirements {#sec:infrastructure}
+--------------------------------------------------------------------------------
+   8.1 Habitat hangar {#sec:habitat-hangar}
+   8.2 Operations concept {#sec:operations-concept}
+   
+   Files:
+   - 08_00_infrastructure.md
+   - 08_01_habitat-hangar.md
+   - 08_02_operations-concept.md
+
+--------------------------------------------------------------------------------
+9. Conclusions and recommendations {#sec:conclusions}
+--------------------------------------------------------------------------------
+   File: 09_00_conclusions.md
+
+--------------------------------------------------------------------------------
+References
+--------------------------------------------------------------------------------
+   File: 10_00_references.md
+
+--------------------------------------------------------------------------------
+Appendices
+--------------------------------------------------------------------------------
+   A. Physical constants and parameters
+   B. Component datasheets
+   C. Sizing script documentation
+   D. Atmospheric model derivation
+   
+   Files:
+   - 11_00_appendix-a-constants.md
+   - 12_00_appendix-b-datasheets.md
+   - 13_00_appendix-c-scripts.md
+   - 14_00_appendix-d-atmosphere.md
+
+================================================================================
+PART 2: GAP ANALYSIS - WHAT NEEDS TO BE ADDED
+================================================================================
+
+This section identifies content gaps relative to the inputs needed for
+constraint analysis (per matchingcharts_analysis_v3.txt).
+
+--------------------------------------------------------------------------------
+A. MISSION PARAMETERS
+--------------------------------------------------------------------------------
+| Parameter            | Status    | Location     | Action Required           |
+|---------------------|-----------|--------------|---------------------------|
+| Payload mass        | ✅ EXISTS  | 4.1, 4.12    | Formalize in 4.12         |
+| Cruise endurance    | ⚠️ PARTIAL | 4.12         | Quantify as 60-90 min     |
+| Hover time          | ⚠️ PARTIAL | 4.12         | Specify allocation        |
+| Cruise velocity     | ⚠️ PARTIAL | 4.12         | Derive & justify 40 m/s   |
+| Minimum velocity    | ❌ MISSING | 4.12         | Add V_min for stall       |
+
+--------------------------------------------------------------------------------
+B. ATMOSPHERIC CONSTANTS
+--------------------------------------------------------------------------------
+STATUS: ✅ COMPLETE in current §2.1 (will be §3.1)
+
+--------------------------------------------------------------------------------
+C. GEOMETRY BOUNDS
+--------------------------------------------------------------------------------
+| Parameter            | Status    | Location     | Action Required           |
+|---------------------|-----------|--------------|---------------------------|
+| Aspect ratio        | ⚠️ PARTIAL | 4.12         | Add bounds [10,14]        |
+| Thickness ratio     | ❌ MISSING | 4.7, 4.12    | From airfoil data         |
+| Taper ratio         | ⚠️ PARTIAL | 4.12         | Add with source   	      |
+| Sweep angle         | ❌ MISSING | 4.12         | Add Λ=0° with rationale   |
+
+--------------------------------------------------------------------------------
+D. AERODYNAMIC DATA
+--------------------------------------------------------------------------------
+| Parameter            | Status    | Location     | Action Required           |
+|---------------------|-----------|--------------|---------------------------|
+| C_L,max             | ⚠️ PARTIAL | 4.7, 4.12    | Consolidate from airfoil  |
+| Oswald efficiency   | ❌ MISSING | 4.7          | Add estimation with cite  |
+| Zero-lift drag C_D0 | ❌ MISSING | 4.7          | Add estimation with cite  |
+
+--------------------------------------------------------------------------------
+E. PROPULSION EFFICIENCIES
+--------------------------------------------------------------------------------
+| Parameter            | Status    | Location     | Action Required           |
+|---------------------|-----------|--------------|---------------------------|
+| Figure of merit     | ⚠️ PARTIAL | 4.5, 4.12    | Add citation (Johnson)    |
+| Propeller η_prop    | ⚠️ PARTIAL | 4.5, 4.12    | Add citation (Bertani)    |
+| Motor η_motor       | ⚠️ PARTIAL | 4.5, 4.12    | Add typical range         |
+| ESC η_ESC           | ⚠️ PARTIAL | 4.5, 4.12    | Add typical range         |
+
+--------------------------------------------------------------------------------
+F. MASS FRACTIONS
+--------------------------------------------------------------------------------
+| Parameter            | Status    | Location     | Action Required           |
+|---------------------|-----------|--------------|---------------------------|
+| Battery fraction    | ⚠️ PARTIAL | 4.11         | Derive from ref data      |
+| Structure fraction  | ❌ MISSING | 4.11         | Derive from ref data      |
+| Propulsion fraction | ❌ MISSING | 4.11         | Derive from ref data      |
+| Payload fraction    | ⚠️ PARTIAL | 4.11         | Calculate statistics      |
+
+--------------------------------------------------------------------------------
+G. LOAD FACTORS
+--------------------------------------------------------------------------------
+| Parameter            | Status    | Location     | Action Required           |
+|---------------------|-----------|--------------|---------------------------|
+| n_limit             | ❌ MISSING | 4.12         | Add n=2.5 with CS-23 ref  |
+| n_ult               | ❌ MISSING | 4.12         | Add n=3.75                |
+| Safety factor       | ❌ MISSING | 4.12         | Add SF=1.5                |
+
+--------------------------------------------------------------------------------
+H. WEIGHT ESTIMATION METHODOLOGY
+--------------------------------------------------------------------------------
+| Item                 | Status    | Location     | Action Required           |
+|---------------------|-----------|--------------|---------------------------|
+| Sadraey 2013        | ✅ EXISTS  | Current      | Supplement with 2020 book |
+| Sadraey 2020        | ❌ MISSING | Zotero       | Add to library            |
+| n_ult parameter     | ❌ MISSING | 4.11, 5.1    | Use n=3.75, not 5.7       |
+| Calibration         | ❌ MISSING | 4.11         | Validate vs ref data      |
+
+================================================================================
+PART 3: FILE MAPPING (CURRENT → NEW)
+================================================================================
+
+Legend:
+  [KEEP]   = Minimal changes, same content
+  [EDIT]   = Content modified
+  [MOVE]   = Content relocated
+  [NEW]    = New file created
+  [MERGE]  = Combined with another file
+  [DELETE] = Content moved elsewhere, file removed
+
+------------------------------------------------------------------------------
+CURRENT SECTION 1 → NEW SECTION 1 (Introduction)
+------------------------------------------------------------------------------
+01_00_introduction.md                    → [KEEP]
+
+------------------------------------------------------------------------------
+CURRENT SECTION 4.1 → NEW SECTION 2 (Design methodology)
+------------------------------------------------------------------------------
+04_01_design-methodology.md              → [MOVE] to 02_01_iterative-sizing.md
+                                           [SPLIT] constraint role to 02_02
+
+------------------------------------------------------------------------------
+CURRENT SECTION 2 → NEW SECTION 3 (Mission analysis)
+------------------------------------------------------------------------------
+02_00_mission-definition.md              → [RENAME] 03_00_mission-analysis.md
+02_01_operational-environment.md         → [RENAME] 03_01_operational-environment.md
+02_02_mission-profile.md                 → [RENAME] 03_02_mission-profile.md
+02_03_requirements.md                    → [EDIT] 03_03_user-needs.md
+                                           - Rename to "User needs"
+                                           - Remove numerical values
+                                           - Add single-fault tolerance
+
+------------------------------------------------------------------------------
+CURRENT SECTION 3 → NEW SECTION 4 (Reference data)
+------------------------------------------------------------------------------
+[NEW] 04_00_reference-data.md            ← Section header
+[NEW] 04_01_payload-systems.md           ← From data collection prompts
+03_02_architecture-comparison.md         → [MOVE] 04_02_architecture-comparison.md
+[NEW] 04_03_mars-uav-concepts.md         ← Extract from 03_01
+[NEW] 04_04_commercial-vtol.md           ← Extract from 03_01
+[NEW] 04_05_propulsion-data.md           ← Extract from 03_01
+[NEW] 04_06_energy-data.md               ← Extract from 03_01
+[NEW] 04_07_aerodynamic-analysis.md      ← MERGE: 03_01 airfoil + old 05_*
+[NEW] 04_08_fuselage-geometry.md         ← Extract from 03_01
+[NEW] 04_09_tail-configurations.md       ← Extract from 03_01
+[NEW] 04_10_structural-materials.md      ← Extract from 03_01
+[NEW] 04_11_weight-estimate.md           ← New content (mass fractions)
+[NEW] 04_12_derived-requirements.md      ← New content (all inputs)
+
+03_01_reference-designs.md               → [DELETE] Content split into 04_03-04_10
+03_03_architecture-selection.md          → [MOVE] to 06_01_architecture-selection.md
+
+------------------------------------------------------------------------------
+CURRENT SECTION 4.2-4.12 → Distributed
+------------------------------------------------------------------------------
+04_02_mass-and-power-allocation.md       → [MERGE] into 04_11 or 04_12
+04_03_target-mtow.md                     → [MERGE] into 04_11
+04_04_wing-geometry.md                   → [MERGE] into 04_12 or 06_03
+04_05_tail-geometry.md                   → [MERGE] into 04_09 or 06_03
+04_06_fuselage-geometry.md               → [MERGE] into 04_08 or 06_03
+04_07_propulsion-sizing.md               → [MERGE] into 04_05 or 07_01
+04_08_rotor-and-propeller-sizing.md      → [MERGE] into 07_01
+04_09_energy-storage.md                  → [MERGE] into 04_06 or 07_02
+04_10_payload.md                         → [MERGE] into 04_01
+04_11_structural-materials.md            → [MERGE] into 04_10
+04_12_summary-of-initial-hypotheses.md   → [MERGE] into 04_12
+
+------------------------------------------------------------------------------
+CURRENT SECTION 5 → MERGED INTO 04_07
+------------------------------------------------------------------------------
+05_00_aerodynamic-analysis.md            → [MERGE] into 04_07
+05_01_low-reynolds-number-flight.md      → [MERGE] into 04_07
+05_02_airfoil-selection.md               → [SPLIT] 
+                                           - Data → 04_07
+                                           - Selection logic → 06_02
+05_03_drag-polar-model.md                → [MERGE] into 04_07
+
+------------------------------------------------------------------------------
+CURRENT SECTION 6 → NEW SECTION 5 (Constraint analysis)
+------------------------------------------------------------------------------
+06_00_preliminary-sizing-methodology.md  → [DELETE] (redundant with §2)
+06_01_constraint-based-sizing.md         → [SPLIT]
+                                           - Equations → 04_07 or 05_01
+                                           - Application → 05_02-05_04
+06_02_weight-estimation.md               → [MOVE] to 04_11 (methodology)
+
+[NEW] 05_00_constraint-analysis.md       ← Section header
+[NEW] 05_01_common-inputs.md             ← Summary tables from 04_12
+[NEW] 05_02_rotorcraft-analysis.md       ← New calculations
+[NEW] 05_03_fixed-wing-analysis.md       ← New calculations
+[NEW] 05_04_hybrid-vtol-analysis.md      ← New calculations
+[NEW] 05_05_comparative-results.md       ← Comparison and recommendation
+
+------------------------------------------------------------------------------
+NEW SECTION 6 (Design decisions)
+------------------------------------------------------------------------------
+[NEW] 06_00_design-decisions.md          ← Section header
+OLD 03_03_architecture-selection.md      → [MOVE] to 06_01
+[NEW] 06_02_airfoil-selection.md         ← Selection logic from old 05_02
+[NEW] 06_03_geometry-selection.md        ← From old 04_05, 04_06
+[NEW] 06_04_material-selection.md        ← From old 04_11
+
+------------------------------------------------------------------------------
+CURRENT SECTION 7-12 → NEW SECTIONS 7-9 + Appendices
+------------------------------------------------------------------------------
+07_00_preliminary-design-results.md      → [MERGE] into 07_04 (verification)
+08_00_component-selection.md             → [RENAME] 07_00_component-verification.md
+09_00_detailed-design-verification.md    → [MERGE] into 07_04
+10_00_infrastructure-requirements.md     → [RENAME] 08_00_infrastructure.md
+10_01_habitat-hangar.md                  → [RENAME] 08_01_habitat-hangar.md
+10_02_operations-concept.md              → [RENAME] 08_02_operations-concept.md
+11_00_conclusions.md                     → [RENAME] 09_00_conclusions.md
+12_00_references.md                      → [RENAME] 10_00_references.md
+
+------------------------------------------------------------------------------
+APPENDICES (renumbered)
+------------------------------------------------------------------------------
+13_00_appendix-a-...                     → [RENAME] 11_00_appendix-a-constants.md
+14_00_appendix-b-...                     → [RENAME] 12_00_appendix-b-datasheets.md
+15_00_appendix-c-...                     → [RENAME] 13_00_appendix-c-scripts.md
+15_01_module-structure.md                → [MERGE] into 13_00
+15_02_usage.md                           → [MERGE] into 13_00
+16_00_create-atmosphere...               → [RENAME] 14_00_appendix-d-atmosphere.md
+17_00_appendix-d-xfoil...                → [DELETE] (XFOIL not used, Selig data in 04_07)
+
+================================================================================
+PART 4: IMPLEMENTATION SEQUENCE (COMPREHENSIVE)
+================================================================================
+
+This section provides the complete, correctly-ordered sequence for implementing
+the document reorganization. Each phase builds on the previous one.
+
+============================================================
+PHASE 1: FILE STRUCTURE PREPARATION
+============================================================
+Purpose: Create the skeleton of files before adding content
+
+STEP 1.1: Back up current manuscript
+[ ] xcopy sections_en sections_en_backup_YYYYMMDD /E /I
+
+STEP 1.2: Create new directory structure
+[ ] Create sections_en_new/ with empty files per Part 1 structure
+
+STEP 1.3: Create section header files (NN_00_slug.md)
+The following files need headers only (brief intro paragraphs):
+[ ] 02_00_design-methodology.md
+[ ] 03_00_mission-analysis.md  
+[ ] 04_00_reference-data.md
+[ ] 05_00_constraint-analysis.md
+[ ] 06_00_design-decisions.md
+[ ] 07_00_component-verification.md
+[ ] 08_00_infrastructure.md
+
+STEP 1.4: Migrate existing content to new file structure
+This step involves RENAMING and SPLITTING existing files per Part 3 mapping:
+
+A) INTRODUCTION (no change):
+   [ ] Copy 01_00_introduction.md → 01_00_introduction.md
+
+B) DESIGN METHODOLOGY (move from §4.1):
+   [ ] Split 04_01_design-methodology.md:
+       - Iterative sizing → 02_01_iterative-sizing.md
+       - Constraint role → 02_02_constraint-role.md
+
+C) MISSION ANALYSIS (renumber from §2):
+   [ ] 02_00_mission-definition.md → 03_00_mission-analysis.md (edit header)
+   [ ] 02_01_operational-environment.md → 03_01_operational-environment.md
+   [ ] 02_02_mission-profile.md → 03_02_mission-profile.md
+   [ ] 02_03_requirements.md → 03_03_user-needs.md (edit content)
+
+D) REFERENCE DATA (split §3.1 into multiple files):
+   [ ] Extract from 03_01_reference-designs.md:
+       - ### Mars UAV concepts → 04_03_mars-uav-concepts.md
+       - ### Commercial VTOL benchmarks → 04_04_commercial-vtol.md
+       - #### Propulsion characteristics → 04_05_propulsion-data.md
+       - #### Energy storage → 04_06_energy-data.md
+       - #### Fuselage geometry → 04_08_fuselage-geometry.md
+       - #### Tail configurations → 04_09_tail-configurations.md
+       - #### Structural materials → 04_10_structural-materials.md
+   [ ] Move 03_02_architecture-comparison.md → 04_02_architecture-comparison.md
+   [ ] Move 03_03_architecture-selection.md → 06_01_architecture-selection.md
+
+E) AERODYNAMIC ANALYSIS (merge old §5 into §4.7):
+   [ ] Merge into 04_07_aerodynamic-analysis.md:
+       - 05_01_low-reynolds-number-flight.md
+       - 05_02_airfoil-selection.md (data only, selection to §6.2)
+       - 05_03_drag-polar-model.md
+
+F) Create placeholder files for NEW content:
+   [ ] 04_01_payload-systems.md (empty - to be filled by prompt)
+   [ ] 04_11_weight-estimate.md (empty - to be filled by prompt)
+   [ ] 04_12_derived-requirements.md (empty - to be filled by prompt)
+   [ ] 05_01_common-inputs.md (empty)
+   [ ] 05_02_rotorcraft-analysis.md (empty)
+   [ ] 05_03_fixed-wing-analysis.md (empty)
+   [ ] 05_04_hybrid-vtol-analysis.md (empty)
+   [ ] 05_05_comparative-results.md (empty)
+   [ ] 06_02_airfoil-selection.md (empty)
+   [ ] 06_03_geometry-selection.md (empty)
+   [ ] 06_04_material-selection.md (empty)
+
+G) LATER SECTIONS (renumber):
+   [ ] 08_00_component-selection.md → 07_00_component-verification.md
+   [ ] 07_00_preliminary-design-results.md → merge into 07_04
+   [ ] 09_00_detailed-design-verification.md → 07_04_design-verification.md
+   [ ] 10_00 → 08_00, 11_00 → 09_00, 12_00 → 10_00
+   [ ] Renumber appendices 13_00-17_00 → 11_00-15_00
+
+STEP 1.5: Verify file structure
+[ ] Run reconstruct.bat to verify no errors
+[ ] Check that all cross-references resolve (or note broken ones)
+
+============================================================
+PHASE 2: DATA COLLECTION (Research Prompts)
+============================================================
+Purpose: Execute research prompts to fill ALL gaps identified in Part 2
+
+This phase creates research prompts following the template established in
+prompt_01a_camera_data.txt. Each prompt targets specific gaps from the
+Gap Analysis (Part 2).
+
+------------------------------------------------------------------------------
+PROMPT 2A: PAYLOAD SYSTEMS - CAMERA DATA
+------------------------------------------------------------------------------
+File: docs/prompt_02a_camera_data.txt (ALREADY EXISTS as prompt_01a)
+Output: sources/camera_systems.yaml
+Gaps addressed: Payload mass (A)
+
+Status: [ ] Execute prompt
+        [ ] Verify YAML created
+        [ ] Verify sources in Zotero
+
+------------------------------------------------------------------------------
+PROMPT 2B: PAYLOAD SYSTEMS - RADIO DATA  
+------------------------------------------------------------------------------
+File: docs/prompt_02b_radio_data.txt (ALREADY EXISTS as prompt_01b)
+Output: sources/radio_systems.yaml
+Gaps addressed: Payload mass (A)
+
+Status: [x] Execute prompt (COMPLETED 2025-12-26)
+        [x] Verify YAML created (sources/radio_systems.yaml exists)
+        [x] Verify sources in Zotero (5 radio systems added)
+        [x] Integrate into manuscript 04_01_payload-systems.md (COMPLETED 2025-12-27)
+        [x] Update source_grounding.txt (COMPLETED 2025-12-27)
+
+------------------------------------------------------------------------------
+PROMPT 2C: PROPULSION EFFICIENCIES
+------------------------------------------------------------------------------
+File: docs/prompt_02c_propulsion_efficiency.txt (TO CREATE)
+Output: sources/propulsion_efficiency_data.yaml
+Gaps addressed: E (Figure of merit, η_prop, η_motor, η_ESC)
+
+CONTENT FOR THIS PROMPT:
+Task: Research and document propulsion efficiency parameters for Mars UAV
+
+Parameters to research:
+1. Figure of Merit (FM) for small rotors at low-Re:
+   - Search: Johnson Mars Science Helicopter [@johnsonMarsScienceHelicopter2020]
+   - Search: Leishman for general rotor FM theory
+   - Expected range: 0.6-0.7
+   - Location in source required
+
+2. Propeller efficiency (η_prop) at low Reynolds numbers:
+   - Search: Bertani 2023 Mars propeller study
+   - Search: McCormick "Aerodynamics, Aeronautics, and Flight Mechanics"
+   - Expected range: 0.50-0.65
+   - Note: efficiency degrades at Re < 100,000
+
+3. Motor efficiency (η_motor):
+   - Search: T-Motor MN505-S datasheet
+   - Search: Commercial VTOL motor specifications
+   - Expected range: 0.82-0.88
+
+4. ESC efficiency (η_ESC):
+   - Search: ESC manufacturer specifications
+   - Expected range: 0.95-0.98
+
+Output format: YAML with source citations for each value
+
+Status: [x] Create prompt file (docs/prompt_02c_propulsion_efficiency.txt already exists)
+        [x] Execute prompt (COMPLETED 2025-12-27)
+        [x] Verify YAML created (sources/propulsion_efficiency_data.yaml)
+        [x] Add sources to Zotero (Leishman already in library)
+        [x] Update source_grounding.txt (COMPLETED 2025-12-27)
+        [x] Integrate into manuscript 04_05_propulsion-data.md (COMPLETED 2025-12-27)
+        Key findings:
+          - FM = 0.50 for Mars rotors (from Leishman MAV data, page 455)
+          - η_prop = 0.55 for low-Re cruise propeller
+          - η_motor = 0.85, η_ESC = 0.95 (industry typical)
+          - Combined hover efficiency: 0.40
+          - Combined cruise efficiency: 0.44
+
+------------------------------------------------------------------------------
+PROMPT 2D: AERODYNAMIC COEFFICIENTS
+------------------------------------------------------------------------------
+File: docs/prompt_02d_aerodynamic_coefficients.txt (TO CREATE)
+Output: Manuscript content for 04_07_aerodynamic-analysis.md
+Gaps addressed: D (C_L,max, Oswald efficiency, C_D0)
+
+CONTENT FOR THIS PROMPT:
+Task: Research and document aerodynamic coefficient estimation methods
+
+1. Maximum lift coefficient (C_L,max):
+   - Consolidate from existing airfoil selection (already done)
+   - Summarize values for candidate airfoils at Re ≈ 60,000
+   - Source: Selig "Summary of Low-Speed Airfoil Data"
+
+2. Oswald efficiency factor (e):
+   - Research estimation method from Raymer:
+     e = 1.78 × (1 - 0.045 × AR^0.68) - 0.64 (for unswept wings)
+   - Or use Nicolai/Carichner method
+   - Search Zotero for "Oswald efficiency estimation"
+   - Add source if not present
+   - Calculate e for AR = 10-14 range
+
+3. Zero-lift drag coefficient (C_D0):
+   - Research component buildup method (Raymer Chapter 12)
+   - OR use wetted area method: C_D0 = C_f × S_wet/S_ref
+   - Document friction coefficient C_f for low-Re
+   - Present method with citation
+
+4. Full drag polar:
+   - Present parabolic drag polar: C_D = C_D0 + C_L²/(π × AR × e)
+   - Cite source for this formulation
+
+Status: [ ] Create prompt file
+        [ ] Execute prompt
+        [ ] Draft 04_07 content
+        [ ] Add sources to Zotero
+        [ ] Update source_grounding.txt
+
+------------------------------------------------------------------------------
+PROMPT 2E: MASS FRACTIONS FROM REFERENCE DATA
+------------------------------------------------------------------------------
+File: docs/prompt_02e_mass_fractions.txt (TO CREATE)
+Output: sources/reference_drones_mass_fractions.yaml + manuscript 04_11
+Gaps addressed: F (Battery, structure, propulsion, payload fractions)
+
+CONTENT FOR THIS PROMPT:
+Task: Calculate mass fractions from reference UAV data
+
+Input data: sources/reference_drones.yaml (existing)
+
+Fractions to calculate for each reference UAV:
+1. Battery fraction = m_battery / MTOW
+2. Structure fraction = m_structure / MTOW (if data available)
+3. Propulsion fraction = (m_motors + m_ESC + m_props) / MTOW
+4. Payload fraction = m_payload_max / MTOW
+5. Avionics fraction = estimate if not available (3-5% typical)
+
+Output:
+- YAML file with calculated fractions for each UAV
+- Statistics summary (min, max, mean, median, std) for each fraction
+- Manuscript content for 04_11_weight-estimate.md:
+  * Table of fractions by reference UAV
+  * Statistical analysis
+  * Recommended ranges for Mars UAV design
+  * Methodology citation (Raymer, Sadraey 2020)
+
+Status: [x] Create prompt file (docs/prompt_02e_mass_fractions.txt already exists)
+        [x] Execute prompt (COMPLETED 2025-12-27)
+        [x] Create YAML output (sources/reference_drones_mass_fractions.yaml)
+        [x] Draft 04_11 content (sections_en/04_11_weight-estimate.md)
+        [x] Update source_grounding.txt (COMPLETED 2025-12-27)
+        Key findings:
+          - Battery fraction: 0.36-0.40 (mean 0.38, n=3)
+          - Payload fraction: 0.10-0.30 (median 0.21, n=9)
+          - Empty fraction: 0.25-0.27 (n=2, limited data)
+          - Recommended Mars UAV values: f_batt=0.35, f_payload=0.15, f_empty=0.45
+          - Baseline MTOW: 3.3 kg (range 3-4 kg)
+
+------------------------------------------------------------------------------
+PROMPT 2F: WEIGHT ESTIMATION METHODOLOGY
+------------------------------------------------------------------------------
+File: docs/prompt_02f_weight_estimation.txt (TO CREATE)
+Output: Theoretical content for 04_11 + constraint analysis
+Gaps addressed: H (Weight estimation methodology for electric UAVs)
+
+CONTENT FOR THIS PROMPT:
+Task: Research weight estimation methodology for small electric UAVs
+
+1. Add Sadraey 2020 to Zotero:
+   - Title: "Design of Unmanned Aerial Systems"
+   - Author: Mohammad H. Sadraey
+   - Publisher: Wiley
+   - Year: 2020
+   - Use Zotero Web API to add
+
+2. Research Chapter 2 of Sadraey 2020:
+   - Electric UAV MTOW estimation method
+   - Battery weight estimation: m_batt = E_required / (e_spec × DoD × η)
+   - Four-component breakdown: payload + autopilot + battery + empty
+
+3. Compare with Sadraey 2013:
+   - What equations change for electric propulsion?
+   - Document differences
+
+4. Research load factor impact on structural weight:
+   - Current Sadraey 2013 uses n_ult implicitly
+   - Need to adapt for n_ult = 3.75 (not 5.7)
+   - Document how n_ult appears in weight equations
+   - Calculate expected weight reduction
+
+5. Document weight estimation equations:
+   - Wing weight: W_wing = f(S, AR, Λ, λ, t/c, n_ult, ...)
+   - Fuselage weight: W_fus = f(L, W_max, H_max, n_ult, ...)
+   - Show dependency on n_ult explicitly
+
+Output: Manuscript content with:
+- Methodology overview
+- Key equations with citations
+- Mars-specific adaptations (n_ult = 3.75)
+- Limitations for small UAVs
+
+Status: [ ] Create prompt file
+        [ ] Add Sadraey 2020 to Zotero
+        [ ] Execute prompt
+        [ ] Draft methodology content
+        [ ] Update source_grounding.txt
+
+------------------------------------------------------------------------------
+PROMPT 2G: LOAD FACTOR SELECTION (CS-23)
+------------------------------------------------------------------------------
+File: docs/prompt_02g_load_factors.txt (TO CREATE)
+Output: Manuscript content for 04_12_derived-requirements.md (load factor section)
+Gaps addressed: G (n_limit, n_ult, SF)
+
+CONTENT FOR THIS PROMPT:
+Task: Research and justify load factor selection for Mars UAV
+
+1. Verify CS-23 is in Zotero:
+   - Citation key: @europeanunionaviationsafetyagency...
+   - If not present, add via Zotero Web API
+   - URL: https://www.easa.europa.eu/en/document-library/certification-specifications/cs-23-amendment-5
+
+2. Research CS-23 load factor methodology:
+   - Document how n_limit is determined for normal category
+   - CS-23.337: Limit maneuvering load factor
+   - Note: CS-23 is for methodology reference, not regulation
+
+3. Justify n_limit = 2.5 for Mars UAV:
+   - Unmanned operation (no pilot injury risk)
+   - Autonomous flight (limited maneuvering envelope)
+   - Thin Mars atmosphere (~60× lower gust loads)
+   - Cite precedents from UAV literature if available
+
+4. Document safety factor:
+   - SF = 1.5 is universal aerospace practice
+   - Cite source (FAR Part 23, CS-23, or textbook)
+   - n_ult = n_limit × SF = 2.5 × 1.5 = 3.75
+
+5. Document structural weight impact:
+   - Compare n_ult = 3.75 vs n_ult = 5.7 (CS-25 typical)
+   - Wing weight scales as n_ult^0.6 approximately
+   - Fuselage weight scales linearly with n_ult
+   - Calculate expected weight reduction
+
+Output: Manuscript content for load factor subsection in 04_12
+
+Status: [x] Create prompt file (docs/prompt_02g_load_factors.txt exists)
+        [x] Verify/add CS-23 to Zotero (key: europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017)
+        [x] Execute prompt (COMPLETED 2025-12-27)
+        [x] Draft content (sections_en/04_12_derived-requirements.md)
+        [x] Update source_grounding.txt (Section 4.12 added)
+        Key findings:
+          - CS-23 Amendment 5 CS 23.2230(a)(2): SF = 1.5 for ultimate loads
+          - n_limit = 2.5 justified by: unmanned operation, autonomous flight, reduced Mars gust loads
+          - n_ult = 2.5 × 1.5 = 3.75 (lower bound of normal category)
+          - Wing weight reduction: 23% (n_ult^0.6 scaling)
+          - Fuselage weight reduction: 10% (n_ult^0.25 scaling)
+          - Combined structural weight savings: ~16-17% (0.24-0.26 kg)
+
+------------------------------------------------------------------------------
+PROMPT 2H: GEOMETRY BOUNDS
+------------------------------------------------------------------------------
+File: docs/prompt_02h_geometry_bounds.txt (TO CREATE)
+Output: Manuscript content for 04_12_derived-requirements.md (geometry section)
+Gaps addressed: C (AR bounds, t/c, taper ratio, sweep)
+
+CONTENT FOR THIS PROMPT:
+Task: Research and justify geometry parameter bounds for Mars UAV
+
+1. Aspect ratio bounds [10, 14]:
+   - Research trade-off: induced drag vs. structural weight
+   - High AR improves L/D but increases wing weight
+   - Cite source for optimal AR selection methodology
+   - Document how Re affects optimal AR
+
+2. Thickness ratio (t/c):
+   - Extract from airfoil analysis:
+     * E387: t/c = 0.091
+     * S7055: t/c = 0.10
+     * SD8000: t/c = 0.10
+   - Cite Selig airfoil data source
+   - Recommend range: 0.08-0.12
+
+3. Taper ratio (λ):
+   - Research optimal taper for elliptical lift distribution
+   - λ ≈ 0.4-0.5 for minimum induced drag (cite Prandtl/Schrenk)
+   - Structural consideration: root bending moment
+   - Recommend range: 0.4-0.6
+
+4. Sweep angle (Λ):
+   - Justify zero sweep for subsonic, low-Re application
+   - Sweep increases local blade Re (negative for low-Re)
+   - Cite source confirming sweep not beneficial at low Mach
+   - Recommend: Λ = 0°
+
+Output: Manuscript content with tables and citations
+
+Status: [x] Create prompt file (docs/prompt_02h_geometry_bounds.txt exists)
+        [x] Execute prompt (COMPLETED 2025-12-27)
+        [x] Draft content (sections_en/04_12_derived-requirements.md)
+        [x] Update source_grounding.txt (Section 4.12 Geometry bounds added)
+        Key findings:
+          - AR range: 10-14 (L/D vs. structure/Re trade-off)
+          - t/c range: 0.06-0.11 (from candidate airfoils)
+          - λ range: 0.4-0.6, baseline 0.5 (near-elliptical loading)
+          - Λ = 0° (low Mach, no benefit from sweep)
+          - ARES comparison: AR = 5.6 (heavier aircraft, lower C_L)
+          - Sources: Sadraey 2013 Ch.5, Selig Vol.1&5, Braun 2006
+
+------------------------------------------------------------------------------
+PROMPT 2I: MISSION PARAMETERS DERIVATION
+------------------------------------------------------------------------------
+File: docs/prompt_02i_mission_parameters.txt (TO CREATE)
+Output: Manuscript content for 04_12_derived-requirements.md (mission section)
+Gaps addressed: A (Cruise velocity, minimum velocity)
+
+CONTENT FOR THIS PROMPT:
+Task: Derive and justify mission velocity parameters
+
+1. Cruise velocity (V_cruise):
+   - Trade-off analysis:
+     * Higher V → shorter mission time → less battery
+     * Higher V → higher power → more battery consumption
+     * Optimal V exists for maximum range/endurance
+   - Mach number constraint: M = V/a ≈ 0.16-0.17 at a = 230 m/s
+   - Reynolds number compatibility: Re = ρVc/μ ≈ 60,000
+   - Given Re, ρ, μ → solve for V×c product
+   - If c ≈ 0.25-0.35 m → V ≈ 35-45 m/s
+   - Cite methodology for optimal cruise speed
+
+2. Minimum velocity (V_min):
+   - Must exceed stall speed with margin
+   - V_min ≥ 1.2 × V_stall (typical margin)
+   - V_stall = sqrt(2W / (ρ × S × C_L,max))
+   - This couples to wing loading selection
+   - Estimate V_min ≈ 10-15 m/s for initial sizing
+
+3. Hover time allocation:
+   - Takeoff hover: 30-60 seconds
+   - Landing hover: 30-60 seconds  
+   - Contingency: 60 seconds
+   - Total hover: 120-180 seconds
+   - Justify based on mission profile
+
+4. Cruise endurance target:
+   - Mission requirement: 50 km operational radius
+   - At V_cruise = 40 m/s: round trip = 100 km / 40 m/s = 2500 s ≈ 42 min
+   - Add 30% margin for headwinds, loiter: 42 × 1.3 ≈ 55 min
+   - Target endurance: 60-90 minutes
+   - Cite any Mars UAV mission profiles from literature
+
+Output: Manuscript content with derivations and citations
+
+Status: [ ] Create prompt file
+        [ ] Execute prompt
+        [ ] Draft content
+        [ ] Update source_grounding.txt
+
+============================================================
+PHASE 3: THEORETICAL DEVELOPMENT (Constraint Analysis)
+============================================================
+Purpose: Draft the theoretical framework for Section 5 (Constraint Analysis)
+following the MANUSCRIPT-FIRST principle
+
+This is the most critical theoretical section. ALL equations must be
+researched, cited, and documented BEFORE any Python implementation.
+
+------------------------------------------------------------------------------
+PROMPT 3A: ROTORCRAFT CONSTRAINT EQUATIONS
+------------------------------------------------------------------------------
+File: docs/prompt_03a_rotorcraft_theory.txt (TO CREATE)
+Output: Manuscript content for 05_02_rotorcraft-analysis.md
+Dependencies: Phase 2 outputs (efficiencies, mass fractions)
+
+CONTENT FOR THIS PROMPT:
+Task: Develop complete theoretical analysis for rotorcraft configuration
+
+THEORETICAL CONTENT REQUIRED:
+
+1. HOVER POWER FROM MOMENTUM THEORY:
+   Source: Leishman "Principles of Helicopter Aerodynamics"
+   
+   a) Derive induced velocity:
+      v_i = sqrt(T / (2 × ρ × A))
+      - Cite Leishman Chapter 2
+      - State assumptions (ideal actuator disk)
+   
+   b) Derive ideal hover power:
+      P_ideal = T × v_i = T^1.5 / sqrt(2 × ρ × A)
+      - Cite equation number from Leishman
+      - Add to source_grounding.txt
+   
+   c) Define Figure of Merit:
+      FM = P_ideal / P_actual
+      - Cite definition source
+      - Research FM values for small rotors at low-Re
+      - Johnson MSH paper likely has this
+      - Document FM = 0.6-0.7 with source
+   
+   d) Actual hover power:
+      P_hover = P_ideal / FM = T^1.5 / (FM × sqrt(2 × ρ × A))
+      - Express in terms of disk loading (T/A)
+   
+   e) Electric power including losses:
+      P_electric = P_hover / (η_motor × η_ESC)
+      - Include efficiency chain
+
+2. FORWARD FLIGHT POWER (ROTORCRAFT):
+   Source: Leishman or Prouty "Helicopter Aerodynamics"
+   
+   a) Power components in forward flight:
+      P_total = P_induced + P_profile + P_parasite
+      - Cite breakdown
+   
+   b) Equivalent L/D for rotorcraft:
+      (L/D)_eff = W × V / P_total
+      - Research typical values: 3-5 for pure helicopters
+      - Cite source
+   
+   c) Endurance-limited analysis:
+      - Show that L/D_eff = 3-5 limits endurance severely
+      - Compare to fixed-wing L/D = 10-15
+
+3. BATTERY ENERGY EQUATION:
+   
+   a) Usable energy:
+      E_usable = m_batt × e_spec × DoD × η_discharge
+      - Cite battery parameters source
+   
+   b) Required energy:
+      E_required = P_total × t_flight
+   
+   c) Endurance:
+      t = E_usable / P_total = (m_batt × e_spec × DoD × η) / P
+   
+   d) Using battery mass fraction:
+      t = (f_batt × MTOW × e_spec × DoD × η) / P
+
+4. CONSTRAINT FORMULATION:
+   
+   a) Express as P/W constraint:
+      (P/W) ≥ P_hover / W = ... (function of disk loading, FM, ρ)
+   
+   b) Show this constraint on matching chart axes
+
+5. FEASIBILITY ANALYSIS:
+   
+   a) Calculate: can rotorcraft meet 60-min endurance?
+   b) Use placeholder [TO BE CALCULATED] for numerical result
+   c) Show the limiting factor is low L/D in forward flight
+
+Status: [ ] Create prompt file
+        [ ] Research all equations from sources
+        [ ] Verify citations in Zotero
+        [ ] Draft 05_02 content
+        [ ] Add equations to source_grounding.txt
+
+------------------------------------------------------------------------------
+PROMPT 3B: FIXED-WING CONSTRAINT EQUATIONS
+------------------------------------------------------------------------------
+File: docs/prompt_03b_fixed_wing_theory.txt (TO CREATE)
+Output: Manuscript content for 05_03_fixed-wing-analysis.md
+
+CONTENT FOR THIS PROMPT:
+Task: Develop complete theoretical analysis for fixed-wing configuration
+
+THEORETICAL CONTENT REQUIRED:
+
+1. CRUISE POWER EQUATION:
+   Source: Raymer "Aircraft Design" or Anderson "Intro to Flight"
+   
+   a) Steady level flight:
+      T = D = W / (L/D)
+      P_cruise = T × V / η_prop = W × V / ((L/D) × η_prop)
+      - Cite source with equation number
+   
+   b) Express L/D from drag polar:
+      (L/D) = C_L / C_D = C_L / (C_D0 + C_L²/(π × AR × e))
+      - Cite source
+   
+   c) Maximum L/D:
+      (L/D)_max = 0.5 × sqrt(π × AR × e / C_D0)
+      - Derive from d(L/D)/dC_L = 0
+      - Cite source
+
+2. STALL CONSTRAINT:
+   Source: Any aerodynamics textbook
+   
+   a) Stall speed:
+      V_stall = sqrt(2W / (ρ × S × C_L,max))
+      - Cite source
+   
+   b) Wing loading limit:
+      W/S ≤ 0.5 × ρ × V_min² × C_L,max
+      - Express as constraint on matching chart
+
+3. ENDURANCE EQUATION (ELECTRIC):
+   
+   a) Fixed-wing endurance:
+      t = E_usable / P_cruise = (m_batt × e_spec × DoD × η) / P_cruise
+   
+   b) Substitute cruise power:
+      t = (f_batt × MTOW × e_spec × DoD × η × (L/D) × η_prop) / (MTOW × g × V)
+      t = (f_batt × e_spec × DoD × η × (L/D) × η_prop) / (g × V)
+   
+   c) Show that with L/D = 12-15, endurance IS achievable
+
+4. TAKEOFF/LANDING PROBLEM:
+   Source: Raymer Chapter 15 or equivalent
+   
+   a) Takeoff ground roll equation:
+      S_TO = (V_TO)² / (2 × a_avg)
+      where a_avg depends on T/W, friction, etc.
+      - Cite source
+   
+   b) Mars-specific issues:
+      - No runway infrastructure
+      - Low density requires long acceleration
+      - Calculate: ground roll would be hundreds of meters
+   
+   c) Alternative launch methods:
+      - Catapult launch: requires infrastructure
+      - Rocket-assisted: adds mass
+      - High-altitude balloon drop: extremely complex
+      - Cite any references discussing these
+
+5. CONSTRAINT FORMULATION:
+   
+   a) Cruise power as P/W constraint
+   b) Stall as W/S constraint
+   c) Show on matching chart
+
+6. FEASIBILITY CONCLUSION:
+   - Cruise efficiency: FEASIBLE
+   - Takeoff/landing: INFEASIBLE without runway
+
+Status: [x] Create prompt file (docs/prompt_03b_fixed_wing_theory.txt exists)
+        [x] Research all equations from sources (Torenbeek, Sadraey 2013, Sadraey 2020)
+        [x] Draft 05_03 content (sections_en/05_03_fixed-wing-analysis.md - COMPLETED 2025-12-28)
+        [x] Add equations to source_grounding.txt (COMPLETED 2025-12-28)
+        Key findings:
+          - Forces equilibrium (L=W, T=D) and lift equation from Torenbeek Ch.5
+          - Maximum L/D = 15.3 at AR=12, e=0.75, C_D0=0.030 (Sadraey Eq. 5.26)
+          - Cruise power: P/W = V/((L/D)×η) = 22.5 W/kg at 40 m/s
+          - Endurance ~191 min (far exceeds 60 min requirement)
+          - Range ~459 km (far exceeds 100 km round-trip)
+          - Takeoff ground roll ~5-6 km (impossible without runway)
+          - CONCLUSION: Fixed-wing NOT FEASIBLE due to VTOL requirement
+
+
+------------------------------------------------------------------------------
+PROMPT 3C: HYBRID VTOL CONSTRAINT EQUATIONS
+------------------------------------------------------------------------------
+File: docs/prompt_03c_hybrid_vtol_theory.txt (TO CREATE)
+Output: Manuscript content for 05_04_hybrid-vtol-analysis.md
+
+CONTENT FOR THIS PROMPT:
+Task: Develop complete theoretical analysis for hybrid VTOL (QuadPlane)
+
+THEORETICAL CONTENT REQUIRED:
+
+1. ARCHITECTURE OVERVIEW:
+   
+   a) QuadPlane concept:
+      - Lift rotors: sized for hover ONLY (short duration)
+      - Wing + cruise motor: sized for efficient cruise
+      - Decoupled optimization
+   
+   b) Cite references to VTOL hybrids:
+      - Search for DeltaQuad, Pipistrel Nuuva technical papers
+      - Bertani 2023 Mars hybrid VTOL paper
+
+2. HOVER CONSTRAINT (LIFT SYSTEM):
+   
+   a) Same momentum theory as rotorcraft (reference §5.2)
+   b) But hover duration is limited:
+      t_hover = t_takeoff + t_landing + t_contingency
+      t_hover ≈ 120-180 seconds (not 60 minutes!)
+   
+   c) Hover power requirement:
+      P_hover = same equation as §5.2
+
+3. CRUISE CONSTRAINT (WING SYSTEM):
+   
+   a) Same equations as fixed-wing (reference §5.3)
+   b) Wing sized for cruise, not hover
+
+4. ENERGY STORAGE CONSTRAINT (CRITICAL):
+   
+   This is the unique constraint for hybrid VTOL.
+   
+   a) Total energy budget:
+      E_required = E_hover + E_cruise + E_reserve
+      E_required = P_hover × t_hover + P_cruise × t_cruise + E_reserve
+   
+   b) Reserve policy:
+      E_reserve = 0.20 × (E_hover + E_cruise)  [20% reserve]
+      - Cite source for reserve requirement
+   
+   c) Available energy:
+      E_available = m_batt × e_spec × DoD × η
+   
+   d) Constraint:
+      E_available ≥ E_required
+   
+   e) Express in terms of battery fraction:
+      f_batt ≥ (E_hover + E_cruise + E_reserve) / (MTOW × e_spec × DoD × η)
+
+5. MASS PENALTY ANALYSIS:
+   
+   a) Dual propulsion system adds mass:
+      - Lift motors (4-8 units)
+      - Lift motor mounts
+      - Additional wiring
+   
+   b) Estimate penalty: 10-15% of MTOW
+      - Reference commercial QuadPlane data from §4.4
+      - Or cite technical papers if available
+   
+   c) Show that penalty is acceptable for achieving feasibility
+
+6. CONSTRAINT FORMULATION:
+   
+   a) Hover P/W constraint (same as rotorcraft but different duration)
+   b) Cruise P/W constraint (same as fixed-wing)
+   c) Stall W/S constraint (same as fixed-wing)
+   d) Energy constraint (UNIQUE to this section)
+   
+   Express all as constraints on matching chart.
+
+7. FEASIBILITY CONCLUSION:
+   - VTOL: FEASIBLE (lift rotors)
+   - Cruise efficiency: FEASIBLE (wing)
+   - Endurance: FEASIBLE (if energy constraint met)
+   - Overall: FEASIBLE
+
+Status: [ ] Create prompt file
+        [ ] Research all equations from sources
+        [ ] Draft 05_04 content
+        [ ] Add equations to source_grounding.txt
+
+------------------------------------------------------------------------------
+PROMPT 3D: COMPARATIVE ANALYSIS AND MATCHING CHARTS
+------------------------------------------------------------------------------
+File: docs/prompt_03d_comparative_analysis.txt (TO CREATE)
+Output: Manuscript content for 05_05_comparative-results.md
+
+CONTENT FOR THIS PROMPT:
+Task: Synthesize comparative analysis across all configurations
+
+CONTENT REQUIRED:
+
+1. SUMMARY COMPARISON TABLE:
+   
+   | Criterion              | Rotorcraft | Fixed-Wing | Hybrid VTOL |
+   |------------------------|------------|------------|-------------|
+   | VTOL capability        | ✓          | ✗          | ✓           |
+   | Cruise efficiency L/D  | 3-5        | 10-15      | 10-15       |
+   | 60-min endurance       | ✗          | ✓          | ✓           |
+   | Takeoff feasible       | ✓          | ✗          | ✓           |
+   | Mass penalty           | None       | None       | ~15%        |
+   | **OVERALL FEASIBILITY**| **NO**     | **NO**     | **YES**     |
+
+2. MATCHING CHART OVERLAY:
+   
+   a) Describe what the matching chart shows:
+      - P/W vs W/S diagram
+      - Each constraint is a boundary
+      - Feasible region is intersection
+   
+   b) Cite matching chart methodology:
+      - Raymer, Roskam, or Sadraey
+   
+   c) Describe constraints for each configuration:
+      - Rotorcraft: hover constraint dominates
+      - Fixed-wing: stall constraint, no VTOL
+      - Hybrid: intersection of hover, cruise, stall, energy
+
+3. DESIGN POINT DETERMINATION:
+   
+   a) Method: minimize P/W at acceptable W/S
+   b) Placeholder for numerical design point [TO BE CALCULATED]
+
+4. CONFIGURATION SELECTION RATIONALE:
+   
+   a) Clear statement:
+      "Based on the quantitative analysis presented in Sections 5.2-5.4,
+       the hybrid VTOL (QuadPlane) configuration is the ONLY architecture
+       that satisfies all mission constraints."
+   
+   b) Forward reference to detailed architecture in §6
+
+Status: [ ] Create prompt file
+        [ ] Draft 05_05 content
+        [ ] Prepare figure placeholders for matching charts
+
+============================================================
+PHASE 4: PYTHON IMPLEMENTATION
+============================================================
+Purpose: Implement Python scripts that EXACTLY reproduce manuscript equations
+
+CRITICAL: Scripts implement MANUSCRIPT equations, not vice versa.
+All equations must be defined in Phase 3 before coding begins.
+
+STEP 4.1: Create analysis module structure
+[ ] Create src/mars_uav_sizing/analysis/ directory
+[ ] Create __init__.py
+
+STEP 4.2: Implement constraint modules
+Each module implements equations from corresponding manuscript section:
+
+[ ] hover_power.py
+    - Implements equations from 05_02: momentum theory, FM, P_hover
+    - Function signatures match manuscript variables exactly
+    
+[ ] cruise_power.py
+    - Implements equations from 05_03: cruise power, L/D
+    
+[ ] stall_constraint.py
+    - Implements stall speed and wing loading equations
+    
+[ ] energy_constraint.py
+    - Implements energy budget equations from 05_04
+    
+[ ] matching_chart.py
+    - Generates P/W vs W/S diagrams
+    - Plots all constraints
+    - Identifies feasible region
+
+STEP 4.3: Implement support modules
+
+[ ] mass_fractions.py
+    - Reads reference_drones.yaml
+    - Calculates mass fractions
+    - Outputs statistics
+    
+[ ] weight_estimation.py
+    - Implements equations from 04_11
+    - Uses n_ult = 3.75 as parameter
+    
+[ ] derived_requirements.py
+    - Consolidates all inputs from 04_12
+
+STEP 4.4: Implement comparison script
+
+[ ] configuration_comparison.py
+    - Runs analysis for all three configurations
+    - Generates comparison tables
+    - Calls matching_chart.py for each
+
+STEP 4.5: Testing
+
+[ ] Verify each module against hand calculations
+[ ] Cross-check with manuscript equations
+[ ] Ensure no equations exist in code that aren't in manuscript
+
+============================================================
+PHASE 5: NUMERICAL INTEGRATION
+============================================================
+Purpose: Run scripts, insert results, generate figures
+
+STEP 5.1: Run mass fraction analysis
+[ ] Execute mass_fractions.py
+[ ] Insert results into 04_11_weight-estimate.md
+[ ] Replace [FROM REFERENCE DATA] placeholders
+
+STEP 5.2: Run derived requirements calculation
+[ ] Execute derived_requirements.py
+[ ] Insert results into 04_12_derived-requirements.md
+[ ] Replace [TO BE CALCULATED] placeholders
+
+STEP 5.3: Run constraint analysis
+[ ] Execute configuration_comparison.py
+[ ] Generate matching chart figures:
+    - figures/matching_chart_rotorcraft.png
+    - figures/matching_chart_fixed_wing.png
+    - figures/matching_chart_hybrid_vtol.png
+    - figures/matching_chart_comparison.png
+[ ] Insert figures into manuscript
+
+STEP 5.4: Insert numerical results
+[ ] Update 05_02 with rotorcraft numerical results
+[ ] Update 05_03 with fixed-wing numerical results
+[ ] Update 05_04 with hybrid VTOL numerical results
+[ ] Update 05_05 with comparative results table
+
+STEP 5.5: Final verification
+[ ] Verify ALL placeholders replaced
+[ ] Verify ALL figures referenced exist
+[ ] Verify source_grounding.txt complete
+
+============================================================
+PHASE 6: DOCUMENT VERIFICATION
+============================================================
+
+STEP 6.1: Build English document
+[ ] Run reconstruct.bat
+[ ] Run build_docx.bat
+[ ] Check for pandoc errors
+
+STEP 6.2: Cross-reference check
+[ ] Verify all @sec: references resolve
+[ ] Verify all @fig: references resolve
+[ ] Verify all @eq: references resolve
+[ ] Verify all [@citation] keys exist in Mars_UAV.bib
+
+STEP 6.3: Content review
+[ ] Read through document for logical flow
+[ ] Check all tables are properly formatted
+[ ] Check all equations render correctly
+
+STEP 6.4: Update project files
+[ ] Update GEMINI.md with new document structure
+[ ] Archive old sections_en/ backup
+
+============================================================
+PHASE 7: ITALIAN VERSION
+============================================================
+
+STEP 7.1: Apply file reorganization
+[ ] Copy file structure to sections_it/
+[ ] Map content from current Italian files
+
+STEP 7.2: Translate new content
+[ ] Translate all new files created in Phase 2-3
+[ ] Maintain consistent terminology
+
+STEP 7.3: Build Italian document
+[ ] Run Italian reconstruct
+[ ] Run Italian build_docx
+[ ] Verify output
+
+================================================================================
+PART 5: CROSS-REFERENCES
+================================================================================
+
+Labels to create/update:
+- @sec:methodology (new - Section 2)
+- @sec:iterative-sizing
+- @sec:constraint-role
+- @sec:mission-analysis
+- @sec:user-needs (replaces @sec:requirements)
+- @sec:reference-data (new - Section 4)
+- @sec:payload-systems
+- @sec:architecture-comparison
+- @sec:mars-uav-concepts
+- @sec:commercial-vtol
+- @sec:propulsion-data
+- @sec:energy-data
+- @sec:aerodynamic-analysis (merged)
+- @sec:fuselage-data
+- @sec:tail-data
+- @sec:materials-data
+- @sec:weight-estimate
+- @sec:derived-requirements
+- @sec:constraint-analysis
+- @sec:common-inputs
+- @sec:rotorcraft-analysis
+- @sec:fixed-wing-analysis
+- @sec:hybrid-vtol-analysis
+- @sec:comparative-results
+- @sec:design-decisions
+- @sec:architecture-selection
+- @sec:airfoil-selection
+- @sec:geometry-selection
+- @sec:material-selection
+- @sec:component-verification
+- @sec:propulsion-selection
+- @sec:energy-selection
+- @sec:payload-selection
+- @sec:design-verification
+- @sec:infrastructure
+- @sec:conclusions
+
+================================================================================
+PART 6: DATA SOURCES TO ADD
+================================================================================
+
+Required for weight estimation revision:
+[ ] Sadraey, M.H. (2020). "Design of Unmanned Aerial Systems." Wiley.
+    - Chapter 2: Electric UAV MTOW estimation
+    - Key resource for battery-electric weight methodology
+
+[ ] Verify CS-23 Amendment 5 is in Zotero:
+    - Citation: @europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017
+    - For load factor methodology (n_limit discussion)
+
+[ ] Raymer, D.P. "Aircraft Design: A Conceptual Approach"
+    - For Oswald efficiency estimation method
+    - For C_D0 component buildup method
+
+================================================================================
+PART 7: SECTION 4 CONTENT SOURCES
+================================================================================
+
+This table maps new Section 4 files to their content sources:
+
+| New File              | Content Source                              |
+|-----------------------|---------------------------------------------|
+| 04_01_payload         | NEW: prompts + camera_systems.yaml, radio_systems.yaml |
+| 04_02_architecture    | EXISTING: 03_02_architecture-comparison.md  |
+| 04_03_mars-uav        | EXTRACT: 03_01 ### Mars UAV concepts        |
+| 04_04_commercial-vtol | EXTRACT: 03_01 ### Commercial VTOL + table  |
+| 04_05_propulsion      | EXTRACT: 03_01 #### Propulsion              |
+| 04_06_energy          | EXTRACT: 03_01 #### Energy storage          |
+| 04_07_aerodynamic     | MERGE: 03_01 airfoil + 05_01 + 05_02 + 05_03|
+| 04_08_fuselage        | EXTRACT: 03_01 #### Fuselage geometry       |
+| 04_09_tail            | EXTRACT: 03_01 #### Tail configurations     |
+| 04_10_materials       | EXTRACT: 03_01 #### Structural materials    |
+| 04_11_weight-estimate | NEW: mass fraction methodology              |
+| 04_12_derived-req     | NEW: all constraint inputs synthesis        |
+
+================================================================================
+END OF PLAN
+================================================================================

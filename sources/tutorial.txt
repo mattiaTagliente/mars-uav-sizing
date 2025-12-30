@@ -1,0 +1,3010 @@
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/336900449
+Tutorial per le esercitazioni del corso di Progetto di aeromobili
+Technical Report · October 2019
+CITATIONS
+0
+READS
+47
+2 authors, including:
+Alessandro Bacchini
+Politecnico di Torino
+11 PUBLICATIONS   13 CITATIONS   
+SEE PROFILE
+All content following this page was uploaded by Alessandro Bacchini on 28 September 2020.
+The user has requested enhancement of the downloaded file.
+
+1 
+ 
+Tutorial per le esercitazioni del corso di 
+Progetto di aeromobili 
+Alessandro Bacchini e Andrea Urraci 
+ 
+Questi tutorial sono stati scritti per aiutare gli studenti che non sono riusciti a seguire tutti i passaggi 
+durante le esercitazioni. Vi guideranno passo a passo a realizzare le parti obbligatorie delle esercitazioni 
+in modo che non perdiate tempo in tecnicismi. Potrete concentrarvi sui principi fondamentali ed 
+esplorare nuove idee.  
+Completando questi tutorial realizzerete un file Excel con vari fogli di calcolo, uno o più per ogni 
+esercitazione. Questo strumento vi permetterà di variare i parametri di progetto e vedere 
+immediatamente l’effetto su tutto il resto dell’aereo. Questo vi permetterà di compiere varie iterazioni, 
+partendo dai dati ricavati dall’analisi statistica, per ottenere un progetto migliore.  
+Le prime quatto esercitazioni saranno sull’aerodinamica. Un’esercitazione sarà dedicata alla stima pesi, 
+al calcolo del baricentro e alla stabilità longitudinale. Un’altra sarà un’introduzione al software CAD 
+Catia. Le ultime quattro esercitazioni saranno dedicate ai calcoli strutturali, due utilizzando metodi 
+analitici e due con il metodo FEM.  
+Gli argomenti obbligatori per la tesina sono tutti quelli trattati nelle prime otto esercitazioni di questi 
+tutorial (cioè tutto tranne il FEM) più: 
+- Analisi di mercato. 
+- Analisi statistica. 
+- Decollo, atterraggio e balanced field length.  
+- Diagramma di manovra e di raffica. 
+- Analisi di stallo. 
+ 
+  
+
+2 
+ 
+Esercitazione 1 – Progetto di aeromobili 
+Alessandro Bacchini 
+ 
+Aerodinamica 2D – Xfoil 
+Introduzione 
+Nelle prime quattro esercitazioni vedremo degli strumenti computazionali per studiare le proprietà 
+aerodinamiche dell’aeromobile che stiamo progettando. La prima esercitazione sarà dedicata 
+all’aerodinamica bidimensionale, la seconda e la terza saranno dedicate all’aerodinamica 
+tridimensionale e nella quarta considereremo i contributi alla resistenza dovuti a fusoliera, piani di coda 
+e nacelles. 
+I nostri obiettivi durante lo studio aerodinamico saranno: 
+• L/D più alto possibile in fase di crociera. Diminuisce il consumo di carburante e aumenta 
+l’autonomia. 
+• Lunghezza di pista minima per decollo e atterraggio abbastanza corta per poter raggiungere 
+anche gli aeroporti più piccoli. 
+Configurazioni che ottimizzano l’efficienza aerodinamica tendono a avere una superficie alare 
+abbastanza ridotta, perché la superficie alare aggiuntiva genera resistenza aerodinamica. Configurazioni 
+con lunghezze minime di pista molto piccole hanno una superficie alare elevata, perché per avere 
+lunghezze di pista minima ridotte bisogna avere una velocità di stallo bassa, che a sua volta dipende 
+dalla superficie alare. Un buon compromesso è progettare l’aereo in modo che abbia un coefficiente di 
+portanza in fase di crociera circa uguale a 0.5.  
+In questa esercitazione utilizzeremo il software Xfoil. Utilizza il metodo del potenziale e lo risolve con il 
+metodo dei pannelli.  Per prima cosa scarichiamo Xfoil dal sito del MIT: 
+  
+
+
+3 
+ 
+Scegliamo XfoilP4 che contiene un eseguibile già pronto per Windows. Estraiamo la cartella e apriamo il 
+programma facendo doppio click sull’icona dell’eseguibile. La schermata che si presenta è questa: 
+ 
+Xfoil ha elencato tutti i comandi disponibili. Per chiedere a Xfoil di ripetere i comandi disponibili bisogna 
+digitare il comando ?. 
+ 
+
+
+4 
+ 
+I comandi preceduti da un . indicano ambienti di lavoro. Ad esempio il comando oper indica l’ambiente 
+di lavoro operativo. 
+ 
+Per accendere a un ambiente di lavoro basta digitare il comando associato. Entriamo nell’ambiente di 
+lavoro operativo: 
+ 
+Una volta entrati in questo ambiente nuovi comandi sono disponibili. Per chiedere a Xfoil di mostrare i 
+comandi disponibili all’interno di ogni ambiente di lavoro possiamo sempre usare il comando ?. 
+Caricare un profilo 
+Prima di entrare in nuovi ambienti di lavoro, iniziamo caricando il profilo con cui vogliamo lavorare. 
+Possiamo: 
+• Caricare un profilo da file con il comando load 
+• Usare un profilo naca a 4 o 5 cifre con il comando naca che è automaticamente riconosciuto da 
+Xfoil 
+Usiamo il comando naca e carichiamo il profilo naca 4412. 
+ 
+Cambiare la pannellizzazione 
+Possiamo cambiare la pannellizzazione utilizzando il comando ppar. Quando Xfoil chiede cosa cambiare 
+dobbiamo specificare n, cioè il numero dei pannelli e poi 200, il numero dei pannelli che abbiamo scelto 
+per ripannellizzare il profilo. Inoltre possiamo notare che la pannellizzazione di default usa 140 pannelli.  
+
+
+5 
+ 
+ 
+Per rendere effettiva la ripannellizzazione dobbiamo chiamare il comando pane. 
+Eseguire calcoli aerodinamici e salvarli in un file 
+A questo punto possiamo entrare nell’ambiente oper per eseguire i calcoli aerodinamici 
+Chiamiamo quindi il comando visc per selezionare l’opzione viscosa. In questo modo Xfoil farà anche i 
+calcoli di strato limite. Come numero di Reynolds specifichiamo 500 000.  
+Quando eseguirete i calcoli aerodinamici sul profilo per il vostro aereo dovrete utilizzare il numero di 
+Reynolds calcolato per la vostra corda media aerodinamica alla condizione di crociera.  
+
+
+6 
+ 
+ 
+Si può anche cambiare il numero di Mach già in Xfoil ma noi consigliamo di eseguire i conti a M = 0 e poi 
+correggere con la correzione di Prandtl-Glauert i risultati in seguito.  
+Se l’aereo che state progettando è transonico, Xfoil è comunque impreciso. Per ottenere predizioni 
+accurate in campo transonico bisogna utilizzare codici RANS. Non vi spaventate, in fase di avanprogetto, 
+strumenti di calcolo agili sono più utili di strumenti complessi. Questi ci permettono di fare più iterazioni 
+di progetto in poco tempo e senza aver bisogno di enormi capacità computazionali. Strumenti di calcolo 
+più precisi come le RANS saranno utili in fase di progetto di dettaglio, quando la configurazione è stata 
+sceclta e le modifiche sono limitate. 
+Per eseguire il calcolo aerodinamico 2D a un’incidenza specificata usiamo il comando alfa seguito 
+dall’angolo di attacco a cui vogliamo eseguire l’analisi.  
+ 
+Il risultato è: 
+
+
+7 
+ 
+ 
+Xfoil ha calcolato Cl, Cd, Cm ed efficienza.  
+Possiamo fare in modo che Xfoil esegua analisi a diversi angoli di attacco e salvi i risultati in un file. Per 
+fare questo usiamo il comando pacc: 
+  
+
+
+8 
+ 
+Quando richiesto, specifichiamo il nome del file che vogliamo utilizzare. In figura potete vedere il nome 
+del file che ho inserito, polare.dat. Quando Xfoil ha richiesto il nome del polar dump filename ho cliccato 
+invio per non creare un ulteriore file.  
+Ora vediamo che di fianco a OPER sono presenti le lettere v e a. Indicano che siamo in visc (v), cioè 
+eseguiamo i calcoli di strato limite, e che l’accumulazione della polare è attivata (a). Per disattivare 
+queste due opzioni basta richiamare i comandi usati per attivarle cioè visc e pacc.  
+Eseguiamo i calcoli per ottenere la polare del nostro profilo. Il comando da utilizzare è aseq che specifica 
+una sequenza di alfa. 
+ 
+Xfoil chiede l’alfa iniziale, l’alfa finale e l’incremento. Una volta specificati questi valori, inizia le analisi. Al 
+termine, i risultati sono plottati nell’interfaccia grafica di Xfoil e salvati nel file polare.dat 
+
+
+9 
+ 
+ 
+Potete aprire il file polare.dat con un qualsiasi editor di testo come ad esempio wordpad o notepad. Io 
+utilizzo sublimetext.  
+
+
+10 
+ 
+ 
+ 
+Come potete notare le analisi per gli angoli d’attacco -5, 0, 1, 14 e 15 non sono arrivate a convergenza e 
+quindi nessun risultato è riportato nel file di accumulazione. Si possono rieseguire i conti modificando il 
+numero massimo di iterazioni consentite con il comando iter: 
+ 
+Rilanciando nuovamente il comando aseq otteniamo risultati per tutti gli angoli di attacco tranne alfa = 
+1. Per avere il risultato anche per questo ultimo angolo usiamo il comando alfa 1. Nel caso in cui anche 
+questo comando non arrivi a convergenza, si può usare il comando “!”. Questo comando dice a Xfoil di 
+continuare con le iterazioni.  
+
+
+11 
+ 
+  
+Questo è il file di accumulazione finale. Possiamo modificarlo a mano per riordinare gli angoli di attacco 
+ed eliminare i doppioni.  
+
+
+12 
+ 
+Modificare la geometria 
+Come ultima cosa vediamo l’ambiente di lavoro gdes (graphic design) che permette di modificare la 
+geometria del profilo. Per uscire da oper basta premere invio, per entrare in gdes bisogna inserire il 
+comando gdes. 
+Il comando tset permette di modificare lo spessore (thickness set). Per rendere effettivi i cambiamenti 
+bisogna utilizzare il comando exec. 
+ 
+Con questi comandi abbiamo cambiato lo spessore massimo da 0.12 a 0.25. 
+
+
+13 
+ 
+ 
+ 
+Il comando flap permette di aggiungere un flap al profilo, anche in questo caso bisogna utilizzare il 
+comando exec per rendere effettivi i cambiamenti. 
+ 
+
+
+14 
+ 
+ 
+Non è necessario eseguire la parte di ipersostentazione in Xfoil. Potete semplicemente usare dati presi 
+da libri di progetto di aeromobili. Ad esempio il libro di Anderson “Aircraft performance and design” 
+riporta la seguente figura (figura 5.28 pagina 257): 
+ 
+
+
+15 
+ 
+Importare i dati in Excel 
+Dopo le modifiche il file polare è: 
+ 
+Possiamo importarlo in Excel con il comando File -> Apri selezionando l’opzione tutti i files: 
+ 
+
+
+16 
+ 
+A questo punto si aprirà lo strumento di importazione guidata testo e noi dovremo semplicemente 
+utilizzare le impostazioni predefinite. 
+Ora abbiamo i dati calcolati con Xfoil all’interno di Excel! 
+ 
+Quello che vogliamo fare adesso è calcolare i parametri che ci serviranno nella prossima esercitazione 
+per studiare le proprietà 3D dell’ala. 
+I parametri necessari sono: 
+- La derivata 𝐶𝑙𝛼 
+- L’angolo di attacco di portanza nulla 𝛼𝐿=0 
+Eseguiamo la regressione lineare. Per fare questo usiamo la funzione regr.lin() di Excel. 
+Creiamo due nuove caselle chiamate m e q e selezioniamole entrambe. Digitiamo nella barra della 
+formula  
+=regr.lin( 
+Selezioniamo per prima la colonna dei Cl, digitiamo  
+;  
+
+
+17 
+ 
+selezioniamo la colonna degli alpha, chiudiamo la parentesi e completiamo la formula premendo 
+contemporaneamente Ctrl e Shift e quindi  schiacciando il tasto Invio. Dobbiamo usare questa procedura 
+perché Excel considera le due caselle selezionate all’inizio come una matrice e con Ctrl + Shift + Invio 
+diciamo a Excel di calcolarne i valori a tempo.  
+ 
+Nell’immagine potete vedere la procedura spiegata sopra all’istante prima di premere Ctrl + Shift + 
+Invio.  
+Controlliamo con un grafico di aver ottenuto una buona regressione lineare 
+
+
+18 
+ 
+ 
+Per fare ciò dobbiamo creare una nuova tabella in cui confrontiamo il Cl stimato con la regressione 
+lineare ( Cl lin ) con i valori di Xfoil. Come potete vedere la regressione non è molto precisa perché 
+abbiamo considerato anche i valori di alpha per i quali il grafico Cl- alpha non è più lineare. Rifacciamo la 
+regressione considerando solo gli alpha per i quali la relazione Cl – alpha rimane lineare. Nel nostro caso 
+sono gli alpha da -4 a 8 circa.  
+
+
+19 
+ 
+ 
+Adesso la retta di regressione è molto più precisa nella zona lineare 
+ 
+
+
+20 
+ 
+ 
+ 
+Per trovare la derivata 𝐶𝑙𝛼 ci basta convertire il valore di m in modo da considerare angoli d’attacco in 
+radianti: 
+  
+ 
+ 
+Possiamo ora trovare facilmente anche l’alpha di zero lift. Questo è l’angolo di attacco per cui il Cl è 
+uguale a zero. Usando la nostra regressione lineare y = mx + q in cui x rappresenta gli angoli d’attacco e 
+y i Cl poniamo y = 0 e ricaviamo x. Otteniamo quindi x = -q/m. L’angolo di attacco di portanza nulla è 
+quindi: 
+
+
+21 
+ 
+ 
+Ricordiamoci di salvare il nostro lavoro come cartella di lavoro Excel! 
+ 
+Conclusioni 
+In questa esercitazione abbiamo visto come utilizzare Xfoil per importare profili, eseguire calcoli 
+aerodinamici e modificare la geometria per creare un profilo migliore e abbiamo poi importato i dati in 
+Excel e calcolato la derivata 𝐶𝑙𝛼  e l’angolo di attacco di portanza.  
+Per il vostro progetto potrete usare i profili che preferite. Il sito airfoiltools.com contiene molti profili e 
+le analisi già fatte con Xfoil per vari numeri di Reynolds. Il sito del gruppo di aerodinamica applicata 
+dell’Università dell’Illinois Urbana-Campaign contiene molti profili (https://m-
+selig.ae.illinois.edu/ads/coord_database.html) e un’ottima lista di risorse (https://m-
+selig.ae.illinois.edu/ads.html). Quando utilizzate in xfoil profili prpesi da internet potreste incorrere in 
+problemi legati all’ordine dei punti. In questo caso potete scaricare da xfoil un file .txt contenente un 
+profilo naca già presente in xfoil usando il comando save, controllare l’ordine dei punti di xfoil, e 
+modificare l’ordine dei punti del file che avete scaricato in modo che sia conforme a quello di xfoil.  
+Nel caso in cui dobbiate progettare un aereo transonico ricordate che Xfoil non è preciso in 
+quell’ambito. Il consiglio è quindi di usare un profilo supercritico e usare Xfoil solo per stimarne le 
+prestazioni senza modificare il profilo.  
+Come ulteriori approfondimenti potete legggere il capitolo 2 del libro “Aircraft performance and Design” 
+di Anderson e il capitolo 4 del libro “Aircraft Design: A Conceptual Approach” di Raymer.  
+  
+
+
+22 
+ 
+Esercitazione 2 – Progetto di aeromobili 
+Alessandro Bacchini 
+ 
+Aerodinamica 3D – Linea portante di Prandtl 
+In questa esercitazione useremo i risultati ottenuti durante la prima esercitazione per calcolare le 
+proprietà aerodinamiche dell’ala. Costruiremo insieme un foglio di calcolo che risolva per noi la linea 
+portante di Prandtl. 
+I dati che ci servono dalla prima esercitazione sono: 
+• La derivata 𝐶𝑙𝛼. 
+• L’angolo di attacco di portanza nulla 𝛼𝐿=0. 
+• La tabella che per ogni angolo di incidenza riporta il Cl e il Cd. 
+Attenzione: l’angolo di attacco di portanza nulla è un valore negativo per tutti i profili convenzionali, il 
+prof. usa il suo valore assoluto. 
+ 
+Gli altri input sono: 
+• Apertura alare 
+• Superficie alare 
+• Alfa di volo 
+• Numero di discretizzazioni per la soluzione numerica della linea portante 
+Usiamo il file Excel iniziato durante la prima esercitazione creando un nuovo foglio di calcolo.  
+
+
+23 
+ 
+ 
+Per creare un nuovo foglio basta premere il tasto + in basso a sinistra accanto al nome del foglio di 
+calcolo che stiamo utilizzando. 
+Per prima cosa inseriamo gli input in tabella 
+ 
+Gli input sono colorati in blu. La superficie alare sarà poi ricalcolata integrando numericamente la 
+distribuzione di corde lungo l’apertura. L’allungamento alare è calcolato con la consueta formula: 
+ 
+Creiamo adesso un’altra tabella che useremo per discretizzare l’ala in stazioni e che riporterà le 
+proprietà di ogni sezione dell’ala. Dato che la circuitazione di un’ala 3D varia molto alle estremità alari 
+dove va a zero scegliamo una discretizzazione che abbia tanti punti all’estremità e meno al centro. Nella 
+nostra tabella rappresenteremo solamente una semiala perché consideriamo solo condizioni di volo 
+simmetriche. 
+Il metodo per ottenere questa discretizzazione è quello del coseno. Dividiamo in angoli uguali una 
+circonferenza e poi proiettiamo con il coseno le stazioni lungo l’asse. 
+
+
+24 
+ 
+ 
+ 
+Nella prima tabella abbiamo selezionato m = 39. Questo valore controlla il numero di stazioni e il 
+numero di termini della serie di Fourier che utilizzeremo per risolvere l’equazione integrale di Prandtl.  
+ 
+La formula sopra indica come discretizziamo l’angolo. Consideriamo stazioni da 20 a 1 cioè da π/2 a 0 
+circa.  
+
+
+25 
+ 
+ 
+ 
+
+
+26 
+ 
+Ottenuta la discretizzazione lungo l’angolo possiamo ottenere facilmente la distanza dalla radice: 
+𝐷𝑖𝑠𝑡𝑎𝑛𝑧𝑎 𝑑𝑎𝑙𝑙𝑎 𝑟𝑎𝑑𝑖𝑐𝑒 = 𝑤𝑖𝑛𝑔𝑠𝑝𝑎𝑛
+2 cos 𝜙 
+ 
+ 
+ Aggiungiamo ora altre colonne per: 
+• Corda 
+• Alfa di volo 
+• Alfa di zero lift (calcolato nell’esercitazione precedente, però in questo caso usiamo il valore  -1 
+per avere gli stessi risultati forniti dal prof) 
+• Svergolamento 
+• Alfa complessivo  
+• Alfa complessivo in radianti 
+• 𝐶𝑙𝛼 (calcolato nell’esercitazione precedente, però in questo caso usiamo il valore approssimato 
+6 per avere gli stessi risultati forniti dal prof) 
+ 
+
+
+27 
+ 
+ 
+Continuiamo a utilizzare la convenzione dei valori blu input inseriti manualmente. I valori neri sono 
+invece valori fissi o calcolati con una formula.  
+Alfa di volo è semplicemente preso dalla prima tabella e considerato costante per ogni stazione: 
+ 
+L’angolo di attacco complessivo è la somma di alfa di volo, alfa di zero lift e svergolamento: 
+ 
+
+
+28 
+ 
+Adesso risolviamo l’equazione integrale di Prandtl. Tralasciamo i passaggi che sono nelle slides del prof. 
+La formula risolutiva è: 
+ 
+Attenzione a non fare confusione con la notazione: 
+- In questa formula a0 corrisponde al 𝐶𝑙𝛼 
+- c è la corda 
+- l è la semi-apertura alare 
+- r è il coefficiente della serie di Fourier 
+Il nostro obiettivo è costruire la matrice As, invertirla e calcolare la matrice {c cl} cioè il prodotto della 
+corda per il cl. A questo punto potremo semplicemente dividere la matrice ottenuta e ottenere il cl di 
+ogni singola sezione. 
+Per ottenere la matrice As costruiamo una per volta tutte le matrici necessarie. Prima di assegnare valori 
+delimitiamo una zona di Excel di 20x20 caselle in modo da essere facilitati nella costruzione delle matrici. 
+ 
+La prima matrice è 1/a0c. Dato che è una matrice diagonale riempiamo i valori lungo la diagonale e poi 
+mettiamo tutti gli altri uguali a zero. 
+
+
+29 
+ 
+ 
+ 
+ 
+Fate attenzione che il primo elemento utilizzi i valori della prima stazione, il secondo quelli della seconda 
+stazione e così via. 
+È anche possibile utilizzare i comandi RIF.RIGA e RIF.COLONNA (che forniscono rispettivamente il 
+riferimento della riga e della colonna di una cella) uniti alla funzione SE, per creare più facilmente le 
+matrici diagonali: 
+ 
+Trascinando la cella appena creata è possibile creare automaticamente tutta la matrice diagonale.  
+La seconda matrice è 1/sen(phi), anch’essa diagonale: 
+
+
+30 
+ 
+ 
+La procedura è praticamente identica alla prima. 
+La terza matrice è sin(r*phi). Per costruirla creiamo per prima cosa una linea con i valori di r. Dato che 
+consideriamo condizioni di volo simmetriche i valori di r che ci servono sono solo quelli dispari, quindi la 
+nostra linea conterrà i primi 20 numeri dispari da 1 a 39. I valori di r dispari corrispondono a funzioni che 
+hanno la forma del seno, simmetrica rispetto al piano xz che taglia a metà l’aereo con un’ala da una 
+parte e l’altra dall’altra. I valori di r pari corrispondono a funzioni che hanno la forma del coseno, 
+asimmetriche rispetto al piano xz. Questo si spiega con l’identità trigonometrica 𝑠𝑖𝑛(2𝛼) =
+2 𝑠𝑖𝑛(𝛼) 𝑐𝑜𝑠(𝛼). Il seno è una funzione simmetrica mentre il coseno non lo è. Il loro prodotto non è 
+simmetrico. I termini pari vanno considerati se calcoliamo l’aerodinamica dell’ala per una manovra di 
+rollio. Nella casella in alto a sinistra inseriamo la formula: 
+ 
+Bloccando con il $ la riga a r (blu) e la colonna a phi (rosso). Adesso possiamo facilmente popolare la 
+matrice trascinando la formula. 
+ 
+La quarta matrice è r*sin(r*phi). Può essere facilmente costruita moltiplicando r per la matrice appena 
+costruita e bloccando la linea a r 
+
+
+31 
+ 
+ 
+ 
+La quinta matrice è sin(r*phi)^-1. Per ottenerla bisogna invertire la matrice sin(r*phi). Selezioniamo 
+l’area 20x20 in cui verrà costruita la matrice, digitiamo la formula 
+ = matr.inversa(  
+Selezioniamo la matrice sin(r*phi) chiudiamo la parentesi e completiamo il comando tenendo premuto 
+Ctrl + Shift e premendo Invio. 
+ 
+Dobbiamo utilizzare questa procedura per far capire a Excel che vogliamo che lavori 
+contemporaneamente con tutta la matrice. 
+ 
+
+
+32 
+ 
+Adesso dobbiamo fare i prodotti. Iniziamo da 1/sen(phi) *r*sen(r*phi). Selezioniamo nuovamente l’area 
+20x20 in cui vogliamo creare la matrice, digitiamo la formula: 
+ = matr.prodotto( 
+Selezioniamo la matrice 1/ sen(phi), digitiamo: 
+ ; 
+selezioniamo la matrice *r*sen(r*phi), chiudiamo la parentesi e completiamo il comando tenendo 
+premuto Ctrl + Shift e premendo Invio. 
+ 
+Il risultato è: 
+ 
+Con la stessa procedura creiamo la matrice da 1/sen(phi)  *  r*sen(r*phi)  *  sen(r*phi)^-1 moltiplicando 
+la matrice appena ottenuta per la matrice sen(r*phi)^-1. Il risultato è: 
+ 
+
+
+33 
+ 
+Per ottenere la matrice As bisogna solamente eseguire la somma. Si può semplicemente fare elemento 
+per elemento scrivendo la formula in alto a sinistra e poi trascinando: 
+ 
+Il blu si riferisce all’elemento in altro a sinistra della matrice 1/a0c, il rosso all’apertura alare, il viola 
+all’elemento in alto a sinistra della matrice 1/sen(phi)  *  r*sen(r*phi)  *  sen(r*phi)^-1 appena calcolata. 
+Per calcolare As^-1 usiamo la procedura utilizzata con sen(r*phi)^-1. 
+ 
+Abbiamo quasi finito! 
+Ora possiamo calcolare la matrice c * cl come prodotto di As^-1 per alfa: 
+
+
+34 
+ 
+ 
+Anche in questo caso dobbiamo ricordarci di selezionare prima l’area in cui verrà inserito il risultato cioè 
+la colonna sotto c*cl digitare la formula, selezionare le matrici As^-1 (blu) e alpha (rosso) e convalidare il 
+comando tenendo premuto Ctrl + Shift e premendo Invio. 
+Ora calcoliamo il cl dividendo c*cl per la corda e visualizziamolo in un grafico: 
+
+
+35 
+ 
+ 
+ 
+In questo grafico abbiamo inserito la distanza dalla radice sull’asse x e il cl sull’asse y. Il modo più facile 
+per creare questo grafico è selezionare le colonne “Distanza dalla radice” e “Corda”, cliccare su inserisci  
+-> grafici consigliati, inserire il grafico e quindi trascinare la colonna delle y dalla colonna “Corda” alla 
+colonna “Cl”. La colonna delle x rimmarrà automaticamente su “Distanza dalla radice”.   
+  
+
+
+36 
+ 
+Aggiungiamo l’angolo di freccia: 
+ 
+Il Cl ora viene modificato di un fattore pari al coseno dell’angolo di freccia.  
+Abbiamo completato la seconda esercitazione! 
+Nella prossima esercitazione calcoleremo il Cd indotto integreremo Cl e Cd su tutta l’ala e scriveremo 
+una macro che ci permetterà di eseguire questi calcoli per vari alfa di volo. Così otterremo la polare 
+dell’ala 3D. 
+ 
+  
+
+
+37 
+ 
+Esercitazione 3 – Progetto di aeromobili 
+Alessandro Bacchini 
+ 
+Aerodinamica 3D 
+In questa esercitazione calcoleremo il Cd indotto integreremo Cl e Cd su tutta l’ala e scriveremo una 
+macro che ci permetterà di eseguire questi calcoli per vari alfa di volo. Così otterremo la polare dell’ala 
+3D. 
+Iniziamo calcolando l’angolo di incidenza indotta: 
+ 
+Invertiamo questa formula per ottenere Alpha i. Per noi Alpha contiene già anche l’alpha di zero lift.  
+ Alpha i = alpha – Cl/𝐶𝑙𝛼 
+ 
+Adesso possiamo calcolare il Cd indotto. La formula da usare è: 
+ Cl * tangente( angolo di incidenza indotto ) 
+
+
+38 
+ 
+ 
+Adesso calcoliamo il Cd bidimensionale (chiamato Cd0) di ogni sezione. Per ogni sezione conosciamo il 
+Cl. Possiamo usare questo valore e la tabella che abbiamo calcolato nella prima esercitazione per 
+trovare il Cd bidimensionale di ogni sezione. Per fare questo si usa la funzione Excel  
+ =cerca( 
+Aggiungendo il valore che vogliamo trovare, cioè il Cl della sezione per cui ricerchiamo il Cd, la colonna 
+dei Cl e la colonna dei Cd. La funzione cerca troverà il Cl presente nella tabella più vicino a quello della 
+sezione in esame e restituirà il Cd corrispondente a quel Cl. Una tabella con tanti valori di alfa ci 
+permette di ottenere un risultato più preciso.  
+ 
+
+
+39 
+ 
+ 
+Attenzione alla notazione! Quello che ora chiamiamo Cd0 è il coefficiente di resistenza bidimensionale 
+Cd 2D che tiene conto degli effetti di attrito viscoso e attrito di forma. 
+Per calcolare Il Cl, Cdi e Cd0 complessivi per l’ala dobbiamo integrare con la regola dei trapezi i valori che 
+abbiamo sezione per sezione. 
+Creiamo quattro nuove colonne.  
+ 
+La prima riga è 0 per tutte perché per integrare abbiamo bisogno di dy cioè della distanza lungo 
+l’apertura alare (asse y) delle due stazioni che stiamo considerando. I valori di Cl, Cdi, Cd0 e c che 
+utilizziamo sono la media sulle due stazioni che consideriamo. Consideriamo sempre la stazione alla riga 
+in cui eseguiamo il calcolo e quella alla riga precedente.  
+Per il Cl * c * dy usiamo direttamente i valori c * cl e moltiplichiamoli per dy. 
+ 
+
+
+40 
+ 
+ 
+ 
+Ora possiamo sommare la colonna c * dy per ottenere la superficie della semiala: 
+ 
+Per ottenere il Cl dell’ala sommiamo la colonna cl * c * dy e dividiamo per la superficie della semiala: 
+
+
+41 
+ 
+ 
+Con lo stesso procedimento e usando le rispettive colonne calcoliamo Cdi e Cd0. Per finire calcoliamo il 
+Cd totale come la somma di Cd0 e Cdi e L/D dividendo Cl per Cd: 
+ 
+In questo modo abbiamo calcolato i parametri complessivi dell’ala 3D per l’angolo di attacco specificato. 
+Per ottenere la polare dobbiamo ripetere questo calcolo per un buon arco di angoli d’attacco. Per fare 
+questo useremo una macro che modificherà il valore di input Alpha fly, eseguirà i calcoli, salverà i 
+risultati in una casella e ripeterà la procedura per una sequenza di alpha fly prescritta.  
+Per utilizzare le macro dobbiamo salvare il file come “Cartella di lavoro con attivazione macro di Excel”. 
+ 
+ 
+
+
+42 
+ 
+ 
+Poi dobbiamo attivare il tab sviluppo da opzioni. 
+File -> Opzioni -> Personalizza barra multifunzione -> Sviluppo 
+ 
+ 
+ 
+Ora sarà disponibile il tab Sviluppo: 
+
+
+43 
+ 
+ 
+Qui possiamo creare un pulsante e assegnargli una macro cliccando sul pulsante Inserisci -> Pulsante. 
+Dopo aver cliccato sul tasto pulsante, dobbiamo trovare un’area del foglio di lavoro opportuna. Poi 
+bisogna cliccare, trascinare e rilasciare il pulsante sinistro del mouse per creare una forma rettangolare 
+che diventerà il pulsante con cui potremo eseguire la marco. Dopo aver rilasciato il tasto sinistro del 
+mouse appare la schermata Assegna macro. 
+
+
+44 
+ 
+ 
+Cliccando in su Nuovo in alto a destra possiamo scrivere la macro. Questa è la schermata che ci si 
+presenta: 
+
+
+45 
+ 
+ 
+Questo editor ci permette di scrivere in Visual Basic una subroutine che verrà chiamata quando il 
+pulsante che abbiamo creato sarà cliccato. 
+L’obiettivo della macro è di creare una tabella con tre colonne: 
+• Angolo d’attacco 
+• Cl  
+• Cd 
+E far questo variando l’angolo d’attacco e salvando i valori Cl e Cd calcolati con la procedura descritta 
+prima. Nella prossima immagine vediamo la macro che fa questo: 
+
+
+46 
+ 
+ 
+Per prima cosa salva il valore di alfa presente all’inizio nella cella di input Alpha fly. La riga: 
+ alfa = Cells(4, 3) 
+vuole dire che sta salvando il valore contenuto nella casella C4 in una nuova variabile chiamata alfa.  
+Se voi avete messo il valore alpha fly in una cella diversa da C4 fate attenzione a cambiare questo valore 
+con il vostro. Le celle si indicano con Cells(riga, colonna in numero) 
+La seconda parte della macro inizializza le variabili necessarie per il ciclo lungo gli alfa. Le variabili 
+necessarie sono: 
+- Alfa iniziale 
+- Alfa finale 
+- Incremento tra i vari alfa 
+- Contatore per creare la tabella durante il ciclo 
+La terza parte è il ciclo vero e proprio. Il ciclo è sulla variabile a che varia secondo i vari angoli d’attacco 
+da alfa iniziale a alfa finale. Nella riga: 
+ Cells(4, 3) = a 
+
+
+47 
+ 
+La macro sostituisce nella casella C4 il valore dell’angolo di attacco. 
+Nelle tre righe successive scrive i risultati nella tabella. 
+        Cells(4 + i, 26) = a 
+Mette nella casella Z4 il valore attuale di alfa quando i è uguale a zero. Ripetendo il ciclo i viene 
+incrementato a ogni iterazione dalla riga: 
+ i = i + 1 
+quindi ogni valore successivo di alfa verrà scritto una riga sotto sempre nella colonna Z. La riga 
+        Cells(4 + i, 28) = Cells(3, 21) 
+Scrive nella casella AB4 il Cl calcolato. Ho usato Cells(3, 21) perché si riferisce alla casella U3 dove ho 
+messo il Cl complessivo dell’ala nel mio foglio Excel, se voi lo avete salvato in un’altra casella fate 
+attenzioni a cambiare questa riga con il valore opportuno. 
+La riga: 
+        Cells(4 + i, 27) = Cells(6, 21) 
+Inserisce il Cd nella tabella esattamente come ha fatto precedentemente per il Cl ma questa volta nella 
+colonna AA. Cliccando sul pulsante si attiva la macro che riempie la tabella: 
+ 
+ 
+Abbiamo ottenuto la polare dell’ala! Se alcuni valori di Cd e Cl non vengono calcolati, controllate la 
+tabella prodotta con xfoil. Molto probabilmente state uscendo dai valori lì presenti. Per risolvere questo 
+problema bisogna ripetere i calcoli xfoil con un range di alfa maggiore per il comando aseq. Già che ci 
+siete potete infittire i dati. Più sono fitti, più il risultato della funzione =cerca() sarà preciso. Uno step di 
+0.25 gradi dovrebbe andare bene.   
+
+
+48 
+ 
+Esercitazione 4 – Progetto di aeromobili 
+Alessandro Bacchini 
+ 
+Resistenza aerodinamica 
+In questa esercitazione calcoleremo i contributi di resistenza aggiuntivi dovuti a: 
+- Resistenza d’onda 
+- Contributo della fusoliera 
+- Contributo dei piani di coda 
+Resistenza d’onda 
+Aggiungiamo al nostro foglio di calcolo gli input necessari: 
+- Ka è fattore legato al profilo. Vale 0.87 per profili standard e 0.95 per profili supercritici. Noi 
+usiamo 0.87 perché abbiamo iniziato i conti con il profilo naca 4412. Nel caso in cui usiate il un 
+profilo supercritico passate a Ka = 0.95 
+- Angolo di freccia 
+- Spessore percentuale del profilo 
+- Mach di crociera  
+ 
+ 
+Utilizziamo la formula di Korn per calcolare il Mach di divergenza: 
+ 
+Con il Mach di divergenza calcoliamo il Mach critico: 
+
+
+49 
+ 
+ 
+E calcoliamo il coefficiente di resistenza d’onda per ogni sezione: 
+ 
+Rispetto alle slides del prof questa formula è priva della parte finale 
+𝑆𝑠𝑡𝑟𝑖𝑝
+𝑆𝑟𝑒𝑓
+ che serve per calcolare il 
+𝑐𝑑𝑤𝑎𝑣𝑒  della sezione. Noi calcoliamo il 𝑐𝑑𝑤𝑎𝑣𝑒  stazione per stazione e poi integriamo sommando le varie 
+sezioni come abbiamo fatto per Cdi e Cd0 moltiplicando per c*dy, cioè 𝑆𝑠𝑡𝑟𝑖𝑝, poi sommiamo tutti i 
+contributi e solo alla fine dividiamo per la superficie della semiala 𝑆𝑟𝑒𝑓 nella tabellina del cl e dei vari cd.    
+Eseguiamo questi passaggi nella nostra tabella. Per prima cosa aggiungiamo 4 nuove colonne: 
+ 
+Inseriamo la formula per calcolare Mdd: 
+
+
+50 
+ 
+ 
+Calcoliamo il Mach critico: 
+ 
+Calcoliamo il Cd wave locale. Ricordiamo che la formula ha senso solo se il Mach di crociera è superiore 
+al Mach critico. Questo perché il Mach di divergenza è il valore per cui la resistenza d’onda inizia a 
+crescere rapidamente mentre il Mach critico è il valore per cui in qualche parte del profilo inizia a 
+comparire un’onda d’urto. Il Mach critico è sempre minore del mach di divergenza. Nel caso in cui il 
+Mach di crociera fosse inferiore al Mach critico avremo resistenza d’onda nulla. Per assicurare questo 
+usiamo l’espressione condizionale =SE().  
+ 
+Con l’espressione che vedete nell’immagine sopra controlliamo se il Mach di crociera è maggiore del 
+Mach critico locale, dopo il punto e virgola specifichiamo cosa vogliamo inserire nella cella se è vero, 
+cioè la formula e dopo l’ultimo punto e virgola specifichiamo cosa vogliamo inserire nella cella se è falso, 
+cioè zero.  
+Ora non resta che integrare il Cd wave. Facciamolo come al solito con la regola dei trapezi. Creiamo la 
+colonna Cdw * c * dy in cui moltiplichiamo il Cdw locale per la media delle corde locale e allo step 
+precedente per il dy. 
+
+
+51 
+ 
+ 
+Per calcolare il Cd w di tutta l’ala sommiamo tutta la colonna e dividiamo per la superficie della semiala. 
+ 
+Ricordiamoci di modificare il calcolo del Cd complessivo in modo che sommi i contributi di: 
+- Resistenza viscosa 
+- Resistenza indotta 
+- Resistenza d’onda 
+ 
+A questo punto ricontrolliamo L/D. Possiamo anche aggiungere il calcolo del fattore di Oswald: 
+
+
+52 
+ 
+ 
+Attenzione! Quando calcolate il fattore di Oswald ricordatevi di utilizzare la superficie alare corretta, cioè 
+la superficie della semiala calcolata per integrazione moltiplicata per due. Un errore comune è usare la 
+superficie alare di input che, a volte, non corrisponde con la superficie alare calcolata per integrazione.  
+Attenzione! Queste ultime immagini a partire dal calcolo di Mdd contengono risultati non corretti 
+perché al momento dello screenshot era presente un errore nella formula di Mdd, cioè t/c era diviso per 
+100. Per darvi modo di controllare i vostri risultati aggiungo questa schermata. Gli input sono diversi 
+perché l’ala è già stata modificata per le esercitazioni successive in modo da ottenere risultati sensati 
+per le stime pesi, la stabilità e i calcoli strutturali. Come ulteriore controprova potete aggiungere il 1/100 
+nella formula di Mdd, controllare i risultati fino a questo punto e quindi eliminarlo in modo da 
+correggere l’errore.  
+ 
+E un po’ più zoomato: 
+
+
+53 
+ 
+ 
+ 
+Resistenza della fusoliera 
+Creiamo un nuovo foglio di calcolo che useremo per calcolare i vari contributi alla resistenza 
+aerodinamica. Ho inoltre rinominato il due fogli già esistenti da polare a polare 2D e da 3D a Ala. 
+ 
+Inseriamo gli input per il calcolo della resistenza: 
+
+
+54 
+ 
+ 
+Dobbiamo inserire i valori di densità, velocità del suono e viscosità dinamica per la quota di crociera.  
+Creiamo una nuova tabella che useremo per calcolare la resistenza viscosa del nostro aereo: 
+ 
+Possiamo inserire il valore di Cd0 per l’ala calcolato nel foglio di calcolo Ala.  
+Attenzione! Il valore non va inserito con copia – incolla ma usando la formula = e selezionando la cella 
+che vogliamo copiare. In questo modo le celle rimangono collegate, quando varia il Cd0 dell’ala, ad 
+esempio perché abbiamo cambiato forma dell’ala, cambia direttamente anche la cella nel foglio di 
+calcolo “Resistenza” 
+ 
+Per calcolare la resistenza viscosa della fusoliera usiamo il metodo seguente. Calcoliamo il numero di 
+Reynolds, calcoliamo il Coefficiente d’attrito turbolento e laminare:  
+ 
+Calcoliamo il fattore di forma F:  
+ 
+Per fare questo aggiungiamo una tabellina con i dati della fusoliera: 
+
+
+55 
+ 
+ 
+A questo punto il nuovo foglio di calcolo sarà circa così: 
+ 
+Per calcolare il Cd0 con la formula: 
+ 
+Mancano ancora la superficie bagnata e il fattore d’interferenza Q. Per il fattore d’interferenza usiamo 1 
+per fusoliera e gondole e 1.2 per ala e piani di coda. 
+Per calcolare la superficie bagnata della fusoliera consideriamo, in prima approssimazione, la superficie 
+del cilindro più la superficie di due mezze sfere alle estremità: 
+ 
+Completando il calcolo abbiamo: 
+
+
+56 
+ 
+ 
+Per il Cd0 laminare seguiamo lo stesso procedimento utilizzando però il Cf laminare.  
+Abbiamo usato la x di transizione per combinare i valori di Cd0 turbolento e laminare: 
+ 
+Resistenza del piano di coda orizzontale 
+Per i piani di coda orizzontali creiamo un nuovo foglio di calcolo copiando quello dell’ala e cambiando gli 
+input.  
+
+
+57 
+ 
+ 
+Cambiamo: 
+- Apertura alare -> 8m 
+- Alfa di volo -> -1° 
+
+
+58 
+ 
+- Corda -> 1m per tutte le sezioni 
+- Alfa di zero lift -> 0° per tutte le sezioni 
+Adesso possiamo usare il valore di Cd0 calcolato in questo nuovo foglio all’interno del foglio di calcolo 
+“Resistenza”.  
+Attenzione! Dobbiamo riferire il Cd0 dell’orizzontale alla superficie di riferimento del velivolo e cioè la 
+superficie alare e non alla superficie dell’orizzontale stesso. Per fare questo moltiplichiamo per la 
+superficie dell’orizzontale e dividiamo per la superficie di riferimento. 
+ 
+ 
+Resistenza del piano di coda verticale 
+Per il piano di coda verticale usiamo il procedimento che abbiamo utilizzato per la fusoliera. Le formule 
+sono leggermente diverse: 
+ 
+ 
+∆0.5𝑐 è l’angolo di freccia alla corda media e  t/c è lo spessore massimo percentuale. 
+Creiamo una tabellina con gli input necessari per i piani di coda verticali: 
+
+
+59 
+ 
+ 
+Eseguiamo i calcoli facendo attenzione a usare, per il calcolo del numero di Reynolds, la corda dei piani 
+di coda verticali e per il calcolo del Cd0 la superficie bagnata dei piani di coda verticali. Ho calcolato la 
+superficie del piano di coda verticale come se fosse un parallelogramma (base x altezza) e ho 
+moltiplicato per due, cioè i due lati, per trovare la superficie bagnata totale. 
+Siamo arrivati a questo punto: 
+ 
+I numeri in blu rappresentano sempre i valori input che mettiamo a mano mentre i valori in nero sono 
+calcolati con una formula. 
+Resistenza delle gondole motore 
+Per le gondole motore possiamo utilizzare questa regola: 
+ 
+Creiamo una nuova tabella con i dati input per le gondole motore: 
+
+
+60 
+ 
+ 
+ 
+Eseguiamo i calcoli con la solita procedura. Ricordiamoci di moltiplicare il Cd0 finale per il numero di 
+gondole motore presenti: 
+ 
+Per visualizzare la grandezza relativa delle varie resistenza possiamo utilizzare un grafico a torta: 
+ 
+Altre componenti di resistenza 
+Andando a prendere dai fogli di calcolo appropriati mettiamo in tabella la resistenza indotta di ala e 
+orizzontale.  
+
+
+61 
+ 
+ 
+Calcoliamo la resistenza di interferenza ala-fusoliera e fusoliera piani di coda con la formula: 
+ 
+Se avessimo considerato piani di coda a T avremmo dovuto scegliere l’altra formula proposta nelle slides 
+del prof. Come spessore percentuale t/c dobbiamo usare lo spessore percntuale della corda di radice 
+dell’ala per l’interferenza ala fusoliera, e lo spessore percentuale della corda di radice dei piani di coda 
+orizzontali per l’interferenza dei piani di coda.  
+ 
+Il foglio di calcolo risultante è circa così. Abbiamo moltiplicato per 2 i valori di resistenza di interferenza 
+di ala e di piani di coda orizzontali perché le giunzioni con la fusoliera sono 2. 
+Aggiungiamo ancora la resistenza d’onda andando a prendere i valori di Cdw dai fogli di calcolo di ala e 
+del piano di coda orizzontale. Anche in questo caso dobbiamo riferire il valore di Cdw del piano di coda 
+orizzontale alla superficie di riferimento del velivolo completo come abbiamo fatto per il Cd0 a pagina 
+58. 
+
+
+62 
+ 
+  
+Mettendo tutto insieme possiamo calcolare il Cl, il Cd e L/D complessivi dell’aereo. Anche in questo caso 
+dobbiamo riferire il valore di Cl del piano di coda orizzontale alla superficie di riferimento del velivolo 
+completo come abbiamo fatto per il Cd0 a pagina 58 e poco fa per il Cdw. 
+ 
+ 
+  
+
+
+63 
+ 
+Correzione di compressibilità 
+Per correggere i valori che abbiamo calcolato con Xfoil considerando Mach = 0, in modo che siano validi 
+a più alti numeri di Mach, usiamo la correzione di Prandtl – Glauert: 
+ 
+Cambiamo il valore di 𝐶𝑙∝ nei fogli di calcolo “Ala” e “Orizzontale”. 
+ 
+ 
+Per mach elevati, come ad esempio quelli di crociera dei velivoli da trasporto a getto 
+quest’approssimazione non è più valida. Possiamo utilizzare questo grafico (figura 2.24 pagina 83 del 
+libro Aircraft Performance and Design di Anderson): 
+
+
+64 
+ 
+ 
+ 
+Attenzione! Questo grafico si riferisce all’effetto di compressibilità sul 𝐶𝑙∝ dell’aereo completo. Come 
+potete vedere infatti per M=0, 𝐶𝑙∝=4.1. Noi vogliamo vedere l’effetto di compressibilità bidimensionale 
+per profili con spessore maggiore del 5%. Dal grafico troviamo un valore di circa 4.5, cioè un incremento 
+del 10%. Riportando questo incremento al nostro valore di 𝐶𝑙∝ iniziale di 6, possiamo stimare il valore di 
+𝐶𝑙∝ con gli effetti di compressibilità a 6.6.  
+
+
+65 
+ 
+Polare del velivolo completo 
+Adesso che il foglio di calcolo Excel è pronto, possiamo calcolare la polare dell’aereo con una macro 
+esattamente come abbiamo fatto nell’esercitazione 3 per l’ala. 
+ 
+Alfa di volo diventa un input che specifichiamo nel foglio di calcolo “Resistenza” e viene copiato nel 
+foglio di calcolo “Ala”. Alfa di volo dell’orizzontale diventa alfa di volo dell’aereo meno un angolo fissato 
+che abbiamo messo uguale a 6 gradi.  
+Esaminiamo questo procedimento più in dettaglio. Per prima cosa bisogna creare una casella nel foglio 
+di calcolo "Resistenza" per l'alfa di volo del velivolo. Questa è la casella che sarà modificata iterazione 
+dopo iterazione dalla nuova macro. A questo punto, bisogna modificare la casella alfa di volo dell'ala in 
+modo che sia uguale alla nuova casella alfa di volo del velivolo nel foglio resistenza, cioè quando la 
+macro modifica il valore all'interno della casella alfa fly nel foglio "Resistenza", la casella alfa fly nel 
+foglio "Ala" si modifica automaticamente. Per fare questo bisogna cliccare sulla casella alfa fly ala, 
+inserire = e poi selezionare la casella alfa fly nel foglio "Resistenza". Dovreste ottenere una formula tipo: 
+="Resistenza"!C50. Bisogna quindi ripetere questo stesso procedimento per la casella alfa di volo 
+dell’orizzontale in modo che, quando la macro modifica l’alfa di volo del velivolo, la casella alfa di volo 
+dell’orizzontale si modifichi automaticamente. Per l’orizzontale bisogna anche considerare l’angolo 
+relativo tra ala e orizzontale, cioè quell’angolo che poco fa abbiamo ipotizzato essere di 6 gradi. In 
+questo procedimento abbiamo fatto l’ipotesi che l’angolo relativo tra ala e fusoliera sia nullo. Va bene in 
+prima approssimazione. Se volete essere più precisi e considerarlo, inseritelo nella casella alfa di volo 
+dell’ala esattamente come è stato fatto poco fa per l’angolo relativo ala-orizzontale per l’alfa di volo 
+dell’orizzontale. In questo caso dovrete modificare anche l’alfa di volo dell’orizzontale per tenere conto 
+anche del nuovo angolo ala-fusoliera. 
+Alfa fly = 5 gradi è solo un valore di input per inizializzare la macro.  
+La macro che esegue i conti è: 
+
+
+66 
+ 
+ 
+Downwash dell’ala sui piani di coda 
+I piani di coda ricevono un flusso che è deviato verso il basso dall’ala. Questo fenomeno è chiamato 
+downwash. L’angolo di downwash può essere stimato con la formula: 
+𝜖 =  𝜖0 +  𝜖𝛼 ∗ 𝛼 
+𝜖0 può essere stimato con la seguente formula: 
+ 
+Inserendo il Cl di angolo di attacco uguale a zero preso da Xfoil. 
+𝜖𝛼 può essere calcolato con la seguente formula: 
+ 
+In Excel: 
+
+
+67 
+ 
+ 
+ 
+Attenzione! L tail è la distanza orizzontale tra ala e piani di coda, non la tail-wing vertical distance come 
+indicato nella casella di excel qui sopra.  
+
+
+68 
+ 
+ 
+ 
+ 
+
+
+69 
+ 
+ 
+ 
+E quindi il downwash è calcolato e inserito nel calcolo aerodinamico dell’orizzontale in questo modo: 
+ 
+
+
+70 
+ 
+Conclusioni  
+Abbiamo terminato il nostro file Excel di calcolo aerodinamico! 
+Ora potrete utilizzarlo variando a vostro piacimento gli input per progettare il vostro aereo.  
+Inserite i vostri valori di input nel vostro file di calcolo Excel che abbiamo appena creato! Controllate che 
+tutti i collegamenti siano bene effettuati e che le macro facciano riferimento alle caselle giuste e 
+dovreste essere pronti a fare tutti i calcoli aerodinamici che volete per progettare il vostro velivolo! 
+Per aumentare l’efficienza aerodinamica, il modo più semplice in fase di avanprogetto è aumentare 
+l’allungamento alare. Questo ridurrà la resistenza indotta. Lo svantaggio è che il peso delle ali 
+aumenterà.  
+Per trovare la condizione di corciera devete semplicemente eguagliare la portanza al peso. In questo 
+modo ricaverete il coefficiente di portanza di crociera. Dalla polare del velivolo complete potete ricavare 
+il valore di L/D del velivolo completo in condizione di crociera.  
+Come approfondimento potete leggere: 
+-  il capitolo 14 del libro di Hoerner “Fluid dynamic drag”, in cui l’autore calcola la resistenza 
+aerodinamica del caccia della seconda guerra mondiale Me-109; 
+- l’articolo “Commercial Transports-Aerodynamic Design for Cruise Performance Efficiency” di F. 
+T. Lynch; 
+- il capitolo 9 del libro “Theory of winng sections” di Abbott e von Doenhoff che tratta degli effetti 
+di compressibilità sui profili subsonici; 
+- i capitoli 9 e 14 del libro “Modern compressible flows” di Anderson. Il capitolo 9 presenta la 
+correzione di compressibilità di Prandtl-Glauert mentre il capitolo 14 discute il flusso transonico.   
+
+71 
+ 
+Esercitazione 5 – Progetto di aeromobili 
+Alessandro Bacchini 
+ 
+In questa esercitazione effettueremo la stima pesi con due metodi: quello di Torenbeek e quello di 
+Jenkinson, calcoleremo la posizione del baricentro ed eseguiremo un’analisi di stabilità statica 
+longitudinale di base. Per fare questo aggiungeremo al nostro file Excel tre nuovi fogli di calcolo: uno per 
+la stima pesi di Tornebeek, uno per la stima pesi di Jenkinson e uno per il baricentro e la stabilità 
+Stima pesi Torenbeek 
+Le formule che useremo in questa parte delle’sercitazione sono quelle fornite nelle slides dal professore. 
+Si riferiscono al capitolo 8 del libro “Synthesis of Subsonic Airplane Design” di Egbert Torenbeek del 
+1982. Il procedimento è molto facile, bisogna inserire gli input e utilizzare le formule per calcolare le 
+masse dei vari componenti. L’unica parte un po’ complessa è la creazione della macro per iterare la 
+stima pesi fino a giungere a convergenza. Questa macro è necessaria perché, per il calcolo delle masse 
+dei componenti, uno degli input è la massa totale. All’inizio la stimeremo. In seguito, una volta calcolata 
+la massa dei componenti, la calcoleremo come somma delle masse dei componenti. Trovata una nuova 
+massa totale, le masse dei componenti saranno aggiornate e si dovrà aggiornare la massa totale fino a 
+giungere a convergenza. La macro farà questo lavoro per noi! 
+Inseriamo la stima preliminare della massa. 
+ 
+La cella in grigio e arancione è quella che aggiorneremo con la macro e che conterrà il risultato finale. 
+Ogni volta che vi serve il valore della massa totale per calcolare il peso di un componente usate la cella 
+che viene aggiornata dalla macro, così il peso dei componenti viene aggiornato automaticamente.  
+Iniziamo ora con il calcolo della massa dei vari componenti. 
+Ala 
+La formula è: 
+ 
+Aggiungo anche il testo in modo che la formula risulti di più facile comprensione: 
+
+
+72 
+ 
+ 
+
+
+73 
+ 
+ 
+• Bref è una costante uguale a 1.905 metri.  
+• Il load factor è il fattore di carico dei diagrammi di manovra e raffica. 
+• Come fuel fraction mettete una stima iniziale, verrà poi modificata alla sezione fuel a pagina 81. 
+• Il maximum zero fuel weight è calcolato come takeoff mass meno il peso del combustibile. 
+ 
+Se potete, seguite il capitolo 8 del libro “Synthesis of Subsonic Airplane Design” di Egbert Torenbeek 
+mentre lavorate su questa perte delle esercitazioni. Torenbeek in persona vi spiegherà il significato delle 
+sue formule.  
+ 
+ 
+ 
+ 
+
+
+74 
+ 
+In Excel: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+75 
+ 
+Piani di coda 
+Per i piani di coda si utilizzano la seguente figura:  
+ 
+E le formule: 
+ 
+Nelle slides il professore riporta un’approssimazione della figura calcolata con una regressione. Per 
+maggiori dettagli consultate il libro di Torenbeek. 
+Per eseguire questi calcoli in Excel per prima cosa calcoliamo la dive speed Vd. Il libro di Torenbeek non 
+spiega come calcolare questa velocità. Dalle slides del professore: 
+
+
+76 
+ 
+ 
+Per maggiori informazioni potete trovare il testo della normativa al sito: 
+https://www.law.cornell.edu/cfr/text/14/25.335 
+Possiamo calcolare la dive speed Vd come EAS moltiplicata per 1.3.  
+ 
+Il calcolo delle masse dei piani di coda è quindi: 
+
+
+77 
+ 
+ 
+Il parameter for figure è il valore che dovete usare come riferimento sull’asse x nella figura a pagina 75. 
+F from figure è il valore che trovate sull’asse y usando la figura a pagina 75 inserendo il parameter for 
+figure nell’asse x.  
+ 
+Fusoliera 
+La formula è: 
+ 
+
+
+78 
+ 
+ 
+Variations è la somma delle variazioni dovute alla pressurizzazione (pressurized), al carrello di 
+atterraggio (undercarriage) e al portello per il cargo (large cargo door).  
+Lt è la stessa grandezza che abbiamo usato per il calcolo del downwash.   
+Per il calcolo della superficie della fusoliera possiamo usare la seguente formula: 
+ 
+ 
+Questo risultato è più preciso di quello ottenuto durante l’esercitazione 4, andiamo anche a sostituirlo 
+nel foglio di calcolo resistenza. 
+Carrelli di atterraggio 
+La formula è: 
+ 
+
+
+79 
+ 
+Con i seguenti coefficienti: 
+ 
+ 
+Gruppo delle superfici di controllo 
+ 
+
+
+80 
+ 
+ 
+ 
+Nacelles 
+Calcoliamo il peso delle nacelles senza i motori usando uno dei due coefficienti seguenti: 
+ 
+
+
+81 
+ 
+ 
+In questo caso ho scelto quello relativo ai turbofan con alto by-pass ratio. 
+Motori 
+Il peso dei motori è preso direttamente dal datesheet del costruttore: 
+ 
+Il valore in figura è relativo al motore IAE V2500 del Airbus A320. 
+Equipaggiamento e impianti 
+ 
+ 
+
+
+82 
+ 
+ 
+Payload 
+ 
+Fuel 
+Per il calcolo del peso del combustibile usiamo lo stesso procedimento sia per il metodo Torenbeek che 
+per il metodo Jenkinson. Ho scelto il procedimento indicato nel libro di Jenkinson alle pagine 130, 131 e 
+132. Forse questo metodo sovrastima il carburante necessario per aerei a corto raggio, se trovate un 
+modo migliore per calcolare le riserve, usatelo pure. 
+ 
+ 
+ 
+  
+
+
+83 
+ 
+ 
+ 
+Convergenza massa 
+Sommando tutti i valori calcolati otteniamo: 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+84 
+ 
+Creiamo la macro per portare a convergenza la stima della massa: 
+ 
+Questa macro itera con il ciclo do until la sostituzione del valore iniziale con il valore calcolato al termine 
+della stima fino a che la differenza tra i due non è inferiore a 0.1. La stima iniziale è contenuta nella cella 
+8,3 del mio foglio, mentre la stima finale è contenuta nella cella 15,8. Fate attenzione a modificare 
+questi due valori con la posizione delle celle del vostro foglio di calcolo! 
+Con i dati di input mostrati sopra otteniamo a convergenza i seguenti risultati: 
+ 
+  
+
+
+85 
+ 
+Stima pesi Jenkinson 
+Questo procedimento è tratto dal capitolo 7 del libro “Civil Jet Aircraft Design” di Lloyd jenkinson. Il 
+procedimento è molto simile a quello adottato per il metodo Torenbeek ma con formule leggermente 
+diverse. Inoltre è necessaria una macro ulteriore perché bisogna iterare anche per la stima pesi della’ala. 
+Vediamo come fare! 
+Ala 
+La formula di Jenkinson per il calcolo della massa alare è: 
+ 
+Attenzione! In questa formula WSWEEP non è l’angolo di freccia in gradi, è il coseno dell’angolo di 
+freccia. 
+ 
+ 
+Come vedete dall’immagine abbiamo impostato come stima iniziale del peso totale 80 tonnellate. 
+Stimiamo il parametro d’inertia relief: 
+
+
+86 
+ 
+ 
+ 
+ 
+Abbiamo sommato solo le prime parentesi quadre che contengono la distanza tra i motori interni perché 
+consideriamo un bimotore. Nel caso considerassimo un quadrimotore dovremmo sommare anche le 
+seconde parentesi quadre. 
+Ora possiamo aggiornare il valore di relief factor, che avevamo inserito all’inizio per calcolare la massa 
+dell’ala, con il valore di inertia relief che abbiamo appena calcolato. 
+Che senso ha il relief factor? Il relief factor rappresenta la diminuzione in momento flettente dovuta 
+all’installazione dei motori sulle ali. Più aumenta il relief factor, più diminuisce il momento flettente che 
+la struttura delle ali deve sopportare e quindi più diminuisce il peso della struttura delle ali.  
+Per aggiornare il relief factor fino a convergenza scriviamo una macro.  
+
+
+87 
+ 
+ 
+Questa macro è molto simile a quella che abbiamo visto per il metodo Torenbeek, itera fino a che il 
+parametro di inerzia relief non converge. Il mio valore iniziale è nella cella 11, 3 mentre il valore 
+calcolato nella cella 19, 3. Come per le altre volte ricordate di adattarla alla posizione delle vostre celle 
+nel vostro foglio di calcolo. 
+Piani di coda 
+Per calcolare la massa dei piani di coda utilizziamo il seguente metodo: 
+ 
+ 
+
+
+88 
+ 
+Fusoliera 
+ 
+Per questo calcolo dobbiamo fare attenzione alla Vd. Non è lo stesso parametro del metodo Torenbeek! 
+In questo caso Vd è la velocità massima dell’aereo equivalent airspeed, non true airspeed. Nel mio 
+calcolo ho semplicemente moltiplicato la velocità di crociera per un margine, in questo modo considero 
+la velocità massima uguale alla velocità di crociera più il 20% (valore che ho stimato). 
+ 
+
+
+89 
+ 
+ 
+ 
+Nacelles 
+Per le nacelles utilizziamo la seguente regola: 
+ 
+ 
+Carrelli di atterraggio 
+La stima del peso del carrello di atterraggio è fatta con questa semplice formula: 
+ 
+
+
+90 
+ 
+ 
+C2 è la cella del mio foglio di calcolo che contiene la stima preliminare della massa totale dell’aereo. 
+Motore 
+Utilizziamo il peso del motore indicato dal produttore. Nel caso non riusciste a trovarlo, potete usare la 
+formula basata sul by-pass-ratio indicata nel libro di Jenkinson.  
+Equipaggiamento fisso 
+L’equipaggiamento fisso è calcolato, come per il metodo Torenbeek come il 11% del peso massimo al 
+decollo: 
+ 
+Attrezzi vari 
+ 
+Per passenger cabin supplies, water and toilet 
+provision e safety equipment, ho scelto il valore 
+più basso che corrisponde a voli brevi. Scegliete 
+i valori più adatti al vostro velivolo. Items per 
+passenger è la somma di questi tre valori. 
+ 
+
+
+91 
+ 
+Equipaggio 
+ 
+Fuel e payload 
+Il calcolo del peso di fuel e payload è fatto esattamente come per il metodo Torenbeek 
+Convergenza massa 
+Sommando tutto otteniamo: 
+ 
+Propulsion system indica la massa dei motori. Se non riuscite a trovare su internet la massa del motore 
+scelto, potete stimarla usando il metodo indicato sul libro di Jenkinson.  
+Scriviamo la macro per portare a convergenza la massa totale. Il metodo è sempre lo stesso però 
+ricordiamoci di portare a convergenza la massa dell’ala ad ogni iterazione! Per fare questo usiamo il 
+comando Call seguito dal nome della macro per la convergenza della massa dell’ala: 
+ 
+Con i dati di input il risultato è: 
+
+
+92 
+ 
+ 
+  
+
+
+93 
+ 
+Baricentro 
+Creiamo un nuovo foglio di calcolo all’interno del nostro file Excel per il calcolo della posizione del 
+baricentro e per l’analisi di stabilità.  
+A questo punto dobbiamo scegliere una delle due stime pesi. Io ho scelto quella di Jenkinson. Creiamo 
+quindi una tabella con la massa di ogni elemento e la sua posizione longo l’asse corpo X espressa come 
+distanza dal nose del velivolo: 
+ 
+In questo modo abbiamo rapidamente calcolato la posizione del baricentro.  
+Le posizioni dei vari componenti lungo l’asse x sono state stimate. Alcune che però sono legate le une 
+con le altre sono state espresse come formula. Quelle in blu sono come da nostra convenzione gli input, 
+quindi le posizioni stimate, quelle in nero sono quelle calcolate da formula. Le formule usate sono 
+semplicemente delle stime per la posizione di ogni singolo elemento. La posizione dell’ala è inserita è 
+quella del suo bordo d’attacco. Per semplicità consideriamo il punto neutro dell’ala coincidente con il 
+baricentro.  
+ 
+In questa immagine vediamo come è stata calcolata la posizione dei piani di coda. 
+Per potere eseguire i calcoli di stabilità dobbiamo calcolare la posizione del baricentro 
+adimensionalizzata rispetto alla corda media aerodinamica. 
+
+
+94 
+ 
+Per prima cosa calcoliamo la corda media aerodinamica con la seguente formula: 
+ 
+ 
+ 
+ 
+Questo valore è adimensionalizzato con la corda media e nel sistema di riferimento in cui l’origine è al 
+bordo di attacco di radice dell’ala. 
+Le altre formule con cui abbiamo stimato la posizione dei vari componenti sono: 
+ 
+
+
+95 
+ 
+ 
+ 
+ 
+  
+
+
+96 
+ 
+Stabilità statica longitudinale 
+Per la stabilità statica longitudinale della configurazione convenzionale siamo interessati a verificare 2 
+condizioni: 
+- 𝐶𝑀 = 0, cioè il velivolo è in equilibrio 
+- 𝐶𝑚𝛼 < 0, cioè la condizione di equilibrio è stabile. 
+Per le configurazioni non convenzionali l’approccio è un po’ più complesso. Ciononostante non vi 
+scoraggiate! Siamo nel pieno della rivoluzione digitale e disponiamo dei computer necessari per 
+stabilizzare artificialmente configurazioni instabili.  
+In questo tutorial tratteremo solamente la configurazione tradizionale. 
+La procedura sarà la seguente: 
+1. Calcoleremo la posizione del punto neutro ala fusoliera e nacelles 
+2. Calcoleremo la posizione del punto neutro considerando anche i piani di coda 
+3. Calcoleremo 𝐶𝑚0e 𝐶𝑚𝛼 e faremo il greafico della curva Cm vs alpha 
+Posizione del punto neutro ala fusoliera e nacelles 
+La posizione del punto neutro dell’ala isolata è al quarto anteriore, cioè al 25% della corda. Per 
+considerare lo spostamento dovuto al cambiamento del campo di moto fluidodinamico dovuto alla 
+presenza di fusoliera e nacelles utilizziamo il seguente grafico: 
+ 
+
+
+97 
+ 
+Per prima cosa calcoliamo i rapporti che moltiplicano il delta h (cioè lo spostamento del punto neutro 
+adimensionalizzato con la corda media aerodinamica): 
+ 
+Fuselage chord è la corda dell’ala di radice, nacelle chord è la corda dell’ala all’altezza della nacelle.  
+E per le nacelles: 
+ 
+Per la fusoliera abbiamo: 
+
+
+98 
+ 
+ 
+Inseriamo i valori di c/l e Ln/L nel grafico e otteniamo 0.9. Dividendolo per il rapporto ottenuto prima 
+otteniamo lo spostamento del punto neutro dovuto alla fusoliera: 
+ 
+Ripetiamo lo stesso procedimento per le nacelles, e calcoliamo lo spostamento totale: 
+
+
+99 
+ 
+ 
+Facciamo attenzione a moltiplicare per due il contributo delle nacelles perché abbiamo due nacelles. 
+Il punto neutro è ora 0.25 più il contributo calcolato: 
+ 
+Questo valore è adimensionalizzato con la corda media ed è nel sistema di riferimento in cui l’origine è 
+al bordo di attacco di radice dell’ala, come la x del baricentro che abbiamo calcolato poco fa. 
+Posizione del punto neutro considerando anche i piani di coda 
+Per calcolare la posizione del punto neutro considerando anche i piani di coda utlizziamo la seguente 
+formula: 
+
+
+100 
+ 
+ 
+ 
+Dove il rapporto volumetrico di coda è: 
+ 
+La distanza d è la distanza tra la coda e il quarto anteriore della corda dell’ala.  
+ 
+Il Cl alfa dell’ala e dei piani di coda sono tridimensionali. Per stimarli possiamo usare la formula 2.15 del 
+libro di Anderson. 
+ 
+ 
+
+
+101 
+ 
+  
+ 
+La cella C79 è quella in cui abbiamo calcolato il punto neutro allo step precedente, l’aerodynamic center 
+wing body. 
+Ora possiamo calcolare il margine statico come la posizione del baricentro meno la posizione del punto 
+neutro appena calcolata: 
+ 
+Curva Cm vs alpha 
+Per il calcolo di 𝐶𝑚0e 𝐶𝑚𝛼 utilizziamo le seguenti formule: 
+
+
+102 
+ 
+ 
+Calcoliamo il Cm0, cioè la prima linea della formula: 
+ 
+L’angolo geometrico tra ala e piani di coda è lo stesso che abbiamo usato nell’esercitazione 4 al 
+momento di creare la macro per il velivolo completo. Ora che abbiamo creato una casella per questo 
+valore, possiamo andare a modificare la formula per il calcolo dell’alfa di volo dei piani di coda 
+orizzontali sostituendo il 6 in numero che avevamo messo con il valore contenuto all’interno di questa 
+nuova cella.  
+Il CmAC è il momento del profilo che abbiamo calcolato con xfoil. Vi riporto qui sotto la tabella dei valori 
+dei miei valori xfoil che mostrano un CmAC di circa -0.1.  
+
+
+103 
+ 
+ 
+ 
+Calcoliamo il CmAlpha, cioè la seconda linea della formula: 
+ 
+ 
+La terza riga della formula si riferisce alla deflessione degli equilibratori, per ora non ci interessa perché 
+stiamo studiando la stabilità statica longitudinale in fase di crociera.  
+A questo punto possiamo fare il grafico Cm vs alpha! 
+
+
+104 
+ 
+ 
+ 
+ 
+ 
+
+
+105 
+ 
+Nell’immagine possiamo vedere il risultato desiderato, la curva ha pendenza negativa e l’aereo è stabile. 
+Se avete dati di input un po’ sballati potreste trovare curve non stabili.  
+L’angolo per cui il Cm è nullo è l’alfa di crociera. Provate a far combaciare questo valore con l’angolo per 
+cui la portanza è uguale al peso. Per ottenere questo risultato modificate l’angolo geometrico tra ala e 
+piani di coda.  
+L’alfa di crociera che abbiamo trovato sarà anche l’angolo geometrico tra ala e fusoliera. Questo perché, 
+in fase di crociera, la fusoliera deve essere parallela al flusso per minimizzare la resistenza aerodinamica.  
+Lavorate sui dati di input per ottenere curve sensate e avrete terminato anche questa esercitazione!   
+
+106 
+ 
+Esercitazione 6 – Progetto di aeromobili 
+Alessandro Bacchini 
+ 
+Creazione della geometria 3D 
+In questa esercitazione vedremo alcuni comandi di Catia e importeremo da Excel la geometria dell’ala.  
+Per usare Catia nei computer del Laib selezioniamo l’icona installazione applicazioni e installiamo sul 
+computer Catia.  
+ 
+ 
+
+
+107 
+ 
+Apriamo Catia e creiamo una nuova parte. 
+Inserimento punti 
+Per prima cosa apriamo uno schizzo. Selezioniamo quindi l’opzione creazione di un punto utilizzando 
+delle coordinate. 
+ 
+Ora proviamo a inserire i punti indicati nelle slides del prof. Facciamo attenzione a non lasciare 
+selezionato il punto appena creato quando ne creiamo uno nuovo perché altrimenti il nuovo punto sarà 
+creato alla distanza specificata come coordinate dal punto creato precedentemente.  
+Un punto è selezionato se è arancione.  
+ 
+
+
+108 
+ 
+ 
+Creazione spline 
+Con i punti inseriti possiamo creare una spline. 
+Selezioniamo il comando spline, selezioniamo in ordine i punti  e clicchiamo nuovamente sul comando 
+spline per confermare il comando.  
+ 
+
+
+109 
+ 
+ 
+
+
+110 
+ 
+ 
+Traslazione, scala e rotazione 
+Usciamo dallo schizzo con il comando in alto a destra. 
+
+
+111 
+ 
+ 
+Per eseguire traslazione e per scalare una forma utilizziamo il comando Inserisci -> Operazioni 
+
+
+112 
+ 
+ 
+ 
+Eseguiamo una traslazione: 
+- Selezioniamo l’elemento da traslare, cioè la spline che abbiamo appena creato,  
+- la distanza a cui traslare ad esempio 5000 mm 
+- e la direzione 
+
+
+113 
+ 
+ 
+
+
+114 
+ 
+ 
+Diamo ok e ricentriamo la visuale con il pulsante nella barra in basso 
+
+
+115 
+ 
+ 
+In maniera praticamente uguale potete eseguire le operazioni di scala e rotazione. 
+Creazione loft 
+Con le due splines create possiamo creare una superficie. 
+
+
+116 
+ 
+ 
+Come prima curva selezioniamo la prima spline e come seconda curva la seconda spline 
+ 
+Selezioniamo ok e la curva è creata! 
+
+
+117 
+ 
+ 
+  
+
+
+118 
+ 
+Importare dati da Excel a Catia 
+Per compiere questa operazione useremo una macro.  
+Per prima cosa apriamo Catia e apriamo una nuova Part. 
+Apriamo il file Excel fornito dal prof e abilitiamo le macro. 
+ 
+Attiviamo la barra Sviluppo andando in Opzioni -> Personalizza barra multifunzione e selezionando 
+Sviluppo.  
+In Sviluppo clicchiamo su Macro: 
+
+
+119 
+ 
+ 
+Eseguiamo la macro Main. 
+ 
+Nella casella che appare selezioniamo 3 per creare oltre ai punti anche le splines e il loft. 
+Abbiamo importato in Catia la geometria dell’ala! 
+ 
+
+
+120 
+ 
+Esercitazione 7 – Progetto di aeromobili  
+Analisi Strutturale 
+Introduzione  
+In questa esercitazione si usa il software Microsoft Excel per effettuare l’analisi strutturale del cassone 
+alare. Gli obiettivi dell’analisi sono i seguenti: 
+• Calcolo delle caratteristiche di sollecitazione; 
+• Calcolo degli stress del cassone; 
+• Calcolo della freccia. 
+I carichi aerodinamici e i pesi stimati sono quindi input dell’analisi strutturale. 
+ 
+Determinazione geometria del profilo alare 
+Prima di iniziare l’analisi si creano due tabelle in cui sono presenti le coordinate adimensionali di ogni 
+profilo utilizzato (uno in questo esempio), ordinate secondo x/c crescente.  
+Si crea perciò un nuovo foglio di lavoro chiamato “Profilo” e si inseriscono due tabelle che contengono le 
+coordinate x/c e z/c per dorso e ventre: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+121 
+ 
+ 
+ 
+ 
+Carichi  
+Si crea un nuovo foglio di lavoro chiamato “Carichi”. In questo foglio saranno anche calcolate le 
+caratteristiche di sollecitazione. Si crea la seguente tabella che contiene le caratteristiche geometriche e 
+le masse che servono per effettuare l’analisi strutturale: 
+ 
+ 
+ 
+Per quanto riguarda dy esso è calcolato con la seguente formula: 
+ 
+ 
+Wing mass si riferisce alla massa totale dell’ala; inizialmente tale valore può essere assunto pari a quello 
+della stima dei pesi; in seguito (come si vedrà nel tutorial ”Esercitazione 8”) sarà necessario variarlo 
+rispetto a questo valore. 
+Si decidono le posizioni dei longheroni anteriore e posteriore e i limiti del serbatoio (inizio e fine). I due 
+limiti del serbatoio vanno assunti (come si vedrà in seguito) in maniera tale da garantire che tutto il 
+carburante stimato con la stima pesi possa essere contenuto all’interno dei serbatoi.  
+ 
+Si crea una tabella che contiene le stazioni, le posizioni y e i valori di Cl e Cd determinati con l’analisi 
+aerodinamica dell’ala: 
+ 
+ 
+ 
+ 
+
+
+122 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Con i seguenti comandi si effettua l’interpolazione polinomiale dei dati del Cl: 
+ 
+ 
+ 
+Si effettua la stessa operazione per il Cd: 
+ 
+ 
+ 
+Questa operazione risulta necessaria perché nell’analisi aerodinamica si utilizzava suddivisione lungo y 
+che tendeva ad infittirsi verso il tip, mentre adesso per l’analisi strutturale si usa una suddivisione delle y 
+equispaziata.  
+
+
+123 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Si crea una nuova tabella che contiene i valori di Cl e Cd per una suddivisione lungo y equispaziata: 
+ 
+ 
+Di seguito le formule utilizzate: 
+ 
+ 
+
+
+124 
+ 
+ 
+ 
+ 
+ 
+ 
+Si crea una nuova tabella: 
+ 
+ 
+L’obiettivo è calcolare DL/dy; per fare ciò si usa la seguente formula: 
+
+
+125 
+ 
+ 
+ 
+ 
+Il Kcorr va calcolato nel seguente modo: 
+ 
+ 
+ 
+ 
+Si prosegue creando una nuova colonna c*cl: 
+ 
+ 
+ 
+ 
+Si calcola l’integrale del c*cl: 
+
+
+126 
+ 
+ 
+ 
+ 
+ 
+Sommando si ottiene il coefficiente A1: 
+ 
+ 
+ 
+Si prosegue con il calcolo del Kcorr applicando la formula riportata precedentemente (a destra in 
+dettaglio la formula usata): 
+ 
+ 
+ 
+
+
+127 
+ 
+Attenzione: il valore di A1 contenuto nella cella 61 è errato; la scrittura corretta è:  
+=SOMMA(E40:E59)*2 
+ 
+Si calcola DL/dy: 
+ 
+ 
+  
+Dividendo per l’efficienza locale per ogni stazione si ottiene dD/dy: 
+ 
+ 
+ 
+ 
+Prima di procedere ulteriormente è necessario aggiungere alcune celle che servono per determinare il 
+carico distribuito del fuel: 
+
+
+128 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Le formule utilizzate sono le seguenti: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Per calcolare il carico si determina la superficie del profilo ad ogni stazione: 
+ 
+ 
+Si procede con il calcolo del volume di fuel che ogni porzione di ala può ospitare: 
+
+
+129 
+ 
+ 
+ 
+ 
+Si inserisce la densità del fuel: 
+ 
+Si calcola la massa del fuel per ogni porzione di ala, tenendo conto delle posizioni limite del serbatoio 
+contenute nelle celle M4 e M5: 
+ 
+ 
+ 
+Si calcola la somma della colonna M per ottenere la massa totale del fuel contenuta nel serbatoio: 
+
+
+130 
+ 
+ 
+ 
+Tale massa deve essere confrontata con quella ottenuta dalla stima dei pesi; in particolare è necessario 
+che questo valore sia maggiore o uguale a metà della massa di totale di fuel stimata. Nell’esempio è 
+stata aggiunta una formattazione condizionale per fare in modo che la cella si colori di verde se questo 
+requisito è soddisfatto. Se questo requisito non è soddisfatto, procedere modificando i limiti del 
+serbatoio inseriti nelle celle M4 e M5. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Si calcola il peso: 
+
+
+131 
+ 
+ 
+ 
+ 
+Si calcola il carico distribuito n*dWs/dy:
+ 
+Si noti che questo carico agisce con segno negativo. 
+ 
+Si crea adesso la colonna del carico distribuito dovuto al peso dell’ala, n*dWa/dy. 
+Esso si calcola come peso wing, moltiplicato per il fattore di carico, diviso per la superficie alare e 
+moltiplicato per la corda della stazione: 
+
+
+132 
+ 
+ 
+Attenzione: la formula in Q40 deve essere ancora moltiplicata per 9.81 
+ 
+A questo punto è possibile calcolare i carichi distribuiti qz (verticale) e qx (orizzontale) sommando le 
+varie componenti: 
+ 
+ 
+ 
+ 
+Integrandoli è possibile calcolare il taglio dovuto ai carichi distribuiti qx e qz; l’integrazione parte dal tip 
+procedendo verso la radice: 
+
+
+133 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Il motore contribuisce anch’esso ai tagli a causa della presenza della spinta e del peso (essi sono 
+entrambi dei carichi concentrati). Si aggiunge una casella che contiene la posizione lungo y del motore: 
+ 
+ 
+ 
+
+
+134 
+ 
+Il contributo alla componente verticale del taglio causato dal peso del motore sarà quindi pari al peso 
+del motore, moltiplicato per il fattore di carico; esso sarà costante e sarà presente solamente nel tratto 
+compreso tra 0 e la posizione determinata in X62: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Analogamente si calcola il contributo al taglio dato dalla spinta: 
+ 
+ 
+
+
+135 
+ 
+ 
+Si calcolano i tagli complessivi sommando i contributi dei carichi distribuiti e concentrati: 
+ 
+ 
+ 
+ 
+ 
+ 
+Si calcolano quindi i momenti flettenti; essi si calcolano per integrazione dei tagli, partendo dal tip in 
+maniera analoga a quanto fatto precedentemente: 
+
+
+136 
+ 
+ 
+ 
+ 
+NB: si noti che l’integrale di Tx genera Mz e che l’integrale di Tz genera Mx. 
+ 
+ 
+ 
+ 
+È possibile tracciare i diagrammi delle caratteristiche di sollecitazione: 
+
+
+137 
+ 
+ 
+ 
+ 
+Nel tutorial dell’Esercitazione 8 saranno calcolati gli stress, gli strain e gli spostamenti. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+138 
+ 
+Esercitazione 8 – Progetto di aeromobili  
+Analisi Strutturale – Parte 2 
+Si prosegue con l’analisi strutturale; l’obiettivo di questa esercitazione è ricavare gli stress, gli strain e gli 
+spostamenti. 
+ 
+Spessori di partenza 
+Si crea un nuovo foglio di lavoro chiamato “Struttura”. 
+Per poter calcolare gli stress è necessario determinare gli spessori del cassone. I dati di partenza sono 
+rappresentati nella figura seguente: 
+ 
+Le celle B3:D8 contengono tutti i dati del materiale (modulo elastico, modulo di Poisson, densità, ecc).  
+I dati in G2:G6 si ottengono nello stesso modo descritto nel tutorial Esercitazione 7. 
+ 
+Nella cella J3 si inserisce la larghezza della soletta anteriore alla radice. Per semplicità in questo esempio 
+la larghezza della soletta posteriore coincide con quella anteriore. 
+ 
+Il cassone viene ora suddiviso in 10 aree resistenti come nella figura di esempio: 
+ 
+ 
+Verrà utilizzata la stessa notazione qui rappresentata anche in questo tutorial. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+139 
+ 
+ 
+ 
+ 
+ 
+ 
+Si inseriscono quindi per le varie stazioni gli spessori di ogni area resistente del cassone: 
+ 
+ 
+Si aggiunge poi una colonna che contiene la larghezza delle solette; essa è calcolata partendo dal valore 
+presente in J3, moltiplicata per il taper ratio della stazione: 
+ 
+ 
+ 
+Si creano adesso delle colonne che contengono le caratteristiche di sollecitazione ricavate tutorial 
+Esercitazione 7: 
+
+
+140 
+ 
+ 
+ 
+ 
+ 
+ 
+In maniera analoga si ricavano le altre colonne: 
+ 
+ 
+ 
+Si aggiunge per comodità la seguente riga: 
+ 
+ 
+Per la stazione selezionata nella cella B33 vengono riportate le y e la corda della stazione, gli spessori 
+delle 10 aree resistenti, la larghezza delle solette e le caratteristiche di sollecitazione. Per fare ciò si usa 
+la funzione cerca: 
+
+
+141 
+ 
+ 
+Trascinando la cella appena creata fino alla S33 si ottiene poi l’intera riga di calcolo. 
+ 
+Attenzione: Si noti che le unità di misura delle celle R33 e S33 sono Nmm; quindi il risultato della 
+funzione CERCA deve essere moltiplicato per 1000.  
+ 
+Devono essere calcolate le coordinate delle aree resistenti della sezione selezionata nella riga di calcolo 
+del cassone. Si crea quindi la seguente tabella: 
+ 
+ 
+ 
+ 
+ 
+ 
+Le due quantità x/c nella figure precedente si ottengono direttamente dal foglio Carichi (e coincidono 
+con le due posizioni dei longheroni anteriore e posteriore decisi in precedenza: 
+ 
+ 
+Si calcolano le coordinate delle solette nella maniera seguente: 
+ 
+ 
+Infine si calcola la coordinata che separa i due pannelli del dorso come il punto medio: 
+
+
+142 
+ 
+ 
+ 
+Per quanto riguarda il ventre è sufficiente replicare quanto fatto per il dorso: 
+ 
+ 
+Si cercano le coordinate z/c del dorso e del ventre: 
+ 
+ 
+ 
+ 
+ 
+Si creano le due colonne delle coordinate dimensionali del profilo, espresse in mm: 
+ 
+ 
+Si crea una nuova tabella grazie alla quale si potrà effettuare la stima dei pesi e il calcolo delle 
+coordinate del centroide: 
+
+
+143 
+ 
+ 
+ 
+La colonna li contiene le lunghezze delle aree resistenti mentre la colonna si gli spessori (questi ultimi 
+ricavati direttamente dalla riga di calcolo): 
+ 
+ 
+Per calcolare le lunghezze dei tratti verticali si usano le formule seguenti: 
+ 
+ 
+ 
+ 
+ 
+ 
+Si calcolano le inclinazioni di ogni area resistente; per i tratti verticali invece si pone direttamente 
+/2 : 
+
+
+144 
+ 
+ 
+ 
+Si calcola la superficie di ogni area resistente e si calcola poi l’area complessiva (nella cella F64): 
+ 
+ 
+Si calcolano le posizioni dei centroidi di ogni area resistente: 
+ 
+ 
+Si calcolano le quantità 
+EA , 
+iEAx , 
+iEAz e le loro somme. 
+
+
+145 
+ 
+ 
+Con E modulo elastico del materiale. 
+ 
+Si calcolano poi le seguenti quantità: 
+A , 
+iAx , 
+iAz  
+ 
+Con 
+  densità del materiale. 
+ 
+È possibile calcolare le seguenti quantità: 
+ 
+In questo modo è stato possibile ottenere le coordinate del centroide. 
+ 
+Si calcolano i momenti di inerzia.  
+Si crea quindi una nuova tabella e si calcolano le nuove quantità 
+icxx−  e 
+iczz− : 
+ 
+ 
+Si calcolano i momenti di inerzia propri di ogni area resistente: 
+
+
+146 
+ 
+ 
+ 
+ 
+Si calcolano i momenti di inerzia complessivi, calcolati come somma del contributo proprio e di quello di 
+trasporto: 
+ 
+ 
+ 
+ 
+
+
+147 
+ 
+ 
+ 
+Si calcolano i momenti di inerzia complessivi della sezione, ottenuti come somma dei momenti di inerzia 
+appena calcolati: 
+ 
+ 
+Adesso si hanno tutti gli ingredienti per poter calcolare le tensioni nella singola stazione. Per fare ciò si 
+usa la formula di Navier: 
+ 
+ 
+ 
+ 
+Si calcola quindi la σ: 
+ 
+ 
+Dalla σ ottenuta si può ottenere la ε: 
+ 
+ 
+
+
+148 
+ 
+Per ottenere la tabella delle tensioni e delle deformazioni per tutte le stazioni del cassone e per 
+calcolare il peso del cassone si fa ricorso a due macro distinte.  
+ 
+Calcolo delle tensioni, deformazioni e del peso del cassone mediante utilizzo di Macro  
+Grazie a questa macro è possibile ricavare le tensioni, semplicemente facendo variare la stazione scelta 
+nella riga di calcolo (cella B33) e salvando le tensioni e le deformazioni ottenute: 
+ 
+ 
+ 
+ 
+Le tabelle che si ottengono sono perciò le seguenti: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Prima di procedere ulteriormente è necessario calcolare il peso del cassone; infatti le caratteristiche di 
+sollecitazione nel foglio Carichi erano state ottenute considerando la massa dell’ala che si otteneva dalla 
+stima dei pesi (in questo caso con il metodo Torenbeek).  
+Le caratteristiche di sollecitazione devono quindi essere ricalcolate, utilizzando la massa dell’ala 
+calcolata a partire dalla massa del cassone alare progettato in questo foglio di lavoro. Per ottenere la 
+massa del cassone si fa uso della seguente macro che lavora in maniera simile alla precedente: 
+ 
+
+
+149 
+ 
+ 
+ 
+ 
+La macro produce la colonna U12:U30 che contiene le Ai complessive per ogni stazione. Si calcolano le 
+masse per unità di lunghezza: 
+ 
+ 
+Infine si calcola il peso complessivo del semicassone per integrazione, sommando tutti i contributi: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+A questo punto è possibile ricalcolare il carico distribuito 
+ / an dW dy . Per fare ciò, nel foglio di lavoro 
+“Carichi” si creano delle nuove celle: 
+
+
+150 
+ 
+ 
+ 
+La massa del semicassone è quella ottenuta nella cella W32 del foglio Struttura: 
+ 
+ 
+La massa del cassone è quindi pari a 2 volte la massa del semicassone; la massa dell’ala sarà calcolata 
+come la massa del cassone per il fattore di ingrandimento (pari a 2). Si procede quindi con il modificare il 
+contenuto della cella C6 del foglio carichi: 
+ 
+ 
+A questo punto è necessario ricalcolare le tensioni nel foglio di lavoro Struttura, facendo eseguire 
+nuovamente la Macro “Stress_strain”, in quanto dopo questa modifica le caratteristiche di sollecitazione 
+sono variate. 
+ 
+Grazie all’uso della formattazione condizionale è possibile evidenziare di rosso le celle in cui sono 
+superati i valori ammissibili dei materiali: 
+ 
+ 
+In questo caso è necessario procedere con l’assegnazione di nuovi spessori. 
+Si ricorda inoltre che la Macro “Stress_strain” deve essere eseguita ogniqualvolta gli spessori delle aree 
+resistenti del cassone vengono variati. Il cambiamento di spessore infatti modifica il carico 
+ / an dW dy  
+che a sua volta modifica le caratteristiche di sollecitazione con cui si calcolano le tensioni stesse. 
+Questi passaggi di variazione degli spessori non vengono effettuati in questo tutorial. 
+ 
+Dopo che gli spessori sono stati decisi è possibile calcolare gli spostamenti. 
+ 
+ 
+
+
+151 
+ 
+ 
+ 
+Calcolo degli spostamenti  
+Per calcolare gli spostamenti è necessario utilizzare il Principio dei Lavori Virtuali: 
+ 
+ 
+Si crea una nuova tabella nel foglio “Struttura”: 
+ 
+Le y sono riportate questa volta in mm. 
+ 
+Si creano tre nuove colonne che riportano i momenti di inerzia complessivi per ogni stazione. 
+ 
+ 
+Per completare la tabella si usa una Macro, il cui codice è il seguente e che lavora in maniera simile alle 
+precedenti: 
+
+
+152 
+ 
+ 
+ 
+Il risultato ottenuto è: 
+ 
+ 
+Si creano due nuove colonne dove sono riportati i momenti flettenti Mx e Mz calcolati nel foglio di 
+lavoro “Carichi”, espressi questa volta in Nmm: 
+ 
+ 
+Si calcolano i rapporti dei momenti di inerzia usando le seguenti formule: 
+ 
+
+
+153 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Si calcolano le caratteristiche di sollecitazione del sistema equilibrato. Si creano due colonne (per ora 
+tutte contenenti 0) che rappresentano i tagli Txe e Tze: 
+ 
+ 
+Si creano le due colonne che calcolano i Momenti flettenti del sistema equilibrato, Mxe e Mze; esse 
+sono ottenute per integrazione dei tagli Tze e Txe partendo dal tip: 
+
+
+154 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Si calcolano le seguenti quantità: 
+ 
+ 
+Si creano quindi due colonne aggiuntive: 
+
+
+155 
+ 
+ 
+ 
+Attenzione: la formula da inserire in cella U87 è: =(J87+K87*L87)/(1-L87*M87) 
+ 
+Si calcola l’integrando della formula del PLV che ha espressione: 
+ 
+ 
+L’integrando è qui chiamato dη/dy. 
+ 
+ 
+ 
+È possibile ottenere lo spostamento per integrazione, partendo dalla radice: 
+
+
+156 
+ 
+ 
+ 
+Si crea una nuova Macro il cui codice è il seguente e che permette di calcolare lo spostamento 
+orizzontale e verticale: 
+ 
+ 
+Il risultato finale sarà quindi il seguente: 
+
+
+157 
+ 
+ 
+ 
+ 
+ 
+Infine si crea un grafico che riporta l’andamento degli spostamenti lungo z e lungo x: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+158 
+ 
+Esercitazione 9 – Progetto di aeromobili  
+Analisi Strutturale mediante FEM 
+In questa esercitazione si esegue l’analisi strutturale ad elementi finiti dell’ala dimensionata nelle due 
+esercitazioni precedenti. Per effettuare l’analisi si utilizzano i software commerciali MSC Patran (Pre - e 
+Post-Processor) e MSC Nastran. Per effettuare correttamente l’analisi statica si procede con: 
+• Creazione/importazione della geometria; 
+• Creazione del materiale (o dei materiali); 
+• Creazione delle proprietà; 
+• Creazione della mesh; 
+• Creazione dei carichi e dei vincoli; 
+• Analisi; 
+• Post-processing dei risultati ottenuti 
+ 
+9.1 Creazione di un nuovo DB 
+Per prima cosa è necessario creare un nuovo DB, cliccando File/New e scegliendo il percorso. Similmente 
+si può aprire un DB esistente usando i comandi Open/Open Recent. 
+ 
+Fig.1: Creazione nuovo DB 
+ 
+9.2 Comandi di base per la creazione della geometria 
+Per creare punti/superfici/solidi cliccare su Geometry: 
+ 
+Fig.2: Comandi per la geometria 
+ 
+Per tutti i successivi comandi si utilizza come sistema di riferimento il Coord 0 di default. Se necessario, è 
+possibile creare altre terne di riferimento, per esempio usando l’azione Coord e il metodo Axis, scegliendo 
+l’origine e la direzione degli assi x e y della nuova terna rispetto una preesistente.  
+
+
+159 
+ 
+ 
+Fig.3: Comandi per la generazione di un sistema di riferimento 
+È possibile creare un punto dandogli le coordinate x,y,z rispetto un sistema di riferimento; in questo caso 
+si vuole creare un punto posto all’origine della terna d’assi Coord 0: 
+ 
+Fig.4: Comandi per la creazione di un punto 
+ 
+L’Auto Execute, se selezionato, consente di eseguire il comando direttamente, senza cliccare Apply, non 
+appena il programma dispone delle informazioni sufficienti per procedere con la sua esecuzione. Si 
+consiglia quindi di selezionarlo con attenzione. Si procede con la creazione dei punti necessari, in questo 
+esempio, per un cassone rettangolare e dritto.   
+ 
+Fig.5: Comandi per la creazione di un punto – Parte 2 
+ 
+ 
+Una volta che i punti sono stati creati, è possibile unirli mediante curve: 
+
+
+160 
+ 
+ 
+Fig.6: Comandi per la creazione di una curva 
+ 
+ 
+Si procede con la creazione delle curve rimanenti. 
+ 
+ 
+ 
+ 
+A questo punto è possibile creare le superfici partendo dalle curve: 
+ 
+Fig.7: Comandi per la creazione di una superficie 
+ 
+Si prosegue creando le superfici rimanenti: 
+
+
+161 
+ 
+ 
+Fig.8: Risultato ottenuto 
+ 
+Molto utile ai fini dell’esercitazione in oggetto può essere la creazione di nuove superfici partendo da 
+alcune esistenti. Si immagini di voler separare a metà le superfici create. Si procede creando un vettore 
+lungo l’asse y: 
+ 
+Fig.9: Creazione di un vettore lungo y 
+ 
+ 
+ 
+ 
+Si procede creando un piano in corrispondenza della mezzeria, sfruttando il vettore appena creato ed il 
+comando Vector Normal: 
+ 
+
+
+162 
+ 
+Fig.10: Creazione di un piano in corrispondenza della mezzeria 
+ 
+A quest o punto è possibile creare delle nuove superfici partendo da quelle esistenti con il seguente 
+comando, ricordando di rispondere Yes for All quando sarà richiesto se cancellare le vecchie superfici: 
+ 
+Fig.11: Separazione delle superfici in corrispondenza della mezzeria 
+ 
+È anche possibile creare una nuova superficie trasversale in corrispondenza della mezzeria, usando i 
+comandi mostrati in precedenza. 
+ 
+9.3 Comandi di base per importazione della geometria 
+È possibile importare la geometria generata con programmi CAD come Solidworks e Catia, cliccando su 
+File/Import e scegliendo le opzioni “Source:” IGES (per Catia) oppure Parasolid xmt (per Solidworks).  
+ 
+ 
+Fig.12: Importazione della geometria 
+ 
+Nel  secondo caso risulta necessario cliccare su Parasolid xmt Options e scegliere le unità di misura corrette 
+cliccando su Model Unit e poi selezionando l’opzione corretta dal menù a tendina. La stessa operazione 
+risulta necessaria anche per importazione da IGES  se l’opzione Import to Parasolid è selezionata. 
+
+
+163 
+ 
+ 
+Fig.13: Selezione delle corrette unità di misura 
+ 
+Si sceglie quindi il percorso del file e si procede con l’importazione. 
+ 
+9.4 Gestione dei gruppi 
+Indipendentemente dal fatto che la geometria sia stata creata  oppure importata, molto utile può essere 
+assegnare la geometria esistente a dei gruppi. Per creare un nuovo gruppo si clicca su Group/Create: 
+ 
+Fig.14: Creazione di un nuovo gruppo 
+ 
+Si procede quindi creando il nome e selezionando le superfici che appartengono al gruppo: 
+ 
+Fig.15: Creazione di un nuovo gruppo – parte 2 
+ 
+Mediante il comando Post è possibile selezionare il gruppo e quindi visualizzare la Geometria/FEM/altre 
+entità ad esso associato. 
+
+
+164 
+ 
+ 
+Fig.16: Comando Post 
+ 
+ 
+Per la gestione dei gruppi molto utili sono il comando Modify, che permette di modificarli, il comando  Set 
+Current che rende corrente il gruppo scelto e il comando Move/Copy che permette di spostare/copiare 
+geometria/FEM da un gruppo da un altro. Lavorare con i gruppi può risultare  molto vantaggioso per 
+esempio durante l’assegnazione delle proprietà (vedere sezione 9.6). 
+ 
+9.5 Creazione del materiale 
+A questo punto è possibile creare il materiale. Per creare un materiale isotropo si procede cliccando 
+dall’apposito menù su Create, Iso tropic e cliccando su Input Properties, inserendo le proprietà del 
+materiale. Poiché il materiale è isotropo, è sufficiente inserire solamente il valore del modulo E (espresso 
+in questo caso in MPa) e del Poisson ν.  
+ 
+Fig.17: Creazione del materiale 
+ 
+È ovviamente possibile la creazione di un materiale composito. In questo caso è sufficiente generare un 
+materiale 2D Ortotropo, procedendo in maniera simile a quanto fatto ora: 
+
+
+165 
+ 
+ 
+Fig.18: Creazione della lamina di materiale ortotropo 
+ 
+ 
+ 
+ 
+ 
+A questo punto è pos sibile procedere creando il composito, con il comando Composite, fornendo al 
+programma i dati sul numero di lamine, orientazione, ecc: 
+ 
+Fig.19: Creazione del laminato composito 
+ 
+Come si può osservare è possibile creare direttamente una laminazione simmetr ica o antisimmetrica. 
+Immaginando di voler creare un laminato simmetrico si potrebbe procedere con un comando simile al 
+seguente: 
+
+
+166 
+ 
+ 
+Fig.20: Creazione del laminato composito – parte 2 
+ 
+Una volta creato è possibile vedere le proprietà del laminato cliccando su Show Laminate Properties. Si 
+noti che sia in questo caso che nel precedente non è stato inserito il valore della densità, in quanto non 
+necessario in un’analisi statica.  
+ 
+ 
+ 
+ 
+9.6 Creazione delle proprietà 
+A questo punto è possibile assegnare le proprietà. Nel caso di materiale isotropo bisogna selezionare 
+Homogeneus, Input Properties e nella schermata che appare si seleziona il nome del materiale e lo 
+spessore. 
+ 
+
+
+167 
+ 
+ 
+Fig.21: Assegnazione proprietà – parte 1 
+ 
+ 
+Si clicca poi su Select Application Region e si selezionano le superfici: 
+ 
+Fig.22: Assegnazione proprietà – parte 2 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+168 
+ 
+Nel caso di materiale composito si procede in maniera analoga, ma indicando Laminate e poi su Input 
+Properties, selezionando il materiale e l’orientazione del laminato mediante un vettore.  
+ 
+Fig.23: Assegnazione proprietà – parte 3 
+ 
+Si procede poi in maniera analoga selezionando le superfici, così come mostrato in Figura 22. 
+ 
+9.7 Creazione della mesh 
+Si clicca su Elements: 
+ 
+Fig.24: Apertura menù 
+ 
+Per prima cosa si crea un mesh seed indicando il numero di elementi per ogni curva; in questo caso per 
+semplicità si creano 4 elementi per ogni curva: 
+ 
+Fig.25: Creazione della mesh seed 
+
+
+169 
+ 
+ 
+ 
+ 
+ 
+ 
+Si passa poi alla creazione degli elementi 2D selezionando le superfici di cui fare la mesh: 
+ 
+Fig.26: Creazione della mesh 
+ 
+Cliccando su Apply verranno quindi creati gli elementi: 
+ 
+Fig.27: Creazione degli elementi 
+ 
+ 
+A questo punto risulta essenziale per la buona riuscita dell’analisi il comando Equivalence, il quale si 
+occupa di cancellare  due nodi la cui distanza si trova al di sotto di una certa tolleranza. Sempre sotto 
+Elements si seleziona Equivalence, facendo attenzione a non escludere alcun nodo dall’apposita cella: 
+
+
+170 
+ 
+ 
+Fig.28: Comando Equivalence 
+ 
+A comando avvenuto, si potrà leggere il numero di nodi cancellati. 
+ 
+ 
+ 
+ 
+ 
+ 
+9.8 Creazione dei carichi e dei vincoli 
+Per creare i carichi e vincoli si deve cliccare su Load/BCS per aprire l’apposito menù: 
+ 
+Fig.29: Apertura menù Load/BCS 
+ 
+Per i vincoli si clicca su Create Displacement: 
+ 
+Fig.30: Creazione Vincoli – parte 1 
+ 
+Cliccando su Input Data, nella finestra che appare, si pongono  uguali a 0 gli spostamenti e le rotazioni che 
+si vuole siano impediti; nel caso di un incastro si pongono quindi tutti gli spostamenti e le rotazioni pari a 
+0 come nella figura seguente: 
+
+
+171 
+ 
+ 
+Fig.31: Creazione Vincoli – parte 2 
+ 
+Si clicca su Ok, dopodichè dal menù precedente cliccando su Select Application Region, si selezionano i 
+nodi da vincolare; quindi si procede con Select: FEM, si selezionano i nodi, si clicca su Add e poi su Ok: 
+ 
+Fig.32: Creazione Vincoli – parte 3 
+ 
+Dopo aver applicato il comando Add, prima di dare Ok, gli stessi nodi della cella di Selzione saranno 
+spostati nella cella Application Region più in basso. Con Apply, se il c omando è stato eseguito 
+correttamente, si dovrebbero poter osservare i vincoli in azzurro: 
+ 
+Fig.33: Creazione Vincoli – parte 4 
+ 
+Ovviamente è possibile la creazione di più vincoli. Si procede quindi con la creazione dei carichi nodali, in 
+maniera analoga a quanto svolto per i vincoli: Create/Force/Nodal: 
+
+
+172 
+ 
+ 
+Fig.34: Creazione Carichi – parte 1 
+ 
+ 
+Cliccando su Input Data è possibile inserire le componenti dei carichi:  
+ 
+Fig.35: Creazione Carichi – parte 2 
+ 
+Cliccando su Select Application Region e procedendo analogamente a quanto mostrato nelle figure 31 e 
+32, si assegnano i carichi ai nodi: 
+ 
+Fig.36: Creazione Carichi – parte 3 
+ 
+ 
+ 
+9.9 Analisi 
+Si apre il menù di Analisi: 
+ 
+Fig.37: Apertura menù di Analisi 
+ 
+Quindi si clicca su: 
+ 
+Fig.38: Action/Object/Method dell’analisi 
+
+
+173 
+ 
+ 
+Nel menù in basso  
+ 
+Fig.39: Menu dell’analisi 
+ 
+Cliccando su Solution Type si verifica che sia selezionato LINEAR STATIC: 
+ 
+Fig.40: Solution Type 
+ 
+Sotto Subcases/Output Request è possibile modificare gli Output che verranno forniti dall’analisi di 
+Nastran:  
+ 
+Fig.41: Output Request 
+ 
+Per il livello dell’analisi richiesto dall’esercitazione è possibile lasciare gli output di deafult.  
+Si clicca su Apply, dopodiché si apre Nastran e si seleziona il percorso in cui si trovava il DB; si clicca sul 
+bdf creato e si attende che l’analisi term ini.  Al termine dell’analisi verranno creati diversi files, tra cui i 
+quali l’XDB e il file F06: 
+
+
+174 
+ 
+ 
+Fig.42: File xdb e f06 
+ 
+L’f06 è un file di testo che può essere aperto con programmi come Notepad o Wordpad e contiene i 
+risultati dell’analisi di Nastran in formato testo; se l’analisi non è terminata correttamente sarà presente 
+la stringa FATAL, con l’indicazione dell’errore. In questo caso, provvedere a correggere l’errore e ripetere 
+l’analisi. Se la stringa non è presente allora si può procedere all’acqui sizione dei risultati. Tornando su 
+Patran, nel menù precedente cliccare su Access Results/Attach XDB e poi cliccando su Select Result File si 
+seleziona il percorso e poi su Apply:  
+ 
+Fig.43: Access Results 
+ 
+Poi cliccando sotto il menù Results, è possibile visualizzare i risultati. Questa parte di post-processamento 
+sarà discussa in maniera più approfondita in seguito.  
+ 
+Fig.44: Esempio di risultati ottenuti - Spostamento 
+ 
+ 
+ 
+ 
+ 
+
+
+175 
+ 
+ 
+ 
+9.10 Consistenza delle unità di misura scelte 
+Per ottenere risultati sensati ed interpretare correttamente quelli ottenuti dall’analisi è necessario 
+scegliere delle unità di misura consistenti. La tabella seguente contiene vari esempi di unità di misura 
+consistenti che possono essere scelte: 
+ 
+Fig.45: Unità di misura consistenti 
+ 
+Qui di seguito è riportata una sua versione un po’ più compatta dove in rosso è riquadrata la scelta fatta 
+per questo tutorial: 
+
+
+176 
+ 
+ 
+Fig.46: Unità di misura consistenti – Tabella 2 
+ 
+Quindi in questo esempio si è scelto di utilizzare i mm per le lunghezze, i N per le forze, i MPa per gli stress. 
+ 
+ 
+9.11 Applicazione: Ala 
+A questo punto è possibile utilizzare i comandi prima visti per l’ala. Per semplicità in questo esempio si 
+creano solo 5 centine; si inizia importando la geometria oppure creandola. In qu esto caso si è partiti 
+creando i punti del profilo del cassone posti nelle stazioni 0, 5, 10, 15 e 20; poi sono state create le curve 
+e le superfici: 
+ 
+Fig.47: Superfici dell’ala 
+ 
+Come nell’esempio precedente le superfici sono state assegnate a diversi gruppi; ad esempio nella figura 
+seguente si possono osservare le centine e le solette: 
+
+
+177 
+ 
+ 
+Fig.48: Centine e solette 
+ 
+In analogia con l’esercitazione 7 si è adottata la stessa suddivisione: 
+ 
+Fig.49: Suddivisione 
+ 
+ 
+ 
+Si passa quindi alla creazione dei materiali, delle proprietà e della mesh: 
+ 
+
+
+178 
+ 
+ 
+Fig.50: Mesh (in alto) e proprietà (in basso) dell’ala 
+ 
+ 
+Si creano i vincoli, in questo caso un incastro per la sezione di radice: 
+ 
+Fig.51: VIncoli 
+ 
+Si crea poi il vettore delle forze; esse sono applicate in corrispondenza di ogni centina, a metà altezza 
+dell’anima: 
+ 
+Fig.52: Carichi 
+ 
+ 
+Per quanto riguarda il valore da assegnare alle varie forze nodali, si agisce nella maniera seguente: si 
+suppone che questo modello sia sottoposto ad una serie di c arichi concentrati in corrispondenza delle 
+centine, in grado di generare un taglio che fornisca un momento flettente comparabile con quello 
+calcolato nel file Excel: 
+
+
+179 
+ 
+ 
+Fig.53: Taglio e Momento flettente 
+ 
+Poiché non è stata calcolata la posizione del centr o di taglio e poiché si vuole effettuare una verifica alla 
+sola flessione, metà dell’entità del carico viene applicata sull’anima L e l’altra metà sull’anima E. per 
+questo motivo, questo calcolo è valido in prima approssimazione, ma è necessario verificare  durante il 
+post-processing dei risultati che le rotazioni non siano eccessive. Se si conoscesse la posizione del centro 
+di taglio, è possibile procedere nella maniera seguente. si immagini di avere un’ala dritta e rettangolare, 
+con tutti i pannelli di con torno di egual spessore per semplicità;  in questo caso particolare il centro di 
+taglio coincide con il centro della sezione. A questo punto si seleziona il Menù Elements, poi 
+Create/MPC/Rigid: 
+ 
+Fig.54: Creazione di elementi MPC 
+ 
+Poi si cliccare su Define Terms per fare apparire il menù: 
+ 
+
+
+180 
+ 
+Fig.55: Creazione di elementi MPC – parte 2 
+ 
+ 
+Come nodo indipendente si seleziona un nodo centrale in corrispondenza del centro di taglio, creato con 
+il comando Create/Node, mentre come nodi dipendenti si selezionano tutti i nodi della centina; infine si 
+clicca su Apply e si applica la forza in corrispondenza del nodo centrale indipendente: 
+ 
+Fig.56: Creazione di elementi MPC – parte 3 
+ 
+ 
+Fig.57: Risultati ottenuti con elementi MPC per il cassone rettangolare 
+ 
+Una volta assegnati i carichi si procede con l’analisi dell’ala con Nastran. In seguito, si effettua l’Attach del 
+xdb al nostro db e si procede con il post-processamento dei risultati. 
+ 
+9.12 Post-processing dei risultati per l’ala 
+Per prima cosa si può creare un plot dei risultati ottenuti con il comando Quick-Plot: 
+
+
+181 
+ 
+ 
+Fig.58: Comando Quick Plot 
+Select Fringe Results permette di selezionare i risultati da visualizzare, in questo caso gli spostamenti, 
+mentre Select Deformation Result permette di seleziona re su quale deformata stampare i risultati. 
+Cliccando sul menù a tendina Magnitude è possibile scegliere se stampare una componente o la 
+Magnitude degli spostamenti. Per come il comando è stato impostato nella figura 58, verrà stampata la 
+magnitude degli spostamenti dell’ala sulla deformata dell’ala: 
+ 
+Fig.59: Comando Quick Plot – Parte 2 
+ 
+Similmente si può ottenere l’andamento delle tensioni. Un plot simile a questo viene prodotto dal 
+comando deformation, sempre sotto il menù results. Molto utile risulta anche il comando Fringe; si clicca 
+su Create/Fringe: 
+ 
+Fig.60: Comando Fringe – Parte 1 
+ 
+Cliccando sul primo simbolo da sinistra si può selezionare la quantità da stampare: 
+
+
+182 
+ 
+ 
+Fig.61: Comando Fringe – Parte 2 
+ 
+ 
+ 
+ 
+ 
+ 
+Cliccando sul secondo simbolo da sinistra è possibile selezionare tutti o solo alcuni elementi dei quali si 
+vuole ottenere l’andamento delle tensioni (cliccare su Target Entities e scegliere elementi/gruppi/ 
+proprietà desiderati): 
+ 
+Fig.62: Comando Fringe – Parte 3 
+ 
+Selezionando Stress Tensor e Current Viewport, otteniamo l’andamento delle tensioni (in questo caso 
+calcolate con Von Mises) per tutta l’ala: 
+
+
+183 
+ 
+ 
+Fig.63: Comando Fringe – Parte 4 
+ 
+Agendo su Target Entity, come spiegato in precedenza, è possibile per esempio vedere l’andamento delle 
+tensioni sulle centine: 
+ 
+Fig.64: Comando Fringe – Parte 5 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Molto utile per i confronti con i risultati del modello di Excel è l’uso del comando Report; infatti è possibile 
+creare un file di testo che contenga i risultati desiderati; per esempio si supponga di voler ottenere 
+l’andamento dello spostamento lungo l’asse: si clicca su Create/Report/Overwrite File (la prima volta che 
+si lancia il comando, Create/Report/Append File per le volte successive) e poi si selezionano la quantità, i 
+nodi, le proprietà, gli elementi, ecc di cui si vuole siano stampati i risultati: 
+
+
+184 
+ 
+ 
+Fig.65: Comando Report – Parte 1 
+ 
+Si sceglie poi il nome del file e cliccando su Format è possibile scegliere quali informazioni stampare in 
+output, l’ordine di stampa ed anche il tipo di dati: 
+ 
+Fig.66: Comando Report – Parte 2 
+ 
+In questo caso verranno stampati nel file l’ID dei nodi selezionati come numeri interi e la componente Z 
+dello spostamento dei nodi selezionati come numero decimale (float). 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+185 
+ 
+Cliccando su Apply, è possibile aprire e leggere il risultato contenuto nel file di Report appena creato: 
+ 
+Fig.67: Comando Report – Parte 3 
+ 
+Nel caso si voglia avere i risultati in funzione della coordinata y selezionare nei results anche la y location 
+e in “sorting option” attivare questa modalità. 
+Analogamente si può eseguire il comando anche per le tensioni o per qualunque altra quantità desiderata, 
+permettendo il confronto con i dati ottenuti da Excel: 
+ 
+Fig.68: Confronto risultati ottenuti 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+186 
+ 
+Conclusioni 
+Grazie per aver seguito i nostri tutorial! Nel caso aveste bisogno di ulteriori chiarimenti o trovaste 
+qualche imprecisione non esitate a contattarci. Potete scrivere ai nostri indirizzi email @polito.it o al mio 
+indirizzo email personale: alessandrobacchini17@gmail.com 
+View publication statsView publication stats

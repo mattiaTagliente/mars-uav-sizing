@@ -1,0 +1,162 @@
+Analysis of Matching Charts Methodology
+
+i) Difference between "Optimization Variables (Solved)" and "Outputs (Results)"
+
+This is an important conceptual distinction:
+
+Optimization Variables (Solved) are the unknowns that the solver (fsolve) iteratively adjusts to satisfy the system of 5 constraint equations. These are the variables we seek as part of the optimization problem:
+
+Variable  Symbol  Description
+W         Total weight    The aircraft gross weight
+S_W       Wing loading    W/S ratio
+T_S       Thrust loading  T/S ratio
+lam       Aspect ratio    Bounded [6, 12]
+k         Fuel fraction   Wf/W
+
+In the MATLAB script (lines 8-12), these are defined as optimvar() objects that the solver manipulates.
+
+Outputs (Results) are derived quantities calculated from the solved optimization variables AFTER convergence. These are not unknowns—they are post-processing computations:
+
+Output           Formula             Description
+S                S = W × S_W         Wing area
+b                b = √(S × λ)        Wingspan
+c                (MAC formula)       Mean aerodynamic chord
+T                T = T_S × S         Total thrust
+Cl, Cd, L/D      (aerodynamic calcs) Cruise aerodynamics
+
+The distinction is:
+Optimization variables: Inputs to the solver, iterated to find solution
+Outputs: Computed from the solution, reported for downstream design
+
+ii) Reynolds Number: Calculation, Output, or Hypothesis?
+
+Examining the MATLAB script (lines 69, 175):
+
+% Line 69 (before solver):
+Rewing = V*c/nu;
+
+% Line 175 (after solver):
+Rewing = V*c/nu;
+
+The Reynolds number is an OUTPUT, computed from other parameters and the solved MAC (c).
+The calculation chain is:
+1. V (cruise velocity) = 221.2 m/s → INPUT (hypothesis/fixed constant)
+2. nu (kinematic viscosity) = 2.44×10⁻⁵ m²/s → INPUT (atmosphere property)
+3. c (MAC) → OUTPUT (computed from solved S, λ, and taper ratio)
+4. Re = V × c / nu → OUTPUT (computed from 1, 2, 3)
+
+So, for the regional jet:
+- Re is neither a hypothesis nor an input
+- Re is a derived output from wing geometry that emerges from the sizing solution
+
+This is important for airfoil selection: The sizing script must be run FIRST to obtain the wing geometry (S, b, c), and THEN the Reynolds number can be calculated to feed into XFOIL for airfoil analysis. This is the correct workflow sequence as you remember.
+
+iii) Adapted Parameter List for Mars UAV
+
+Based on the three documents and the plan you're developing, here is a necessary and sufficient parameter list for the Mars UAV feasibility study, highlighting differences from the regional jet case:
+
+INPUTS (Fixed Constants / Design Hypotheses)
+
+Parameter               Symbol          Mars UAV           Regional Jet          Difference
+----------------------------------------------------------------------------------------------------------
+Mission
+Payload mass            $m_{payload}$   0.5 kg             10,000 kg (100 pax)   ✅ Orders of magnitude smaller
+Cruise endurance        $t_{cruise}$    60-90 min          —                     NEW (replaces range)
+Hover time              $t_{hover}$     2-3 min (TO+Landing)—                    NEW (VTOL specific)
+Range                   R               10-50 km           1852 km               Much shorter
+
+Atmosphere
+Surface density         $\rho_{Mars}$   0.020 kg/m³        1.225 kg/m³           60× thinner
+Gravity                 $g$             3.711 m/s²         9.81 m/s²             38% of Earth
+Kinematic viscosity     $\nu$           5×10⁻⁴ m²/s        1.5×10⁻⁵ m²/s         33× higher
+
+Wing Geometry
+Aspect ratio bounds     $\lambda$       [10, 14]           [6, 12]               Higher for low-Re
+Sweep angle             $\Lambda$       0°                 25°                   No sweep needed
+Thickness ratio         t/c             0.10               0.14                  Thinner for low-Re
+Taper ratio             $\lambda_{taper}$ 0.5-0.6          0.4                   Similar
+
+Aerodynamics
+$C_{L,max}$ (clean)     —               1.2-1.4            2.3 (with flaps)      ❌ No high-lift devices
+Oswald factor           $e$             0.80-0.85          0.93                  Lower (small UAV)
+
+Propulsion
+Number of lift rotors   $n_{lift}$      8                  —                     NEW (VTOL)
+Number of cruise motors $n_{cruise}$    2                  —                     NEW (separate cruise)
+Disk loading            DL              100-150 N/m²       —                     NEW
+Figure of merit         FM              0.6-0.7            —                     NEW
+Propeller efficiency    $\eta_{prop}$   0.50-0.65          —                     NEW (low-Re Mars)
+Motor efficiency        $\eta_{motor}$  0.82-0.88          —                     NEW (electric)
+ESC efficiency          $\eta_{ESC}$    0.95-0.98          —                     NEW
+
+Energy
+Battery specific energy $e_{spec}$      150-270 Wh/kg      —                     NEW (replaces SFC)
+Depth of discharge      DoD             0.80-0.90          —                     NEW
+Energy reserve          —               10-20%             20% fuel reserve      Similar concept
+SFC                     —               ❌ Not applicable   0.7 kg/N/h            Removed
+
+Mass Fractions
+Battery fraction        $f_{batt}$      0.30-0.40          —                     NEW (replaces fuel)
+Structure fraction      $f_{struct}$    0.23-0.35          —                     NEW
+Propulsion fraction     $f_{prop}$      0.10-0.15          —                     NEW
+
+
+Removed inputs (not applicable to Mars UAV):
+❌ Take-off runway length
+❌ Landing runway length
+❌ Braking deceleration
+❌ SFC (specific fuel consumption)
+❌ Altitude/throttle correction factors (ψ, ζ)
+
+
+OPTIMIZATION VARIABLES (Unknowns to be Solved)
+
+Variable    Mars UAV          Regional Jet       Difference
+W           Total weight      Total weight       ✅ Same concept
+W/S         Wing loading      Wing loading       ✅ Same concept
+λ           Aspect ratio      Aspect ratio       ✅ Same concept
+P/W ⚠️      Power loading     T/S (thrust loading) CHANGED to power-based
+$f_{batt}$ ⚠️ Battery fraction k (fuel fraction)  CHANGED semantics (mass constant)
+
+Key differences:
+T/S → P/W: For electric propulsion, power loading (W/N or W/kg) is more natural than thrust loading because we size by power consumption, not thrust production.
+k → $f_{batt}$: Fuel fraction diminishes during flight (Breguet); battery fraction is constant. The energy equation changes fundamentally.
+
+
+OUTPUTS (Derived Results)
+
+Output                     Mars UAV    Regional Jet          Used For
+Wing area S                ✅           ✅                    Structure sizing
+Wingspan b                 ✅           ✅                    Hangar requirements
+MAC c                      ✅           ✅                    Airfoil Reynolds calculation
+Cruise Power $P_{cruise}$  ✅           ❌ (uses thrust)      Motor sizing (cruise)
+Hover Power $P_{hover}$    ✅           ❌                    Motor sizing (lift)
+$C_L$ cruise               ✅           ✅                    Airfoil selection
+$C_D$ cruise               ✅           ✅                    Efficiency check
+L/D                        ✅           ✅                    Efficiency metric
+Reynolds number Re         ✅           ✅                    Airfoil simulation (XFOIL/Selig data)
+Total thrust T             ⚠️ Useful but secondary ✅ Primary Mars: power is primary
+Lift rotor diameter        ✅           ❌                    VTOL propeller selection
+Cruise propeller diameter  ✅           ❌                    Cruise propeller selection
+Battery mass               ✅           ❌ (fuel mass)        Component selection
+
+
+Summary: New Constraint Equations for Mars UAV
+
+#   Mars UAV Constraint                             Replaces (Regional Jet)
+1   Mass balance (component sum = MTOW)             Mass balance (same structure, different Q terms)
+2   Hover power constraint (momentum theory)        ❌ Take-off runway
+3   Stall constraint (max W/S from $V_{stall}$, $C_{L,max}$) ❌ Landing runway
+4   Cruise power constraint (P = D × V / η)         Cruise thrust (modified)
+5   Battery energy constraint (E ≥ mission energy)  ❌ Breguet range
+
+
+Workflow Implication
+
+Based on the document_reorganization_plan.txt, the Reynolds number feeds into aerodynamic analysis (Section 5) which precedes constraint analysis (Section 6). This means:
+
+Phase 1: Assume initial MTOW and wing loading → estimate MAC → estimate Re → select airfoil (Section 5)
+Phase 2: Use airfoil $C_L$, $C_D$ data at estimated Re → run matching chart (Section 6)
+Iterate: If sizing result changes Re significantly (>10%), re-run airfoil analysis
+
+This is consistent with the iterative methodology described in Section 4.1 of your plan.

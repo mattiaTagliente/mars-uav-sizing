@@ -1,0 +1,120 @@
+# Mars UAV Sizing - Baseline Parameters
+# ======================================
+# Consolidated input parameters from manuscript Sections 2, 3, 4.
+# All values are traced to source_grounding.txt for citation.
+#
+# Reference: docs/prompt_04_python_implementation.txt
+# Updated: 2025-12-28 - CORRECTED values from verification script
+
+# ============================================================================
+# Physical Constants (from §3.1 Operational Environment)
+# ============================================================================
+physical:
+  g_mars: 3.711          # m/s², Mars gravity [NASA Mars Fact Sheet]
+  
+  # CORRECTED: Atmospheric properties at Arcadia Planitia (-3 km elevation)
+  # Pressure calculated from barometric formula: P = P0 × exp(-g×h/(R×T))
+  # With P0 = 610 Pa, h = -3000 m, T = 210 K, R = 188.92 J/(kg·K)
+  pressure_arcadia: 800.5    # Pa (CORRECTED from 854.5)
+  rho_arcadia: 0.0196        # kg/m³ (CORRECTED from 0.0209)
+  
+  mu_mars: 1.08e-5       # Pa·s, dynamic viscosity [Sutherland's law]
+  speed_of_sound: 230.8  # m/s, at 210 K [a = sqrt(γRT)]
+  temperature: 210       # K, reference temperature
+  # nu = mu/rho ≈ 5.5e-4 m²/s (CORRECTED)
+
+# ============================================================================
+# Propulsion Efficiencies (from §4.5 Propulsion data)
+# ============================================================================
+propulsion:
+  figure_of_merit: 0.40   # FM, low-Reynolds Mars rotor [Leishman Ch.7, MAV data 0.30-0.50]
+  eta_prop: 0.55          # Propeller efficiency at low-Re [Sadraey 2020]
+  eta_motor: 0.85         # BLDC motor efficiency [industry typical]
+  eta_esc: 0.95           # ESC efficiency [industry typical]
+  # Derived:
+  # eta_hover = FM × eta_motor × eta_esc = 0.40 × 0.85 × 0.95 = 0.323
+  # eta_cruise = eta_prop × eta_motor × eta_esc = 0.55 × 0.85 × 0.95 = 0.444
+
+# ============================================================================
+# Battery Parameters (from §4.6 Energy Storage)
+# ============================================================================
+battery:
+  e_spec_wh_kg: 270       # Wh/kg, specific energy [solid-state Li-ion projection]
+  dod: 0.80               # Depth of discharge for cycle life [industry practice]
+  eta_discharge: 0.95     # Discharge efficiency [industry typical]
+  reserve_fraction: 0.20  # 20% energy reserve [mission profile, §4.12]
+
+# ============================================================================
+# Mass Fractions (from §4.11 Weight Estimate)
+# ============================================================================
+mass_fractions:
+  f_batt: 0.35            # Battery mass fraction [from reference UAV statistics]
+  f_empty: 0.30           # Empty (structure) mass fraction [from reference UAV statistics]
+  f_payload: 0.10         # Payload mass fraction [from reference UAV statistics]
+  f_propulsion: 0.20      # Propulsion mass fraction (dual system)
+  f_avionics: 0.05        # Avionics mass fraction
+  mtow_baseline_kg: 10.0  # Baseline MTOW [computed from m_payload / f_payload]
+
+# ============================================================================
+# Aerodynamic Parameters (from §4.7 Aerodynamic Analysis)
+# ============================================================================
+aerodynamics:
+  aspect_ratio: 6         # AR, design choice [§4.12, Mars precedents]
+  
+  # CORRECTED: Oswald efficiency from Sadraey correlation:
+  # e = 1.78 × (1 - 0.045 × AR^0.68) - 0.64
+  # For AR = 6: e = 1.78 × (1 - 0.045 × 6^0.68) - 0.64 = 0.869
+  oswald_e: 0.869         # (CORRECTED from 0.82)
+  
+  cd0: 0.030              # Zero-lift drag coefficient [equivalent friction method]
+  cl_max: 1.20            # Maximum lift coefficient [E387 at Re=60,000, UIUC Vol.1]
+  ld_eff_rotorcraft: 4.0  # Equivalent L/D for rotorcraft forward flight [Leishman]
+  
+  # CORRECTED calculated values from drag polar (§4.7):
+  # k = 1/(π × AR × e) = 1/(π × 6 × 0.869) = 0.0612
+  # (L/D)_max = 0.5 × sqrt(π × AR × e / CD0) = 0.5 × sqrt(π × 6 × 0.869 / 0.030) = 12.0
+  # C_L* = sqrt(π × AR × e × CD0) = sqrt(π × 6 × 0.869 × 0.030) = 0.70
+
+# ============================================================================
+# Geometry Parameters (from §4.12 Derived Requirements)
+# ============================================================================
+geometry:
+  disk_loading: 30.0      # N/m², DL design choice [§4.12]
+  taper_ratio: 0.5        # λ = c_tip/c_root [§4.12, near-elliptical loading]
+  thickness_ratio: 0.09   # t/c [§4.12, structural depth]
+  sweep_angle_deg: 0      # Λ [§4.12, low Mach, no benefit]
+
+# ============================================================================
+# Mission Parameters (from §4.12 Derived Requirements)
+# ============================================================================
+mission:
+  v_cruise: 40.0          # m/s, cruise velocity [Mach, Re constraints]
+  
+  # CORRECTED: Stall speed for W/S = 10 N/m²
+  # V_stall = sqrt(2 × (W/S) / (ρ × C_L,max))
+  # V_stall = sqrt(2 × 10 / (0.0196 × 1.20)) = 29.2 m/s
+  # V_min = 1.2 × V_stall = 35 m/s
+  v_stall_ws10: 29.2      # m/s (CORRECTED from 20 m/s)
+  v_min_factor: 1.2       # V_min = 1.2 × V_stall [safety margin]
+  
+  t_hover_s: 180          # s, total hover time (takeoff + landing = 3 min)
+  t_cruise_min: 57        # min, cruise time requirement [outbound + survey + return]
+  t_total_min: 60         # min, total flight time requirement
+  operational_radius_km: 50  # km, minimum operational radius
+  payload_mass_kg: 1.0    # kg, camera + radio [§4.1]
+
+# ============================================================================
+# QuadPlane-specific Parameters
+# ============================================================================
+quadplane:
+  ld_penalty_factor: 0.90  # L/D reduction due to stopped rotors (~10% drag penalty)
+  # Resulting L/D ≈ 0.90 × 12.0 ≈ 10.8 for QuadPlane cruise
+
+# ============================================================================
+# Structural Parameters (from §4.12 Load Factor Selection)
+# ============================================================================
+structural:
+  n_limit: 2.5            # Limit load factor [CS-23 lower bound, unmanned]
+  safety_factor: 1.5      # Factor of safety [CS-23 standard]
+  n_ultimate: 3.75        # n_ult = n_limit × SF [for weight estimation]
+

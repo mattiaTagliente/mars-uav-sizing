@@ -1,0 +1,522 @@
+================================================================================
+PROMPT 03D: COMPARATIVE ANALYSIS AND MATCHING CHARTS
+================================================================================
+Task: Synthesize comparative analysis across all configurations and present
+      matching chart methodology with final configuration recommendation
+Output: Manuscript content for 05_05_comparative-results.md
+
+================================================================================
+WORKFLOW: MANUSCRIPT FIRST
+================================================================================
+
+This is the FINAL prompt in Phase 3 (Theoretical Development).
+
+It synthesizes the analyses from:
+- §5.2 Rotorcraft configuration (prompt 03A)
+- §5.3 Fixed-wing configuration (prompt 03B)
+- §5.4 Hybrid VTOL configuration (prompt 03C)
+
+And provides:
+- Side-by-side comparison table
+- Matching chart methodology explanation
+- Design point determination
+- Clear configuration selection recommendation
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are developing Section 5.5 of the Mars UAV feasibility study:
+"Comparative results and configuration selection"
+
+This section is the CLIMAX of the constraint analysis. It presents:
+1. The quantitative comparison of all three configurations
+2. The visual matching chart methodology
+3. The definitive selection of hybrid VTOL as the baseline
+
+OUTCOME: This section provides the QUANTITATIVE JUSTIFICATION for selecting
+the QuadPlane configuration, enabling the detailed design in Section 6.
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. REFERENCE EARLIER SECTIONS:
+   - All numerical results come from §5.2, §5.3, §5.4
+   - Use [FROM §5.X] placeholders until Phase C
+
+2. MATCHING CHART METHODOLOGY:
+   - Cite Raymer, Roskam, or Sadraey for methodology
+   - Explain the P/W vs W/S diagram concept
+
+3. CLEAR RECOMMENDATION:
+   - State conclusion unambiguously
+   - Connect to Section 6 (Design Decisions)
+
+================================================================================
+THEORETICAL CONTENT REQUIRED
+================================================================================
+
+------------------------------------------------------------------------------
+SECTION 1: CONFIGURATION COMPARISON OVERVIEW
+------------------------------------------------------------------------------
+
+1.1 REQUIREMENTS RECAP
+
+From @sec:user-needs and @sec:derived-requirements, the Mars UAV must satisfy:
+
+| Requirement | Threshold | Rationale |
+|-------------|-----------|-----------|
+| Operational radius | 50 km | Habitat exploration range |
+| Cruise endurance | 60-90 min | Round trip + operations |
+| VTOL capability | Required | No runway on Mars |
+| Payload capacity | ≥0.5 kg | Camera + radio relay |
+| Single-fault tolerance | Required | Mission-critical system |
+
+1.2 ANALYSIS SUMMARY
+
+Each configuration was analyzed against these requirements:
+
+| Configuration | Method | Key Finding |
+|--------------|--------|-------------|
+| Rotorcraft | Momentum theory + (L/D)_eff | Endurance insufficient |
+| Fixed-wing | Drag polar + ground roll | VTOL impossible |
+| Hybrid VTOL | Combined + energy budget | All requirements met |
+
+------------------------------------------------------------------------------
+SECTION 2: QUANTITATIVE COMPARISON
+------------------------------------------------------------------------------
+
+2.1 AERODYNAMIC EFFICIENCY
+
+| Configuration | (L/D) or (L/D)_eff | Source |
+|--------------|---------------------|--------|
+| Rotorcraft | 3-5 | Forward flight power analysis |
+| Fixed-wing | 12-15 | Drag polar at optimal C_L |
+| Hybrid VTOL | 12-15 | Wing-borne cruise |
+
+KEY INSIGHT: Fixed-wing and hybrid VTOL share the same cruise efficiency
+because the QuadPlane uses wing lift during cruise.
+
+2.2 POWER REQUIREMENTS
+
+| Configuration | Hover P/W | Cruise P/W | Notes |
+|--------------|-----------|------------|-------|
+| Rotorcraft | [FROM §5.2] W/kg | [FROM §5.2] W/kg | All flight is hover-like |
+| Fixed-wing | N/A | [FROM §5.3] W/kg | No hover capability |
+| Hybrid VTOL | [FROM §5.4] W/kg | [FROM §5.4] W/kg | Decoupled systems |
+
+2.3 ENDURANCE CAPABILITY
+
+Using the endurance equations from each section:
+
+| Configuration | Calculated Endurance | Requirement | Status |
+|--------------|---------------------|-------------|--------|
+| Rotorcraft | [FROM §5.2] min | 60-90 min | ... |
+| Fixed-wing | [FROM §5.3] min | 60-90 min | ... |
+| Hybrid VTOL | [FROM §5.4] min | 60-90 min | ... |
+
+2.4 VTOL CAPABILITY
+
+| Configuration | VTOL? | Method | Infrastructure |
+|--------------|-------|--------|----------------|
+| Rotorcraft | ✓ Yes | Rotor thrust | None required |
+| Fixed-wing | ❌ No | N/A | Runway required |
+| Hybrid VTOL | ✓ Yes | Lift rotors | None required |
+
+2.5 MASS EFFICIENCY
+
+| Configuration | Propulsion Fraction | Notes |
+|--------------|---------------------|-------|
+| Rotorcraft | ...| Single system, optimized for hover |
+| Fixed-wing | ... | Single system, optimized for cruise |
+| Hybrid VTOL | ... | Dual systems, mass penalty |
+
+------------------------------------------------------------------------------
+SECTION 3: SUMMARY COMPARISON TABLE
+------------------------------------------------------------------------------
+
+Present the definitive comparison table:
+
+| Criterion | Rotorcraft | Fixed-Wing | Hybrid VTOL |
+|-----------|------------|------------|-------------|
+| **Aerodynamic efficiency** | | | |
+| (L/D) or (L/D)_eff |  | |  |
+| **Power requirements** | | | |
+| Hover P/W (W/kg) |  |  |  |
+| Cruise P/W (W/kg) |  |  |  |
+| **Mission capability** | | | |
+| Endurance (min) |  |  |  |
+| Range (km) |  |  |  |
+| **Operational** | | | |
+| VTOL capable |  |  |  |
+| Infrastructure needed | None | Runway | None |
+| **Mass** | | | |
+| Propulsion fraction |  | |  |
+| Mass penalty | None | None |  |
+| **OVERALL** | | | |
+| Meets endurance |  | |  |
+| Meets VTOL |  |  |  |
+| **FEASIBILITY** |  |  |  |
+
+: Configuration comparison summary {#tbl:config-comparison}
+
+------------------------------------------------------------------------------
+SECTION 4: MATCHING CHART METHODOLOGY
+------------------------------------------------------------------------------
+
+4.1 INTRODUCTION TO MATCHING CHARTS
+
+The matching chart (also called constraint diagram or P/W-W/S diagram) is a
+graphical tool for aircraft preliminary sizing that shows:
+- All design constraints as boundaries
+- The feasible design space as the intersection of acceptable regions
+- The optimal design point
+
+CITE: Raymer "Aircraft Design" Chapter 5, or Roskam "Airplane Design" Part I,
+or Sadraey "Aircraft Design" Chapter on preliminary sizing
+
+4.2 AXES DEFINITION
+
+X-AXIS: Wing Loading (W/S)
+- Units: N/m² or Pa
+- W = weight (N)
+- S = wing reference area (m²)
+
+Higher W/S means:
+- Smaller wing for given weight
+- Higher cruise speed
+- Higher stall speed
+- Lighter structure (smaller wing)
+
+Y-AXIS: Power Loading (P/W)
+- Units: W/N or W/kg (if using mass)
+- P = installed power (W)
+- W = weight (N)
+
+Higher P/W means:
+- More power available
+- Better climb performance
+- Better hover performance
+- Heavier, more expensive propulsion
+
+4.3 CONSTRAINT REPRESENTATION
+
+Each constraint divides the chart into feasible and infeasible regions:
+
+HOVER CONSTRAINT:
+$$\left(\frac{P}{W}\right)_{hover} \geq \frac{1}{FM \times \eta} \times \sqrt{\frac{DL}{2\rho}}$$
+
+- HORIZONTAL LINE (for fixed disk loading)
+- Region ABOVE the line is feasible
+
+CRUISE CONSTRAINT:
+$$\left(\frac{P}{W}\right)_{cruise} \geq \frac{V}{(L/D) \times \eta}$$
+
+- CURVE (L/D depends on C_L, which depends on W/S)
+- Lower P/W at optimal W/S, higher at extremes
+- Region ABOVE the curve is feasible
+
+STALL CONSTRAINT:
+$$\frac{W}{S} \leq \frac{1}{2} \rho V_{min}^2 C_{L,max}$$
+
+- VERTICAL LINE at maximum W/S
+- Region LEFT of the line is feasible
+
+CLIMB CONSTRAINT (if included):
+$$\left(\frac{P}{W}\right)_{climb} \geq \frac{V_{climb}}{(L/D)_{climb} \times \eta} + \frac{ROC}{V_{climb}}$$
+
+- CURVE similar to cruise
+- Region ABOVE the curve is feasible
+
+ENERGY CONSTRAINT (for electric):
+- More complex, couples P/W with mission time
+- Can be shown as a boundary or checked separately
+
+4.4 FEASIBLE REGION
+
+The feasible design space is the INTERSECTION of all acceptable regions:
+- Above hover constraint
+- Above cruise constraint
+- Left of stall constraint
+- Satisfying energy constraint
+
+This region represents all (W/S, P/W) combinations that satisfy all requirements.
+
+4.5 DESIGN POINT SELECTION
+
+The optimal design point is typically:
+- MINIMUM P/W (lightest, cheapest propulsion)
+- At a feasible W/S (within structural/manufacturing limits)
+
+Often the design point is at the intersection of two or more constraints.
+
+CITE: Raymer or equivalent for design point selection rationale
+
+------------------------------------------------------------------------------
+SECTION 5: MATCHING CHARTS BY CONFIGURATION
+------------------------------------------------------------------------------
+
+5.1 ROTORCRAFT MATCHING CHART
+
+For pure rotorcraft, the matching chart shows:
+- Hover constraint: DOMINANT (very high P/W required)
+- No wing, so W/S concept is replaced by disk loading
+- Alternative axes: P/W vs DL (disk loading)
+
+KEY OBSERVATION: .
+
+[FIGURE PLACEHOLDER: matching_chart_rotorcraft.png]
+
+5.2 FIXED-WING MATCHING CHART
+
+For pure fixed-wing:
+- Cruise constraint: defines minimum P/W
+- Stall constraint: defines maximum W/S
+- Feasible region exists
+
+BUT: No point in the feasible region allows VTOL.
+
+[FIGURE PLACEHOLDER: matching_chart_fixed_wing.png]
+
+5.3 HYBRID VTOL MATCHING CHART
+
+For QuadPlane:
+- Hover constraint: sets minimum P/W (horizontal)
+- Cruise constraint: typically below hover (not limiting)
+- Stall constraint: sets maximum W/S
+
+Feasible region:
+- ABOVE hover constraint
+- LEFT of stall constraint
+- Energy constraint also satisfied
+
+[FIGURE PLACEHOLDER: matching_chart_hybrid_vtol.png]
+
+5.4 OVERLAY COMPARISON
+
+An overlay of all three configurations shows:
+- Rotorcraft: small or nonexistent feasible region
+- Fixed-wing: feasible region but fails VTOL requirement
+- Hybrid VTOL: feasible region satisfies all requirements
+
+[FIGURE PLACEHOLDER: matching_chart_comparison.png]
+
+------------------------------------------------------------------------------
+SECTION 6: DESIGN POINT DETERMINATION
+------------------------------------------------------------------------------
+
+6.1 HYBRID VTOL DESIGN POINT
+
+From the matching chart analysis, the design point for the QuadPlane is:
+
+| Parameter | Value | Constraint |
+|-----------|-------|------------|
+| W/S | [TO BE CALCULATED] N/m² | Near stall limit |
+| P/W | [TO BE CALCULATED] W/kg | At hover constraint |
+
+6.2 IMPLIED DESIGN PARAMETERS
+
+From the design point:
+
+| Derived Parameter | Value | Calculation |
+|-------------------|-------|-------------|
+| Wing area | S = W / (W/S) = [X] m² | From W/S and MTOW |
+| Wingspan | b = √(AR × S) = [X] m | From AR and S |
+| Chord | c = S / b = [X] m | Mean chord |
+| Installed power | P = (P/W) × W = [X] W | From P/W and MTOW |
+
+These values feed into the design decisions in Section 6.
+
+------------------------------------------------------------------------------
+SECTION 7: CONFIGURATION SELECTION
+------------------------------------------------------------------------------
+
+7.1 ELIMINATION OF ALTERNATIVES
+
+**Rotorcraft (§5.2)**: ELIMINATED
+- Reason: 
+- Root cause: 
+- No feasible improvement path
+
+**Fixed-Wing (§5.3)**: 
+- Reason: Cannot achieve VTOL without runway
+- Root cause: Mars lacks infrastructure
+- Alternative launch methods impractical
+
+7.2 SELECTION OF HYBRID VTOL
+
+**Hybrid VTOL (§5.4)**: 
+- Meets endurance: ~[X] min ≥ 60 min requirement ✓
+- Meets range: ~[X] km ≥ 100 km round trip ✓
+- Meets VTOL: Lift rotors enable vertical takeoff and landing ✓
+- Mass penalty: ~ %, acceptable for enabling mission
+
+7.3 RECOMMENDATION
+
+Based on the quantitative analysis presented in Sections 5.2 through 5.4,
+the **hybrid VTOL (QuadPlane) configuration** is selected as the baseline
+for the Mars UAV design.
+
+This configuration is the **ONLY architecture** that satisfies all mission
+constraints simultaneously:
+- VTOL capability (critical for Mars operations)
+- 60-90 minute cruise endurance (operational radius requirement)
+- Energy feasibility within battery technology limits
+
+The detailed architecture decisions are presented in @sec:design-decisions.
+
+------------------------------------------------------------------------------
+SECTION 8: FORWARD REFERENCES
+------------------------------------------------------------------------------
+
+The constraint analysis results feed into the following sections:
+
+| Result | Used In | Purpose |
+|--------|---------|---------|
+| Design point (W/S, P/W) | §6 Design Decisions | Wing and power sizing |
+| QuadPlane selection | §6.1 Architecture Selection | Configuration baseline |
+| (L/D) estimate | §6.2 Airfoil Selection | Verification target |
+| Stall constraint | §6.3 Geometry Selection | Wing area determination |
+| Energy budget | §7 Component Selection | Battery sizing |
+
+================================================================================
+OUTPUT: MANUSCRIPT STRUCTURE
+================================================================================
+
+File: 05_05_comparative-results.md
+
+```markdown
+## 5.5 Comparative results and configuration selection {#sec:comparative-results}
+
+### Requirements summary
+
+[Brief recap from @sec:derived-requirements]
+
+### Quantitative comparison
+
+#### Aerodynamic efficiency
+[Table comparing L/D values]
+
+#### Power requirements
+[Table comparing hover and cruise P/W]
+
+#### Mission capability
+[Table comparing endurance and range]
+
+### Summary comparison
+
+[Comprehensive table - @tbl:config-comparison]
+
+### Matching chart methodology
+
+#### Introduction
+[Explain P/W vs W/S diagram]
+
+#### Axes definition
+[W/S and P/W explained]
+
+#### Constraint representation
+[How each constraint appears on chart]
+
+#### Feasible region
+[Intersection of acceptable regions]
+
+### Configuration matching charts
+
+[Figure placeholders for each configuration]
+
+#### Design point
+[Selected W/S, P/W values]
+
+### Configuration selection
+
+#### Elimination of alternatives
+[Why rotorcraft and fixed-wing fail]
+
+#### Selection of hybrid VTOL
+[Why QuadPlane is selected]
+
+### Recommendation
+
+Based on the quantitative analysis in Sections 5.2-5.4, the **hybrid VTOL
+(QuadPlane) configuration** is selected as the Mars UAV baseline.
+
+This is the **ONLY** configuration that satisfies all mission requirements.
+
+The detailed design proceeds in @sec:design-decisions.
+```
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+```
+## Section: 5.5 Comparative results
+
+- "Matching chart (P/W vs W/S) methodology for preliminary sizing"
+  Source: [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 5, Constraint Analysis
+
+- "Design point is typically at minimum P/W within feasible region"
+  Source: [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 5, Design Point Selection
+
+- "Rotorcraft equivalent L/D: 3-5"
+  Source: [@leishmanPrinciplesHelicopterAerodynamics2006]
+  Location: Chapter 5, Forward Flight
+
+- "Fixed-wing L/D: 12-15 for low-Re optimized design"
+  Source: Calculated from drag polar, @sec:aerodynamic-analysis
+  Location: This document
+
+- "Hybrid VTOL mass penalty: 15-25% of MTOW"
+  Source: Calculated from reference UAV data
+  Location: sources/reference_drones.yaml analysis
+```
+
+================================================================================
+FIGURES TO GENERATE (Phase C)
+================================================================================
+
+The following figures should be generated by Python scripts:
+
+1. matching_chart_rotorcraft.png
+   - P/W vs DL (or equivalent)
+   - Show hover constraint dominant
+   - Mark infeasible due to endurance
+
+2. matching_chart_fixed_wing.png
+   - P/W vs W/S
+   - Show cruise and stall constraints
+   - Mark feasible region (but no VTOL)
+
+3. matching_chart_hybrid_vtol.png
+   - P/W vs W/S
+   - Show hover, cruise, stall constraints
+   - Mark feasible region and design point
+
+4. matching_chart_comparison.png
+   - Overlay of all three
+   - Or side-by-side comparison
+   - Visual summary of analysis
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+[ ] Summary comparison table complete
+[ ] Matching chart methodology explained with citation
+[ ] All constraint equations referenced (hover, cruise, stall)
+[ ] Each configuration chart described
+[ ] Design point values identified (with placeholders)
+[ ] Clear elimination rationale for rotorcraft and fixed-wing
+[ ] Unambiguous selection of hybrid VTOL
+[ ] Forward references to Section 6
+[ ] Figure placeholders for all matching charts
+[ ] source_grounding.txt entries specified
+
+
+================================================================================
+END OF PROMPT
+================================================================================

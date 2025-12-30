@@ -1,0 +1,386 @@
+================================================================================
+PROMPT 02: CONSTRAINT ANALYSIS BY CONFIGURATION
+================================================================================
+Task: Draft Section 6 - quantitative comparison of rotorcraft, fixed-wing, 
+      and hybrid VTOL configurations using matching chart analysis
+Output: 6 section files (06_00 through 06_05) with complete analytical framework
+
+================================================================================
+WORKFLOW: MANUSCRIPT FIRST, THEN CODE
+================================================================================
+
+This task follows a THREE-PHASE workflow:
+
+PHASE 1: THEORETICAL DEVELOPMENT (this prompt)
+   - Research and cite all equations from authoritative sources
+   - Present the analytical models with proper derivations
+   - Follow the citation protocol strictly
+   - Build the complete conceptual framework in the manuscript
+
+PHASE 2: PYTHON IMPLEMENTATION (subsequent task)
+   - Develop scripts that EXACTLY reproduce the cited equations
+   - No new equations - only implement what's in the manuscript
+   - Scripts are a computational tool, not a source of equations
+
+PHASE 3: NUMERICAL RESULTS (subsequent task)
+   - Run scripts with verified input parameters
+   - Add numerical results to manuscript
+   - Generate figures for inclusion
+
+THIS PROMPT COVERS PHASE 1 ONLY.
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. This section provides the
+QUANTITATIVE JUSTIFICATION for selecting the hybrid VTOL (QuadPlane) 
+configuration over pure rotorcraft or pure fixed-wing alternatives.
+
+The key insight is that the Mars atmosphere (~1/60 of Earth sea level density)
+imposes severe constraints on all configurations, but affects them differently:
+- Rotorcraft: hover power scales as 1/sqrt(rho), limiting endurance
+- Fixed-wing: no runway on Mars, cannot take off conventionally  
+- Hybrid VTOL: pays mass penalty for dual systems but achieves feasibility
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. EQUATION SOURCING: Every equation MUST be cited
+   - Search Zotero Mars_UAV collection first
+   - If not found, search full Zotero library
+   - If not found, search web for authoritative sources
+   - Add new sources to Zotero before citing
+   - Verify citation key exists in Mars_UAV.bib
+
+2. PARAMETER VALUES: Every numerical value MUST be traced
+   - State the source for each parameter
+   - Map to source_grounding.txt
+
+3. DERIVATIONS: Show complete derivation chains
+   - Start from fundamental principles
+   - Each step must be justified
+
+4. NO UNVERIFIED CLAIMS: If source cannot be found, state "further research needed"
+
+================================================================================
+SECTION 6 CONTENT REQUIREMENTS
+================================================================================
+
+------------------------------------------------------------------------------
+FILE: 06_00_constraint-analysis.md
+------------------------------------------------------------------------------
+Content: Section introduction
+
+- State the purpose: quantitative comparison of three configurations
+- Explain the matching chart methodology (P/W vs W/S diagram)
+- Cite the methodology source (e.g., Raymer, Sadraey, or Roskam)
+- Outline the section structure
+
+------------------------------------------------------------------------------
+FILE: 06_01_common-inputs.md
+------------------------------------------------------------------------------
+Content: Define all input parameters used in constraint analysis
+
+For EACH parameter, provide:
+- Symbol and name
+- Value with units
+- Source citation
+- Cross-reference to where it was derived (if from earlier sections)
+
+Required parameters:
+- MTOW (from §3.4)
+- Mars gravity (from §2.1)
+- Mars density at Arcadia Planitia (from §2.1)
+- Cruise speed (from §3.3)
+- Maximum lift coefficient (from §5.2)
+- Drag polar parameters CD0, Oswald factor (from §5.3)
+- Battery parameters (from §3.1 reference data)
+
+Example format:
+```markdown
+| Symbol | Parameter | Value | Unit | Source |
+|--------|-----------|-------|------|--------|
+| $W$ | Weight | 44.5 | N | @sec:initial-weight-estimate, using $g_{Mars}$ = 3.711 m/s² |
+| $\rho$ | Density | 0.020 | kg/m³ | @sec:operational-environment [@nasaMarsAtmosphereModel2021] |
+```
+
+------------------------------------------------------------------------------
+FILE: 06_02_rotorcraft-constraints.md
+------------------------------------------------------------------------------
+Content: Theoretical analysis for pure rotorcraft configuration
+
+SECTION: Hover power from momentum theory
+
+1. Research and cite the source for momentum theory
+   - Primary source: Leishman "Principles of Helicopter Aerodynamics"
+   - Verify in Zotero, add if needed
+   
+2. Present the ideal induced power equation:
+   $$P_{ideal} = T \cdot v_i = \frac{T^{3/2}}{\sqrt{2 \rho A}}$$ {#eq:momentum-ideal}
+   
+   Where:
+   - T = thrust (N)
+   - v_i = induced velocity (m/s)
+   - ρ = air density (kg/m³)
+   - A = rotor disk area (m²)
+   
+   CITE THE SOURCE for this equation.
+
+3. Define Figure of Merit (FM):
+   $$FM = \frac{P_{ideal}}{P_{actual}}$$ {#eq:figure-of-merit}
+   
+   Research typical FM values for small rotors:
+   - CITE source for FM = 0.6-0.7 range
+   - Johnson "Mars Science Helicopter" paper likely has this
+
+4. Present actual hover power equation:
+   $$P_{hover} = \frac{T^{3/2}}{FM \cdot \sqrt{2 \rho A}}$$ {#eq:hover-power}
+
+5. Account for motor efficiency:
+   $$P_{electric} = \frac{P_{hover}}{\eta_{motor}}$$ {#eq:electric-hover}
+   
+   CITE source for motor efficiency values.
+
+SECTION: Forward flight power
+
+1. Research rotorcraft forward flight aerodynamics
+2. Present the equivalent L/D concept for rotorcraft
+   - CITE source stating rotorcraft L/D is typically 3-5
+3. Present forward flight power equation
+
+SECTION: Endurance analysis
+
+1. Present battery energy equation:
+   $$E_{usable} = m_{batt} \cdot e_{spec} \cdot DoD \cdot \eta_{discharge}$$ {#eq:battery-energy}
+   
+   CITE sources for:
+   - Specific energy values for LiPo batteries
+   - Typical depth of discharge
+   - Discharge efficiency
+
+2. Derive endurance limit for rotorcraft
+3. Show that 60-minute requirement CANNOT be met
+
+SECTION: Conclusion
+- State clearly that rotorcraft configuration is infeasible
+- Summarize the limiting constraint (endurance)
+
+------------------------------------------------------------------------------
+FILE: 06_03_fixed-wing-constraints.md
+------------------------------------------------------------------------------
+Content: Theoretical analysis for pure fixed-wing configuration
+
+SECTION: Cruise power
+
+1. Present thrust-equals-drag equilibrium:
+   $$T = D = \frac{W}{L/D}$$ {#eq:cruise-thrust}
+
+2. Present cruise power equation:
+   $$P_{cruise} = \frac{T \cdot V}{\eta_{prop}} = \frac{W \cdot V}{(L/D) \cdot \eta_{prop}}$$ {#eq:cruise-power}
+   
+   CITE source (Raymer, Anderson, or similar)
+
+3. Define propeller efficiency for low-Re conditions
+   - CITE source for η_prop = 0.5-0.65 range on Mars
+
+SECTION: Stall constraint
+
+1. Present stall equation:
+   $$\frac{W}{S} \leq \frac{1}{2} \rho V_{stall}^2 C_{L,max}$$ {#eq:stall}
+   
+   CITE source
+
+2. Calculate maximum wing loading
+
+SECTION: Endurance analysis
+
+1. Show that cruise endurance CAN meet 60-minute requirement
+2. Fixed-wing is efficient in cruise
+
+SECTION: The takeoff and landing problem
+
+1. Explain that conventional fixed-wing requires runway
+2. Estimate takeoff ground roll for Mars conditions
+   - Present takeoff equation, CITE source
+   - Show result is hundreds of meters
+
+3. Discuss alternative launch methods:
+   - Catapult: requires ground infrastructure
+   - Rocket-assisted: adds mass and complexity
+   - Balloon drop: extremely complex for Mars
+   - CITE any sources discussing these alternatives
+
+4. Conclude: Fixed-wing INFEASIBLE without runway
+
+------------------------------------------------------------------------------
+FILE: 06_04_hybrid-vtol-constraints.md
+------------------------------------------------------------------------------
+Content: Theoretical analysis for hybrid VTOL (QuadPlane)
+
+SECTION: Key advantage - decoupled flight modes
+
+1. Explain QuadPlane architecture:
+   - Lift rotors sized for hover ONLY
+   - Wing + cruise motor sized for efficient cruise
+   
+2. CITE references to QuadPlane or similar hybrid concepts
+   - Search for Pipistrel Nuuva, DeltaQuad papers, etc.
+
+SECTION: Hover constraint (lift system)
+
+1. Same momentum theory as rotorcraft section
+2. But hover duration is limited (takeoff + landing only)
+3. Reference equations from §6.2 (no need to repeat derivation)
+
+SECTION: Cruise constraint (wing system)
+
+1. Same as fixed-wing analysis
+2. Reference equations from §6.3
+
+SECTION: Energy storage constraint
+
+1. This is the critical constraint for QuadPlane
+2. Battery must provide energy for BOTH phases:
+   $$E_{required} = E_{hover} + E_{cruise} + E_{reserve}$$
+   
+3. Expand:
+   $$E_{required} = P_{hover} \cdot t_{hover} + P_{cruise} \cdot t_{cruise} + E_{reserve}$$
+
+4. Define reserve policy (e.g., 20%)
+   - CITE source for reserve requirements
+
+5. Show that mission IS achievable within battery fraction
+
+SECTION: Mass penalty analysis
+
+1. Quantify the dual-propulsion mass penalty:
+   - Extra motors for lift system
+   - Structural mounts for rotors
+   
+2. Show penalty is acceptable (15-20% of MTOW)
+   - CITE source for QuadPlane mass breakdown if available
+
+SECTION: Conclusion
+- State that hybrid VTOL is FEASIBLE
+- It is the ONLY feasible configuration
+
+------------------------------------------------------------------------------
+FILE: 06_05_comparative-analysis.md
+------------------------------------------------------------------------------
+Content: Side-by-side comparison and configuration selection
+
+1. Summary comparison table:
+
+| Criterion | Rotorcraft | Fixed-Wing | Hybrid VTOL |
+|-----------|------------|------------|-------------|
+| VTOL capability | ✓ | ✗ | ✓ |
+| Cruise efficiency (L/D) | Low (3-5) | High (10-15) | High (10-15) |
+| Meets 60 min endurance | ✗ | ✓ | ✓ |
+| Takeoff feasible | ✓ | ✗ | ✓ |
+| **Overall feasibility** | **NO** | **NO** | **YES** |
+
+2. Discussion of trade-offs
+
+3. Clear conclusion:
+   "Based on the quantitative analysis above, the hybrid VTOL (QuadPlane)
+   configuration is the ONLY architecture that satisfies all mission
+   constraints."
+
+4. Forward reference to detailed architecture selection (§7)
+
+================================================================================
+EQUATIONS TO RESEARCH AND CITE
+================================================================================
+
+The following equations MUST be found in authoritative sources and cited:
+
+| Equation | Likely Source | Zotero Search Query |
+|----------|---------------|---------------------|
+| Momentum theory (hover power) | Leishman "Principles of Helicopter Aerodynamics" | leishman helicopter |
+| Figure of Merit definition | Leishman or Johnson | figure of merit rotor |
+| Cruise power | Raymer "Aircraft Design" or Anderson "Intro to Flight" | raymer aircraft design |
+| Stall equation | Any aerodynamics textbook | stall wing loading |
+| Takeoff ground roll | Raymer or Roskam | takeoff distance |
+| Battery energy | Battery technology literature | battery specific energy |
+
+For EACH equation:
+1. Search Zotero first
+2. Find the exact page/equation number in the source
+3. Add to source_grounding.txt
+4. Use proper LaTeX formatting with equation labels
+
+================================================================================
+PARAMETERS TO RESEARCH
+================================================================================
+
+| Parameter | Typical Value | Source to Research |
+|-----------|---------------|-------------------|
+| Figure of Merit (small rotors) | 0.6-0.7 | Johnson MSH paper |
+| Propeller efficiency (low Re) | 0.5-0.65 | Mars propeller studies |
+| Rotorcraft equivalent L/D | 3-5 | Leishman |
+| Fixed-wing L/D (low Re) | 10-15 | Section 5 or airfoil data |
+| Motor efficiency | 0.80-0.88 | Motor datasheets |
+| Battery specific energy | 150-270 Wh/kg | battery references |
+| Depth of discharge | 0.80 | Battery literature |
+
+================================================================================
+SOURCE GROUNDING UPDATES
+================================================================================
+
+After writing the content, update source_grounding.txt:
+
+```
+## Section: 6.2 Rotorcraft constraints
+
+- "Ideal hover power from momentum theory: P = T^1.5 / sqrt(2*rho*A)"
+  Source: [@leishmanPrinciplesHelicopterAerodynamics2006]
+  Location: Chapter 2, Equation 2.XX
+
+- "Figure of Merit for small rotors: 0.6-0.7"
+  Source: [@johnsonMarsScienceHelicopter2020]
+  Location: Page X
+
+## Section: 6.3 Fixed-wing constraints
+
+- "Cruise power equation: P = W*V / (L/D * eta)"
+  Source: [@raymerAircraftDesignConceptual2018]
+  Location: Chapter X, Equation X.XX
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] All 6 section files created with complete theoretical content
+[ ] EVERY equation has a citation to an authoritative source
+[ ] All citations verified in Mars_UAV.bib BEFORE use
+[ ] Parameter values have sources (not invented)
+[ ] Derivation chains are complete and traceable
+[ ] source_grounding.txt updated for all equations and values
+[ ] Clear conclusions stated for each configuration
+[ ] Comparative table in 06_05 is complete
+[ ] Content is suitable for SUBSEQUENT Python implementation
+
+================================================================================
+WHAT COMES NEXT (NOT part of this prompt)
+================================================================================
+
+After Phase 1 (this prompt) is complete:
+
+PHASE 2: Python Implementation
+- A separate task will create Python scripts
+- Scripts will implement EXACTLY the equations from the manuscript
+- No new equations - code follows manuscript
+
+PHASE 3: Numerical Results  
+- Run scripts with input parameters
+- Generate matching chart figures
+- Add numerical results to manuscript sections
+
+================================================================================
+END OF PROMPT
+================================================================================

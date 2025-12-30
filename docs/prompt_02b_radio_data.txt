@@ -1,0 +1,262 @@
+================================================================================
+PROMPT 01B: RADIO SYSTEMS DATA COLLECTION
+================================================================================
+Task: Collect reference data on UAV-compatible radio/telecommunication systems
+Output: YAML file sources/radio_systems.yaml with full citations
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are working on a Mars UAV feasibility study. The UAV has a TELECOMMUNICATION
+RELAY mission objective to extend communication range for surface operations.
+
+This task collects reference data on existing radio systems to:
+- Understand what types of radios are suitable for UAV relay missions
+- Establish realistic mass ranges for radio payloads
+- Provide grounded data for initial MTOW estimation
+
+The YAML output will be used by another LLM agent to:
+- Write the manuscript content for Section 3.1 (Payload systems survey)
+- Justify payload mass allocation in Section 3.4 (Initial weight estimate)
+- Inform component selection in Section 11.4 (after preliminary sizing)
+
+NOTE: For Mars, the radio would communicate with the habitat ground station
+or EVA astronauts, not Earth. The frequency bands differ from Earth applications
+but mass references remain valid for estimation purposes.
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+EVERY piece of data must be traced to a primary source and properly cited.
+
+1. VERIFICATION (Primary Source Rule):
+   - Use ONLY manufacturer specification pages as sources
+   - If blocked by anti-bot protection, use Jina Reader:
+     https://r.jina.ai/[original-url]
+   - Do NOT use aggregator sites, review sites, or Wikipedia
+
+2. REGISTRATION (Zotero):
+   - Add each manufacturer page to the Mars_UAV Zotero collection
+   - Use the Zotero Web API:
+     - User ID: 10348042
+     - API Key: s8qR5N0A7GSQxZfkW1NAcmjZ
+     - Collection Key: 2BQEVWT7
+   - Required metadata: Title, Manufacturer (as author), Date, URL
+
+3. CITATION KEY:
+   - After adding to Zotero, wait for BetterBibTeX sync
+   - Verify the citation key exists in Mars_UAV.bib
+   - Use the EXACT key in the YAML file
+
+4. NO UNVERIFIED DATA:
+   - If a specification is not available, use null
+   - Do NOT estimate or guess values
+
+================================================================================
+RADIO SYSTEMS TO RESEARCH
+================================================================================
+
+Collect data on 5-7 radio systems from the following categories:
+
+MESH RADIO SYSTEMS (Primary - collect 3-4):
+Purpose: Self-forming networks for relay functionality
+(examples)
+1. Silvus StreamCaster SC4200 or SC4400
+2. Doodle Labs Smart Radio (Helix series)
+3. Rajant Kinetic Mesh ME4 or ES1
+4. Persistent Systems MPU5
+
+LONG-RANGE DATA LINKS (Secondary - collect 2-3):
+Purpose: Point-to-point high-bandwidth links
+(examples)
+5. Microhard pMDDL2450 or pDDL2450
+6. RFD900x (open source, common in UAV community)
+7. uAvionix SkyLine command-and-control link
+
+LIGHTWEIGHT OPTIONS (If available):
+8. Any sub-100g radio transceivers suitable for small UAVs
+
+================================================================================
+DATA FIELDS TO COLLECT
+================================================================================
+
+For each radio system, collect ALL of the following fields.
+Use null for any field where data is not available from the primary source.
+
+| Field                | Description                              | Unit    |
+|----------------------|------------------------------------------|---------|
+| model                | Full product model name                  | string  |
+| manufacturer         | Company name                             | string  |
+| type                 | "mesh" or "point-to-point" or "c2_link"  | string  |
+| mass_radio_g         | Radio/transceiver unit mass only         | grams   |
+| mass_antenna_g       | Standard antenna mass                    | grams   |
+| mass_total_g         | Complete system as configured for UAV    | grams   |
+| frequency_band       | e.g., "2.4 GHz", "900 MHz", "L-band"     | string  |
+| frequency_range_mhz  | e.g., "2400-2500"                        | string  |
+| channel_bandwidth_mhz| e.g., "1.25, 2.5, 5, 10, 20"             | string  |
+| output_power_dbm     | Maximum transmit power                   | number  |
+| output_power_w       | Maximum transmit power in watts          | number  |
+| data_rate_mbps       | Maximum data rate                        | number  |
+| data_rate_typical_mbps| Typical/sustained data rate             | number  |
+| range_los_km         | Line-of-sight range                      | number  |
+| range_nlos_km        | Non-line-of-sight range (if applicable)  | number  |
+| latency_ms           | Typical latency                          | number  |
+| voltage_input_v      | Operating voltage range                  | string  |
+| power_consumption_w  | Typical power draw                       | number  |
+| power_consumption_max_w | Maximum power draw (at max TX)         | number  |
+| operating_temp_min_c | Minimum operating temperature            | number  |
+| operating_temp_max_c | Maximum operating temperature            | number  |
+| dimensions_mm        | "L x W x H"                              | string  |
+| ip_rating            | e.g., "IP67"                             | string  |
+| encryption           | e.g., "AES-256"                          | string  |
+| mimo_config          | e.g., "2x2", "4x4"                       | string  |
+| interface            | e.g., "Ethernet", "USB", "UART"          | string  |
+| antenna_connectors   | e.g., "2x SMA", "4x TNC"                 | string  |
+| certifications       | e.g., "FCC, CE, MIL-STD-810G"            | string  |
+| source_url           | Primary manufacturer URL                 | string  |
+| source_key           | Zotero citation key                      | string  |
+| access_date          | Date accessed (YYYY-MM-DD)               | string  |
+| notes                | Any relevant notes                       | string  |
+
+================================================================================
+OUTPUT FILE FORMAT
+================================================================================
+
+Create file: sources/radio_systems.yaml
+
+```yaml
+# Radio Systems Database for Mars UAV Feasibility Study
+# Generated: [DATE]
+# Purpose: Reference data for payload mass estimation and component selection
+# 
+# CITATION PROTOCOL:
+# Each entry includes source_key which references Mars_UAV.bib
+# All specifications are from primary manufacturer sources
+#
+# NOTE: For Mars application, frequency bands will differ from Earth usage
+# but mass and power specifications remain valid for estimation
+# 
+# See source_grounding.txt for detailed claim-to-source mapping
+
+metadata:
+  generated_date: "2025-12-25"
+  purpose: "Payload systems survey for Mars UAV feasibility study"
+  data_source: "Primary manufacturer specification pages"
+  mars_note: "Frequency bands not directly applicable to Mars; mass/power data used for estimation"
+
+radio_systems:
+  - model: "StreamCaster SC4200"
+    manufacturer: "Silvus Technologies"
+    type: "mesh"
+    
+    # Mass properties
+    mass_radio_g: 380
+    mass_antenna_g: 50  # per antenna, typically 2-4 used
+    mass_total_g: 480  # with 2x antennas
+    
+    # RF specifications
+    frequency_band: "2.4 GHz"
+    frequency_range_mhz: "2400-2500"
+    channel_bandwidth_mhz: "1.25, 2.5, 5, 10, 20"
+    output_power_dbm: 33
+    output_power_w: 2.0
+    
+    # Data performance
+    data_rate_mbps: 100
+    data_rate_typical_mbps: 50
+    range_los_km: 50
+    range_nlos_km: null
+    latency_ms: 5
+    
+    # Power requirements
+    voltage_input_v: "9-36 VDC"
+    power_consumption_w: 12
+    power_consumption_max_w: 20
+    
+    # Environmental specifications
+    operating_temp_min_c: -40
+    operating_temp_max_c: 70
+    ip_rating: "IP67"
+    
+    # Physical specifications
+    dimensions_mm: "140 x 89 x 38"
+    interface: "Ethernet, USB"
+    antenna_connectors: "4x SMA"
+    mimo_config: "4x4"
+    encryption: "AES-256"
+    certifications: "FCC, CE, MIL-STD-810G"
+    
+    # Source citation
+    source_url: "https://silvustechnologies.com/products/streamcaster-radios/sc4200/"
+    source_key: "@silvusSC4200Specifications2024"
+    access_date: "2025-12-25"
+    notes: "Wideband MIMO mesh radio with MN-MIMO technology"
+
+  - model: "RFD900x"
+    manufacturer: "RFDesign"
+    type: "point-to-point"
+    # ... (similar structure)
+
+  # ... (additional radios)
+
+summary:
+  total_systems: 6
+  mass_range_radio_only_g:
+    min: 55   # example: RFD900x
+    max: 450  # example: Persistent Systems MPU5
+  mass_range_complete_g:
+    min: 80
+    max: 600
+  power_range_w:
+    min: 2
+    max: 25
+  recommended_for_mars_uav:
+    category: "Lightweight mesh capable"
+    rationale: "Balance of mass, range capability, and power consumption"
+```
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+After creating the YAML file, update source_grounding.txt with entries:
+
+```
+## Section: 3.1.3 Payload systems - Radio survey
+
+- "Silvus SC4200 mass: 380 g (radio only)"
+  Source: [@silvusSC4200Specifications2024]
+  Location: https://silvustechnologies.com/products/streamcaster-radios/sc4200/
+
+- "Silvus SC4200 range (LOS): 50 km"
+  Source: [@silvusSC4200Specifications2024]
+  Location: https://silvustechnologies.com/products/streamcaster-radios/sc4200/
+
+- "RFD900x mass: 55 g"
+  Source: [@rfdesignRFD900xSpecifications2024]
+  Location: [URL]
+
+# ... (one entry per key data point)
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+The output is acceptable if:
+
+[ ] YAML file created at sources/radio_systems.yaml
+[ ] At least 5 radio systems documented
+[ ] All mass values verified from primary sources (no estimates)
+[ ] At least one system from mesh and point-to-point categories
+[ ] All sources added to Zotero Mars_UAV collection
+[ ] All source_key values verified in Mars_UAV.bib
+[ ] source_grounding.txt updated with all data points
+[ ] YAML is valid and parseable
+[ ] Summary section includes calculated mass and power ranges
+
+================================================================================
+END OF PROMPT
+================================================================================

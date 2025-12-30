@@ -1,0 +1,93 @@
+## Codifica Caratteri e Simboli Speciali
+
+* Tutti i file markdown devono essere codificati in UTF-8 per supportare correttamente i caratteri italiani (à, è, é, ì, ò, ù) e i comuni simboli scientifici (lettere greche, simbolo di grado °, operatori matematici, ecc.).
+
+* Utilizzare i caratteri Unicode direttamente per i simboli comuni: simbolo di grado (°), segno di moltiplicazione (×), lettere greche (α, β, γ, λ, μ, ecc.), apici, pedici e altra notazione scientifica quando appropriato.
+
+* Per espressioni matematiche complesse, utilizzare la sintassi LaTeX tra simboli di dollaro. Per simboli e unità semplici, utilizzare i caratteri Unicode direttamente nel testo.
+
+## Formattazione Matematica e Tecnica
+
+* Usare sempre 4 cifre significative per i risultati dei calcoli.
+
+* Per intervalli aperti, usare la notazione matematica di disuguaglianza (es. "> 40") invece della notazione con il più (es. "40+"). Questo si applica a tabelle, prosa e tutti i contesti numerici.
+
+* Utilizzare la sintassi LaTeX per le espressioni matematiche: `$...$` per la matematica inline e `$$...$$` per le equazioni in display.
+
+* **Pedici e apici nel testo corrente**: usare SEMPRE la sintassi LaTeX inline per pedici e apici, anche per simboli semplici. La notazione con underscore semplice (es. `T_ref`, `μ_max`) NON viene renderizzata correttamente nell'output Word via Pandoc. Usare invece:
+  - `$T_\text{rif}$` per temperatura di riferimento (renderizza T con pedice "rif")
+  - `$\mu_\text{rif}$` per viscosità di riferimento
+  - `$C_{L,\text{max}}$` per coefficiente di portanza massimo
+  - `$W_\text{Marte}$` per peso marziano
+  - `$A_\text{rotore}$` per area del rotore
+  - Per pedici numerici: `$T_0$`, `$p_0$`, `$C_{D,0}$`
+  - Per pedici o apici con lettere greche: `$C_L$`, `$C_D$`, `$R_{CO_2}$`
+
+* Per le intestazioni di tabella con pedici, usare la matematica LaTeX inline: `$C_L$` invece di `C_L`.
+
+* Formattare le equazioni centrate con righe vuote prima e dopo. Posizionare l'equazione e la sua etichetta di riferimento incrociato sulla stessa riga nel formato `$$equazione$$ {#eq:etichetta}`. Per equazioni lunghe, posizionare l'etichetta sulla riga successiva come `{#eq:etichetta}`.
+
+* Effettuare l'escape dei caratteri speciali per markdown, es. `6 \> 5`.
+
+## Tipografia e Punteggiatura
+
+* Utilizzare le maiuscole standard dell'italiano, inclusi i titoli. Maiuscola solo dopo il punto, per nomi propri, composti chimici e acronimi. Non usare maiuscole dopo i due punti, punto e virgola, o negli elementi di lista.
+
+* Evitare formattazione grassetto o corsivo non necessaria. Non usare grassetto o corsivo per evidenziare parole, acronimi o nuovi concetti.
+
+* Non utilizzare mai trattini lunghi (em-dash). Usare virgole per separare concetti e frasi, o trattini (-) per separare lettere o parole.
+
+* Scrivere "e" invece di "&", eccetto in "R&D".
+
+* È un documento scientifico, non usare mai gli indicatori ✓/❌.
+
+## Liste e Struttura dei Paragrafi
+
+* Utilizzare sempre asterischi (*) per le liste puntate, mai trattini (-). Questa convenzione garantisce consistenza nella formattazione e la corretta conversione tramite pandoc del documento.
+
+* Limitare le liste verticali (puntate o numerate) ai casi strettamente necessari per riferimento rapido. Altrimenti, utilizzare liste integrate nel flusso del paragrafo. Separare elementi brevi con virgole; separare elementi complessi o con punteggiatura interna con punto e virgola.
+
+* Rendere TUTTE le liste compatte (tight lists) rimuovendo TUTTE le righe vuote/paragrafi extra tra gli elementi della lista. Questa regola si applica SENZA ECCEZIONI a:
+  - Liste puntate con asterisco (*)
+  - Liste puntate con bullet point (•)
+  - Liste numerate (1. 2. 3.)
+  - Liste in TUTTI i file del documento
+
+## Tabelle, Figure e Riferimenti Incrociati
+
+* Formattare le tabelle usando la sintassi pipe table con didascalie prima della tabella: `: Testo didascalia {#tbl:etichetta}` seguito da una riga vuota, poi riga di intestazione, riga separatore e righe dati. Utilizzare le maiuscole standard. Consolidare le voci multilinea in righe singole con allineamento corretto dei delimitatori pipe.
+
+* Usare intestazioni di tabella concise, di una parola o un concetto singolo. Ad esempio: usare "Metrica" invece di "Metrica/Aspetto", usare "Piattaforma" invece di "Piattaforma / Dispositivo".
+
+* Formattare le immagini usando markdown standard: `![Testo didascalia](percorso/immagine.png){#fig:etichetta}`. Posizionare le immagini inline con righe vuote prima e dopo. Specificare larghezza e altezza tra parentesi graffe quando necessario.
+
+* Formattare le sottofigure usando un Div con l'ID della figura principale. Ogni immagine sottofigura deve avere il proprio ID con classe `.nocaption`. Posizionare la didascalia completa dopo tutte le sottofigure. Esempio:
+  ```
+  ::: {#fig:etichetta-principale}
+  ![](percorso/immagine1.png){#fig:etichetta-principale-a width=49% .nocaption}
+  ![](percorso/immagine2.png){#fig:etichetta-principale-b width=49% .nocaption}
+
+  Testo didascalia che descrive (a) prima sottofigura e (b) seconda sottofigura
+  :::
+  ```
+  Riferirsi all'intera figura con `@fig:etichetta-principale` e alle singole sottofigure con `@fig:etichetta-principale-a`, `@fig:etichetta-principale-b`.
+
+* Usare etichette di riferimento incrociato per equazioni, tabelle e figure: `{#eq:etichetta}`, `{#tbl:etichetta}`, `{#fig:etichetta}` per etichettare; `@eq:etichetta`, `@tbl:etichetta`, `@fig:etichetta` per citare. Mettere in maiuscola la prima lettera del token di riferimento per riferimenti con maiuscola: `@Eq:etichetta`, `@Tbl:etichetta`, `@Fig:etichetta`. Non codificare mai riferimenti fissi come "Tabella 3.1".
+
+## Voce e Prospettiva
+
+* Mantenere una prospettiva oggettiva in terza persona. Evitare pronomi in prima e seconda persona (es. "io," "noi," "tu"). Usare costruzioni impersonali o passive per concentrarsi su metodologia e risultati.
+
+## Precisione Linguistica e Oggettività
+
+* Evitare aggettivi valutativi soggettivi che esprimono opinione piuttosto che proprietà misurabili (es. "geniale," "innovativo," "significativo," "notevole," "promettente"). Presentare fatti oggettivi, dati quantitativi o descrizioni funzionali.
+
+* Sostituire termini di necessità iperbolica con alternative modeste. Evitare "cruciale," "critico," "vitale" o "essenziale." Usare "importante," "necessario" o "rilevante."
+
+* Evitare affermazioni speculative ed espressioni colloquiali. Non usare frasi predittive come "destinato a," "pronto a" o "giocherà un ruolo chiave." Evitare espressioni idiomatiche come "colonna portante" o "fondamento." Descrivere invece capacità attualmente dimostrate, applicazioni esistenti o pattern di utilizzo reali.
+
+* Evitare figure retoriche e dispositivi letterari. Mantenere un linguaggio semplice e diretto senza metafore, similitudini, personificazioni o domande retoriche. Non usare frasi come "apre la strada," "ha promessa," "getta luce su," "colma il divario" o "apre la porta a."
+
+## Citazioni
+
+* Usare solo citazioni implicite, posizionando i tag di citazione alla fine dell'affermazione logica. Non usare mai frasi di attribuzione esplicita come "riportato da," "dimostrato da," "mostrato da" o nomi di autori come soggetti della frase. Affermare i fatti direttamente e aggiungere citazioni: `[@imHybridIntegratedSilicon2021]`.

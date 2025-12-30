@@ -1,0 +1,556 @@
+================================================================================
+PROMPT 03B: FIXED-WING CONSTRAINT EQUATIONS (THEORETICAL)
+================================================================================
+Task: Develop complete theoretical analysis for fixed-wing configuration
+Output: Manuscript content for 05_03_fixed-wing-analysis.md
+Dependencies: Phase 2 outputs (aero coefficients, derived requirements)
+
+================================================================================
+WORKFLOW: MANUSCRIPT FIRST
+================================================================================
+
+This prompt follows the THREE-PHASE workflow:
+
+PHASE A: THEORETICAL DEVELOPMENT (THIS PROMPT)
+   - Research and cite ALL equations from authoritative sources
+   - Present complete derivations with assumptions stated
+   - Build the analytical framework in the manuscript
+   - Use [TO BE CALCULATED] placeholders for numerical results
+
+PHASE B: PYTHON IMPLEMENTATION (subsequent task)
+   - Implement scripts that EXACTLY reproduce manuscript equations
+
+PHASE C: NUMERICAL RESULTS (subsequent task)
+   - Run scripts, insert results, generate figures
+
+THIS PROMPT COVERS PHASE A ONLY.
+
+================================================================================
+CONTEXT
+================================================================================
+
+You are developing Section 5.3 of the Mars UAV feasibility study:
+"Fixed-wing configuration analysis"
+
+This section analyzes whether a pure fixed-wing (conventional airplane)
+configuration can satisfy the Mars UAV mission requirements:
+- 50 km operational radius
+- 60-90 minute cruise endurance
+- VTOL capability (REQUIRED)
+
+SPOILER: The analysis will show that fixed-wing CAN meet the endurance
+requirement (high L/D = 12-15), but CANNOT meet the VTOL requirement:
+- No runway on Mars for conventional takeoff
+- Ground roll would be hundreds of meters in thin atmosphere
+- Alternative launch methods (catapult, rocket-assist) are impractical
+
+The section provides QUANTITATIVE JUSTIFICATION for this conclusion.
+
+================================================================================
+PROJECT PROTOCOLS (MANDATORY)
+================================================================================
+
+1. EQUATION SOURCING:
+   - EVERY equation must be cited to an authoritative source
+   - Search Zotero Mars_UAV collection first
+   - Primary sources: Raymer, Anderson, Roskam
+
+2. DERIVATION REQUIREMENTS:
+   - State all assumptions explicitly
+   - Show intermediate steps
+   - Define all symbols
+
+3. PARAMETER VALUES:
+   - Reference values from earlier sections (@sec:derived-requirements)
+   - Use placeholders if not yet determined
+
+================================================================================
+THEORETICAL CONTENT REQUIRED
+================================================================================
+
+------------------------------------------------------------------------------
+SECTION 1: STEADY LEVEL FLIGHT FUNDAMENTALS
+------------------------------------------------------------------------------
+
+SOURCE: Anderson "Introduction to Flight" or Raymer "Aircraft Design"
+Check Zotero for these sources.
+
+1.1 FORCE EQUILIBRIUM
+
+In steady level flight, the forces balance:
+- Lift = Weight: L = W
+- Thrust = Drag: T = D
+
+Present these fundamental equations:
+$$L = W$$ {#eq:lift-weight}
+$$T = D$$ {#eq:thrust-drag}
+
+CITE: Any introductory flight mechanics textbook
+
+1.2 LIFT EQUATION
+
+The lift equation:
+$$L = \frac{1}{2} \rho V^2 S C_L$$ {#eq:lift}
+
+Where:
+- L = lift force (N)
+- ρ = air density (kg/m³)
+- V = airspeed (m/s)
+- S = wing reference area (m²)
+- C_L = lift coefficient (dimensionless)
+
+At cruise (L = W):
+$$W = \frac{1}{2} \rho V^2 S C_L$$
+
+Solving for required C_L:
+$$C_L = \frac{2W}{\rho V^2 S} = \frac{2(W/S)}{\rho V^2}$$ {#eq:cl-required}
+
+CITE: Anderson or equivalent
+
+1.3 DRAG EQUATION
+
+Total drag:
+$$D = \frac{1}{2} \rho V^2 S C_D$$ {#eq:drag}
+
+Using the parabolic drag polar (from @sec:aerodynamic-analysis):
+$$C_D = C_{D0} + \frac{C_L^2}{\pi \cdot AR \cdot e}$$ {#eq:drag-polar}
+
+Where:
+- C_D0 = zero-lift drag coefficient
+- AR = aspect ratio
+- e = Oswald efficiency factor
+
+VALUES (from prompt 02D):
+- C_D0 = 0.030
+- e = 0.80
+- AR = 12 (nominal)
+
+CITE: Raymer or Anderson for drag polar formulation
+
+------------------------------------------------------------------------------
+SECTION 2: LIFT-TO-DRAG RATIO
+------------------------------------------------------------------------------
+
+2.1 L/D FROM DRAG POLAR
+
+The lift-to-drag ratio is:
+$$\frac{L}{D} = \frac{C_L}{C_D} = \frac{C_L}{C_{D0} + C_L^2/(\pi \cdot AR \cdot e)}$$ {#eq:ld-ratio}
+
+2.2 MAXIMUM L/D
+
+To find maximum L/D, differentiate and set to zero:
+$$\frac{d(L/D)}{dC_L} = 0$$
+
+Result:
+$$C_L^* = \sqrt{\pi \cdot AR \cdot e \cdot C_{D0}}$$ {#eq:cl-star}
+
+At this C_L, the induced drag equals the parasite drag.
+
+The maximum L/D is:
+$$\left(\frac{L}{D}\right)_{max} = \frac{1}{2} \sqrt{\frac{\pi \cdot AR \cdot e}{C_{D0}}}$$ {#eq:ld-max}
+
+EXAMPLE CALCULATION:
+With AR = 12, e = 0.80, C_D0 = 0.030:
+(L/D)_max = 0.5 × sqrt(π × 12 × 0.80 / 0.030)
+(L/D)_max = 0.5 × sqrt(1005)
+(L/D)_max ≈ 15.9
+
+CITE: Anderson "Fundamentals of Aerodynamics" or Raymer
+
+2.3 SPEED FOR MAXIMUM L/D
+
+The speed at which (L/D)_max occurs:
+$$V_{(L/D)max} = \sqrt{\frac{2W}{\rho S C_L^*}} = \sqrt{\frac{2(W/S)}{\rho \sqrt{\pi \cdot AR \cdot e \cdot C_{D0}}}}$$ {#eq:v-ld-max}
+
+------------------------------------------------------------------------------
+SECTION 3: CRUISE POWER
+------------------------------------------------------------------------------
+
+3.1 POWER REQUIRED FOR LEVEL FLIGHT
+
+Power required to overcome drag:
+$$P_{required} = D \times V = \frac{D \times V}{\eta_{prop}}$$ (shaft power)
+
+For propulsive power:
+$$P_{cruise} = \frac{T \times V}{\eta_{prop}} = \frac{D \times V}{\eta_{prop}}$$ {#eq:cruise-power-basic}
+
+Since T = D = W/(L/D):
+$$P_{cruise} = \frac{W \times V}{(L/D) \times \eta_{prop}}$$ {#eq:cruise-power}
+
+CITE: Raymer, Anderson, or similar
+
+3.2 ELECTRICAL POWER
+
+Including motor and ESC efficiencies:
+$$P_{electric} = \frac{P_{cruise}}{\eta_{motor} \times \eta_{ESC}}$$ {#eq:cruise-electric}
+
+$$P_{electric} = \frac{W \times V}{(L/D) \times \eta_{prop} \times \eta_{motor} \times \eta_{ESC}}$$ {#eq:cruise-electric-full}
+
+Combined propulsive efficiency:
+$$\eta_{total} = \eta_{prop} \times \eta_{motor} \times \eta_{ESC}$$
+
+VALUES (from prompt 02C):
+- η_prop = 0.55 (Mars low-Re)
+- η_motor = 0.85
+- η_ESC = 0.95
+- η_total = 0.55 × 0.85 × 0.95 = 0.44
+
+3.3 POWER LOADING FORMULATION
+
+Express as power loading (P/W):
+$$\frac{P}{W} = \frac{V}{(L/D) \times \eta_{total}}$$ {#eq:power-loading-cruise}
+
+This is the CRUISE CONSTRAINT on the matching chart.
+
+EXAMPLE:
+At V = 40 m/s, (L/D) = 15, η_total = 0.44:
+P/W = 40 / (15 × 0.44) = 6.06 W/N
+
+For Mars (g = 3.711 m/s²):
+P/W = 6.06 × 3.711 = 22.5 W/kg
+
+------------------------------------------------------------------------------
+SECTION 4: STALL CONSTRAINT
+------------------------------------------------------------------------------
+
+4.1 STALL SPEED
+
+The minimum flight speed (stall) occurs at maximum C_L:
+$$V_{stall} = \sqrt{\frac{2W}{\rho S C_{L,max}}} = \sqrt{\frac{2(W/S)}{\rho C_{L,max}}}$$ {#eq:stall-speed}
+
+CITE: Any aerodynamics textbook
+
+4.2 WING LOADING CONSTRAINT
+
+Rearranging for wing loading:
+$$\frac{W}{S} = \frac{1}{2} \rho V_{stall}^2 C_{L,max}$$ {#eq:wing-loading-stall}
+
+For a minimum operating speed V_min with margin:
+$$\frac{W}{S} \leq \frac{1}{2} \rho V_{min}^2 C_{L,max}$$ {#eq:wing-loading-constraint}
+
+This is a VERTICAL LINE on the matching chart (W/S upper bound).
+
+VALUES (from prompts 02D, 02I):
+- C_L,max = 1.0 (at Re = 60,000)
+- ρ = 0.020 kg/m³
+- V_min = 1.2 × V_stall (assume V_stall ≈ 25 m/s for estimate)
+
+EXAMPLE:
+W/S ≤ 0.5 × 0.020 × 25² × 1.0 = 6.25 N/m² = 6.25 Pa
+
+This is VERY LOW compared to Earth aircraft (typical: 1500-5000 Pa)
+
+------------------------------------------------------------------------------
+SECTION 5: ENDURANCE ANALYSIS
+------------------------------------------------------------------------------
+
+5.1 AVAILABLE ENERGY
+
+From battery (same as rotorcraft):
+$$E_{available} = f_{batt} \times MTOW \times e_{spec} \times DoD \times \eta_{batt}$$ {#eq:energy-available}
+
+5.2 ENDURANCE EQUATION
+
+Endurance for electric aircraft at constant speed:
+$$t = \frac{E_{available}}{P_{electric}}$$ {#eq:endurance-basic}
+
+Substituting:
+$$t = \frac{f_{batt} \times MTOW \times e_{spec} \times DoD \times \eta_{batt}}{W \times V / ((L/D) \times \eta_{total})}$$
+
+Since W = MTOW × g:
+$$t = \frac{f_{batt} \times e_{spec} \times DoD \times \eta_{batt} \times (L/D) \times \eta_{total}}{g \times V}$$ {#eq:endurance-fixedwing}
+
+This is the KEY ENDURANCE EQUATION for fixed-wing.
+
+Note: Endurance is INDEPENDENT of MTOW (for fixed fractions).
+
+5.3 COMPARISON WITH ROTORCRAFT
+
+| Parameter | Rotorcraft | Fixed-Wing | Effect |
+|-----------|-----------|------------|--------|
+| (L/D)_eff | 4 | 15 | +275% for fixed-wing |
+| η_prop | 0.81 | 0.44 | -46% for fixed-wing |
+| Net factor | 3.24 | 6.6 | +104% endurance |
+
+Fixed-wing has approximately TWICE the endurance of rotorcraft.
+
+5.4 ENDURANCE CALCULATION
+
+Using values:
+- f_batt = 0.35
+- e_spec = 250 Wh/kg = 900,000 J/kg
+- DoD = 0.80
+- η_batt = 0.95
+- (L/D) = 15
+- η_total = 0.44
+- g = 3.711 m/s²
+- V = 40 m/s
+
+t = (0.35 × 900000 × 0.80 × 0.95 × 15 × 0.44) / (3.711 × 40)
+t = [TO BE CALCULATED] seconds
+
+EXPECTED RESULT: t ≈ 80-100 minutes (EXCEEDS 60-min requirement)
+
+------------------------------------------------------------------------------
+SECTION 6: THE TAKEOFF PROBLEM
+------------------------------------------------------------------------------
+
+THIS IS WHY FIXED-WING FAILS FOR MARS MISSION.
+
+6.1 TAKEOFF GROUND ROLL
+
+The takeoff ground roll distance:
+$$S_{TO} = \frac{V_{TO}^2}{2 \bar{a}}$$ {#eq:takeoff-roll}
+
+Where:
+- V_TO = takeoff speed ≈ 1.1 × V_stall
+- ā = average acceleration during ground roll
+
+Average acceleration:
+$$\bar{a} = \frac{g}{W} \left[ T - D - \mu_r (W - L) \right]_{avg}$$ {#eq:takeoff-accel}
+
+CITE: Raymer Chapter 17 "Takeoff and Landing"
+
+6.2 MARS-SPECIFIC ISSUES
+
+On Mars, the takeoff roll is extremely long because:
+
+a) LOW DENSITY:
+   - V_stall is higher (∝ 1/√ρ)
+   - At ρ = 0.020 kg/m³ vs Earth 1.225 kg/m³
+   - V_stall increases by √(1.225/0.020) = √61 ≈ 7.8×
+   - If Earth V_stall = 25 m/s → Mars V_stall ≈ 200 m/s (impossible!)
+
+   Note: This calculation assumes same W/S. Mars UAV must have MUCH lower W/S.
+
+b) RECALCULATION WITH MARS-APPROPRIATE W/S:
+   For W/S = 6.25 Pa (from stall constraint), V_stall ≈ 25 m/s
+   V_TO ≈ 1.1 × 25 = 27.5 m/s
+   
+c) ACCELERATION IS LOW:
+   - Lower density → lower thrust (propeller)
+   - Lower friction coefficient (μ_r ≈ 0.02-0.05 on regolith)
+   - Net: acceleration is low
+
+d) ESTIMATED GROUND ROLL:
+   With T/W = 0.3, rough estimate:
+   ā ≈ 0.2 × g_Mars = 0.74 m/s²
+   S_TO = (27.5)² / (2 × 0.74) = 756 / 1.48 ≈ 511 m
+   
+   This is HUNDREDS OF METERS with no runway infrastructure.
+
+6.3 ALTERNATIVE LAUNCH METHODS
+
+CATAPULT/RAIL LAUNCH:
+- Requires ground infrastructure
+- Not available from habitat
+- Adds mission complexity
+
+ROCKET-ASSISTED TAKEOFF (RATO):
+- Solid rocket boosters add mass
+- One-time use → multiple flights impractical
+- Safety hazard near habitat
+
+BALLOON-DROP LAUNCH:
+- Deploy from high-altitude balloon
+- Extremely complex for Mars
+- No balloon infrastructure exists
+
+AIR-LAUNCH FROM LARGER VEHICLE:
+- Not applicable (no carrier aircraft on Mars)
+
+CITE: Any sources discussing alternative launch methods if available.
+
+6.4 LANDING PROBLEM
+
+Landing also requires:
+- Long rollout distance after touchdown
+- Prepared surface to avoid obstacles
+- Same issues as takeoff
+
+------------------------------------------------------------------------------
+SECTION 7: FEASIBILITY CONCLUSION
+------------------------------------------------------------------------------
+
+7.1 SUMMARY TABLE
+
+| Requirement | Fixed-Wing Capability | Status |
+|-------------|----------------------|--------|
+| 60-90 min endurance | ~[XX] min | ✓ PASS |
+| 50 km radius | ~[XX] km | ✓ PASS |
+| VTOL | NOT possible | ❌ FAIL |
+
+7.2 CONCLUSION
+
+The pure fixed-wing configuration CAN meet the endurance and range
+requirements due to its high aerodynamic efficiency ((L/D) ≈ 15).
+
+However, it CANNOT satisfy the VTOL requirement. Conventional takeoff
+and landing requires a prepared runway of hundreds of meters, which does
+not exist on Mars.
+
+The fixed-wing configuration is **NOT FEASIBLE** for the Mars UAV mission
+due to infrastructure constraints, not aerodynamic limitations.
+
+------------------------------------------------------------------------------
+SECTION 8: CONSTRAINT FORMULATION FOR MATCHING CHART
+------------------------------------------------------------------------------
+
+8.1 CRUISE POWER CONSTRAINT
+
+From @eq:power-loading-cruise:
+$$\left(\frac{P}{W}\right)_{cruise} = \frac{V}{(L/D) \times \eta_{total}}$$
+
+This is a function of W/S through the L/D relationship to C_L.
+
+8.2 STALL CONSTRAINT
+
+From @eq:wing-loading-constraint:
+$$\frac{W}{S} \leq \frac{1}{2} \rho V_{min}^2 C_{L,max}$$
+
+This is a VERTICAL LINE on matching chart.
+
+8.3 MATCHING CHART DESCRIPTION
+
+For fixed-wing, the matching chart shows:
+- Stall constraint: vertical line (W/S upper bound)
+- Cruise power: curve (higher P/W at very low or very high W/S)
+- Feasible region: left of stall line, above cruise curve
+
+================================================================================
+OUTPUT: MANUSCRIPT STRUCTURE
+================================================================================
+
+File: 05_03_fixed-wing-analysis.md
+
+```markdown
+## 5.3 Fixed-wing configuration {#sec:fixed-wing-analysis}
+
+### Aerodynamic fundamentals
+
+#### Steady level flight
+[Force equilibrium, lift equation]
+
+#### Drag polar
+[Parabolic drag polar from @sec:aerodynamic-analysis]
+
+#### Lift-to-drag ratio
+[L/D equation, maximum L/D calculation]
+
+### Cruise power analysis
+
+#### Power required
+[Cruise power equation]
+
+#### Electrical power
+[Efficiency chain]
+
+#### Power loading
+[P/W formulation for matching chart]
+
+### Stall constraint
+
+#### Stall speed
+[Stall equation]
+
+#### Wing loading limit
+[W/S constraint for matching chart]
+
+### Endurance analysis
+
+#### Battery energy
+[Same model as rotorcraft]
+
+#### Endurance calculation
+[Key result: ~[XX] min achievable - EXCEEDS requirement]
+
+### Takeoff and landing problem
+
+#### Ground roll analysis
+[Takeoff distance calculation]
+
+#### Mars-specific constraints
+[Low density effects, no runway]
+
+#### Alternative launch methods
+[Catapult, RATO, balloon - all impractical]
+
+### Feasibility conclusion
+
+The pure fixed-wing configuration is **NOT FEASIBLE** for the Mars UAV mission.
+
+Despite excellent aerodynamic efficiency enabling the endurance requirement,
+the lack of runway infrastructure prevents conventional takeoff and landing.
+
+| Requirement | Capability | Status |
+|-------------|-----------|--------|
+| 60-90 min endurance | ~[XX] min | ✓ PASS |
+| 50 km radius | ~[XX] km | ✓ PASS |
+| VTOL | No | ❌ FAIL |
+```
+
+================================================================================
+SOURCE GROUNDING UPDATE
+================================================================================
+
+```
+## Section: 5.3 Fixed-wing configuration
+
+- "Lift equation: L = 0.5 × ρ × V² × S × C_L"
+  Source: [@andersonIntroductionFlight20XX]
+  Location: Chapter X, Equation X.XX
+
+- "Parabolic drag polar: C_D = C_D0 + C_L²/(π×AR×e)"
+  Source: [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 12, Equation 12.XX
+
+- "Maximum L/D: (L/D)_max = 0.5 × sqrt(π×AR×e/C_D0)"
+  Source: [@andersonFundamentalsAerodynamics20XX]
+  Location: Chapter 5, Equation 5.XX
+
+- "Cruise power: P = W×V / (L/D × η)"
+  Source: [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 17, Performance analysis
+
+- "Stall speed: V_stall = sqrt(2W/(ρ×S×C_L,max))"
+  Source: [@andersonIntroductionFlight20XX]
+  Location: Chapter X
+
+- "Takeoff ground roll: S_TO = V_TO² / (2×a_avg)"
+  Source: [@raymerAircraftDesignConceptual20XX]
+  Location: Chapter 17, Takeoff analysis
+```
+
+================================================================================
+QUALITY CRITERIA
+================================================================================
+
+[ ] All equations have citations
+[ ] Drag polar connected to @sec:aerodynamic-analysis
+[ ] Maximum L/D derived and calculated
+[ ] Cruise power equation sourced (Raymer/Anderson)
+[ ] Stall constraint formulated for matching chart
+[ ] Endurance shows fixed-wing PASSES requirement
+[ ] Takeoff ground roll calculated (hundreds of meters)
+[ ] Alternative launch methods discussed
+[ ] Feasibility conclusion: NOT FEASIBLE due to VTOL
+[ ] Manuscript structure provided
+[ ] source_grounding.txt entries specified
+
+================================================================================
+KEY EQUATIONS SUMMARY
+================================================================================
+
+For Python implementation (Phase B):
+
+1. Lift coefficient: C_L = 2(W/S) / (ρV²)
+2. Drag polar: C_D = C_D0 + C_L²/(π×AR×e)
+3. L/D ratio: L/D = C_L / C_D
+4. (L/D)_max = 0.5 × sqrt(π×AR×e/C_D0)
+5. Cruise power: P = WV / ((L/D) × η)
+6. Stall speed: V_stall = sqrt(2(W/S) / (ρ × C_L,max))
+7. Endurance: t = (f_batt × e_spec × DoD × η_batt × L/D × η) / (g × V)
+
+================================================================================
+END OF PROMPT
+================================================================================

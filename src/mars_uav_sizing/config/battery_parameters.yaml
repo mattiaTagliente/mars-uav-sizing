@@ -1,0 +1,34 @@
+# Mars UAV Sizing - Battery Parameters
+# =====================================
+# Energy storage system parameters.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §4.6 Energy Storage Characteristics
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# BATTERY SPECIFICATIONS (from §4.6.1)
+# ==============================================================================
+specifications:
+  # Specific energy for solid-state Li-ion batteries
+  # Reference: CGBT SLD1-6S27Ah datasheet
+  specific_energy_Wh_kg: 270   # Wh/kg
+  
+  # Operating temperature range
+  operating_temp_min_C: -20    # °C
+  operating_temp_max_C: 60     # °C
+  
+  # Cycle life at 80% DoD
+  cycle_life: 1000             # cycles
+
+# ==============================================================================
+# UTILIZATION PARAMETERS (from §4.6.2)
+# ==============================================================================
+utilization:
+  # Depth of discharge for acceptable cycle life
+  # Reference: Industry practice for mission-critical applications
+  depth_of_discharge: 0.80     # DoD, dimensionless (80%)
+  
+  # Discharge efficiency (Coulombic efficiency)
+  # Reference: Industry typical for Li-ion
+  discharge_efficiency: 0.95   # dimensionless

@@ -1,0 +1,64 @@
+# Mars UAV Sizing - Geometry Parameters
+# ======================================
+# Aircraft geometry and derived geometric requirements.
+# Source grounding: source_grounding.txt
+#
+# Section Reference: §4.12 Derived Requirements
+# Last Updated: 2025-12-29
+
+# ==============================================================================
+# ROTOR CONFIGURATION (from §4.12.6)
+# ==============================================================================
+rotor:
+  # Disk loading - compromise between hover power and rotor size
+  # Reference: §4.12 analysis, Mars rotorcraft precedents
+  disk_loading_N_m2: 30.0      # DL = T/A, N/m²
+
+  # Number of lift rotors (QuadPlane configuration)
+  n_rotors: 4                  # dimensionless
+
+# ==============================================================================
+# WING GEOMETRY (from §4.12)
+# ==============================================================================
+wing:
+  # Taper ratio for near-elliptical loading
+  taper_ratio: 0.5             # λ = c_tip/c_root, dimensionless
+  
+  # Thickness-to-chord ratio for structural depth
+  thickness_ratio: 0.09        # t/c, dimensionless
+  
+  # Sweep angle (no benefit at low Mach)
+  sweep_angle_deg: 0           # Λ, degrees
+
+# ==============================================================================
+# FUSELAGE GEOMETRY (from §4.12)
+# ==============================================================================
+fuselage:
+  # Length-to-wingspan ratio (from commercial VTOL benchmarks)
+  length_to_span_ratio: 0.50   # L_fus/b, dimensionless
+  
+  # Fineness ratio (slenderness)
+  fineness_ratio: 6.0          # L/D_fus, dimensionless
+
+# ==============================================================================
+# TAIL GEOMETRY (from §4.12)
+# ==============================================================================
+tail:
+  # Horizontal tail volume coefficient (increased 25% for Mars)
+  # Reference: Roskam (2004), with Mars adjustment
+  v_h: 0.45                    # V_H, dimensionless (baseline 0.36 × 1.25)
+
+  # Vertical tail volume coefficient (increased 25% for Mars)
+  v_v: 0.035                   # V_V, dimensionless (baseline 0.028 × 1.25)
+
+  # V-tail dihedral angle
+  vtail_dihedral_deg: 40       # Γ, degrees
+
+  # V-tail aspect ratio (per surface)
+  # Reference: Roskam (2004), typical for small aircraft
+  vtail_aspect_ratio: 4.0      # AR_Vtail, dimensionless
+
+  # Tail moment arm ratio (fraction of fuselage length)
+  # l_H = l_V = ratio × L_fuselage
+  # Reference: commercial VTOL UAV benchmarks
+  moment_arm_ratio: 0.6        # l/L_fus, dimensionless

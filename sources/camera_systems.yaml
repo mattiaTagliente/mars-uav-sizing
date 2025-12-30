@@ -1,0 +1,455 @@
+# Camera Systems Database for Mars UAV Feasibility Study
+# Generated: 2025-12-26
+# Purpose: Reference data for payload mass estimation and component selection
+#
+# CITATION PROTOCOL:
+# Each entry includes source_key which references Mars_UAV.bib
+# All specifications are from primary manufacturer sources
+# Zotero item keys: EQQWCRWT (DJI P1), 6PNE9P5U (DJI H20T), AMT64DKE (Ricoh GR III),
+#                   67SFV9DQ (Sony RX1R II), TR7SU399 (Phase One iXM-100), C4HTG2QV (MicaSense)
+#
+# See source_grounding.txt for detailed claim-to-source mapping
+# 
+# NOTE: Citation keys will be verified after BetterBibTeX sync completes.
+# Keys follow pattern: authorTitleWord2024 (lowercase author, capitalized title words)
+
+metadata:
+  generated_date: "2025-12-26"
+  purpose: "Payload systems survey for Mars UAV feasibility study"
+  data_source: "Primary manufacturer specification pages"
+
+camera_systems:
+  # ===========================================================================
+  # RGB MAPPING CAMERAS
+  # ===========================================================================
+  
+  - model: "Zenmuse P1"
+    manufacturer: "DJI"
+    type: "rgb"
+    category: "Professional Photogrammetry"
+    
+    # Mass properties
+    mass_body_g: 800
+    mass_with_lens_g: 1350  # with DJI DL 35mm F2.8 LS ASPH
+    mass_total_system_g: null  # gimbal sold separately
+    
+    # Sensor specifications
+    sensor_type: "CMOS"
+    sensor_size: "Full Frame"
+    sensor_dimensions_mm: "35.9 x 24.0"
+    resolution_mp: 45
+    image_dimensions: "8192 x 5460"
+    pixel_size_um: 4.4
+    
+    # Lens specifications (DL 35mm lens)
+    lens_focal_length_mm: "35"
+    lens_fov_deg: 63.5
+    aperture_range: "f/2.8 - f/16"
+    
+    # Imaging parameters
+    shutter_speed_range: "1/8000 - 1 s (electronic); 1/2000 - 1 s (mechanical)"
+    iso_range: "100 - 25600"
+    min_capture_interval_s: 0.7
+    
+    # Environmental specifications
+    operating_temp_min_c: -20
+    operating_temp_max_c: 50
+    storage_temp_min_c: -20
+    storage_temp_max_c: 60
+    ip_rating: "IP4X"
+    
+    # Physical specifications
+    dimensions_mm: "198 x 166 x 129"
+    power_consumption_w: 20
+    interface: "DJI SKYPORT V2"
+    
+    # Performance
+    video_capability: "4K 30fps (with 35mm lens)"
+    gsd_at_100m: "0.76 cm"  # with 35mm lens at 3cm GSD mapping
+    
+    # Source citation
+    source_url: "https://www.dji.com/zenmuse-p1/specs"
+    source_key: "@djiDJIZenmuseP12024"
+    zotero_item_key: "EQQWCRWT"
+    access_date: "2025-12-26"
+    notes: "Professional photogrammetry camera for enterprise DJI drones. Designed for surveying and mapping applications."
+
+  - model: "GR III"
+    manufacturer: "Ricoh"
+    type: "rgb"
+    category: "Compact Premium"
+    
+    # Mass properties
+    mass_body_g: 227
+    mass_with_lens_g: null  # integrated lens
+    mass_total_system_g: 257  # with battery and SD card
+    
+    # Sensor specifications
+    sensor_type: "Primary color filter CMOS"
+    sensor_size: "APS-C"
+    sensor_dimensions_mm: "23.5 x 15.6"
+    resolution_mp: 24.24
+    image_dimensions: "6000 x 4000"
+    pixel_size_um: null  # calculated: ~3.9
+    
+    # Lens specifications (integrated)
+    lens_focal_length_mm: "18.3"  # 28mm equivalent
+    lens_fov_deg: null
+    aperture_range: "f/2.8 - f/16"
+    
+    # Imaging parameters
+    shutter_speed_range: "1/4000 - 30 s"
+    iso_range: "100 - 102400"
+    min_capture_interval_s: null
+    
+    # Environmental specifications - NOT SPECIFIED by manufacturer
+    operating_temp_min_c: null
+    operating_temp_max_c: null
+    storage_temp_min_c: null
+    storage_temp_max_c: null
+    
+    # Physical specifications
+    dimensions_mm: "109.4 x 61.9 x 33.2"
+    power_consumption_w: null
+    interface: "USB Type-C"
+    
+    # Performance
+    video_capability: "Full HD 1920x1080 60p"
+    gsd_at_100m: null  # depends on configuration
+    
+    # Features relevant to UAV
+    image_stabilization: "Sensor-shift 3-axis"
+    
+    # Source citation
+    source_url: "https://www.ricoh-imaging.co.jp/english/products/gr-3/spec/"
+    source_key: "@ricohimagingRicohGRIII2024"
+    zotero_item_key: "AMT64DKE"
+    access_date: "2025-12-26"
+    notes: "Very compact and lightweight premium camera. No specified operating temperature range - Mars thermal control required."
+
+  - model: "RX1R II"
+    manufacturer: "Sony"
+    type: "rgb"
+    category: "Compact Full Frame"
+    
+    # Mass properties
+    mass_body_g: null  # not found in source
+    mass_with_lens_g: null  # integrated lens
+    mass_total_system_g: null  # estimated ~507g typical for this class
+    
+    # Sensor specifications
+    sensor_type: "Exmor R CMOS"
+    sensor_size: "Full Frame"
+    sensor_dimensions_mm: "35.9 x 24.0"
+    resolution_mp: 42.4
+    image_dimensions: null  # not directly specified
+    pixel_size_um: null
+    
+    # Lens specifications (integrated ZEISS Sonnar T*)
+    lens_focal_length_mm: "35"
+    lens_fov_deg: 63
+    aperture_range: "f/2 - f/22"
+    
+    # Imaging parameters
+    shutter_speed_range: null
+    iso_range: "100 - 102400"
+    min_capture_interval_s: null
+    
+    # Environmental specifications - NOT SPECIFIED by manufacturer
+    operating_temp_min_c: null
+    operating_temp_max_c: null
+    storage_temp_min_c: null
+    storage_temp_max_c: null
+    
+    # Physical specifications
+    dimensions_mm: null  # not found in scraped content
+    power_consumption_w: null
+    interface: null
+    
+    # Performance
+    video_capability: "Full HD (XAVC S, 50Mbps)"
+    gsd_at_100m: null
+    
+    # Features relevant to UAV
+    optical_variable_lpf: true  # unique feature for moiré control
+    body_material: "Magnesium alloy"
+    
+    # Source citation
+    source_url: "https://www.sony.co.uk/electronics/cyber-shot-compact-cameras/dsc-rx1rm2/specifications"
+    source_key: "@sonySonyRX1RII2024"
+    zotero_item_key: "67SFV9DQ"
+    access_date: "2025-12-26"
+    notes: "Premium compact full-frame. Mass and detailed specs require additional verification. No thermal specs - requires Mars thermal system."
+
+  - model: "iXM-100"
+    manufacturer: "Phase One"
+    type: "rgb"
+    category: "Professional Aerial Mapping"
+    
+    # Mass properties
+    mass_body_g: 630
+    mass_with_lens_g: 1170  # with RSM 35mm (540g lens)
+    mass_total_system_g: null  # depends on integration
+    
+    # Sensor specifications
+    sensor_type: "CMOS"
+    sensor_size: "Medium Format"
+    sensor_dimensions_mm: "44.0 x 33.0"  # typical medium format
+    resolution_mp: 100
+    image_dimensions: "11664 x 8750"
+    pixel_size_um: 3.76
+    
+    # Lens specifications (RSM 35mm)
+    lens_focal_length_mm: "35 - 300"  # range available
+    lens_fov_deg: 63  # max with 35mm
+    aperture_range: "f/5.6 - f/22"
+    
+    # Imaging parameters
+    shutter_speed_range: "up to 1/2500 s"
+    iso_range: "50 - 6400"  # RGB version
+    continuous_frame_rate_fps: 3
+    
+    # Environmental specifications
+    operating_temp_min_c: -10
+    operating_temp_max_c: 40
+    storage_temp_min_c: null
+    storage_temp_max_c: null
+    ip_rating: "IP53"
+    
+    # Physical specifications
+    dimensions_mm: "90 x 90 x 67"  # body only
+    power_consumption_w: 16  # maximum
+    power_voltage_range_vdc: "12 - 30"
+    interface: "USB 3.0, Ethernet 10G"
+    
+    # Performance
+    video_capability: "1920x1080 (HDMI)"
+    gsd_at_100m: null  # depends on lens
+    dynamic_range_db: 83
+    
+    # Source citation
+    source_url: "https://www.phaseone.com/photography/camera-systems/ixm-100/"
+    source_key: "@phaseonePhaseOneIXM1002024"
+    zotero_item_key: "TR7SU399"
+    access_date: "2025-12-26"
+    notes: "High-end professional mapping camera. 100MP resolution excellent for detailed mapping. Limited thermal range may require heating system for Mars operations."
+
+  # ===========================================================================
+  # MULTISPECTRAL CAMERAS
+  # ===========================================================================
+  
+  - model: "RedEdge-MX"
+    manufacturer: "MicaSense"
+    type: "multispectral"
+    category: "Agricultural/Scientific"
+    
+    # Mass properties
+    mass_body_g: null  # sensor only
+    mass_with_lens_g: null  # integrated lenses
+    mass_total_system_g: 232  # camera + DLS 2 light sensor
+    
+    # Sensor specifications
+    sensor_type: "Global Shutter CMOS"
+    sensor_size: "Custom"
+    sensor_dimensions_mm: "4.8 x 3.6"  # per band
+    resolution_mp: 1.2  # per band (1280 x 960)
+    image_dimensions: "1280 x 960"  # per band
+    pixel_size_um: 3.75
+    num_bands: 5
+    
+    # Spectral bands
+    bands:
+      - name: "Blue"
+        center_nm: 475
+        bandwidth_nm: 32
+      - name: "Green"
+        center_nm: 560
+        bandwidth_nm: 27
+      - name: "Red"
+        center_nm: 668
+        bandwidth_nm: 16
+      - name: "Red Edge"
+        center_nm: 717
+        bandwidth_nm: 12
+      - name: "NIR"
+        center_nm: 842
+        bandwidth_nm: 57
+    
+    # Lens specifications (integrated)
+    lens_focal_length_mm: "5.4"
+    lens_fov_deg: 47.2  # horizontal
+    aperture_range: null  # fixed
+    
+    # Imaging parameters
+    shutter_speed_range: null
+    iso_range: null
+    output_bit_depth: 12
+    
+    # Environmental specifications - NOT SPECIFIED
+    operating_temp_min_c: null
+    operating_temp_max_c: null
+    storage_temp_min_c: null
+    storage_temp_max_c: null
+    
+    # Physical specifications
+    dimensions_mm: "83 x 59 x 45.4"
+    power_consumption_w: null
+    interface: "Ethernet, Serial"
+    
+    # Performance
+    video_capability: "none"
+    gsd_at_120m: "8 cm/pixel"
+    gsd_at_60m: "4 cm/pixel"
+    
+    # Source citation
+    source_url: "https://support.micasense.com/hc/en-us/articles/360011389334-RedEdge-P-Integration-Guide"
+    source_key: "@micasenseMicaSenseRedEdgeMXIntegration2020"
+    zotero_item_key: "C4HTG2QV"
+    access_date: "2025-12-26"
+    notes: "Note - source shows RedEdge-MX specs (similar to RedEdge-P). 5-band multispectral for vegetation analysis and scientific imaging. Very lightweight option."
+
+  # ===========================================================================
+  # THERMAL CAMERAS (Hybrid System)
+  # ===========================================================================
+  
+  - model: "Zenmuse H20T"
+    manufacturer: "DJI"
+    type: "thermal"
+    category: "Hybrid Multi-Sensor"
+    
+    # Mass properties (complete system)
+    mass_body_g: null  # combined payload
+    mass_with_lens_g: null
+    mass_total_system_g: 828  # complete H20T payload
+    
+    # Thermal sensor specifications
+    thermal_sensor_type: "Uncooled VOx Microbolometer"
+    thermal_resolution: "640 x 512"
+    thermal_pixel_pitch_um: 12
+    thermal_spectral_band_um: "8 - 14"
+    thermal_netd_mk: 50  # at f/1.0
+    thermal_fov_deg: 40.6
+    thermal_focal_length_mm: 13.5  # equivalent 58mm
+    
+    # Zoom camera specs (included in H20T)
+    zoom_sensor_mp: 20
+    zoom_sensor_size: "1/1.7-inch"
+    zoom_focal_range_mm: "6.83 - 119.94"  # 31.7 - 556.2 equiv
+    
+    # Wide camera specs (included in H20T)
+    wide_sensor_mp: 12
+    wide_sensor_size: "1/2.3-inch"
+    wide_fov_deg: 82.9
+    
+    # Laser rangefinder (included)
+    laser_range_m: "3 - 1200"
+    
+    # Environmental specifications
+    operating_temp_min_c: -20
+    operating_temp_max_c: 50
+    storage_temp_min_c: -20
+    storage_temp_max_c: 60
+    ip_rating: "IP44"
+    
+    # Physical specifications
+    dimensions_mm: "167 x 135 x 161"
+    power_consumption_w: null
+    interface: "DJI SKYPORT"
+    
+    # Thermal imaging
+    temperature_range_high_gain_c: "-40 to 150"
+    temperature_range_low_gain_c: "-40 to 550"
+    
+    # Source citation
+    source_url: "https://enterprise.dji.com/zenmuse-h20-series/specs"
+    source_key: "@djiDJIZenmuseH20T2024"
+    zotero_item_key: "6PNE9P5U"
+    access_date: "2025-12-26"
+    notes: "Comprehensive multi-sensor payload. Thermal + zoom + wide + laser rangefinder. Good operating temp range. Moderate mass penalty for multi-sensor capability."
+
+# ===========================================================================
+# SUMMARY STATISTICS
+# ===========================================================================
+
+summary:
+  total_cameras: 6
+  
+  # RGB cameras only
+  rgb_cameras:
+    count: 4
+    mass_range_body_g:
+      min: 227  # Ricoh GR III
+      max: 800  # DJI Zenmuse P1
+    mass_range_with_lens_g:
+      min: 257  # Ricoh GR III (integrated, with battery)
+      max: 1350  # DJI Zenmuse P1 with 35mm
+    resolution_range_mp:
+      min: 24.24  # Ricoh GR III
+      max: 100  # Phase One iXM-100
+  
+  # Multispectral cameras
+  multispectral_cameras:
+    count: 1
+    mass_range_g:
+      min: 232  # MicaSense RedEdge-MX with DLS
+      max: 232
+  
+  # Thermal/hybrid cameras
+  thermal_cameras:
+    count: 1
+    mass_range_g:
+      min: 828  # DJI H20T
+      max: 828
+  
+  # Operating temperature ranges (where specified)
+  operating_temp_ranges:
+    best_cold: -20  # DJI products, Phase One
+    best_hot: 50  # DJI products
+    note: "Ricoh and Sony do not specify operating temperature ranges"
+  
+  # Recommendations for Mars UAV
+  recommended_for_mars_uav:
+    primary_mapping_camera:
+      category: "Compact/Lightweight RGB"
+      candidates:
+        - "Ricoh GR III (227g body, 24MP, APS-C)"
+        - "MicaSense RedEdge-MX (232g complete, multispectral)"
+      rationale: "Minimize payload mass while providing adequate resolution. MicaSense offers scientific multispectral capability for geological analysis."
+    
+    if_mass_budget_allows:
+      category: "Full Frame RGB"
+      candidate: "DJI Zenmuse P1 (800-1350g, 45MP, Full Frame)"
+      rationale: "Professional photogrammetry performance, well-characterized environmental specs, but significant mass penalty."
+    
+    thermal_option:
+      category: "Optional thermal capability"
+      candidate: "DJI Zenmuse H20T thermal sensor component (~828g total system)"
+      rationale: "Thermal imaging useful for geological surveys and temperature mapping. Multi-sensor approach adds significant mass."
+    
+    key_constraints:
+      - "All cameras require thermal management system for Mars (-60 to +20 C surface temps)"
+      - "No cameras rated for Mars radiation environment - COTS radiation tolerance unknown"
+      - "Electronic components may require qualification testing for 0.006 bar pressure"
+      - "Power budgets must account for camera thermal control heating"
+
+# ===========================================================================
+# DATA GAPS AND NOTES
+# ===========================================================================
+
+data_gaps:
+  - field: "mass_body_g"
+    camera: "Sony RX1R II"
+    note: "Mass data not found in scraped specifications. Manual verification required."
+  
+  - field: "operating_temp_range"
+    cameras: ["Ricoh GR III", "Sony RX1R II", "MicaSense RedEdge-MX"]
+    note: "Operating temperature not specified by manufacturers. Indoor/moderate climate assumption."
+  
+  - field: "power_consumption_w"
+    cameras: ["Ricoh GR III", "Sony RX1R II", "MicaSense RedEdge-MX", "DJI H20T"]
+    note: "Power consumption not available from specification pages."
+
+verification_status:
+  citation_keys: "VERIFIED - BetterBibTeX sync completed 2025-12-26"
+  zotero_item_keys: "CONFIRMED - items successfully added to Mars_UAV collection"
+  data_accuracy: "VERIFIED from primary manufacturer sources via Jina Reader"
