@@ -645,6 +645,8 @@ def _expected_hybrid_vtol() -> Dict[str, Any]:
     v_cruise = get_param("mission.velocity.v_cruise_m_s")
     t_hover_s = get_param("mission.time.t_hover_s")
     t_cruise_min = get_param("mission.time.t_cruise_min")
+    t_transition_s = get_param("mission.time.t_transition_s")
+    n_transitions = get_param("mission.time.n_transitions")
     reserve = get_param("mission.energy.reserve_fraction")
     f_batt = get_param("mission.mass_fractions.f_battery")
     e_spec = get_param("battery.specifications.specific_energy_Wh_kg")
@@ -672,9 +674,18 @@ def _expected_hybrid_vtol() -> Dict[str, Any]:
     eta_cruise = eta_p * eta_m * eta_e
     p_cruise = (weight_n * v_cruise) / (ld_qp * eta_cruise)
 
+    reference_energy_j = get_param("mission.transition.reference_energy_j")
+    mars_scaling = get_param("mission.transition.mars_scaling_factor")
+    ref_mtow_kg = get_param("mission.transition.reference_mtow_kg")
+    mass_ratio = mtow / ref_mtow_kg
+    per_transition_j = reference_energy_j * mass_ratio * mars_scaling
+    per_transition_wh = per_transition_j / 3600.0
+    total_transition_wh = per_transition_wh * n_transitions
+
     e_hover = p_hover_elec * (t_hover_s / 3600)
     e_cruise = p_cruise * (t_cruise_min / 60)
-    e_mission = e_hover + e_cruise
+    e_mission_without_trans = e_hover + e_cruise
+    e_mission = e_mission_without_trans + total_transition_wh
     e_reserve = e_mission * reserve
     e_required = e_mission + e_reserve
 
@@ -685,15 +696,25 @@ def _expected_hybrid_vtol() -> Dict[str, Any]:
     margin_wh = usable_energy - e_required
     margin_pct = (margin_wh / e_required) * 100 if e_required > 0 else 0.0
 
-    e_for_cruise = usable_energy * (1 - reserve) - e_hover
+    e_for_cruise = usable_energy * (1 - reserve) - e_hover - total_transition_wh
     if e_for_cruise > 0 and p_cruise > 0:
         cruise_time_min = (e_for_cruise / p_cruise) * 60
     else:
         cruise_time_min = 0.0
-    endurance_min = (t_hover_s / 60) + cruise_time_min
+    endurance_min = (t_hover_s / 60) + (t_transition_s / 60) + cruise_time_min
 
     range_km = (v_cruise * cruise_time_min * 60) / 1000
     operational_radius_km = range_km / 2
+
+    if e_hover > 0:
+        fraction_of_hover = (total_transition_wh / e_hover) * 100
+    else:
+        fraction_of_hover = 0.0
+
+    if e_mission_without_trans > 0:
+        fraction_of_mission = (total_transition_wh / e_mission_without_trans) * 100
+    else:
+        fraction_of_mission = 0.0
 
     energy_feasible = usable_energy >= e_required
     endurance_passes = endurance_min >= endurance_req
@@ -720,10 +741,17 @@ def _expected_hybrid_vtol() -> Dict[str, Any]:
         "hover_time_min": t_hover_s / 60,
         "cruise_time_min": cruise_time_min,
         "hover_energy_wh": e_hover,
+        "transition_energy_wh": total_transition_wh,
         "cruise_energy_wh": e_cruise,
         "mission_energy_wh": e_mission,
+        "mission_energy_without_trans_wh": e_mission_without_trans,
         "reserve_energy_wh": e_reserve,
         "required_energy_wh": e_required,
+        "transition_per_phase_j": per_transition_j,
+        "transition_per_phase_wh": per_transition_wh,
+        "n_transitions": n_transitions,
+        "transition_fraction_of_hover": fraction_of_hover,
+        "transition_fraction_of_mission": fraction_of_mission,
         "battery_mass_kg": battery_mass,
         "total_energy_wh": total_energy,
         "usable_energy_wh": usable_energy,

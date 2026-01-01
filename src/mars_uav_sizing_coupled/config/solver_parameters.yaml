@@ -1,0 +1,19 @@
+﻿# Mars UAV Sizing (Coupled) - Solver Parameters
+# ============================================
+# Engineering seeds and solver settings for coupled constraint solving.
+# Seeds are defined from Section 4 and treated as fixed starting points.
+# Any tuning should be handled as a subsequent iteration per Section 2.
+
+solver:
+  initial_guess:
+    mtow_kg: 10.0
+    wing_loading_n_m2: 10.0
+    power_loading_w_n: 80.0
+    battery_mass_kg: 3.5
+
+  options:
+    method: fsolve
+    max_iter: 500
+    tol: 1.0e-9
+    power_constraint: smooth_max  # hover | cruise | smooth_max
+    smooth_max_epsilon: 1.0e-3

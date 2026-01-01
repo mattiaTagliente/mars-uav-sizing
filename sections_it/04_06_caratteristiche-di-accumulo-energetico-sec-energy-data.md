@@ -12,10 +12,10 @@ La capacità e la tecnologia delle batterie variano tra i progetti. Le batterie 
 
 | UAV | Tipo batteria | Capacità (mAh) | Massa (kg) | Energia spec. (Wh/kg) | Range temp. (°C) | Rif. |
 |:----|:-------------|---------------:|----------:|---------------------:|-----------------:|:----:|
-| UAVMODEL X2400 | LiPo 6S | 30000 | 2.5 | circa 133 | N.D. | [@uavmodelUAVMODELX2400VTOL2024] |
-| DeltaQuad Evo | Li-ion semi-solido | 44000 | 4.0 | circa 180 | −20 a +45 | [@deltaquadDeltaQuadEvoEnterprise2024] |
-| AirMobi V25 | HV LiPo 6S ×2 | 50000 | 5.05 | circa 150 | −20 a +45 | [@gensace/tattuTattu25000mAh228V2024] |
-| RTV320 E | Li-ion stato solido ×4 | 108000 | 9.36 | circa 270 | −20 a +60 | [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025] |
+| UAVMODEL X2400 | LiPo 6S | 30000 | 2.5 | circa 133 | N.D. | [@uavmodelUAVMODELX2400VTOL2024]<!-- #specs --> |
+| DeltaQuad Evo | Li-ion semi-solido | 44000 | 4.0 | circa 180 | −20 a +45 | [@deltaquadDeltaQuadEvoEnterprise2024]<!-- #specs --> |
+| AirMobi V25 | HV LiPo 6S ×2 | 50000 | 5.05 | circa 150 | −20 a +45 | [@gensace/tattuTattu25000mAh228V2024]<!-- #specs --> |
+| RTV320 E | Li-ion stato solido ×4 | 108000 | 9.36 | circa 270 | −20 a +60 | [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs --> |
 
 Le batterie allo stato solido utilizzate nel RTV320 E raggiungono 270 Wh/kg con range di temperatura esteso, rendendole adatte per applicazioni marziane dove le temperature ambiente raggiungono −80°C.
 
@@ -33,4 +33,4 @@ $$E_\text{disponibile} = f_\text{batt} \times MTOW \times e_\text{spec} \times D
 
 dove $f_\text{batt}$ è la frazione di massa della batteria (da @sec:initial-mass-estimate) e $e_\text{spec}$ è l'energia specifica (Wh/kg). Questa equazione è applicata nell'analisi dei vincoli (@sec:constraint-analysis) per determinare l'energia disponibile per ciascuna configurazione.
 
-Viene adottata una profondità di scarica di $DoD$ = 0.80 per preservare la vita ciclica della batteria. L'efficienza di scarica dipende dal C-rate (corrente di scarica relativa alla capacità). Per le correnti di scarica previste durante il funzionamento dell'UAV marziano (circa 3-5C durante l'hovering, 0.5-1C durante la crociera), le batterie al litio allo stato solido raggiungono efficienze di scarica di 0.93-0.97 [@sadraeyDesignUnmannedAerial2020]. Viene adottato un valore di $\eta_\text{batt}$ = 0.95 come rappresentativo di tassi di scarica moderati.
+Viene adottata una profondità di scarica di $DoD$ = 0.80 per preservare la vita ciclica della batteria. L'efficienza di scarica dipende dal C-rate (corrente di scarica relativa alla capacità). Per le correnti di scarica previste durante il funzionamento dell'UAV marziano (circa 3-5C durante l'hovering, 0.5-1C durante la crociera), le batterie al litio allo stato solido raggiungono efficienze di scarica di 0.93-0.97 [@sadraeyDesignUnmannedAerial2020]<!-- #s:battery -->. Viene adottato un valore di $\eta_\text{batt}$ = 0.95 come rappresentativo di tassi di scarica moderati.

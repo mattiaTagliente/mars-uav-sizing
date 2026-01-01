@@ -35,3 +35,89 @@ electromechanical:
 # ==============================================================================
 # eta_hover = FM × eta_motor × eta_esc = 0.40 × 0.85 × 0.95 = 0.323
 # eta_cruise = eta_prop × eta_motor × eta_esc = 0.55 × 0.85 × 0.95 = 0.444
+
+# ==============================================================================
+# COMPONENT MASSES (from datasheets, Section 7 tbl:propulsion-summary)
+# ==============================================================================
+# Source grounding: source_grounding.txt - "Propulsion Component Selection"
+# Last Updated: 2025-12-31
+
+components:
+  # ============================================================================
+  # LIFT SYSTEM (8 motors in 4 coaxial pairs - octocopter configuration)
+  # ============================================================================
+  lift:
+    # SunnySky V4006-380
+    # Source: [@sunnyskySunnySkyV4006Multicopter2024]
+    motor:
+      model: "SunnySky V4006-380"
+      mass_kg: 0.066
+      quantity: 8  # 4 coaxial pairs
+      max_power_w: 375
+      kv: 380
+    
+    # Hobbywing XRotor Micro 30A
+    # Source: [@hobbywingHobbywingXRotorMicro2024]
+    esc:
+      model: "Hobbywing XRotor Micro 30A"
+      mass_kg: 0.006
+      quantity: 8
+      continuous_current_a: 30
+    
+    # Carbon fiber 14x4.8 propeller
+    # Source: Estimate based on T-Motor NS series
+    propeller:
+      model: "NS14×4.8"
+      mass_kg: 0.018  # per pair
+      quantity: 8  # One per motor
+      diameter_in: 14
+      pitch_in: 4.8
+  
+  # ============================================================================
+  # CRUISE SYSTEM (2 coaxial contra-rotating motors at bow)
+  # ============================================================================
+  cruise:
+    # T-Motor AT2312-1150
+    # Source: [@t-motorTMotorAT2312FixedWing2024]
+    motor:
+      model: "T-Motor AT2312-1150"
+      mass_kg: 0.060
+      quantity: 2  # Coaxial pair
+      max_power_w: 350
+      kv: 1150
+    
+    # Hobbywing XRotor Micro 30A (same as lift for commonality)
+    # Source: [@hobbywingHobbywingXRotorMicro2024]
+    esc:
+      model: "Hobbywing XRotor Micro 30A"
+      mass_kg: 0.006
+      quantity: 2
+      continuous_current_a: 30
+    
+    # Carbon fiber 12x6 propeller
+    # Source: Estimate based on T-Motor NS series
+    propeller:
+      model: "NS12×6"
+      mass_kg: 0.015  # per pair
+      quantity: 2  # Coaxial pair
+      diameter_in: 12
+      pitch_in: 6
+
+  # ============================================================================
+  # SHARED COMPONENTS (engineering estimates without source grounding)
+  # ============================================================================
+  # These values are estimates for integration hardware without manufacturer
+  # datasheets. Consolidated here to distinguish from source-grounded data.
+  shared:
+    # Structural mounting for entire propulsion system
+    mounting:
+      description: "Motor pods, booms, brackets, nacelle, fasteners"
+      mass_kg: 0.200  # Engineering estimate
+      quantity: 1
+    
+    # Power distribution and signal wiring
+    wiring:
+      description: "Power distribution board, signal wiring, connectors"
+      mass_kg: 0.100  # Engineering estimate
+      quantity: 1
+

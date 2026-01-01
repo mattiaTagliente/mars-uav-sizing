@@ -1,0 +1,68 @@
+# Section 04_05: Propulsion characteristics
+# Source attribution for propulsion data and efficiency parameters
+
+uavmodelUAVMODELX2400VTOL2024:
+  specs:
+    excerpt: "Sunnysky 4112 485KV lift, 3525 465KV cruise"
+    context: "X2400 propulsion specifications"
+
+airmobiAirmobiV25Full2024:
+  specs:
+    excerpt: "T-Motor MN505-S lift, AT4130 cruise"
+    context: "V25 propulsion specifications"
+
+spideruavV135SentinelVTOL2024:
+  specs:
+    excerpt: "T-Motor V13L KV65, 6000W"
+    context: "V13-5 Sentinel propulsion"
+
+balaramMarsHelicopterTechnology2018:
+  specs:
+    excerpt: "2x 46-pole BLDC outrunners, >2400 RPM"
+    context: "Ingenuity motor specifications"
+
+johnsonMarsScienceHelicopter2020:
+  specs:
+    excerpt: "6x electric 550W each, 50in props"
+    context: "MSH propulsion concept"
+
+bertaniPreliminaryDesignFixedwing2023:
+  specs:
+    excerpt: "6x 750W lift, 635W cruise"
+    context: "Hybrid VTOL power requirements"
+
+maxongroupMaxonMotorsFly2021:
+  specs:
+    excerpt: "6x Maxon DCX 10S, 7.1g each, 1.4W"
+    context: "Ingenuity swashplate servos"
+
+tzanetosIngenuityMarsHelicopter2022:
+  s:power:
+    excerpt: "350W total system power, 194 W/kg"
+    context: "Ingenuity specific power"
+
+braunDesignARESMars2006:
+  s:propulsion:
+    excerpt: "Bipropellant rocket (MMH/MON3)"
+    context: "ARES propulsion system type"
+
+leishmanPrinciplesHelicopterAerodynamics2006:
+  s:fm:
+    excerpt: "FM 0.75-0.82 high Re, 0.30-0.50 low Re MAVs"
+    context: "Figure of merit by Reynolds number"
+  s:ld:
+    excerpt: "Equivalent L/D 4-6 for conventional helicopter"
+    context: "Rotorcraft forward flight efficiency"
+
+sadraeyDesignUnmannedAerial2020:
+  s:prop:
+    excerpt: "Propeller efficiency 0.80-0.85 high Re, 0.50-0.65 low Re"
+    context: "UAV propeller efficiency range"
+  s:motor:
+    excerpt: "BLDC motors 88-92% peak, ESC 93-98%"
+    context: "Electric motor and ESC efficiency"
+
+proutyHelicopterPerformanceStability2002:
+  s:ld:
+    excerpt: "Conventional helicopter L/D_eff 4-6"
+    context: "Rotorcraft equivalent L/D values"

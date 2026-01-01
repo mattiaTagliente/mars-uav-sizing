@@ -1,0 +1,8 @@
+# Section 07_03: Energy storage selection
+# Source attribution for battery selection trade-offs
+# Generated: 2026-01-01
+
+cgbtshenzhenchanggongbeitechnology222VUAVSolid2025:
+  specs:
+    excerpt: "270 Wh/kg, -20 to +60C, 1000 cycles at 80% DoD"
+    context: "Solid-state Li-ion battery specifications"

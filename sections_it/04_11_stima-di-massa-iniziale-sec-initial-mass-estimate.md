@@ -2,7 +2,7 @@
 
 ## Stima di massa iniziale {#sec:initial-mass-estimate}
 
-Questa sezione stabilisce la stima iniziale dell'MTOW (Maximum Takeoff Weight) utilizzando l'approccio delle frazioni di massa, una tecnica standard nella progettazione concettuale di aeromobili [@roskamAirplaneDesign12005a; @sadraeyAircraftDesignSystems2013]. L'intervallo di MTOW stabilito qui fornisce il punto di partenza per l'analisi dei vincoli in @sec:constraint-analysis.
+Questa sezione stabilisce la stima iniziale dell'MTOW (Maximum Takeoff Weight) utilizzando l'approccio delle frazioni di massa, una tecnica standard nella progettazione concettuale di aeromobili [@roskamAirplaneDesign12005a]<!-- #s:mass-fraction --> [@sadraeyAircraftDesignSystems2013]<!-- #s:mass-fraction -->. L'intervallo di MTOW stabilito qui fornisce il punto di partenza per l'analisi dei vincoli in @sec:constraint-analysis.
 
 ### Metodologia delle frazioni di massa
 
@@ -53,7 +53,7 @@ Basandosi sull'analisi dei dati di riferimento e sui requisiti della missione ma
 | Propulsione | $f_\text{prop}$ | 0.20 | 0.15-0.25 | Sistema di propulsione duale ridondante (sollevamento + crociera) |
 | Avionica | $f_\text{avionica}$ | 0.05 | 0.03-0.07 | Stima standard con sensori specifici per Marte |
 
-La frazione di propulsione è più alta rispetto ai benchmark degli UAV commerciali a causa della necessità di ridondanza nel sistema di propulsione duale (sia rotori di sollevamento che elica di crociera), operando senza possibilità di riparazione in volo.
+La frazione di propulsione è più alta rispetto ai benchmark degli UAV commerciali a causa della necessità di ridondanza nel sistema di propulsione duale (sia rotori di sollevamento che eliche di crociera), operando senza possibilità di riparazione in volo.
 
 La frazione a vuoto tiene conto dei requisiti specifici per Marte: sistemi di isolamento termico e riscaldamento attivo per l'ambiente operativo da −80 a +20 °C, protezione dall'ingresso di polvere (equivalente a IP55 o superiore), potenziale selezione di componenti tolleranti alle radiazioni, e margini strutturali per la fatica da cicli termici.
 
@@ -74,11 +74,13 @@ La sensibilità alla selezione della frazione di payload:
 
 | Frazione di payload | Stima MTOW |
 |:---:|---:|
-| 0.08 (molto conservativa) | 12.5 kg |
-| 0.10 (base) | 10.0 kg |
-| 0.15 (ottimistica) | 6.7 kg |
+| 0.08 | 12.5 kg |
+| 0.10 | 10.0 kg |
+| 0.15 | 6.7 kg |
 
 Viene adottato un MTOW di base di 10 kg per il dimensionamento iniziale. Questo valore sarà affinato attraverso l'analisi dei vincoli in @sec:constraint-analysis, dove i requisiti di potenza, il carico alare e i vincoli di autonomia sono valutati simultaneamente.
+
+La massa del payload di 1.00 kg è un **vincolo di missione fisso** derivato dai componenti selezionati per camera e relè radio (@sec:payload-systems). Questo dimensionamento basato sul payload garantisce che il requisito di payload della missione sia soddisfatto per costruzione. Qualsiasi configurazione che non possa trasportare 1.00 kg entro l'involucro MTOW di 10.00 kg è non fattibile.
 
 ### Validazione delle frazioni di massa
 

@@ -41,6 +41,7 @@ CONFIG_FILES = {
     'aerodynamic': 'aerodynamic_parameters.yaml',
     'geometry': 'geometry_parameters.yaml',
     'mission': 'mission_parameters.yaml',
+    'design': 'design_decisions.yaml',  # Section 6 design selections
 }
 
 

@@ -1,0 +1,78 @@
+# ==============================================================================
+# FUSELAGE GEOMETRY SELECTION (§6.3)
+# ==============================================================================
+# Reference data from §4.8:
+#   - Commercial VTOL benchmark range: 0.28-0.63
+#   - Median: 0.50
+#   - DeltaQuad Evo (flying wing): 0.28
+#   - RTV320 E: 0.63
+#
+# TRADE-OFF ANALYSIS:
+# Shorter fuselage (lower ratio):
+#   + Less fuselage structural mass
+#   + Less fuselage wetted area (drag)
+#   - Requires boom extension for tail moment arm
+#   - Less internal volume margin
+#
+# Longer fuselage (higher ratio):
+#   + More fuselage lift contribution
+#   + Longer tail moment arm without boom extension
+#   + More internal volume for payload growth
+#   - More fuselage structural mass
+#   - More fuselage wetted area
+#
+# Design decision: Use lower benchmark (0.30)
+# Rationale: Internal volume requirement (4-5 L) is far less than 170 L
+# provided by 0.50 ratio. Boom-mounted tail provides moment arm independently.
+
+fuselage:
+  # Selected length-to-wingspan ratio (lower benchmark)
+  length_to_span_ratio: 0.30
+  
+  # Fineness ratio (from aerodynamic literature)
+  fineness_ratio: 6.0           # L/D, for low-drag profile
+  
+  # Computed dimensions (from b = 4.01 m):
+  #   L_fus = 0.30 × 4.01 = 1.20 m
+  #   D_fus = L_fus / 6 = 0.20 m
+  #   V_fus = π/4 × D² × L = 0.038 m³ = 38 L
+  length_m: 1.20                # Computed from ratio × wingspan
+  diameter_m: 0.20              # Computed from length / fineness
+  height_with_gear_m: 0.50      # Ground clearance for rotors
+  
+  # Total aircraft length including boom extension
+  boom_extension_m: 1.05        # Tail support structure aft of fuselage
+  total_length_m: 2.25          # Nose to tail trailing edge
+
+# ==============================================================================
+# AIRFOIL SELECTION (§6.2)
+# ==============================================================================
+# Reference data from §4.7:
+#   - E387: CL_max 1.21, good low-Re performance
+#   - SD8000: CL_max 1.15, larger stall margin
+#
+# Design decision: SD8000 selected
+# Rationale: Larger stall margin (4.6° vs 1.3°) provides safety margin
+# for Mars operations where recovery from stall is difficult.
+
+airfoil:
+  selected: SD8000
+  cl_max: 1.15                  # From Selig wind tunnel data
+  cd_min: 0.0142                # At design Re ≈ 55,000
+  stall_margin_deg: 4.6         # α_stall - α_design
+
+# ==============================================================================
+# CONFIGURATION SELECTION (§6.1)
+# ==============================================================================
+# Reference data from §5 comparative analysis:
+#   - Rotorcraft: Fails endurance requirement
+#   - Fixed-wing: Fails VTOL requirement
+#   - Hybrid VTOL: Meets all requirements
+#
+# Design decision: QuadPlane (hybrid VTOL) selected
+
+configuration:
+  type: quadplane
+  n_lift_rotors: 8              # Octocopter for redundancy
+  n_cruise_props: 1             # Single pusher
+  wing_mounted: true            # Not tilt-rotor

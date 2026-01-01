@@ -1,18 +1,29 @@
+<!-- 
+  CANONICAL SOURCE: This file (AGENTS.md) is the single source of truth.
+  SYNCHRONIZED COPIES: GEMINI.md and CLAUDE.md must be identical.
+  
+  TO UPDATE: Edit only AGENTS.md, then run sync_agent_rules.bat to propagate changes.
+  
+  DO NOT edit GEMINI.md or CLAUDE.md directly - changes will be overwritten.
+-->
+
 # Mars UAV Feasibility Study - Project Instructions
 
 ## Project Overview
 
-This project develops a comprehensive feasibility study for a Mars UAV operating from a crewed habitat. The study focuses on a single configuration: a **battery-only minimal design (TBD kg MTOW)** optimized for simplicity and reliability.
+This project develops a comprehensive feasibility study for a Mars UAV operating from a crewed habitat. The study focuses on a single configuration: a **battery-only QuadPlane design (10 kg MTOW)** optimized for simplicity and reliability.
 
 ### Mission Objectives
 1. **Mapping**: Aerial reconnaissance and geological survey of the area around the habitat (camera payload)
 2. **Telecommunication relay**: Extend communication range for surface operations (radio payload)
 
 ### Key Files
-- **Main manuscript**: `drone.md` (English)
+- **Main manuscript**: `drone.md` (English), `drone_it.md` (Italian)
+- **Document structure**: `docs/document_structure.md` ★ (authoritative reference)
 - **Implementation plan**: `docs/mars_UAV_plan.md`
 - **Bibliography**: `Mars_UAV.bib` (auto-updated from Zotero)
-- **Source grounding**: `source_grounding.txt` (maps claims to source locations)
+- **Source attribution**: `sources/*.sources.yaml` (precision citation system)
+- **Attribution design**: `docs/source_attribution_design.md` ★
 - **Python sizing tools**: `src/mars_uav_sizing/`
 
 ---
@@ -70,14 +81,15 @@ For every distinct piece of information:
     - **MANDATORY**: You must populate valid metadata (Author, Title, Date, URL).
     - **Verification**: Check `Mars_UAV.bib` to confirm the key exists.
 
-4.  **Mapping (Source Grounding)**:
-    - Immediately update `source_grounding.txt`.
-    - Map the specific datum to the specific source key and location (page/table/URL).
+4.  **Attribution (Inline Locator + YAML Sidecar)**:
+    - Add an **inline locator tag** after the citation: `[@key]<!-- #loc -->`
+    - Add a matching entry in `sources/{section}.sources.yaml`
+    - See `docs/source_attribution_design.md` for full specification
 
 **Strict Prohibition**:
 - NEVER invent or guess data.
 - NEVER use a citation key that is not in `Mars_UAV.bib`.
-- NEVER skip the source grounding step.
+- NEVER skip the source attribution step.
 
 ### Reference Search Order
 When a reference is needed, search in this order:
@@ -127,40 +139,52 @@ If a needed reference is not in the bib file, **do not cite it**. Instead:
 3. Add it to Zotero Mars_UAV collection if found
 4. Wait for the bib file to update before citing
 
-### Source Grounding File
-The file `source_grounding.txt` MUST be kept updated after every modification to references. Its purpose is to map every piece of information in the manuscript to the exact location in the sources.
+### Source Attribution System
 
-**Format for source_grounding.txt**:
-```
-## Section: [Section name]
+The project uses a **precision citation system** with inline locator tags and YAML sidecar files. See `docs/source_attribution_design.md` for the complete specification.
 
-- "[Claim or data point]"
-  Source: [@citationKey]
-  Location: Page X / Section Y / URL / Table Z
+**Key Concepts**:
+- Each citation gets a **locator tag**: `[@key]<!-- #loc -->`
+- Locators map to entries in `sources/{section}.sources.yaml`
+- YAML entries contain searchable excerpts for verification
 
-- "[Another claim]"
-  Source: [@citationKey]
-  Location: Page X, paragraph Y
+**Inline Locator Syntax**:
+```markdown
+The thrust equation [@leishmanPrinciples2006]<!-- #eq2.14 --> states...
 ```
 
-**Example entries**:
+**YAML Sidecar Entry** (in `sources/05_01.sources.yaml`):
+```yaml
+leishmanPrinciples2006:
+  eq2.14:                          # no hash in YAML key
+    excerpt: "T = 2*rho*A*v_i^2"
+    context: "Momentum theory thrust equation"
 ```
-## Section: Atmospheric model
 
-- "Mars surface pressure: 610 Pa mean"
-  Source: [@nasaMarsAtmosphereModel2021]
-  Location: https://www.grc.nasa.gov/www/k-12/airplane/atmosmrm.html
+**Locator Rules**:
+- Inline: uses hash prefix `<!-- #loc -->`
+- YAML key: no hash, lowercase only
+- Allowed chars: `a-z`, `0-9`, `:`, `.`, `_`, `-`
+- Ranges: single dash, e.g., `p12-15`
 
-- "CO2 ratio of specific heats gamma = 1.29"
-  Source: [@desertAerodynamicDesignMartian2017]
-  Location: Page 4, Table 1
+**Locator Formats by Source Type**:
+| Type | Examples |
+|------|----------|
+| Book | `#ch10`, `#ch10:p584`, `#eq2.14`, `#fig8.3` |
+| Article | `#p4`, `#s3`, `#fig2a`, `#tbl1`, `#abs` |
+| Report | `#p23`, `#s:rotor-sizing`, `#fig12` |
+| Webpage | `#sec:specs`, `#operating-temp` |
+| Dataset | `#v1:e387:re61k`, `#file:sd8000.drg` |
 
-## Section: Aerodynamic analysis
+**YAML Field Requirements**:
+| Field | Required | Limit |
+|-------|----------|-------|
+| `excerpt` | Yes | ≤100 chars |
+| `context` | Yes | ≤80 chars |
+| `verified` | No | boolean |
+| `note` | No | — |
 
-- "E387 airfoil CL_max = 1.20 at Re = 60,000"
-  Source: [@seligSummaryLowSpeed1995]
-  Location: Volume 1, Page 187, Figure 5.42
-```
+**Legacy**: The old `source_grounding.txt` is deprecated and will be migrated incrementally.
 ### Managing Zotero Collection
 
 The Zotero MCP has read-only capabilities. To write information to Zotero, use the Zotero Web API with the following account:
@@ -377,77 +401,16 @@ Remove-Item temp_patch_item.json
 
 ---
 
-## Document Structure (Target)
+## Document Structure
 
-```
-0.(abstract) Executive summary
-1. Introduction
-2. Mission definition
-   2.1 Operational environment: Arcadia Planitia (includes atmosphere model)
-   2.2 Mission profile
-   2.3 Requirements
-3. Configuration trade-offs
-   3.1 Reference designs
-       3.1.1 Mars UAV concepts (Ingenuity, ARES, Mars Science Helicopter)
-       3.1.2 Commercial VTOL benchmarks
-           3.1.2.1 Propulsion characteristics
-           3.1.2.2 Energy storage characteristics
-           3.1.2.3 Fuselage geometry (length/span ratios, fineness)
-           3.1.2.4 Tail configurations (fuselage-mounted vs boom-mounted)
-           3.1.2.5 Structural materials
-   3.2 Architecture comparison
-       3.2.1 Flight architecture (rotorcraft, fixed-wing, hybrid VTOL)
-       3.2.2 Fuselage geometry trade-offs
-       3.2.3 Tail configuration trade-offs (fuselage vs boom-mounted options)
-       3.2.4 Structural material trade-offs
-   3.3 Architecture selection
-       3.3.1 QuadPlane configuration rationale
-       3.3.2 Tail configuration selection
-       3.3.3 Fuselage geometry selection
-       3.3.4 Structural material selection
-4. Initial design hypotheses
-   4.1 Design methodology
-   4.2 Mass and power allocation
-   4.3 Target MTOW
-   4.4 Wing geometry
-   4.5 Tail geometry (sizing for Mars conditions)
-   4.6 Fuselage geometry (sizing and payload integration)
-   4.7 Propulsion sizing
-   4.8 Rotor and propeller sizing
-   4.9 Energy storage
-   4.10 Payload
-   4.11 Structural materials (mass estimation implications)
-   4.12 Summary of initial hypotheses
-5. Aerodynamic analysis
-   5.1 Low-Reynolds regime characteristics
-   5.2 Airfoil selection (E387, S1223, S7055 comparison)
-   5.3 Drag polar model
-6. Preliminary sizing methodology
-   6.1 Constraint-based sizing (matching chart)
-   6.2 Weight estimation
-7. Preliminary design results
-   7.1 Design point from matching chart
-   7.2 Preliminary mass breakdown
-   7.3 Preliminary power budget
-   7.4 Estimated endurance and range
-8. Component selection
-   8.1 Selection criteria and trade-offs
-   8.2 Propulsion (lift motors, cruise motors, propellers)
-   8.3 Energy storage (batteries)
-   8.4 Payload (camera, radio relay)
-   8.5 Avionics and thermal control
-9. Detailed design verification
-    9.1 Updated mass breakdown with selected components
-    9.2 Updated power budget
-    9.3 Final performance (endurance, range, operational radius)
-    9.4 Requirements compliance check
-10. Infrastructure requirements
-    10.1 Habitat hangar specifications
-    10.2 Operations concept
-11. Conclusions and recommendations
-12. References
-Appendices: A. Constants, B. Component datasheets, C. Sizing scripts, D. XFOIL results
-```
+**See `docs/document_structure.md` for the authoritative, up-to-date document structure.**
+
+The document structure file contains:
+- Current manuscript organization (sections and subsections)
+- Key design parameters with current values
+- Section completion status
+- Cross-reference labels
+- Recent changes log
 
 ---
 
@@ -476,17 +439,22 @@ The design follows an iterative process:
 
 ## Technical Notes
 
-### Airfoil Analysis
+### Airfoil Selection (Updated 2025-12-31)
+- **Selected airfoil**: SD8000 (replaced E387)
+- **Selection rationale**: Larger stall margin (4.6° vs 1.3°), consistent drag behavior without LSB transitions
+- **Key parameters**: CL_max = 1.15, t/c = 8.9%, Cd_min = 0.0142
 - **XFOIL does not converge** at Reynolds ~50,000 due to laminar separation bubbles
 - Use **Selig wind tunnel data** from "Summary of Low-Speed Airfoil Data" instead
-- Candidates: E387, S1223, S7055
 
-### Key Design Parameters
-- Target MTOW: TBD kg
-- Cruise speed: TBD m/s
-- Reynolds number: ~50,000-55,000
+### Key Design Parameters (Current Baseline)
+- Baseline MTOW: 10.00 kg
+- Wing loading: 13.82 N/m²
+- Wing area: 2.686 m²
+- Wingspan: 4.01 m
+- Cruise speed: 40.0 m/s
+- Reynolds number: ~55,000
 - Operating location: Arcadia Planitia (-3 km elevation)
-- Atmospheric density: ~0.020 kg/m³
+- Atmospheric density: 0.0196 kg/m³
 
 ---
 

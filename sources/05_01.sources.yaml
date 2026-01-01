@@ -1,0 +1,50 @@
+# Source Attribution: Section 5.1 Rotorcraft Configuration
+# Companion to: sections_en/05_01_rotorcraft-configuration-sec-rotorcraft-analysis.md
+#              sections_it/05_01_configurazione-a-rotore-sec-rotorcraft-analysis.md
+#
+# Last updated: 2026-01-01
+#
+# Note: Locator keys are lowercase, no hash prefix (hash is only in manuscript inline tags)
+
+leishmanPrinciplesHelicopterAerodynamics2006:
+  s2.3:
+    excerpt: "Actuator disk model treats rotor as infinitely thin disk"
+    context: "Rankine-Froude momentum theory foundation"
+  
+  eq2.14:
+    excerpt: "T = m_dot × delta_v = 2*rho*A*v_i^2"
+    context: "Thrust equals mass flow times velocity change"
+  
+  eq2.15:
+    excerpt: "v_i = sqrt(T / 2*rho*A)"
+    context: "Induced velocity solved from thrust equation"
+  
+  s2.3:ideal:
+    excerpt: "P_ideal = T × v_i"
+    context: "Ideal hover power = thrust times induced velocity"
+  
+  s2.8:
+    excerpt: "FM = P_ideal / P_actual"
+    context: "Figure of merit: ratio of ideal to actual power"
+  
+  ch5:s4:
+    excerpt: "P_total = P_induced + P_profile + P_parasite + P_climb"
+    context: "Forward flight power breakdown components"
+  
+  ch1:ld:
+    excerpt: "(L/D)_eff = W × V / P"
+    context: "Rotorcraft equivalent L/D definition"
+
+proutyHelicopterPerformanceStability2002:
+  ch4:ld:
+    excerpt: "Typical helicopter L/D: 3.5-5.0 in forward flight"
+    context: "Rotorcraft effective L/D range benchmark"
+
+johnsonMarsScienceHelicopter2020:
+  p4:rotor:
+    excerpt: "P = kappa*T*sqrt(T/2*rho*A) + rho*A_b*V_tip^3*(1/8)*c_d"
+    context: "MSH power equation with induced and profile terms"
+  
+  fm:
+    excerpt: "FM = 0.5-0.6 for Mars rotors due to compressibility"
+    context: "Lower figure of merit expected at Mars conditions"

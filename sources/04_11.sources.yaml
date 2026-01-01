@@ -1,0 +1,12 @@
+# Section 04_11: Initial mass estimate
+# Source attribution for mass fraction methodology
+
+roskamAirplaneDesign12005a:
+  s:mass-fraction:
+    excerpt: "Mass fraction approach for conceptual design"
+    context: "Aircraft sizing methodology"
+
+sadraeyAircraftDesignSystems2013:
+  s:mass-fraction:
+    excerpt: "Mass fraction technique for initial sizing"
+    context: "UAV conceptual design methodology"

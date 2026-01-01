@@ -1,0 +1,626 @@
+## Purpose and scope
+
+This plan defines the minimum set of actions required to produce a mission-driven and internally consistent feasibility study using the baseline-case methodology (fixed reference MTOW) and to document a deferred, improved methodology as future work.
+
+The target outcome is a manuscript that:
+
+* reports results that are reproducible from the current sizing code
+* states feasibility conditions and limitations explicitly (payload and energy constraints included)
+* avoids presenting exploratory coupled sizing results as final design results
+
+The goal is an architecture trade study based on constraint diagrams, requiring **configuration-specific constraint diagrams**:
+
+* **Rotorcraft**: The natural constraint plot is P/W vs DL (disk loading), not P/W vs W/S. ✓ *Already implemented in code and figures.*
+* **Fixed-wing**: Classic P/W vs W/S (cruise, stall, takeoff/landing as needed). ✓ *Already implemented.*
+* **Hybrid VTOL**: P/W vs W/S with hover line + cruise curve + stall line. ✓ *Already implemented.*
+
+The uncoupled approach is acceptable for a baseline trade study (matching charts are often done "weight-free" in terms of P/W and W/S), but endurance margins must be stated as conditional on the assumed battery fraction and MTOW.
+
+Baseline trade study approach: keep MTOW fixed (10 kg) and compare endurance/range. Call this the **"baseline case"**, not a "sized design".
+
+
+## Key decisions (record)
+
+* Baseline case is retained for this feasibility study: the comparative analysis is performed at a fixed reference MTOW justified in Section 4.
+* Mission constraints are treated as non-negotiable requirements, including payload mass and endurance.
+* Energy feasibility is treated as necessary for any configuration labelled feasible, including reserve and non-cruise phases.
+* A configuration-specific coupled sizing workflow (improved approach) is deferred to future work and is not required for feasibility-study completion.
+
+## Working definition of “feasible” (necessary and sufficient for this study)
+
+For a configuration to be labelled feasible in the baseline case, all items below must be satisfied simultaneously under the same set of assumptions:
+
+* Payload: the mission payload mass is carried as a fixed mass term in the mass model, and the baseline MTOW allocation remains consistent with the assumed mass fractions in Section 4.
+* VTOL: configurations that do not satisfy the VTOL requirement are labelled not feasible regardless of endurance.
+* Energy: the mission energy budget including hover, transition allowance, cruise, battery depth of discharge, discharge efficiency, and reserve fraction is satisfied.
+* Endurance and range: the computed mission endurance and range satisfy the requirement thresholds.
+
+If a condition is not modelled (for example, packaging volume, thermal margins, controllability, actuator sizing), it must be stated as an unverified item
+
+## Current state audit (inputs and code authority)
+
+  - The manuscript’s matching-chart section is explicitly a single baseline case at MTOW = 10.00 kg (see
+    sections_en/05_04_matching-chart-methodology-sec-comparative-results.md:135). That’s why it can turn the chart into
+    absolute numbers like S = 2.574 m², P_hover = 3181 W, etc. It’s a scenario, not a closed-loop “size-to-requirement”
+    result.
+  - The “uncoupled” code (src/mars_uav_sizing/) mirrors that: it uses one global MTOW (mission.mass.mtow_kg) and one
+    global battery fraction (mission.mass_fractions.f_battery) for all three configurations. So the comparisons are
+    “given the same 10 kg vehicle with the same battery fraction, what endurance/range do the three architectures
+    produce?”
+  - **Configuration-specific matching charts exist** (verified 2025-12-30):
+    - `plot_rotorcraft_matching_chart()` uses P/W vs DL axes correctly
+    - `plot_fixed_wing_matching_chart()` uses P/W vs W/S axes
+    - `plot_matching_chart()` (hybrid VTOL) uses P/W vs W/S with hover/cruise/stall constraints
+  - The configurations share global assumptions (MTOW, battery fraction, disk loading, speeds) but use
+    configuration-appropriate constraint spaces in their respective figures.”
+
+* Manuscript results in Section 5.4 are expressed for a baseline `MTOW = 10.00 kg` and use that MTOW to compute absolute geometry and installed power (`S`, `b`, `P`), see `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md`.
+* Uncoupled code path (authoritative for baseline case): `src/mars_uav_sizing/`.
+* Coupled code path (exploratory, not yet suitable for baseline-case manuscript numbers): `src/mars_uav_sizing_coupled/` currently solves one coupled state and reuses it across configurations, which is not a mission-fair comparison across architectures.
+
+## Deliverables
+
+* Updated manuscript sections that match the uncoupled code outputs and state feasibility conditions precisely
+* Reproducible baseline report generated from `src/mars_uav_sizing/run_analysis.py` and stored under `reports/` with an unambiguous label and UTF-8-safe output.
+* A future-work subsection describing the deferred “improved approach” without changing the current feasibility-study scope.
+
+## Action steps (baseline case completion)
+
+### 1. Align definitions, assumptions, and terminology in the manuscript
+
+**Objective:** Ensure the manuscript clearly communicates that this is a baseline scenario study, not a closed-loop sizing result.
+
+* Add a short paragraph in `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md` stating explicitly that the matching-chart design point is evaluated at a fixed baseline MTOW (reference case), and that it is not a closed-loop sizing result.
+* Add a short paragraph in `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md` stating that the energy constraint is verified by an explicit mission energy budget evaluation at the candidate design point, and is not plotted as a separate constraint line for the fixed disk loading baseline case.
+* Add a short paragraph in `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md` stating what is held constant across configurations in the baseline comparison (payload mass, MTOW, battery technology assumptions, reserve policy, mission time allocations).
+
+**Practical steps:**
+
+1. Open `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md`
+2. After the "Matching chart fundamentals" subsection (around line 76), insert a new subsection:
+   ```markdown
+   ### Baseline case definition {#sec:baseline-case}
+   
+   The constraint analysis in this section is performed for a **fixed baseline MTOW of 10.00 kg**, 
+   derived from the payload-driven mass allocation in @sec:mass-fractions. This is a reference case 
+   study, not a closed-loop sizing result. The matching chart identifies feasible design space 
+   regions and constraint interactions; absolute geometry and power values are conditional on the 
+   assumed MTOW.
+   
+   To ensure fair comparison across configurations, the following parameters are held constant:
+   
+   * Payload mass: 1.00 kg (camera + radio relay)
+   * MTOW: 10.00 kg (baseline value)
+   * Battery mass fraction: 35% (3.50 kg battery mass)
+   * Battery technology: HV LiPo, 270 Wh/kg specific energy
+   * Depth of discharge: 80%
+   * Energy reserve: 20%
+   * Hover time allocation: 2 min (takeoff + landing)
+   * Transition time allocation: 1 min (two 30-s transitions)
+   
+   The energy constraint is verified by explicit mission energy budget evaluation at the 
+   candidate design point, rather than plotted as a separate constraint line. This approach 
+   is appropriate for the fixed disk loading baseline case where energy feasibility depends 
+   on mission segment durations rather than wing loading.
+   ```
+3. Update any language in the "Design point determination" subsection to use "baseline design point" terminology.
+4. Repeat equivalent changes in the Italian section file (`sections_it/05_04_...`).
+
+**Verification:**
+- [ ] Baseline case definition subsection added to English manuscript
+- [ ] Baseline case definition subsection added to Italian manuscript
+- [ ] "Design point" language updated to "baseline design point"
+- [ ] Manuscript builds without errors (`build_docx.bat`)
+
+---
+
+### 2. Ensure payload constraint is applied and communicated correctly
+
+**Objective:** Verify that the payload mass is a binding constraint and is visibly documented in the manuscript.
+
+* Confirm that the baseline case uses `mission.mass.payload_kg = 1.0` and `mission.mass.mtow_kg = 10.0` with consistent mass fractions in `src/mars_uav_sizing/config/mission_parameters.yaml`.
+* Add a "payload feasibility" statement in Section 4 or Section 5 clarifying that the payload mass is a fixed mission constraint and is included in the mass allocation.
+* Ensure that any discussion of "optimising MTOW" is confined to future work unless a configuration-specific closure is implemented and validated.
+
+**Practical steps:**
+
+1. **Verify configuration file:**
+   ```powershell
+   # Check current values
+   Get-Content src\mars_uav_sizing\config\mission_parameters.yaml | Select-String -Pattern "payload_kg|mtow_kg|f_payload"
+   ```
+   Expected output:
+   - `payload_kg: 1.0`
+   - `mtow_kg: 10.0`
+   - `f_payload: 0.10`
+   Verify that `payload_kg / f_payload = mtow_kg` (i.e., 1.0 / 0.10 = 10.0 kg).
+
+2. **Add payload feasibility statement to manuscript:**
+   In `sections_en/04_11_mass-fractions.md` (or appropriate Section 4 file), add:
+   ```markdown
+   The payload mass of 1.00 kg is a **fixed mission constraint** derived from the selected 
+   camera and radio relay components (@sec:payload-systems). The baseline MTOW of 10.00 kg 
+   follows directly from the payload mass and the assumed payload mass fraction:
+   
+   $$M_\text{MTOW} = \frac{M_\text{payload}}{f_\text{payload}} = \frac{1.00}{0.10} = 10.00 \text{ kg}$$
+   
+   This payload-driven sizing ensures that the mission payload requirement is satisfied by 
+   construction. Any configuration that cannot carry 1.00 kg within the 10.00 kg MTOW 
+   envelope is infeasible.
+   ```
+
+3. **Audit manuscript for "optimising MTOW" language:**
+   ```powershell
+   Get-ChildItem sections_en\*.md | Select-String -Pattern "optim|minim|size-to|closure" -CaseSensitive:$false
+   ```
+   If any results suggest closed-loop sizing, reword to clarify that this is a baseline case or move to future work.
+
+4. **Repeat for Italian sections.**
+
+**Verification:**
+- [ ] `mission_parameters.yaml` values confirmed consistent
+- [ ] Payload feasibility statement added to Section 4
+- [ ] No misleading "optimising MTOW" language in baseline case sections
+- [ ] Italian manuscript synchronised
+
+---
+
+### 3. Make energy accounting consistent across configurations (honest feasibility)
+
+**Objective:** Ensure all three configurations use identical energy accounting assumptions for fair comparison.
+
+* Confirm that all three configurations apply the same reserve policy (`mission.energy.reserve_fraction`) and battery utilisation (`dod`, `eta_discharge`) when computing endurance.
+* Confirm that rotorcraft and hybrid VTOL include explicit hover energy for `t_hover_s`.
+* For hybrid VTOL, ensure that transition energy is either modelled (with clear assumptions) or explicitly bounded, and that the manuscript states which approach is used.
+* Update any manuscript numbers to 4 significant figures and ensure consistency with the current code outputs.
+
+**Practical steps:**
+
+1. **Audit energy parameters in code:**
+   ```powershell
+   # Check battery parameters
+   Get-Content src\mars_uav_sizing\config\battery_parameters.yaml | Select-String -Pattern "dod|eta_discharge|reserve"
+   Get-Content src\mars_uav_sizing\config\mission_parameters.yaml | Select-String -Pattern "reserve_fraction"
+   ```
+
+2. **Audit each analysis module for energy consistency:**
+   Review the following files to confirm they use the same energy accounting:
+   - `src/mars_uav_sizing/section5/rotorcraft.py`
+   - `src/mars_uav_sizing/section5/fixed_wing.py`
+   - `src/mars_uav_sizing/section5/hybrid_vtol.py`
+   
+   Check that each:
+   - Uses `get_param('mission.energy.reserve_fraction')` (not hardcoded values)
+   - Uses `get_param('battery.depth_of_discharge')` and `get_param('battery.eta_discharge')`
+   - Computes available energy as: `E_total × DoD × η_discharge × (1 - reserve)`
+
+3. **Confirm hover energy accounting:**
+   - Rotorcraft: Check that `t_hover_s` is read from config and hover energy is subtracted.
+   - Hybrid VTOL: Check that hover energy + transition energy are subtracted before cruise endurance.
+   - Fixed-wing: Confirm hover is not applicable (or explicitly stated as zero).
+
+4. **Audit transition energy model:**
+   In `src/mars_uav_sizing/section5/hybrid_vtol.py`, confirm the transition energy model:
+   ```python
+   # Expected pattern:
+   E_trans = E_ref × (m_UAV / m_ref) × mars_factor
+   ```
+   If the model is simplified, ensure the manuscript states this clearly (Action Step 1 should include this).
+
+5. **Cross-check manuscript numbers against code output:**
+   Run the analysis and compare key values:
+   ```powershell
+   cd src\mars_uav_sizing
+   python -m mars_uav_sizing.run_analysis > ..\..\reports\baseline_check.txt 2>&1
+   ```
+   Compare with values in:
+   - `sections_en/05_02_rotorcraft-analysis.md` (or equivalent)
+   - `sections_en/05_03_fixed-wing-analysis.md`
+   - `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md`
+
+6. **Update manuscript with 4 significant figures:**
+   Any discrepancies should be corrected to match the code output (code is authoritative for stated assumptions).
+
+**Verification:**
+- [ ] All three configurations use identical energy accounting
+- [ ] Hover energy explicitly accounted for rotorcraft and hybrid VTOL
+- [ ] Transition energy model documented in manuscript
+- [ ] Manuscript numbers match code output to 4 significant figures
+
+---
+
+### 4. Correct report generation for reproducibility and manuscript integration
+
+**Objective:** Generate clean, reproducible reports that can be directly referenced.
+
+* Generate a single "baseline case" report from `src/mars_uav_sizing/run_analysis.py` and save it under `reports/` with a stable naming scheme (date-time and mode).
+* Ensure report headers match the actual mode (avoid "COUPLED" headers when running uncoupled code paths).
+* Ensure report output is UTF-8 clean and does not contain non-standard glyphs that impede manuscript copy-paste.
+
+**Practical steps:**
+
+1. **Fix header mismatch issue:**
+   The current report shows "MARS UAV FEASIBILITY STUDY (COUPLED)" but the analysis is uncoupled.
+   
+   Locate the header generation code:
+   ```powershell
+   Get-ChildItem src\mars_uav_sizing -Recurse -Filter "*.py" | Select-String -Pattern "COUPLED" -CaseSensitive
+   ```
+   
+   Fix the header to correctly identify the mode. The header should read:
+   ```
+   MARS UAV FEASIBILITY STUDY (BASELINE CASE)
+   Section 5: Constraint Analysis
+   Mode: UNCOUPLED - Fixed MTOW = 10.00 kg
+   ```
+
+2. **Fix UTF-8 encoding issues:**
+   The box-drawing characters (╔, ═, ━) are rendering as mojibake.
+   
+   Option A (Recommended): Replace Unicode box-drawing with ASCII alternatives:
+   ```python
+   # Replace
+   print("╔" + "═" * 78 + "╗")
+   # With
+   print("+" + "=" * 78 + "+")
+   ```
+   
+   Option B: Ensure proper encoding when writing to file:
+   ```python
+   with open(report_path, 'w', encoding='utf-8') as f:
+       ...
+   ```
+   And ensure PowerShell/terminal uses UTF-8:
+   ```powershell
+   [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+   ```
+
+3. **Update report naming scheme:**
+   Modify `run_analysis.py` to save reports with a clear naming convention:
+   ```python
+   timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+   report_name = f"baseline_case_{timestamp}.txt"
+   report_path = Path(__file__).parent.parent.parent / "reports" / report_name
+   ```
+
+4. **Generate authoritative baseline report:**
+   ```powershell
+   cd C:\Users\matti\OneDrivePhD\Dev\Drone_marte
+   python -m mars_uav_sizing.run_analysis 2>&1 | Out-File -Encoding utf8 reports\baseline_case_authoritative.txt
+   ```
+
+5. **Verify report is clean:**
+   Open the report in a text editor and confirm:
+   - No mojibake characters
+   - Header correctly identifies "BASELINE CASE" or "UNCOUPLED"
+   - All numerical values are formatted consistently
+
+**Verification:**
+- [ ] Report header correctly identifies mode
+- [ ] No UTF-8 encoding issues in report output
+- [ ] Report saved with stable naming scheme
+- [ ] Report can be opened and read in any text editor without corruption
+
+---
+
+### 5. Reconcile figures and tables with code outputs
+
+**Objective:** Ensure all figures and tables match the code outputs for the baseline case.
+
+* Regenerate the matching chart figure used in `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md` and ensure it corresponds to the baseline assumptions (fixed MTOW and fixed disk loading) and to the numbers reported in `@tbl:design-point` and `@tbl:design-parameters`.
+* Confirm that any comparative figures (`@fig:ld-comparison`, `@fig:endurance-comparison`) are generated from the same baseline configuration and are not mixing coupled and uncoupled results.
+
+**Practical steps:**
+
+1. **Identify figure generation scripts:**
+   ```powershell
+   Get-ChildItem src\mars_uav_sizing -Recurse -Filter "*.py" | Select-String -Pattern "savefig|plt\.save" -CaseSensitive:$false
+   ```
+
+2. **Regenerate all Section 5 figures:**
+   ```powershell
+   cd src\mars_uav_sizing
+   python -m mars_uav_sizing.visualization.generate_all_figures
+   ```
+   (Or run individual figure generation scripts if a master script doesn't exist.)
+
+3. **Verify figure parameters match tables:**
+   Cross-check `@fig:matching-chart` annotations against `@tbl:design-point`:
+   - Hover constraint line at P/W = 85.71 W/N
+   - Stall constraint line at W/S = 14.42 N/m²
+   - Design point marker at intersection
+
+4. **Check comparative figures for consistency:**
+   Confirm that the values shown in `@fig:ld-comparison`, `@fig:power-comparison`, and `@fig:endurance-comparison` match:
+   - Rotorcraft: L/D = 4.0, endurance = 63.17 min
+   - Fixed-wing: L/D = 11.68, endurance = 120.5 min
+   - Hybrid VTOL: L/D = 10.52, endurance = 89.55 min
+
+5. **Update figure files:**
+   Copy regenerated figures to the manuscript figures directory:
+   ```powershell
+   Copy-Item src\mars_uav_sizing\output\figures\*.png sections_en\figures\ -Force
+   Copy-Item src\mars_uav_sizing\output\figures\*.png sections_it\figures\ -Force
+   ```
+
+6. **Verify figures render in manuscript:**
+   ```powershell
+   .\reconstruct.bat
+   .\build_docx.bat
+   ```
+   Open the output DOCX and confirm all figures display correctly.
+
+**Verification:**
+- [ ] All Section 5 figures regenerated from current code
+- [ ] Figure annotations match table values
+- [ ] No mixing of coupled/uncoupled results in comparative figures
+- [ ] Figures render correctly in DOCX output
+
+---
+
+### 6. Verification loop (required before manuscript rebuild)
+
+**Objective:** Run automated verification and reconcile any mismatches.
+
+* Run manuscript verification checks using `src/mars_uav_sizing/verification/verify_manuscript.py` and reconcile any mismatches by updating either:
+  * the manuscript text and tables, if the code is authoritative for the stated assumptions
+  * the YAML configuration, if the manuscript states a different assumption
+* Rebuild the manuscript using `reconstruct.bat` and confirm that cross-references, equations, and figures render correctly in `build_docx.bat`.
+
+**Practical steps:**
+
+1. **Run verification script:**
+   ```powershell
+   cd src\mars_uav_sizing
+   python -m mars_uav_sizing.verification.verify_manuscript
+   ```
+
+2. **Review verification output:**
+   The script will report:
+   - `[PASS]` for values within tolerance (default 0.5%)
+   - `[FAIL]` for values outside tolerance
+   
+   For each `[FAIL]`:
+   - If code is authoritative: update manuscript value
+   - If manuscript states different assumption: update YAML config
+
+3. **Apply tolerance criterion:**
+   All numerical values must match within **0.5%** relative error.
+   For binary/categorical values (e.g., "feasible"), exact match is required.
+
+4. **Document any configuration changes:**
+   If YAML config is modified, add a comment explaining the change:
+   ```yaml
+   # Updated 2025-12-30 per verification loop (was 0.35, corrected to 0.355)
+   f_battery: 0.355
+   ```
+
+5. **Rebuild manuscript:**
+   ```powershell
+   cd C:\Users\matti\OneDrivePhD\Dev\Drone_marte
+   .\reconstruct.bat
+   .\build_docx.bat
+   ```
+
+6. **Check build log for issues:**
+   ```powershell
+   Get-Content build_docx.log | Select-String -Pattern "undefined|missing|warning" -CaseSensitive:$false
+   ```
+
+7. **Final visual inspection:**
+   Open the output DOCX and spot-check:
+   - Cross-references resolve correctly
+   - Equations render correctly
+   - Figures display correctly
+   - Tables are properly formatted
+
+**Verification:**
+- [ ] `verify_manuscript.py` reports all `[PASS]`
+- [ ] No undefined cross-references in build log
+- [ ] DOCX output opens without errors
+- [ ] Visual inspection confirms correct rendering
+
+---
+
+### 7. Italian manuscript synchronisation (NEW)
+
+**Objective:** Ensure Italian manuscript sections reflect all changes made to English sections.
+
+**Practical steps:**
+
+1. **Identify corresponding Italian files:**
+   For each English section file modified in steps 1–6, locate the Italian equivalent:
+   - `sections_en/05_04_matching-chart-methodology-sec-comparative-results.md` → `sections_it/05_04_...`
+   - `sections_en/04_11_mass-fractions.md` → `sections_it/04_11_...`
+
+2. **Translate new content:**
+   For the baseline case definition subsection (Step 1), translate to Italian:
+   ```markdown
+   ### Definizione del caso di riferimento {#sec:baseline-case}
+   
+   L'analisi dei vincoli in questa sezione è eseguita per un **MTOW di riferimento fisso 
+   di 10,00 kg**, derivato dall'allocazione di massa basata sul payload in @sec:mass-fractions. 
+   Si tratta di uno studio di caso di riferimento, non di un risultato di dimensionamento 
+   ad anello chiuso. ...
+   ```
+
+3. **Verify all numerical values are identical:**
+   Numbers should not be translated—they must match exactly between English and Italian.
+
+4. **Rebuild Italian manuscript:**
+   ```powershell
+   .\build_docx.bat it
+   ```
+
+5. **Check for consistency:**
+   Compare section structure between English and Italian to ensure they match.
+
+**Verification:**
+- [ ] All modified English sections have corresponding Italian updates
+- [ ] Numerical values identical between languages
+- [ ] Italian manuscript builds without errors
+
+---
+
+### 8. Update Section 2 (Design Methodology) for clarity (NEW)
+
+**Objective:** Clarify that Section 2 correctly describes the methodology, and that this manuscript represents the **first iteration** of the described 4-phase cycle. Also document configuration-specific constraint spaces.
+
+**Assessment of current Section 2:**
+
+The methodology described in Section 2 (4-phase iterative sizing) is accurate and consistent with the manuscript structure:
+
+| Phase | Described in §2 | Manuscript Status |
+|:------|:----------------|:------------------|
+| 1. Initial hypotheses | Reference data, scaling from Earth designs | ✓ Section 4 complete |
+| 2. Preliminary sizing | Matching chart → design point | ✓ Section 5 complete |
+| 3. Component selection | Actual components from datasheets | ◐ Section 7 partial |
+| 4. Verification | Recalculate with actual values | ◐ Code exists, integration pending |
+
+**Conclusion**: Section 2 does NOT need to be rewritten. The methodology is correct; we're executing the first iteration. Only minor clarifications and additions are needed.
+
+**Issues to address:**
+
+| Issue | Action needed |
+|:------|:--------------|
+| Generic "P/W vs W/S" chart description | Add note on configuration-specific constraint spaces |
+| No "current status" statement | Add brief note indicating first-iteration scope |
+| No explicit feasibility criteria | Already addressed in Step 1 (baseline case definition) |
+
+**Practical steps:**
+
+1. **Update §2.2 to acknowledge configuration-specific constraint spaces:**
+
+   In `sections_en/02_02_role-of-constraint-based-sizing-sec-constraint-role.md`, after line 5, add clarification:
+
+   ```markdown
+   The constraint space axes depend on the configuration under study:
+   
+   * For pure rotorcraft without a wing, the relevant axes are power loading (P/W) 
+     versus disk loading (DL), with the hover constraint from actuator disk theory 
+     as the primary bound (@sec:rotorcraft-analysis).
+   * For fixed-wing aircraft, the classic P/W versus W/S axes apply, with cruise 
+     and stall constraints defining the feasible region (@sec:fixed-wing-analysis).
+   * For hybrid VTOL aircraft, the P/W versus W/S axes are used with both hover 
+     (appearing as a horizontal line) and wing-related constraints combined 
+     (@sec:hybrid-vtol-analysis).
+   ```
+
+2. **Add a brief "study status" note at the end of §2.1:**
+
+   In `sections_en/02_01_iterative-sizing-approach-sec-iterative-sizing.md`, after the figure, add:
+
+   ```markdown
+   This manuscript documents the first pass through the iterative cycle. Phases 1 
+   and 2 (initial hypotheses and preliminary sizing) are fully developed in 
+   Sections 4 and 5. Component selection (Phase 3) and final verification (Phase 4) 
+   are addressed in Sections 7 and 9, completing the first iteration at the baseline 
+   MTOW of 10.00 kg. Subsequent iterations would refine the MTOW and other parameters 
+   based on component-level constraints.
+   ```
+
+3. **(Optional) Add unverified items disclosure to §2 or Conclusions:**
+
+   List aspects not modelled in this first iteration (packaging, thermal margins, 
+   stability, manufacturing). This can be in Section 2 or deferred to Conclusions.
+
+4. **Repeat equivalent updates for Italian sections.**
+
+**Note**: This step does NOT suggest that Section 2 is wrong. The methodology description is accurate; we're simply clarifying the current iteration status and adding configuration-specific constraint space documentation.
+
+**Verification:**
+- [ ] §2.2 documents configuration-specific constraint spaces
+- [ ] §2.1 includes "first iteration" status note
+- [ ] Italian sections updated
+- [ ] Manuscript builds without errors
+
+---
+
+
+
+
+## Deferred future work (improved approach, not required for this study)
+
+This subsection is intended to be added to conclusions or future work, without changing the baseline-case results.
+
+* Implement **configuration-specific coupled closures**:
+  * rotorcraft closure: solve for MTOW and battery mass given payload mass, disk loading, hover time, cruise time, and energy reserve
+  * fixed-wing closure: solve for MTOW and battery mass given payload mass, chosen `W/S`, cruise speed policy, and energy reserve
+  * hybrid VTOL closure: solve for MTOW and battery mass given payload mass, `DL`, `W/S`, mission segment times, transition energy model, and energy reserve
+* Replace fixed mass fractions with a **minimal component-based mass model** for at least battery, payload, propulsion, and structure, and add a plausibility constraint on payload fraction using the reference drone database.
+* Add **parametric sweeps** in disk loading (`DL`) and mission times to the hybrid VTOL analysis.
+* Report results as **minimum feasible MTOW** (or maximum margin) subject to all mission constraints, and clearly separate design variables from requirements.
+
+**Note**: Configuration-appropriate constraint diagrams (P/W vs DL for rotorcraft, P/W vs W/S for fixed-wing and hybrid VTOL) are already implemented in the baseline case and are NOT deferred.
+
+## Acceptance criteria (baseline case)
+
+* A reader can reproduce all Section 5 numeric results by running `src/mars_uav_sizing/run_analysis.py` with the committed YAML inputs.
+* Any feasible label is backed by an explicit payload statement, an energy budget check (including reserve), and the endurance requirement check.
+* The manuscript does not mix coupled and uncoupled results in the same baseline-case tables or claims.
+
+---
+
+## Execution summary checklist
+
+Use this checklist to track progress. Mark items `[x]` when complete.
+
+### Action Step 1: Terminology alignment
+- [ ] Baseline case definition subsection added (English)
+- [ ] Baseline case definition subsection added (Italian)
+- [ ] "Design point" → "baseline design point" terminology updated
+- [ ] Manuscript builds without errors
+
+### Action Step 2: Payload constraint
+- [ ] Configuration values verified (payload_kg = 1.0, mtow_kg = 10.0, f_payload = 0.10)
+- [ ] Payload feasibility statement added to Section 4
+- [ ] "Optimising MTOW" language audited and corrected
+- [ ] Italian synchronised
+
+### Action Step 3: Energy accounting
+- [ ] Energy parameters audited in all three analysis modules
+- [ ] Hover energy accounting verified for rotorcraft and hybrid VTOL
+- [ ] Transition energy model verified and documented
+- [ ] Manuscript numbers match code output (4 sig figs)
+
+### Action Step 4: Report generation
+- [ ] Header mismatch fixed (no "COUPLED" when running uncoupled)
+- [ ] UTF-8 encoding issues resolved
+- [ ] Authoritative baseline report generated and saved
+
+### Action Step 5: Figures and tables
+- [ ] All Section 5 figures regenerated
+- [ ] Figure annotations match table values
+- [ ] Figures copied to manuscript directories
+- [ ] Figures render correctly in DOCX
+
+### Action Step 6: Verification loop
+- [ ] `verify_manuscript.py` reports all PASS
+- [ ] No undefined cross-references
+- [ ] DOCX builds and opens correctly
+- [ ] Visual inspection complete
+
+### Action Step 7: Italian synchronisation
+- [ ] All English changes replicated in Italian
+- [ ] Numerical values identical
+- [ ] Italian DOCX builds without errors
+
+### Action Step 8: Section 2 methodology clarification
+- [ ] §2.2 documents configuration-specific constraint spaces (P/W vs DL for rotorcraft)
+- [ ] §2.1 includes "first iteration" status note
+- [ ] Italian sections updated
+
+### Final acceptance
+- [ ] All Section 5 results reproducible from committed code and YAML
+- [ ] All feasibility labels backed by explicit checks
+- [ ] No mixed coupled/uncoupled results in baseline-case sections
+- [ ] Section 2 accurately reflects methodology used
+- [ ] Plan file moved to `docs/completed/` (optional)
+
+---
+
+*Plan completed: 2025-12-30*
+*Plan author: AI assistant (updated with Section 2 methodology step)*
+*Status: Ready for execution*
+
+

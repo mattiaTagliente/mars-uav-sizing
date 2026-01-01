@@ -1,0 +1,13 @@
+﻿
+================================================================================
+MARS UAV FEASIBILITY STUDY (COUPLED)
+Section 5: Constraint Analysis
+================================================================================
+
+  Analysis run: 2025-12-30 19:18:52
+  Configuration: All parameters from config/ YAML files
+  Baseline MTOW: 10.0 kg
+
+  Mode: UNCOUPLED (delegated to mars_uav_sizing.run_analysis)
+
+

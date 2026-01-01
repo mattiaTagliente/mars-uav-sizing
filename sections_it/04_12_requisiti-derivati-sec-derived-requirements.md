@@ -10,11 +10,11 @@ I requisiti operativi definiscono l'inviluppo di prestazioni della missione deri
 
 #### Raggio operativo
 
-L'UAV dovrà raggiungere un raggio operativo di almeno 50 km. Questo requisito deriva dall'esigenza utente N1 (raggio esteso oltre la capacità dei rover di superficie). Il rover Curiosity ha percorso circa 35 km in totale in oltre un decennio sulla superficie marziana [@nasaMarsScienceLaboratory2025]. Un raggio di 50 km consente il rilevamento in un singolo volo di aree inaccessibili ai rover entro tempistiche di missione pratiche, fornendo un miglioramento sostanziale delle capacità che giustifica lo sviluppo dell'UAV. La verifica è dimostrata attraverso test di volo di autonomia che copre 100 km di distanza andata e ritorno.
+L'UAV dovrà raggiungere un raggio operativo di almeno 50 km. Questo requisito deriva dall'esigenza utente N1 (raggio esteso oltre la capacità dei rover di superficie). Il rover Curiosity ha percorso circa 35 km in totale in oltre un decennio sulla superficie marziana [@nasaMarsScienceLaboratory2025]<!-- #s:distance -->. Un raggio di 50 km consente il rilevamento in un singolo volo di aree inaccessibili ai rover entro tempistiche di missione pratiche, fornendo un miglioramento sostanziale delle capacità che giustifica lo sviluppo dell'UAV. La verifica è dimostrata attraverso test di volo di autonomia che copre 100 km di distanza andata e ritorno.
 
 #### Altitudine operativa
 
-L'UAV dovrà operare ad altitudini tra 30 m e 350 m sopra il livello del suolo. L'altitudine minima di 30 m deriva dalle esigenze di separazione dal terreno: le distribuzioni di frequenza-dimensione delle rocce nei siti di atterraggio marziani indicano che le rocce pericolose sono tipicamente alte 0.5 m o circa 1 m di diametro [@golombekRockSizeFrequencyDistributions2021], e 30 m fornisce un fattore di sicurezza di 60× rispetto ai più grandi ostacoli superficiali comuni. L'altitudine massima di 350 m deriva dai requisiti di risoluzione dell'imaging (esigenza utente N2). La mappatura geologica richiede tipicamente una distanza di campionamento a terra (GSD) di 5-10 cm per pixel. Per una camera con passo pixel di 2.4 μm e lunghezza focale di 8.8 mm (tipico sensore da 1 pollice come il DJI Air 2S [@djiDJIAir2S2021]), il GSD è calcolato come:
+L'UAV dovrà operare ad altitudini tra 30 m e 350 m sopra il livello del suolo. L'altitudine minima di 30 m deriva dalle esigenze di separazione dal terreno: le distribuzioni di frequenza-dimensione delle rocce nei siti di atterraggio marziani indicano che le rocce pericolose sono tipicamente alte 0.5 m o circa 1 m di diametro [@golombekRockSizeFrequencyDistributions2021]<!-- #abs -->, e 30 m fornisce un fattore di sicurezza di 60× rispetto ai più grandi ostacoli superficiali comuni. L'altitudine massima di 350 m deriva dai requisiti di risoluzione dell'imaging (esigenza utente N2). La mappatura geologica richiede tipicamente una distanza di campionamento a terra (GSD) di 5-10 cm per pixel. Per una camera con passo pixel di 2.4 μm e lunghezza focale di 8.8 mm (tipico sensore da 1 pollice come il DJI Air 2S [@djiDJIAir2S2021]<!-- #specs -->), il GSD è calcolato come:
 
 $$GSD = \frac{H \cdot p}{f}$$ {#eq:gsd}
 
@@ -26,7 +26,7 @@ Arrotondando a 350 m si assicura che il requisito di GSD di 10 cm sia soddisfatt
 
 #### Autonomia di volo
 
-L'UAV dovrà raggiungere un tempo di volo totale di almeno 60 minuti, incluse le fasi di hovering e crociera. Questo requisito deriva dall'esigenza utente N5 (autonomia estesa) in combinazione con il requisito di raggio operativo. Il profilo di missione (@sec:mission-parameters) richiede 42 minuti di tempo di transito (100 km andata e ritorno a 40 m/s), 15 minuti di operazioni di rilevamento, e 3 minuti di fasi di hovering (decollo, atterraggio, contingenza), per un totale di 60 minuti. Questa autonomia supera sostanzialmente l'elicottero Ingenuity, che ha raggiunto voli individuali fino a 169 secondi e tempo di volo cumulativo di circa 129 minuti su 72 voli [@nasaIngenuityMarsHelicopter2024; @tzanetosIngenuityMarsHelicopter2022]. La verifica è dimostrata attraverso test di volo con profilo di missione completo.
+L'UAV dovrà raggiungere un tempo di volo totale di almeno 60 minuti, incluse le fasi di hovering e crociera. Questo requisito deriva dall'esigenza utente N5 (autonomia estesa) in combinazione con il requisito di raggio operativo. Il profilo di missione (@sec:mission-parameters) richiede 42 minuti di tempo di transito (100 km andata e ritorno a 40 m/s), 15 minuti di operazioni di rilevamento, 2 minuti di fasi di hovering (decollo e atterraggio) e 1 minuto di fasi di transizione, per un totale di 60 minuti. Questa autonomia supera l'elicottero Ingenuity, che ha raggiunto voli individuali fino a 169 secondi e tempo di volo cumulativo di circa 129 minuti su 72 voli [@nasaIngenuityMarsHelicopter2024]<!-- #s:flights --> [@tzanetosIngenuityMarsHelicopter2022]<!-- #abs -->. La verifica è dimostrata attraverso test di volo con profilo di missione completo.
 
 ### Requisiti ambientali {#sec:environmental-requirements}
 
@@ -34,15 +34,15 @@ I requisiti ambientali definiscono le condizioni in cui l'UAV deve operare, deri
 
 #### Tolleranza al vento
 
-L'UAV dovrà operare in sicurezza con venti sostenuti fino a 10 m/s. Le misurazioni del vento da parte del rover Mars 2020 Perseverance nel cratere Jezero hanno rilevato velocità medie del vento di 3.2 ± 2.3 m/s, con picchi pomeridiani che raggiungono 6.1 ± 2.2 m/s; il 99% dei venti misurati è rimasto sotto i 10 m/s [@viudez-moreirasWindsMars20202022]. Il limite di 10 m/s accomoda le condizioni marziane tipiche con margine. Sebbene i venti delle tempeste di polvere possano raggiungere 27 m/s [@nasaFactFictionMartian2015], le operazioni di volo durante tali eventi sono rinviate piuttosto che progettate per essere sostenute. La verifica include test in galleria del vento dell'autorità di controllo e simulazione di volo con profili di raffica di 10 m/s.
+L'UAV dovrà operare in sicurezza con venti sostenuti fino a 10 m/s. Le misurazioni del vento da parte del rover Mars 2020 Perseverance nel cratere Jezero hanno rilevato velocità medie del vento di 3.2 ± 2.3 m/s, con picchi pomeridiani che raggiungono 6.1 ± 2.2 m/s; il 99% dei venti misurati è rimasto sotto i 10 m/s [@viudez-moreirasWindsMars20202022]<!-- #abs -->. Il limite di 10 m/s accomoda le condizioni marziane tipiche con margine. Sebbene i venti delle tempeste di polvere possano raggiungere 27 m/s [@nasaFactFictionMartian2015]<!-- #s:storms -->, le operazioni di volo durante tali eventi sono rinviate piuttosto che progettate per essere sostenute. La verifica include test in galleria del vento dell'autorità di controllo e simulazione di volo con profili di raffica di 10 m/s.
 
 #### Protezione dalla polvere
 
-Tutti i componenti critici dovranno essere protetti secondo lo standard IP6X. La protezione dalla polvere segue il codice IP definito dalla IEC 60529 [@internationalelectrotechnicalcommissionDegreesProtectionProvided2013]. IP6X denota involucri a tenuta di polvere con esclusione completa del particolato, necessaria data la fine regolite marziana (dimensioni delle particelle 1-100 μm) che può degradare cuscinetti meccanici e superfici ottiche. La verifica avviene attraverso test di ingresso polvere secondo le procedure IEC 60529 o equivalenti.
+Tutti i componenti critici dovranno essere protetti secondo lo standard IP6X. La protezione dalla polvere segue il codice IP definito dalla IEC 60529 [@internationalelectrotechnicalcommissionDegreesProtectionProvided2013]<!-- #s:ip6x -->. IP6X denota involucri a tenuta di polvere con esclusione completa del particolato, necessaria data la fine regolite marziana (dimensioni delle particelle 1-100 μm) che può degradare cuscinetti meccanici e superfici ottiche. La verifica avviene attraverso test di ingresso polvere secondo le procedure IEC 60529 o equivalenti.
 
 #### Tolleranza alle radiazioni
 
-L'elettronica dovrà tollerare una dose totale ionizzante di almeno 1 krad(Si). Lo strumento RAD del Mars Science Laboratory ha misurato un tasso medio di dose assorbita di circa 76 mGy/anno (7.6 rad/anno, o 0.0076 krad/anno) sulla superficie marziana [@hasslerMarsSurfaceRadiation2014]. In una missione biennale, la dose accumulata è circa 0.015 krad. Un requisito di tolleranza alle radiazioni di 1 krad(Si) di dose totale ionizzante fornisce un margine di circa 67× ed è raggiungibile con elettronica commerciale off-the-shelf (COTS), che tipicamente tollera 5-20 krad senza richiedere costosi componenti radiation-hardened [@brunettiCOTSDevicesSpace2024]. La verifica avviene attraverso dati di test di radiazione a livello di componente o qualifica per heritage.
+L'elettronica dovrà tollerare una dose totale ionizzante di almeno 1 krad(Si). Lo strumento RAD del Mars Science Laboratory ha misurato un tasso medio di dose assorbita di circa 76 mGy/anno (7.6 rad/anno, o 0.0076 krad/anno) sulla superficie marziana [@hasslerMarsSurfaceRadiation2014]<!-- #abs -->. In una missione biennale, la dose accumulata è circa 0.015 krad. Un requisito di tolleranza alle radiazioni di 1 krad(Si) di dose totale ionizzante fornisce un margine di circa 67× ed è raggiungibile con elettronica commerciale off-the-shelf (COTS), che tipicamente tollera 5-20 krad senza richiedere costosi componenti radiation-hardened [@brunettiCOTSDevicesSpace2024]<!-- #abs -->. La verifica avviene attraverso dati di test di radiazione a livello di componente o qualifica per heritage.
 
 #### Range di temperatura operativa
 
@@ -55,11 +55,11 @@ Le equazioni di stima del peso strutturale in @sec:mass-breakdown includono il f
 
 #### Definizioni
 
-Il *fattore di carico limite* ($n_\text{limite}$) è il massimo fattore di carico atteso in operazione normale senza deformazione permanente. Il *fattore di carico ultimo* ($n_\text{ult}$) è il fattore di carico limite moltiplicato per un fattore di sicurezza [@europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017]:
+Il *fattore di carico limite* ($n_\text{limite}$) è il massimo fattore di carico atteso in operazione normale senza deformazione permanente. Il *fattore di carico ultimo* ($n_\text{ult}$) è il fattore di carico limite moltiplicato per un fattore di sicurezza [@europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017]<!-- #cs23.2230 -->:
 
 $$n_\text{ult} = n_\text{limite} \times FS$$ {#eq:n-ult-definition}
 
-dove $FS = 1.5$ è il fattore di sicurezza aerospaziale standard [@europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017, CS 23.2230(a)(2)]. Questo fattore 1.5 tiene conto delle variazioni delle proprietà dei materiali, delle tolleranze di fabbricazione, della fatica e delle tolleranze ai danni, e dell'incertezza nella previsione dei carichi.
+dove $FS = 1.5$ è il fattore di sicurezza aerospaziale standard [@europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017, CS 23.2230(a)(2)]<!-- #cs23.2230 -->. Questo fattore 1.5 tiene conto delle variazioni delle proprietà dei materiali, delle tolleranze di fabbricazione, della fatica e delle tolleranze ai danni, e dell'incertezza nella previsione dei carichi.
 La struttura deve sopportare i carichi limite senza deformazione permanente, e i carichi ultimi senza cedimento.
 
 #### Motivazione della selezione del fattore di carico
@@ -80,7 +80,7 @@ $$\Delta n_\text{raffica} \propto \frac{\rho \cdot U_\text{de} \cdot V \cdot a}{
 
 dove $\rho$ è la densità atmosferica, $U_\text{de}$ è la velocità di raffica di progetto, $V$ è la velocità di volo, e $a$ è la pendenza della curva di portanza. Alla densità superficiale di Marte (circa 0.020 kg/m³), i carichi da raffica sono circa 60 volte inferiori rispetto al livello del mare terrestre per velocità di raffica equivalenti. Anche con le velocità di raffica di progetto più elevate su Marte (fino a 10 m/s, secondo @sec:user-needs), il contributo del carico da raffica rimane trascurabile rispetto ai carichi di manovra. Il fattore di carico di manovra domina quindi la progettazione strutturale.
 
-Quarto, i precedenti dei velivoli a rotore marziani supportano fattori di carico ridotti. Lo studio NASA Mars Science Helicopter [@johnsonMarsScienceHelicopter2020] ha notato che "i carichi aerodinamici sulla pala sono piccoli a causa della bassa densità atmosferica su Marte," consentendo design strutturali leggeri innovativi. Sebbene i fattori di carico specifici non siano pubblicati per Ingenuity o MSH, l'atmosfera rarefatta riduce fondamentalmente il carico aerodinamico rispetto ai design terrestri.
+Quarto, i precedenti dei velivoli a rotore marziani supportano fattori di carico ridotti. Lo studio NASA Mars Science Helicopter [@johnsonMarsScienceHelicopter2020]<!-- #s:loads --> ha notato che "i carichi aerodinamici sulla pala sono piccoli a causa della bassa densità atmosferica su Marte," consentendo design strutturali leggeri innovativi. Sebbene i fattori di carico specifici non siano pubblicati per Ingenuity o MSH, l'atmosfera rarefatta riduce fondamentalmente il carico aerodinamico rispetto ai design terrestri.
 
 #### Confronto con altre categorie di aeromobili
 
@@ -119,13 +119,13 @@ La resistenza indotta scala inversamente con l'allungamento:
 
 $$C_{D,i} = \frac{C_L^2}{\pi \cdot AR \cdot e}$$ {#eq:induced-drag}
 
-Un maggiore allungamento riduce la resistenza indotta, mentre il peso dell'ala aumenta approssimativamente come $AR^{0.6}$ [@sadraeyAircraftDesignSystems2013]. A parità di superficie alare, un maggiore allungamento riduce anche la corda media:
+Un maggiore allungamento riduce la resistenza indotta, mentre il peso dell'ala aumenta approssimativamente come $AR^{0.6}$ [@sadraeyAircraftDesignSystems2013]<!-- #ch10:ar -->. A parità di superficie alare, un maggiore allungamento riduce anche la corda media:
 
 $$\bar{c} = \sqrt{\frac{S}{AR}}$$ {#eq:chord-from-ar}
 
 Questa riduzione della corda influenza il numero di Reynolds, che è vincolato dai requisiti di prestazione del profilo.
 
-L'intervallo selezionato è basato sia sui dati degli UAV terrestri che sugli studi specifici per Marte. Gli allungamenti tipici per piccoli UAV variano da 4 a 12 [@sadraeyAircraftDesignSystems2013]. I design di UAV marziani in letteratura selezionano consistentemente allungamenti nell'intervallo da 5 a 6. Il design dell'aereo marziano ARES ha utilizzato $AR$ = 5.6 [@braunDesignARESMars2006]. Barbato et al. hanno trovato un $AR$ ottimale da 5.3 a 6.3 per un UAV marziano a energia solare da 24 kg [@barbatoPreliminaryDesignFixedWing2024], dimostrando che l'allungamento ottimale aumenta con il coefficiente di portanza e diminuisce con la massa del payload.
+L'intervallo selezionato è basato sia sui dati degli UAV terrestri che sugli studi specifici per Marte. Gli allungamenti tipici per piccoli UAV variano da 4 a 12 [@sadraeyAircraftDesignSystems2013]<!-- #ch10:ar -->. I design di UAV marziani in letteratura selezionano consistentemente allungamenti nell'intervallo da 5 a 6. Il design dell'aereo marziano ARES ha utilizzato $AR$ = 5.6 [@braunDesignARESMars2006]<!-- #s:ar -->. Barbato et al. hanno trovato un $AR$ ottimale da 5.3 a 6.3 per un UAV marziano a energia solare da 24 kg [@barbatoPreliminaryDesignFixedWing2024]<!-- #s:ar -->, dimostrando che l'allungamento ottimale aumenta con il coefficiente di portanza e diminuisce con la massa del payload.
 
 Viene adottato un allungamento di base di $AR$ = 6, che rappresenta un compromesso tra riduzione della resistenza indotta (che favorisce AR più alti) e peso strutturale (che favorisce AR più bassi). All'MTOW target di 10 kg, questo allungamento fornisce un adeguato rapporto portanza/resistenza mantenendo una corda alare ragionevole per i requisiti di numero di Reynolds e uno spessore strutturale per la capacità di sopportare i carichi.
 
@@ -136,9 +136,9 @@ Il rapporto di spessore dell'ala è limitato da considerazioni strutturali e aer
 
 $$t/c \in [0.06, 0.11]$$ {#eq:tc-bounds}
 
-Questo intervallo riflette le caratteristiche di spessore dei profili candidati a basso Reynolds dal database UIUC [@seligSummaryLowSpeedAirfoil1995; @williamsonSummaryLowSpeedAirfoil2012]. I profili candidati coprono rapporti di spessore dal 6.2% (AG12, serie AG sottile) fino al 10.5% (S7055, design bilanciato). Il profilo general-purpose E387 ha $t/c$ = 9.1%, il profilo a bassa resistenza SD8000 ha $t/c$ = 8.9%, e il profilo general-purpose SD7037 ha $t/c$ = 9.2%.
+Questo intervallo riflette le caratteristiche di spessore dei profili candidati a basso Reynolds dal database UIUC [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:thickness --> [@williamsonSummaryLowSpeedAirfoil2012]<!-- #v5:thickness -->. I profili candidati coprono rapporti di spessore dal 6.2% (AG12, serie AG sottile) fino al 10.5% (S7055, design bilanciato). Il profilo general-purpose E387 ha $t/c$ = 9.1%, il profilo a bassa resistenza SD8000 ha $t/c$ = 8.9%, e il profilo general-purpose SD7037 ha $t/c$ = 9.2%.
 
-Il peso strutturale dell'ala scala approssimativamente come $(t/c)^{-0.3}$ [@sadraeyAircraftDesignSystems2013], favorendo profili più spessi per l'efficienza strutturale. Viene adottato un rapporto di spessore di base di $t/c$ = 0.09 per il dimensionamento, fornendo adeguato spessore strutturale pur rimanendo compatibile con i profili candidati. La selezione specifica del profilo è rinviata a @sec:airfoil-selection dove le prestazioni aerodinamiche al numero di Reynolds di progetto sono valutate.
+Il peso strutturale dell'ala scala approssimativamente come $(t/c)^{-0.3}$ [@sadraeyAircraftDesignSystems2013]<!-- #ch10:tc -->, favorendo profili più spessi per l'efficienza strutturale. Viene adottato un rapporto di spessore di base di $t/c$ = 0.09 per il dimensionamento, fornendo adeguato spessore strutturale pur rimanendo compatibile con i profili candidati. La selezione specifica del profilo è rinviata a @sec:airfoil-selection dove le prestazioni aerodinamiche al numero di Reynolds di progetto sono valutate.
 
 #### Rapporto di rastremazione
 
@@ -148,7 +148,7 @@ $$\lambda \in [0.4, 0.6]$$ {#eq:taper-bounds}
 
 dove $\lambda = c_\text{tip} / c_\text{root}$.
 
-Per la minima resistenza indotta, la distribuzione di portanza lungo l'apertura ideale è ellittica, e per un'ala non a freccia, un rapporto di rastremazione di circa $\lambda$ = 0.4 approssima strettamente questa distribuzione di carico [@sadraeyAircraftDesignSystems2013]. Le ali rastremate concentrano inoltre il materiale strutturale vicino alla radice dove i momenti flettenti sono massimi, migliorando l'efficienza strutturale, sebbene rapporti di rastremazione più bassi aumentino la suscettibilità allo stallo di estremità. Le ali rettangolari ($\lambda$ = 1.0) offrono la fabbricazione più semplice; il limite superiore di $\lambda$ = 0.6 rappresenta un compromesso verso la semplicità di fabbricazione pur mantenendo un carico quasi ellittico.
+Per la minima resistenza indotta, la distribuzione di portanza lungo l'apertura ideale è ellittica, e per un'ala non a freccia, un rapporto di rastremazione di circa $\lambda$ = 0.4 approssima strettamente questa distribuzione di carico [@sadraeyAircraftDesignSystems2013]<!-- #ch5:taper -->. Le ali rastremate concentrano inoltre il materiale strutturale vicino alla radice dove i momenti flettenti sono massimi, migliorando l'efficienza strutturale, sebbene rapporti di rastremazione più bassi aumentino la suscettibilità allo stallo di estremità. Le ali rettangolari ($\lambda$ = 1.0) offrono la fabbricazione più semplice; il limite superiore di $\lambda$ = 0.6 rappresenta un compromesso verso la semplicità di fabbricazione pur mantenendo un carico quasi ellittico.
 
 Viene adottato un valore nominale di $\lambda$ = 0.5 per il dimensionamento di base, fornendo circa il 98% della resistenza indotta minima teorica offrendo al contempo buone caratteristiche di stallo e ragionevole complessità di fabbricazione.
 
@@ -158,9 +158,9 @@ L'angolo di freccia al quarto di corda è fissato a:
 
 $$\Lambda = 0°$$ {#eq:sweep-selection}
 
-La freccia alare è principalmente utilizzata per ritardare gli effetti di comprimibilità a velocità transoniche, tipicamente sopra $M$ = 0.7 [@sadraeyAircraftDesignSystems2013]. Il meccanismo è che la freccia riduce la componente di velocità perpendicolare al bordo d'attacco dell'ala, riducendo effettivamente il numero di Mach locale.
+La freccia alare è principalmente utilizzata per ritardare gli effetti di comprimibilità a velocità transoniche, tipicamente sopra $M$ = 0.7 [@sadraeyAircraftDesignSystems2013]<!-- #ch5:sweep -->. Il meccanismo è che la freccia riduce la componente di velocità perpendicolare al bordo d'attacco dell'ala, riducendo effettivamente il numero di Mach locale.
 
-Al numero di Mach di crociera dell'UAV marziano di circa $M$ = 0.17, gli effetti di comprimibilità sono del tutto trascurabili. La freccia non fornisce alcun beneficio aerodinamico a questa velocità e introduce penalità tra cui maggiore complessità strutturale dall'accoppiamento flessione-torsione, penalità di peso da strutture ad ala a freccia più pesanti, ridotta pendenza della curva di portanza che richiede angoli di attacco più elevati, e caratteristiche di stallo degradate poiché le ali a freccia tendono a stallare prima all'estremità, compromettendo il controllo di rollio.
+Al numero di Mach di crociera dell'UAV marziano di circa $M$ = 0.1741, gli effetti di comprimibilità sono del tutto trascurabili. La freccia non fornisce alcun beneficio aerodinamico a questa velocità e introduce penalità tra cui maggiore complessità strutturale dall'accoppiamento flessione-torsione, penalità di peso da strutture ad ala a freccia più pesanti, ridotta pendenza della curva di portanza che richiede angoli di attacco più elevati, e caratteristiche di stallo degradate poiché le ali a freccia tendono a stallare prima all'estremità, compromettendo il controllo di rollio.
 
 Per l'UAV marziano viene adottata una configurazione senza freccia.
 
@@ -185,9 +185,9 @@ Questa sezione deriva e giustifica i parametri di velocità e tempo richiesti pe
 
 La selezione della velocità di crociera deve bilanciare vincoli multipli: numero di Mach, numero di Reynolds, consumo di potenza e requisiti di tempo di missione.
 
-Rimanere ben sotto $M \approx 0.3$ mantiene piccole le correzioni per comprimibilità, poiché le variazioni di densità scalano approssimativamente con $M^2$ nel flusso subsonico. Viene presa come obiettivo una banda di Mach di progetto di $M_\infty \approx 0.16$-$0.28$, con una selezione iniziale intorno a $M \approx 0.17$. Utilizzando la velocità del suono su Marte all'altitudine operativa ($a$ = 230.8 m/s da @tbl:atmosphere), questo corrisponde a:
+Rimanere ben sotto $M \approx 0.3$ mantiene piccole le correzioni per comprimibilità, poiché le variazioni di densità scalano approssimativamente con $M^2$ nel flusso subsonico. Viene presa come obiettivo una banda di Mach di progetto di $M_\infty \approx 0.16$-$0.28$, con una selezione iniziale intorno a $M \approx 0.1741$. Utilizzando la velocità del suono su Marte all'altitudine operativa ($a$ = 229.7 m/s da @tbl:atmosphere), questo corrisponde a:
 
-$$V_\text{crociera} = M \times a = 0.17 \times 230.8 \approx 40 \text{ m/s}$$ {#eq:cruise-velocity-value}
+$$V_\text{crociera} = M \times a = 0.1741 \times 229.7 \approx 40 \text{ m/s}$$ {#eq:cruise-velocity-value}
 
 Questa velocità è circa il doppio di quella degli UAV VTOL ibridi terrestri tipici ma rappresenta un compromesso necessario: velocità inferiori richiederebbero corde alari eccessivamente grandi per raggiungere numeri di Reynolds accettabili, mentre velocità superiori aumenterebbero significativamente il consumo di potenza. La potenza di crociera scala fortemente con la velocità una volta che la resistenza parassita domina ($P \sim D \times V$, con resistenza parassita $\sim V^2$, portando a $P \sim V^3$).
 
@@ -195,7 +195,7 @@ Il numero di Reynolds in crociera è:
 
 $$Re = \frac{\rho \cdot V \cdot c}{\mu}$$ {#eq:reynolds-definition}
 
-Utilizzando le proprietà atmosferiche all'altitudine operativa da @tbl:atmosphere ($\rho$ = 0.0196 kg/m³, $\mu$ = 1.08 × 10⁻⁵ Pa·s), con $V$ = 40 m/s e puntando a $Re$ = 60.000:
+Utilizzando le proprietà atmosferiche all'altitudine operativa da @tbl:atmosphere ($\rho$ = 0.0196 kg/m³, $\mu$ = 1.08 × 10⁻⁵ Pa·s), con $V$ = 40 m/s e puntando a $Re$ = 60,000:
 
 $$c = \frac{Re \cdot \mu}{\rho \cdot V} = \frac{60{,}000 \times 1.08 \times 10^{-5}}{0.0196 \times 40} = 0.83 \text{ m}$$
 
@@ -203,9 +203,9 @@ La superficie alare è legata alla corda attraverso l'allungamento. Per $AR$ = 6
 
 $$S = \bar{c}^2 \times AR = 0.83^2 \times 6 = 4.1 \text{ m}^2$$
 
-@tbl:chord-velocity presenta la relazione tra velocità di crociera, corda e superficie alare per raggiungere $Re$ = 60.000 con $AR$ = 6.
+@tbl:chord-velocity presenta la relazione tra velocità di crociera, corda e superficie alare per raggiungere $Re$ = 60,000 con $AR$ = 6.
 
-: Requisiti di corda e superficie alare per Re = 60.000 {#tbl:chord-velocity}
+: Requisiti di corda e superficie alare per Re = 60,000 {#tbl:chord-velocity}
 
 | $V_\text{crociera}$ (m/s) | $\bar{c}$ richiesta (m) | $S$ richiesta (m²) con AR = 6 |
 |:------------------------|:----------------------:|:------------------------:|
@@ -219,7 +219,7 @@ Viene adottata una velocità di crociera di $V_\text{crociera}$ = 40 m/s, con un
 
 #### Velocità minima
 
-La velocità minima operativa fornisce un margine di sicurezza sopra la velocità di stallo. Secondo la pratica aerospaziale generale, le velocità di avvicinamento e minime operative per gli aeromobili sono tipicamente 1.2 volte la velocità di stallo [@sadraeyAircraftDesignSystems2013]:
+La velocità minima operativa fornisce un margine di sicurezza sopra la velocità di stallo. Secondo la pratica aerospaziale generale, le velocità di avvicinamento e minime operative per gli aeromobili sono tipicamente 1.2 volte la velocità di stallo [@sadraeyAircraftDesignSystems2013]<!-- #ch4:vmin -->:
 
 $$V_\text{min} \geq 1.2 \times V_\text{stallo}$$ {#eq:v-min-constraint}
 
@@ -241,30 +241,32 @@ $$\frac{W}{S} \leq \frac{1}{2} \rho V_\text{min}^2 C_{L,\text{max}}$$ {#eq:wing-
 
 Questa equazione definisce il vincolo di stallo sul diagramma di matching. Su un diagramma con P/W sull'asse verticale e W/S sull'asse orizzontale, il vincolo di stallo appare come una linea verticale (W/S massimo costante) indipendente dal carico di potenza.
 
-Per il progetto preliminare, utilizzando il carico alare derivato dall'analisi della velocità di crociera ($W/S \approx 9.000$ N/m² da @tbl:chord-velocity), $\rho$ = 0.01960 kg/m³, e $C_{L,\text{max}}$ = 1.200:
+Per il progetto preliminare, utilizzando il carico alare derivato dall'analisi della velocità di crociera ($W/S \approx 9.000$ N/m² da @tbl:chord-velocity), $\rho$ = 0.01960 kg/m³, e $C_{L,\text{max}}$ = 1.150 (profilo SD8000, vedi @sec:airfoil-selection):
 
-$$V_\text{stallo} = \sqrt{\frac{2 \times 9.000}{0.01960 \times 1.200}} = \sqrt{765.3} = 27.67 \text{ m/s}$$
+$$V_\text{stallo} = \sqrt{\frac{2 \times 9.000}{0.01960 \times 1.150}} = \sqrt{798.6} = 28.26 \text{ m/s}$$
 
-$$V_\text{min} \geq 1.200 \times 27.67 = 33.20 \text{ m/s}$$
+$$V_\text{min} \geq 1.200 \times 28.26 = 33.91 \text{ m/s}$$
 
 La velocità di crociera di 40.00 m/s fornisce un margine confortevole sopra la velocità minima, indicando che l'aeromobile opererà a coefficienti di portanza moderati durante la crociera piuttosto che vicino allo stallo. Questo margine permette manovre e fornisce sicurezza contro condizioni ventose.
 
 #### Allocazione del tempo di hovering
 
-Per la configurazione VTOL ibrida, il tempo di hovering è limitato al decollo verticale, all'atterraggio e alle operazioni di contingenza. L'allocazione del tempo è riassunta in @tbl:hover-allocation.
+Per la configurazione VTOL ibrida, il tempo di hovering è limitato al decollo e all'atterraggio. Le fasi di transizione sono contabilizzate separatamente. L'allocazione del tempo è riassunta in @tbl:hover-allocation.
 
 : Allocazione del tempo di hovering per il bilancio energetico {#tbl:hover-allocation}
 
-| Fase di volo | Durata (s) | Descrizione |
-|:-------------|-------------:|:------------|
-| Salita al decollo | 30 | Salita verticale a 30 m di altitudine sicura |
-| Transizione al decollo | 30 | Transizione da hovering a volo avanzato |
-| Transizione all'atterraggio | 30 | Transizione da volo avanzato a hovering |
-| Discesa all'atterraggio | 30 | Discesa controllata e contatto |
-| Riserva di contingenza | 60 | Abort, evitamento ostacoli, atterraggio di precisione |
-| Totale hovering | 180 | N.D. |
+| Fase di volo | Durata (s) | Categoria | Descrizione |
+|:-------------|-------------:|:---------|:------------|
+| Salita al decollo | 30 | Hovering | Salita verticale a 30 m di altitudine sicura |
+| Hovering al decollo | 30 | Hovering | Stazionamento prima della transizione |
+| Transizione Q2P | 30 | Transizione | Passaggio da quad a ala fissa |
+| Transizione P2Q | 30 | Transizione | Passaggio da ala fissa a quad |
+| Hovering all'atterraggio | 30 | Hovering | Stazionamento dopo la transizione |
+| Discesa all'atterraggio | 30 | Hovering | Discesa controllata e contatto |
+| **Totale hovering** | **120** | N.D. | 2 min di hovering puro |
+| **Totale transizione** | **60** | N.D. | 2 × 30 s |
 
-Il tempo totale di hovering di 180 s (3 min) è utilizzato per i calcoli energetici. Questa allocazione è conservativa rispetto alle operazioni VTOL terrestri, tenendo conto di tassi di salita più lenti nell'atmosfera rarefatta (stimati 1-2 m/s), fasi di transizione estese a causa della minore autorità di controllo, e contingenza per raffiche di vento inattese o scenari di abort. Per confronto, l'elicottero Ingenuity ha raggiunto tempi di volo totali di 90-170 secondi per operazioni di puro velivolo a rotore [@nasaIngenuityMarsHelicopter2024], sebbene il confronto diretto sia limitato poiché Ingenuity opera interamente in modalità hovering/volo avanzato a rotore piuttosto che transitando in crociera ad ala fissa.
+Il tempo totale di hovering di 120 s (2 min) e il tempo totale di transizione di 60 s (1 min) sono utilizzati per i calcoli energetici. Queste durate sono stime ingegneristiche basate su operazioni QuadPlane terrestri scalate alle condizioni marziane. I dati di riferimento di @goetzendorf-grabowskiOptimizationEnergyConsumption2022 indicano un tempo VTOL totale di circa 2 minuti per un quad-plane da 10 kg, con decollo verticale di circa 20 s e atterraggio di 10-15 s. Il tempo restante copre hovering di stazionamento e transizioni. La durata di 30 s per ciascuna transizione è una stima conservativa; la durata effettiva dipende dal corridoio di transizione e dalla strategia di controllo impiegata [@mathurMultiModeFlightSimulation2025]<!-- #s:transition-time -->. Per Marte, l'allocazione tiene conto di tassi di salita più lenti nell'atmosfera rarefatta (stimati 1-2 m/s per un velivolo da 10 kg), fasi di transizione più lunghe dovute alla minore autorità di controllo e contingenza per raffiche di vento inattese o scenari di abort. Per confronto, l'elicottero Ingenuity ha raggiunto tempi di volo totali di 90-170 secondi per operazioni di puro velivolo a rotore [@nasaIngenuityMarsHelicopter2024]<!-- #s:flights -->, sebbene il confronto diretto sia limitato poiché Ingenuity opera interamente in modalità hovering e volo avanzato a rotore piuttosto che transitando in crociera ad ala fissa.
 
 #### Autonomia di crociera
 
@@ -272,7 +274,7 @@ Il requisito di autonomia di crociera è derivato dal raggio operativo di 50 km:
 
 $$t_\text{crociera} = t_\text{andata} + t_\text{rilevamento} + t_\text{ritorno}$$ {#eq:cruise-time}
 
-Le componenti sono: transito di andata (50.000 m / 40 m/s = 1250 s = 20.8 min), transito di ritorno (20.8 min), e rilevamento/loiter all'obiettivo (15 min per operazioni di mappatura). Il tempo totale di crociera è:
+Le componenti sono: transito di andata (50,000 m / 40 m/s = 1250 s = 20.8 min), transito di ritorno (20.8 min), e rilevamento/loiter all'obiettivo (15 min per operazioni di mappatura). Il tempo totale di crociera è:
 
 $$t_\text{crociera} = 20.8 + 20.8 + 15 \approx 57 \text{ min}$$ {#eq:cruise-endurance}
 
@@ -289,11 +291,12 @@ Una riserva energetica del 20% è mantenuta in aggiunta all'energia del profilo 
 | Fase | Durata | Cumulativo | Modo di potenza |
 |:------|:--------:|:----------:|:-----------|
 | Hovering al decollo | 1 min | 1 min | Hovering |
-| Crociera di andata | 21 min | 22 min | Crociera |
-| Operazioni di rilevamento | 15 min | 37 min | Crociera |
-| Crociera di ritorno | 21 min | 58 min | Crociera |
-| Hovering all'atterraggio | 1 min | 59 min | Hovering |
-| Contingenza | 1 min | 60 min | Hovering |
+| Transizione Q2P | 0.5 min | 1.5 min | Transizione |
+| Crociera di andata | 21 min | 22.5 min | Crociera |
+| Operazioni di rilevamento | 15 min | 37.5 min | Crociera |
+| Crociera di ritorno | 21 min | 58.5 min | Crociera |
+| Transizione P2Q | 0.5 min | 59 min | Transizione |
+| Hovering all'atterraggio | 1 min | 60 min | Hovering |
 | Volo totale | 60 min | N.D. | N.D. |
 
 Il tempo di volo di 60 minuti più il 20% di riserva energetica produce un requisito di autonomia di progetto di circa 72 minuti di capacità energetica equivalente.
@@ -311,7 +314,8 @@ Il tempo di volo di 60 minuti più il 20% di riserva energetica produce un requi
 | M2 | Velocità di crociera | $V_\text{crociera}$ | 40 m/s | Vincoli Mach, Re |
 | M3 | Velocità minima | $V_\text{min}$ | 1.2 × $V_\text{stallo}$ | Margine di sicurezza |
 | M4 | Tempo di crociera | $t_\text{crociera}$ | 57 min | N1, N5 |
-| M5 | Tempo di hovering | $t_\text{hover}$ | 3 min | N4 |
+| M5 | Tempo di hovering | $t_\text{hover}$ | 2 min | N4 |
+| M5b | Tempo di transizione | $t_\text{transition}$ | 1 min | N4 |
 | M6 | Riserva energetica | N.D. | 20% | Margine di sicurezza |
 | Parametri geometrici | | | | |
 | G1 | Allungamento | $AR$ | 6 | Precedenti marziani |
@@ -319,7 +323,7 @@ Il tempo di volo di 60 minuti più il 20% di riserva energetica produce un requi
 | G3 | Rapporto di rastremazione | $\lambda$ | 0.5 | Carico ellittico |
 | G4 | Angolo di freccia | $\Lambda$ | 0° | Basso Mach |
 | Coefficienti aerodinamici | | | | |
-| A1 | Coefficiente di portanza max | $C_{L,\text{max}}$ | 1.20 | Galleria del vento UIUC |
+| A1 | Coefficiente di portanza max | $C_{L,\text{max}}$ | 1.15 | SD8000 (UIUC) |
 | A2 | Efficienza di Oswald | $e$ | 0.87 | Correlazione AR=6 |
 | A3 | Resistenza a portanza nulla | $C_{D,0}$ | 0.030 | Buildup componenti |
 | Efficienze propulsive | | | | |

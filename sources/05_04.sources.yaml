@@ -1,0 +1,10 @@
+# Source Attribution: Section 5.4 Matching Chart Methodology
+# Companion to: sections_en/05_04_matching-chart-methodology-sec-comparative-results.md
+#              sections_it/05_04_metodologia-grafico-di-vincolo-sec-comparative-results.md
+#
+# Last updated: 2026-01-01
+
+roskamAirplaneDesign12005a:
+  s:constraint:
+    excerpt: "Constraint diagram identifies feasible design space intersection"
+    context: "Matching chart fundamentals for preliminary sizing"

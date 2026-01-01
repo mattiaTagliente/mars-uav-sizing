@@ -1,0 +1,47 @@
+# Source Attribution: Section 5.3 Hybrid VTOL Configuration
+# Companion to: sections_en/05_03_hybrid-vtol-configuration-sec-hybrid-vtol-analysis.md
+#              sections_it/05_03_configurazione-vtol-ibrida-sec-hybrid-vtol-analysis.md
+#
+# Last updated: 2026-01-01
+# Migrated from: source_grounding.txt Section 5.3
+
+bertaniPreliminaryDesignFixedwing2023:
+  exec:
+    excerpt: "MTOM 20 kg, 6 lift rotors 20-inch, 4.5 kW hover, 635 W cruise"
+    context: "Hybrid VTOL Mars UAV reference design parameters"
+  
+  s:drag-penalty:
+    excerpt: "Stopped rotor parasitic drag increases total drag 5-10%"
+    context: "L/D penalty for QuadPlane from stopped lift rotors"
+
+goetzendorf-grabowskiOptimizationEnergyConsumption2022:
+  s:transition:
+    excerpt: "Transition from vertical to horizontal consumes large energy"
+    context: "Importance of transition phase in VTOL energy budget"
+  
+  s:vtol-time:
+    excerpt: "~2 min total VTOL time including transitions"
+    context: "Typical hover time allocation for QuadPlane operations"
+  
+  tbl:energy:
+    excerpt: "~45 kJ per transition for 25 kg PW Chimera"
+    context: "Reference transition energy for mass scaling"
+
+mathurMultiModeFlightSimulation2025:
+  s:hybrid-paradox:
+    excerpt: "Hybrid mode can consume higher power than pure hover"
+    context: "Transition power paradox from multi-mode simulation"
+  
+  s:quad-mode:
+    excerpt: "Quad-mode operations consume ~50% of mission energy"
+    context: "Vertical flight phases dominate energy budget"
+
+zhaoDevelopmentMultimodeFlight2023:
+  s:corridor:
+    excerpt: "Feasible transitions within bounded velocity-tilt space"
+    context: "Transition corridor theory for tilt-rotor VTOL"
+
+kulkarniSimulationStudiesUrban2022:
+  s:simplification:
+    excerpt: "Transition power and energy ignored in this study"
+    context: "Common simplification in preliminary VTOL design"

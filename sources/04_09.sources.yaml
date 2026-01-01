@@ -1,0 +1,32 @@
+# Section 04_09: Tail configurations
+# Source attribution for UAV empennage data
+
+jouavJOUAVCW15Multipurpose2024:
+  tail:
+    excerpt: "Fuselage-mounted conventional tail"
+    context: "CW-15 empennage configuration"
+
+uavmodelUAVMODELX2400VTOL2024:
+  tail:
+    excerpt: "Fuselage-mounted V-tail"
+    context: "X2400 empennage configuration"
+
+spideruavV135SentinelVTOL2024:
+  tail:
+    excerpt: "Fuselage-mounted Y-tail"
+    context: "V13-5 Sentinel empennage"
+
+jouavJOUAVCW25ELong2024:
+  tail:
+    excerpt: "Boom-mounted inverted V"
+    context: "CW-25E empennage configuration"
+
+event38unmannedsystemsEvent38E4002024:
+  tail:
+    excerpt: "Boom-mounted inverted U"
+    context: "E400 empennage configuration"
+
+nugrohoPerformanceAnalysisEmpennage2022:
+  s:comparison:
+    excerpt: "Inverted U boom provides favorable stall and efficiency"
+    context: "CFD comparison of VTOL empennage configurations"

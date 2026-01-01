@@ -1,0 +1,40 @@
+# Source Attribution: Section 5.2 Fixed-wing Configuration
+# Companion to: sections_en/05_02_fixed-wing-configuration-sec-fixed-wing-analysis.md
+#              sections_it/05_02_configurazione-ad-ala-fissa-sec-fixed-wing-analysis.md
+#
+# Last updated: 2026-01-01
+# Migrated from: source_grounding.txt Section 5.2
+
+torenbeekSynthesisSubsonicAirplane1982:
+  ch5:
+    excerpt: "L = W, T = D in steady unaccelerated level flight"
+    context: "Force equilibrium conditions for cruise analysis"
+  
+  ch5:s3:
+    excerpt: "L = 0.5*rho*V^2*S*C_L"
+    context: "Aerodynamic lift force equation"
+  
+  ch5:s3:drag:
+    excerpt: "D = 0.5*rho*V^2*S*C_D"
+    context: "Aerodynamic drag force equation"
+  
+  ch5:s4:
+    excerpt: "L/D = C_L / C_D"
+    context: "Lift-to-drag ratio definition"
+  
+  ch5:s4:power:
+    excerpt: "P_req = D*V = W*V/(L/D)"
+    context: "Power required to overcome drag in level flight"
+  
+  ch5:s3.4:
+    excerpt: "P_shaft = P_req / eta_prop"
+    context: "Shaft power accounts for propeller efficiency"
+  
+  appk:
+    excerpt: "Ground roll distance during takeoff"
+    context: "Takeoff ground roll analysis methodology"
+
+sadraeyAircraftDesignSystems2013:
+  ch4:s3.4:
+    excerpt: "S_g = V_LO^2 / (2*a_avg)"
+    context: "Ground roll distance equation for takeoff"

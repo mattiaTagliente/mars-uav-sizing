@@ -1,4 +1,4 @@
-# Constraint analysis
+# Constraint analysis {#sec:constraint-analysis-fixed-wing}
 
 ## Fixed-wing configuration {#sec:fixed-wing-analysis}
 
@@ -8,7 +8,7 @@ This section evaluates whether a pure fixed-wing (conventional airplane) configu
 
 #### Force equilibrium
 
-In steady, unaccelerated, level flight, two pairs of forces must be in equilibrium [@torenbeekSynthesisSubsonicAirplane1982, Chapter 5]:
+In steady, unaccelerated, level flight, two pairs of forces must be in equilibrium [@torenbeekSynthesisSubsonicAirplane1982, Chapter 5]<!-- #ch5 -->:
 
 $$L = W$$ {#eq:lift-weight-equilibrium}
 
@@ -18,7 +18,7 @@ where $L$ is lift, $W$ is aircraft weight, $T$ is thrust, and $D$ is drag. These
 
 #### Lift equation
 
-The aerodynamic lift force is expressed as [@torenbeekSynthesisSubsonicAirplane1982, Section 5.3]:
+The aerodynamic lift force is expressed as [@torenbeekSynthesisSubsonicAirplane1982, Section 5.3]<!-- #ch5:s3 -->:
 
 $$L = \frac{1}{2} \rho V^2 S C_L$$ {#eq:lift-equation}
 
@@ -30,7 +30,7 @@ $$C_L = \frac{2W}{\rho V^2 S} = \frac{2(W/S)}{\rho V^2}$$ {#eq:cl-required}
 
 This equation reveals a fundamental constraint for Mars flight: the low atmospheric density ($\rho \approx 0.02000$ kg/m³) requires either high airspeed, large wing area, or high lift coefficient to generate sufficient lift.
 
-The total aerodynamic drag is [@torenbeekSynthesisSubsonicAirplane1982, Section 5.3]:
+The total aerodynamic drag is [@torenbeekSynthesisSubsonicAirplane1982, Section 5.3]<!-- #ch5:s3:drag -->:
 
 $$D = \frac{1}{2} \rho V^2 S C_D$$ {#eq:drag-equation}
 
@@ -46,7 +46,7 @@ Using the values from @tbl:aero-coefficients: $C_{D,0}$ = 0.03000, $e$ = 0.8692,
 
 #### L/D from the drag polar
 
-The lift-to-drag ratio quantifies aerodynamic efficiency and directly determines cruise performance [@torenbeekSynthesisSubsonicAirplane1982, Section 5.4]:
+The lift-to-drag ratio quantifies aerodynamic efficiency and directly determines cruise performance [@torenbeekSynthesisSubsonicAirplane1982, Section 5.4]<!-- #ch5:s4 -->:
 
 $$\frac{L}{D} = \frac{C_L}{C_D} = \frac{C_L}{C_{D,0} + C_L^2/(\pi \cdot AR \cdot e)}$$ {#eq:ld-ratio}
 
@@ -66,9 +66,9 @@ The airspeed at which $(L/D)_\text{max}$ occurs is found by substituting $C_L^*$
 
 $$V_{(L/D)\text{max}} = \sqrt{\frac{2(W/S)}{\rho C_L^*}}$$ {#eq:v-ld-max}
 
-For the Mars UAV with estimated $W/S \approx 14.42$ N/m² (from stall constraint at $V_\text{min}$ = 35.04 m/s), $\rho$ = 0.01960 kg/m³, and $C_L^*$ = 0.7011:
+For the Mars UAV with estimated $W/S \approx 13.82$ N/m² (from stall constraint at $V_\text{min}$ = 35.04 m/s), $\rho$ = 0.01960 kg/m³, and $C_L^*$ = 0.7011:
 
-$$V_{(L/D)\text{max}} = \sqrt{\frac{2 \times 14.42}{0.01960 \times 0.7011}} = \sqrt{2099} = 45.82 \text{ m/s}$$
+$$V_{(L/D)\text{max}} = \sqrt{\frac{2 \times 13.82}{0.01960 \times 0.7011}} = \sqrt{2012} = 44.86 \text{ m/s}$$
 
 This optimal speed is above the design cruise velocity of 40.00 m/s, indicating that the Mars UAV will operate at a lift coefficient higher than $C_L^*$ during cruise (in the induced drag-dominated regime). At 40.00 m/s, the actual L/D remains close to maximum (approximately 11.0 for the pure wing, reduced slightly for the QuadPlane configuration due to stopped rotor drag).
 
@@ -76,7 +76,7 @@ This optimal speed is above the design cruise velocity of 40.00 m/s, indicating 
 
 #### Power required for level flight
 
-The power required to overcome drag in level flight is the product of drag force and velocity [@torenbeekSynthesisSubsonicAirplane1982, Section 5.4]:
+The power required to overcome drag in level flight is the product of drag force and velocity [@torenbeekSynthesisSubsonicAirplane1982, Section 5.4]<!-- #ch5:s4:power -->:
 
 $$P_\text{aero} = D \times V$$ {#eq:power-aero}
 
@@ -88,7 +88,7 @@ This is the aerodynamic power that must be delivered to the airstream to maintai
 
 #### Shaft power and propeller efficiency
 
-The shaft power required from the motor accounts for propeller efficiency [@torenbeekSynthesisSubsonicAirplane1982, Section 5.3.4]:
+The shaft power required from the motor accounts for propeller efficiency [@torenbeekSynthesisSubsonicAirplane1982, Section 5.3.4]<!-- #ch5:s3.4 -->:
 
 $$P_\text{shaft} = \frac{P_\text{aero}}{\eta_\text{prop}} = \frac{W \times V}{(L/D) \times \eta_\text{prop}}$$ {#eq:shaft-power}
 
@@ -142,13 +142,15 @@ The stall constraint, expressed as a maximum allowable wing loading, is derived 
 
 $$\frac{W}{S} \leq \frac{1}{2} \rho V_\text{min}^2 C_{L,\text{max}}$$
 
-Using $C_{L,\text{max}}$ = 1.200 (from @tbl:aero-coefficients), $\rho$ = 0.01960 kg/m³, and $V_\text{min}$ = 35.04 m/s (where $V_\text{min}$ = 1.2 × $V_\text{stall}$ per @eq:v-min-constraint, with $V_\text{stall}$ = 29.2 m/s):
+Using $C_{L,\text{max}}$ = 1.150 (from @tbl:aero-coefficients), $\rho$ = 0.01960 kg/m³, and $V_\text{min}$ = 35.04 m/s (where $V_\text{min}$ = 1.2 × $V_\text{stall}$ per @eq:v-min-constraint, with $V_\text{stall}$ = 29.2 m/s):
 
-$$\frac{W}{S} \leq \frac{1}{2} \times 0.01960 \times 35.04^2 \times 1.200 = 14.42 \text{ N/m}^2$$
+$$\frac{W}{S} \leq \frac{1}{2} \times 0.01960 \times 35.04^2 \times 1.150 = 13.82 \text{ N/m}^2$$
 
 This constrains the maximum allowable wing loading. On a matching chart, this appears as a vertical line (constant $W/S$) independent of power loading.
 
 The wing loading constraint on Mars is extremely low compared to Earth aircraft (typical $W/S$ = 1500-5000 N/m² for light aircraft). This is a direct consequence of the thin atmosphere and represents a significant driver of aircraft geometry.
+
+The fixed-wing matching chart is presented in @fig:matching-chart-fixed-wing in @sec:comparative-results.
 
 ### Endurance analysis
 
@@ -217,7 +219,7 @@ The fixed-wing configuration demonstrates excellent cruise performance. However,
 
 #### Ground roll analysis
 
-The takeoff ground roll distance for a conventional takeoff is [@torenbeekSynthesisSubsonicAirplane1982; @sadraeyAircraftDesignSystems2013]:
+The takeoff ground roll distance for a conventional takeoff is [@torenbeekSynthesisSubsonicAirplane1982]<!-- #appk --> [@sadraeyAircraftDesignSystems2013]<!-- #ch4:s3.4 -->:
 
 $$S_\text{TO} = \frac{V_\text{TO}^2}{2 \bar{a}}$$ {#eq:takeoff-roll}
 
@@ -233,9 +235,9 @@ where $\mu_r$ is the rolling friction coefficient (typically 0.02-0.05 on hard s
 
 On Mars, several factors increase the takeoff distance:
 
-Regarding low density effect on stall speed, the stall speed scales inversely with the square root of density. For the Mars UAV with $W/S$ = 14.42 N/m² (at the stall constraint limit), $C_{L,\text{max}}$ = 1.20, and $\rho$ = 0.0196 kg/m³:
+Regarding low density effect on stall speed, the stall speed scales inversely with the square root of density. For the Mars UAV with $W/S$ = 13.82 N/m² (at the stall constraint limit), $C_{L,\text{max}}$ = 1.15, and $\rho$ = 0.0196 kg/m³:
 
-$$V_\text{stall} = \sqrt{\frac{2 \times 14.42}{0.0196 \times 1.20}} = \sqrt{1225} = 35.0 \text{ m/s}$$
+$$V_\text{stall} = \sqrt{\frac{2 \times 13.82}{0.0196 \times 1.15}} = \sqrt{1228} = 35.0 \text{ m/s}$$
 
 $$V_\text{TO} = 1.1 \times 35.0 = 38.5 \text{ m/s}$$
 
@@ -247,21 +249,11 @@ $$S_\text{TO} = \frac{38.5^2}{2 \times 0.7000} = \frac{1482}{1.400} = 1059 \text
 
 The takeoff ground roll of approximately 1060 m is impractical for Mars operations—no prepared runway of this length exists or can reasonably be constructed near a habitat.
 
-Even with wing loading constrained by the stall speed requirement (14.42 N/m² at the design point), the required runway length is prohibitive. The problem is that low atmospheric density requires substantial ground roll distance regardless of wing sizing.
+Even with wing loading constrained by the stall speed requirement (13.82 N/m² at the design point), the required runway length is prohibitive. The problem is that low atmospheric density requires substantial ground roll distance regardless of wing sizing.
 
 #### Alternative launch methods
 
-Several alternative launch methods exist for fixed-wing aircraft without runways, but none are practical for Mars operations from a habitat.
-
-Catapult or rail launch requires substantial ground infrastructure including the launcher mechanism, guide rails, and energy storage systems, none of which are available in a Mars habitat environment. This approach adds operational complexity and crew workload, as each launch requires setup and recovery of equipment.
-
-Rocket-assisted takeoff (RATO) requires solid rocket boosters that add significant mass and are single-use per flight, requiring multiple sets for repeated operations. This method presents a safety hazard near a crewed habitat, and exhaust products may contaminate science operations.
-
-Balloon-drop launch requires carrying the aircraft to altitude by balloon before releasing it, but no balloon infrastructure exists on Mars. This approach adds complexity to the operations concept, and ascent time combined with positioning constraints limits operational flexibility.
-
-Air-launch from a carrier aircraft is not applicable because no carrier aircraft exists on Mars.
-
-All alternative launch methods fail the operational requirements for repeated, autonomous operations from a Mars habitat without complex infrastructure.
+Several alternative launch methods exist for fixed-wing aircraft without runways, but none are practical for Mars operations from a habitat: catapult or rail launch requires substantial ground infrastructure including the launcher mechanism, guide rails, and energy storage systems, none of which are available in a Mars habitat environment; rocket-assisted takeoff (RATO) requires solid rocket boosters that add significant mass and are single-use per flight, presenting a safety hazard near a crewed habitat; balloon-drop launch requires carrying the aircraft to altitude by balloon before releasing it, but no balloon infrastructure exists on Mars; and air-launch from a carrier aircraft is not applicable because no carrier aircraft exists on Mars. All alternative launch methods fail the operational requirements for repeated, autonomous operations from a Mars habitat without complex infrastructure.
 
 #### Landing problem
 

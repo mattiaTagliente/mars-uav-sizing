@@ -12,35 +12,35 @@ La selezione del payload camera comporta compromessi tra risoluzione, dimensione
 
 | Modello | Tipo | Sensore | Risoluzione | Massa (g) | Range temp. (°C) | Fonte |
 |---------|------|---------|-------------|----------|------------------|--------|
-| DJI Zenmuse P1 | RGB | Full frame | 45 MP | 800-1350 | −20 a +50 | [@djiDJIZenmuseP12024] |
-| Ricoh GR III | RGB | APS-C | 24 MP | 227-257 | N.D. | [@ricohimagingRicohGRIII2024] |
-| Phase One iXM-100 | RGB | Medio formato | 100 MP | 630-1170 | −10 a +40 | [@phaseonePhaseOneIXM1002024] |
-| MicaSense RedEdge-MX | Multispettrale | Custom (5 bande) | 1.2 MP/banda | 232 | N.D. | [@micasenseMicaSenseRedEdgeMXIntegration2020] |
-| DJI Zenmuse H20T | Termico + RGB | Multiplo | 640×512 (termico) | 828 | −20 a +50 | [@djiDJIZenmuseH20T2024] |
+| DJI Zenmuse P1 | RGB | Full frame | 45 MP | 800-1350 | −20 a +50 | [@djiDJIZenmuseP12024]<!-- #specs --> |
+| Ricoh GR III | RGB | APS-C | 24 MP | 227-257 | N.D. | [@ricohimagingRicohGRIII2024]<!-- #specs --> |
+| Phase One iXM-100 | RGB | Medio formato | 100 MP | 630-1170 | −10 a +40 | [@phaseonePhaseOneIXM1002024]<!-- #specs --> |
+| MicaSense RedEdge-MX | Multispettrale | Custom (5 bande) | 1.2 MP/banda | 232 | N.D. | [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs --> |
+| DJI Zenmuse H20T | Termico + RGB | Multiplo | 640×512 (termico) | 828 | −20 a +50 | [@djiDJIZenmuseH20T2024]<!-- #specs --> |
 
-I valori di massa rappresentano configurazioni dal solo corpo alla configurazione completa. La DJI Zenmuse P1 varia da 800 g (corpo) a 1350 g con l'obiettivo DL 35mm [@djiDJIZenmuseP12024]. La Ricoh GR III raggiunge 257 g includendo batteria e storage [@ricohimagingRicohGRIII2024]. Il corpo della Phase One iXM-100 pesa 630 g, aumentando a 1170 g con l'obiettivo RSM 35mm [@phaseonePhaseOneIXM1002024].
+I valori di massa rappresentano configurazioni dal solo corpo alla configurazione completa. La DJI Zenmuse P1 varia da 800 g (corpo) a 1350 g con l'obiettivo DL 35mm [@djiDJIZenmuseP12024]<!-- #specs -->. La Ricoh GR III raggiunge 257 g includendo batteria e storage [@ricohimagingRicohGRIII2024]<!-- #specs -->. Il corpo della Phase One iXM-100 pesa 630 g, aumentando a 1170 g con l'obiettivo RSM 35mm [@phaseonePhaseOneIXM1002024]<!-- #specs -->.
 
 #### Telecamere RGB per mappatura
 
-I sensori full-frame forniscono qualità d'immagine superiore per applicazioni fotogrammetriche. La DJI Zenmuse P1 offre una risoluzione di 45 MP con passo pixel di 4.4 μm, ottenendo una distanza di campionamento a terra di 0.76 cm a 100 m di altitudine con l'obiettivo 35mm [@djiDJIZenmuseP12024]. Il consumo di potenza è circa 20 W. Il range di temperatura operativa da −20 a +50°C copre la porzione più calda delle condizioni superficiali marziane.
+I sensori full-frame forniscono qualità d'immagine superiore per applicazioni fotogrammetriche. La DJI Zenmuse P1 offre una risoluzione di 45 MP con passo pixel di 4.4 μm, ottenendo una distanza di campionamento a terra di 0.76 cm a 100 m di altitudine con l'obiettivo 35mm [@djiDJIZenmuseP12024]<!-- #specs -->. Il consumo di potenza è circa 20 W. Il range di temperatura operativa da −20 a +50°C copre la porzione più calda delle condizioni superficiali marziane.
 
-Le telecamere compatte offrono vantaggi in termini di massa. La Ricoh GR III fornisce imaging APS-C da 24 MP in un corpo da 227 g con obiettivo integrato da 18.3 mm [@ricohimagingRicohGRIII2024]. Tuttavia, il produttore non specifica limiti di temperatura operativa, indicando una tolleranza termica di grado consumer inadeguata per le condizioni marziane senza gestione termica.
+Le telecamere compatte offrono vantaggi in termini di massa. La Ricoh GR III fornisce imaging APS-C da 24 MP in un corpo da 227 g con obiettivo integrato da 18.3 mm [@ricohimagingRicohGRIII2024]<!-- #specs -->. Tuttavia, il produttore non specifica limiti di temperatura operativa, indicando una tolleranza termica di grado consumer inadeguata per le condizioni marziane senza gestione termica.
 
-La Phase One iXM-100 rappresenta la fascia alta dei sistemi di mappatura aerea con sensore medio formato (44×33 mm) da 100 MP [@phaseonePhaseOneIXM1002024]. Con consumo massimo di 16 W e massa del corpo di 630 g, ottiene un passo pixel di 3.76 μm. La classificazione IP53 fornisce protezione dalla polvere rilevante per le operazioni marziane, sebbene il range operativo da −10 a +40°C richieda controllo termico.
+La Phase One iXM-100 rappresenta la fascia alta dei sistemi di mappatura aerea con sensore medio formato (44×33 mm) da 100 MP [@phaseonePhaseOneIXM1002024]<!-- #specs -->. Con consumo massimo di 16 W e massa del corpo di 630 g, ottiene un passo pixel di 3.76 μm. La classificazione IP53 fornisce protezione dalla polvere rilevante per le operazioni marziane, sebbene il range operativo da −10 a +40°C richieda controllo termico.
 
 #### Telecamere multispettrali
 
-La MicaSense RedEdge-MX fornisce imaging multispettrale a cinque bande (blu, verde, rosso, red-edge, infrarosso vicino) per analisi scientifica [@micasenseMicaSenseRedEdgeMXIntegration2020]. A 232 g completa con il sensore DLS 2 per la luce, rappresenta un'opzione leggera per applicazioni di rilevamento geologico. Ogni banda fornisce 1.2 MP (1280×960 pixel) con otturatore globale e profondità di output a 12 bit. La distanza di campionamento a terra è 8 cm/pixel a 120 m di altitudine.
+La MicaSense RedEdge-MX fornisce imaging multispettrale a cinque bande (blu, verde, rosso, red-edge, infrarosso vicino) per analisi scientifica [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. A 232 g completa con il sensore DLS 2 per la luce, rappresenta un'opzione leggera per applicazioni di rilevamento geologico. Ogni banda fornisce 1.2 MP (1280×960 pixel) con otturatore globale e profondità di output a 12 bit. La distanza di campionamento a terra è 8 cm/pixel a 120 m di altitudine.
 
 #### Termocamere
 
-La DJI Zenmuse H20T integra telecamere termiche, zoom e grandangolari con telemetro laser in un singolo payload da 828 g [@djiDJIZenmuseH20T2024]. Il microbolometro VOx non raffreddato fornisce una risoluzione termica di 640×512 con differenza di temperatura equivalente al rumore di 50 mK. L'intervallo di misurazione della temperatura va da −40 a +150°C (alto guadagno) o da −40 a +550°C (basso guadagno), adatto per la mappatura termica geologica.
+La DJI Zenmuse H20T integra telecamere termiche, zoom e grandangolari con telemetro laser in un singolo payload da 828 g [@djiDJIZenmuseH20T2024]<!-- #specs -->. Il microbolometro VOx non raffreddato fornisce una risoluzione termica di 640×512 con differenza di temperatura equivalente al rumore di 50 mK. L'intervallo di misurazione della temperatura va da −40 a +150°C (alto guadagno) o da −40 a +550°C (basso guadagno), adatto per la mappatura termica geologica.
 
 #### Riepilogo di massa e dimensioni
 
 Sulla base dei sistemi esaminati, le caratteristiche del payload camera sono le seguenti. Le telecamere RGB vanno da 227 g (solo corpo, Ricoh GR III) a 1350 g (con obiettivo, DJI Zenmuse P1). I sensori multispettrali come la MicaSense RedEdge-MX pesano circa 232 g. I sistemi termici/ibridi come la DJI Zenmuse H20T pesano circa 828 g.
 
-Le dimensioni delle telecamere variano con il formato del sensore e la configurazione dell'obiettivo. La Ricoh GR III misura 109.4 × 61.9 × 33.2 mm (solo corpo) [@ricohimagingRicohGRIII2024]. La DJI Zenmuse P1 misura 198 × 166 × 129 mm [@djiDJIZenmuseP12024]. La MicaSense RedEdge-MX misura 87 × 59 × 45.4 mm [@micasenseMicaSenseRedEdgeMXIntegration2020].
+Le dimensioni delle telecamere variano con il formato del sensore e la configurazione dell'obiettivo. La Ricoh GR III misura 109.4 × 61.9 × 33.2 mm (solo corpo) [@ricohimagingRicohGRIII2024]<!-- #specs -->. La DJI Zenmuse P1 misura 198 × 166 × 129 mm [@djiDJIZenmuseP12024]<!-- #specs -->. La MicaSense RedEdge-MX misura 87 × 59 × 45.4 mm [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->.
 
 Per scopi di dimensionamento iniziale, una telecamera RGB compatta (250-400 g) rappresenta l'allocazione di payload di base.
 
@@ -62,15 +62,15 @@ Le radio mesh forniscono capacità di rete auto-formante e auto-rigenerante, seb
 
 | Modello | Produttore | Massa (g) | Range freq. | Potenza (W) | Range temp. (°C) | Fonte |
 |---------|------------|----------|-------------|-----------|------------------|--------|
-| StreamCaster 4200E+ | Silvus Technologies | 425 | 300 MHz-6 GHz | 5-48 | −40 a +85 | [@silvustechnologiesStreamCaster4200SC42002025] |
-| MPU5 | Persistent Systems | 391-726 | Bande multiple | N.D. | −40 a +85 | [@persistentsystemsMPU5TechnicalSpecifications2025] |
-| BreadCrumb ES1 | Rajant Corporation | 455 | 2.4/5 GHz | 2.8-15 | −40 a +60 | [@rajantcorporationBreadCrumbES1Specifications2025] |
+| StreamCaster 4200E+ | Silvus Technologies | 425 | 300 MHz-6 GHz | 5-48 | −40 a +85 | [@silvustechnologiesStreamCaster4200SC42002025]<!-- #specs --> |
+| MPU5 | Persistent Systems | 391-726 | Bande multiple | N.D. | −40 a +85 | [@persistentsystemsMPU5TechnicalSpecifications2025]<!-- #specs --> |
+| BreadCrumb ES1 | Rajant Corporation | 455 | 2.4/5 GHz | 2.8-15 | −40 a +60 | [@rajantcorporationBreadCrumbES1Specifications2025]<!-- #specs --> |
 
-Il Silvus StreamCaster 4200E+ fornisce capacità mesh MIMO 2×2 a banda larga in un pacchetto da 425 g con classificazione IP68 e sommergibilità fino a 20 m [@silvustechnologiesStreamCaster4200SC42002025]. Il consumo di potenza varia da 5 W a 1 W di potenza di trasmissione a 48 W alla massima potenza di trasmissione di 10 W. Il range di temperatura operativa da −40 a +85°C supera i requisiti superficiali marziani.
+Il Silvus StreamCaster 4200E+ fornisce capacità mesh MIMO 2×2 a banda larga in un pacchetto da 425 g con classificazione IP68 e sommergibilità fino a 20 m [@silvustechnologiesStreamCaster4200SC42002025]<!-- #specs -->. Il consumo di potenza varia da 5 W a 1 W di potenza di trasmissione a 48 W alla massima potenza di trasmissione di 10 W. Il range di temperatura operativa da −40 a +85°C supera i requisiti superficiali marziani.
 
-Il Persistent Systems MPU5 integra un processore quad-core da 1 GHz con 2 GB di RAM per la gestione autonoma della rete [@persistentsystemsMPU5TechnicalSpecifications2025]. A 391 g (solo chassis) o 726 g con batteria, fornisce un raggio in linea di vista fino a 209 km tra i nodi. Le certificazioni MIL-STD-810G e MIL-STD-461F indicano una robusta tolleranza ambientale.
+Il Persistent Systems MPU5 integra un processore quad-core da 1 GHz con 2 GB di RAM per la gestione autonoma della rete [@persistentsystemsMPU5TechnicalSpecifications2025]<!-- #specs -->. A 391 g (solo chassis) o 726 g con batteria, fornisce un raggio in linea di vista fino a 209 km tra i nodi. Le certificazioni MIL-STD-810G e MIL-STD-461F indicano una robusta tolleranza ambientale.
 
-Il Rajant BreadCrumb ES1 offre funzionamento dual-band (2.4 GHz e 5 GHz) con capacità di rete auto-formante InstaMesh in un'unità da 455 g [@rajantcorporationBreadCrumbES1Specifications2025]. Il consumo di potenza è 2.8 W in idle e 15 W di picco. Il range di temperatura da −40 a +60°C copre le condizioni superficiali diurne marziane.
+Il Rajant BreadCrumb ES1 offre funzionamento dual-band (2.4 GHz e 5 GHz) con capacità di rete auto-formante InstaMesh in un'unità da 455 g [@rajantcorporationBreadCrumbES1Specifications2025]<!-- #specs -->. Il consumo di potenza è 2.8 W in idle e 15 W di picco. Il range di temperatura da −40 a +60°C copre le condizioni superficiali diurne marziane.
 
 #### Collegamenti dati punto-punto
 
@@ -80,19 +80,19 @@ Per applicazioni relay con singolo UAV, i collegamenti punto-punto leggeri forni
 
 | Modello | Produttore | Massa (g) | Banda freq. | Data rate | Raggio (km) | Potenza (W) | Fonte |
 |---------|------------|----------|------------|-----------|------------|-----------|--------|
-| RFD900x | RFDesign | 14.5 | 900 MHz | 0.064-0.75 Mbps | > 40 | 5 | [@rfdesignRFD900xModemSpecifications2024] |
-| pMDDL2450 (OEM) | Microhard | 7 | 2.4 GHz | 12-25 Mbps | N.D. | N.D. | [@microhardPMDDL2450MiniatureMIMO2025] |
-| pMDDL2450 (custodia) | Microhard | 165 | 2.4 GHz | 12-25 Mbps | N.D. | N.D. | [@microhardPMDDL2450MiniatureMIMO2025] |
+| RFD900x | RFDesign | 14.5 | 900 MHz | 0.064-0.75 Mbps | > 40 | 5 | [@rfdesignRFD900xModemSpecifications2024]<!-- #specs --> |
+| pMDDL2450 (OEM) | Microhard | 7 | 2.4 GHz | 12-25 Mbps | N.D. | N.D. | [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs --> |
+| pMDDL2450 (custodia) | Microhard | 165 | 2.4 GHz | 12-25 Mbps | N.D. | N.D. | [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs --> |
 
-Il RFD900x è un modem di telemetria ultraleggero da 14.5 g, ampiamente utilizzato nella comunità UAV con firmware open-source SiK [@rfdesignRFD900xModemSpecifications2024]. Fornisce un raggio in linea di vista di oltre 40 km con 1 W di potenza di trasmissione a 900 MHz. Il data rate va da 64 kbps di default a 750 kbps massimo, sufficiente per collegamenti di telemetria e comando. Il range di temperatura operativa da −40 a +85°C si estende oltre i requisiti superficiali marziani.
+Il RFD900x è un modem di telemetria ultraleggero da 14.5 g, ampiamente utilizzato nella comunità UAV con firmware open-source SiK [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->. Fornisce un raggio in linea di vista di oltre 40 km con 1 W di potenza di trasmissione a 900 MHz. Il data rate va da 64 kbps di default a 750 kbps massimo, sufficiente per collegamenti di telemetria e comando. Il range di temperatura operativa da −40 a +85°C si estende oltre i requisiti superficiali marziani.
 
-Il Microhard pMDDL2450 offre maggiore larghezza di banda (throughput di 25 Mbps) per applicazioni video relay in un fattore di forma estremamente compatto [@microhardPMDDL2450MiniatureMIMO2025]. Il modulo OEM pesa solo 7 g, mentre la versione con custodia e connettori pesa 165 g. La configurazione MIMO 2×2 fornisce una migliore affidabilità del collegamento attraverso la diversità spaziale.
+Il Microhard pMDDL2450 offre maggiore larghezza di banda (throughput di 25 Mbps) per applicazioni video relay in un fattore di forma estremamente compatto [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->. Il modulo OEM pesa solo 7 g, mentre la versione con custodia e connettori pesa 165 g. La configurazione MIMO 2×2 fornisce una migliore affidabilità del collegamento attraverso la diversità spaziale.
 
 #### Riepilogo di massa e dimensioni
 
 Sulla base dei sistemi esaminati, le caratteristiche del payload radio sono le seguenti. Le radio mesh vanno da 391 g (solo chassis) a 726 g con batteria integrata. I collegamenti punto-punto vanno da 7 g (modulo OEM) a 165 g (versione con custodia).
 
-Le dimensioni per il Microhard pMDDL2450 sono: modulo OEM 27 × 33 × 4 mm, versione con custodia 77 × 55 × 28 mm [@microhardPMDDL2450MiniatureMIMO2025].
+Le dimensioni per il Microhard pMDDL2450 sono: modulo OEM 27 × 33 × 4 mm, versione con custodia 77 × 55 × 28 mm [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
 
 Per scopi di dimensionamento iniziale, un collegamento punto-punto leggero (15-170 g) rappresenta l'allocazione di payload radio di base. La piena capacità mesh aggiungerebbe circa 400-500 g se fosse richiesto il coordinamento multi-asset.
 

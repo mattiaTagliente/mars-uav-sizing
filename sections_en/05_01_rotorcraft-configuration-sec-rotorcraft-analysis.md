@@ -1,4 +1,4 @@
-# Constraint analysis
+# Constraint analysis {#sec:constraint-analysis-rotorcraft}
 
 ## Rotorcraft configuration {#sec:rotorcraft-analysis}
 
@@ -8,17 +8,17 @@ This section evaluates whether a pure rotorcraft (helicopter or multicopter) con
 
 #### Momentum theory fundamentals {#sec:momentum-theory}
 
-The rotor performance in hover is analysed using Rankine-Froude momentum theory, which treats the rotor as an infinitely thin actuator disk that imparts momentum to the air passing through it [@leishmanPrinciplesHelicopterAerodynamics2006]. This idealised model, despite its simplicity, provides insight into rotor performance and the relationship between thrust, power, and disk loading.
+The rotor performance in hover is analysed using Rankine-Froude momentum theory, which treats the rotor as an infinitely thin actuator disk that imparts momentum to the air passing through it [@leishmanPrinciplesHelicopterAerodynamics2006]<!-- #s2.3 -->. This idealised model, despite its simplicity, provides insight into rotor performance and the relationship between thrust, power, and disk loading.
 
 The momentum theory makes the following assumptions: uniform, steady flow through the rotor disk; inviscid flow with no swirl in the wake; incompressible conditions (valid for $M < 0.3$); and one-dimensional flow through a well-defined slipstream.
 
-From the principle of conservation of fluid momentum, the rotor thrust equals the time rate of change of momentum of the air passing through the rotor disk. For a hovering rotor with induced velocity $v_i$ at the disk plane, the thrust is [@leishmanPrinciplesHelicopterAerodynamics2006]:
+From the principle of conservation of fluid momentum, the rotor thrust equals the time rate of change of momentum of the air passing through the rotor disk. For a hovering rotor with induced velocity $v_i$ at the disk plane, the thrust is [@leishmanPrinciplesHelicopterAerodynamics2006]<!-- #eq2.14 -->:
 
 $$T = \dot{m} \cdot w = 2\rho A v_i^2$$ {#eq:thrust-momentum}
 
 where $\dot{m} = \rho A v_i$ is the mass flow rate through the disk, $w = 2v_i$ is the wake velocity far downstream (from energy conservation), $\rho$ is the air density, and $A$ is the rotor disk area.
 
-Solving @eq:thrust-momentum for the induced velocity at the rotor disk yields [@leishmanPrinciplesHelicopterAerodynamics2006]:
+Solving @eq:thrust-momentum for the induced velocity at the rotor disk yields [@leishmanPrinciplesHelicopterAerodynamics2006]<!-- #eq2.15 -->:
 
 $$v_i = \sqrt{\frac{T}{2\rho A}}$$ {#eq:induced-velocity}
 
@@ -26,7 +26,7 @@ This fundamental result shows that induced velocity scales with the square root 
 
 $$v_i = \sqrt{\frac{DL}{2\rho}}$$ {#eq:induced-velocity-dl}
 
-The ideal power required to hover is the product of thrust and induced velocity [@leishmanPrinciplesHelicopterAerodynamics2006]:
+The ideal power required to hover is the product of thrust and induced velocity [@leishmanPrinciplesHelicopterAerodynamics2006]<!-- #s2.3:ideal -->:
 
 $$P_\text{ideal} = T \cdot v_i = T \sqrt{\frac{T}{2\rho A}}$$ {#eq:ideal-power-1}
 
@@ -44,7 +44,7 @@ $$P_\text{ideal} = \frac{W^{3/2}}{\sqrt{2\rho A}} = W \sqrt{\frac{DL}{2\rho}} = 
 
 The momentum theory result represents an idealised lower bound on hover power. Real rotors experience additional losses from profile drag on the blade sections, non-uniform inflow distribution, tip losses (finite blade effects), and swirl in the wake.
 
-The figure of merit (FM) quantifies the efficiency of a real rotor relative to the ideal momentum theory prediction [@leishmanPrinciplesHelicopterAerodynamics2006]:
+The figure of merit (FM) quantifies the efficiency of a real rotor relative to the ideal momentum theory prediction [@leishmanPrinciplesHelicopterAerodynamics2006]<!-- #s2.8 -->:
 
 $$FM = \frac{P_\text{ideal}}{P_\text{actual}} < 1$$ {#eq:figure-of-merit}
 
@@ -84,11 +84,13 @@ Including the electrical efficiency chain:
 
 $$\left(\frac{P}{W}\right)_\text{hover} = \frac{1}{FM \cdot \eta_\text{motor} \cdot \eta_\text{ESC}} \cdot \sqrt{\frac{DL}{2\rho}}$$ {#eq:hover-constraint}
 
+The rotorcraft matching chart is presented in @fig:matching-chart-rotorcraft in @sec:comparative-results.
+
 ### Forward flight performance
 
 #### Power components in forward flight
 
-In forward flight, the total power required by a rotorcraft comprises multiple components [@leishmanPrinciplesHelicopterAerodynamics2006]:
+In forward flight, the total power required by a rotorcraft comprises multiple components [@leishmanPrinciplesHelicopterAerodynamics2006]<!-- #ch5:s4 -->:
 
 $$P_\text{total} = P_i + P_0 + P_p + P_c$$ {#eq:forward-power-components}
 
@@ -100,7 +102,7 @@ The minimum power speed occurs where the sum of these components reaches a minim
 
 #### Equivalent lift-to-drag ratio
 
-For comparison with fixed-wing aircraft, the rotorcraft forward flight efficiency can be expressed as an equivalent lift-to-drag ratio [@leishmanPrinciplesHelicopterAerodynamics2006, Chapter 1]:
+For comparison with fixed-wing aircraft, the rotorcraft forward flight efficiency can be expressed as an equivalent lift-to-drag ratio [@leishmanPrinciplesHelicopterAerodynamics2006, Chapter 1]<!-- #ch1:ld -->:
 
 $$\left(\frac{L}{D}\right)_\text{eff} = \frac{W \cdot V}{P_\text{total}}$$ {#eq:equivalent-ld}
 
@@ -174,7 +176,7 @@ Substituting into @eq:endurance-simple:
 
 $$t_\text{endurance} = \frac{0.3500 \times 972000 \times 0.8000 \times 0.9500 \times 4.000 \times 0.8500 \times 0.9500}{3.711 \times 40.00}$$
 
-$$t_\text{endurance} = \frac{849706}{148.44} = 5723 \text{ s} = 95.39 \text{ min}$$ {#eq:endurance-result}
+$$t_\text{endurance} = \frac{835123}{148.44} = 5626 \text{ s} = 93.77 \text{ min}$$ {#eq:endurance-result}
 
 This calculation represents the theoretical maximum endurance assuming 100% of flight time is spent in efficient forward cruise. The practical endurance is lower due to hover phases and reserve requirements, as analysed in the feasibility assessment below.
 
@@ -182,7 +184,7 @@ This calculation represents the theoretical maximum endurance assuming 100% of f
 
 #### Critical analysis of rotorcraft endurance
 
-The 95.39-minute theoretical endurance calculated above exceeds the 60-minute requirement, but several factors reduce the achievable endurance for a pure rotorcraft mission.
+The 93.77-minute theoretical endurance calculated above exceeds the 60-minute requirement, but several factors reduce the achievable endurance for a pure rotorcraft mission.
 
 A pure rotorcraft cannot use fixed-wing cruise. The $(L/D)_\text{eff}$ = 4.000 applies to helicopter forward flight, which is less efficient than fixed-wing cruise.
 
@@ -194,7 +196,7 @@ The hover power requirement is:
 
 $$P_\text{hover} = \frac{W \cdot v_i}{FM \cdot \eta_\text{motor} \cdot \eta_\text{ESC}} = \frac{37.11 \times 27.68}{0.4000 \times 0.8500 \times 0.9500} = 3178 \text{ W}$$
 
-This induced velocity is of the same order as the cruise velocity, and the hover power (3178 W) exceeds cruise power (~459.7 W), consuming significant energy during the 3-minute hover phases.
+This induced velocity is of the same order as the cruise velocity, and the hover power (3178 W) exceeds cruise power (approximately 460 W), consuming significant energy during the 2-minute hover phases.
 
 The 20% energy reserve reduces effective endurance.
 
@@ -208,18 +210,20 @@ A fixed-wing aircraft achieves $(L/D) \approx 12$, approximately three times hig
 
 | Requirement | Target | Rotorcraft capability | Status |
 |:------------|:-------|:----------------------|:------:|
-| Cruise endurance | ≥60 min | 57 min (with 20% reserve) | FAIL |
-| Operational radius | ≥50 km | 65 km (130 km range) | PASS |
-| VTOL capability | Required | Yes, inherent | PASS |
-| Hover time | 3 min | Unlimited (power limited) | PASS |
+| Cruise endurance | ≥60 min | 63.17 min | PASS |
+| Operational radius | ≥50 km | 73.4 km | PASS |
+| VTOL capability | Required | Yes | PASS |
+| Hover time | 2 min | Unlimited | PASS |
 
-The usable energy is 718.2 Wh × 0.80 (reserve) = 574.6 Wh. Hover energy (3 min at 3178 W) consumes 158.9 Wh, leaving 415.7 Wh for forward flight. Forward flight power is $P = WV/(L/D)_\text{eff}/\eta = 37.11 \times 40.00 / (4.000 \times 0.8075) = 459.7$ W. Forward flight time is 415.7 Wh / 459.7 W = 0.904 h = 54.27 min. Total endurance: 57.27 min. Range: 40.00 m/s × 54.27 min × 60 s/min = 130.2 km.
+Note: Cruise endurance includes 20% energy reserve. Operational radius corresponds to 146.8 km total range. Hover time is power-limited rather than architecturally constrained.
 
-The rotorcraft configuration fails the endurance requirement (57 min vs 60 min required). Even if it marginally met the requirement, the margin would be insufficient:
+The usable energy is 718.2 Wh × 0.80 (reserve) = 574.6 Wh. Hover energy (2 min at 3178 W) consumes 106.0 Wh, leaving 468.5 Wh for forward flight. Forward flight power is $P = WV/(L/D)_\text{eff}/\eta = 37.11 \times 40.00 / (4.000 \times 0.8075) = 459.7$ W. Forward flight time is 468.5 Wh / 459.7 W = 1.019 h = 61.17 min. Total endurance: 63.17 min. Range: 40.00 m/s × 61.17 min × 60 s/min = 146.8 km.
+
+The rotorcraft configuration marginally meets the endurance requirement (63.17 min vs 60 min required), but the margin is limited.
 
 #### Sensitivity analysis
 
-The 57.27-minute endurance represents a -4.5% margin below the 60-minute requirement, which is unacceptable for a Mars mission.
+The 63.17-minute endurance represents a +5.284% margin above the 60-minute requirement, which is insufficient for a Mars mission with no abort capability.
 
 Once the UAV departs the habitat, it must complete the mission. There is no alternative landing site.
 
@@ -229,18 +233,18 @@ Lithium batteries lose capacity over charge cycles and in extreme cold. Capacity
 
 If a rotor fails, a multirotor cannot glide to a safe landing.
 
-For comparison, the hybrid VTOL configuration achieves 90 minutes endurance (+50% margin), providing greater operating margin. The configuration analysis and selection rationale are presented in @sec:architecture-selection.
+The configuration analysis and selection rationale are presented in @sec:architecture-selection.
 
 ### Rotorcraft configuration conclusion
 
-The pure rotorcraft configuration fails to meet the minimum endurance requirement (57.27 min vs 60 min required), with a -4.5% margin that is unacceptable for mission operations. The configuration presents operational risks.
+The pure rotorcraft configuration marginally meets the minimum endurance requirement (63.17 min vs 60 min required), with a +5.284% margin that is insufficient for mission operations. The configuration presents operational risks.
 
-The 57.27-minute achievable endurance falls short of the 60-minute requirement by 2.73 minutes.
+The 63.17-minute achievable endurance exceeds the 60-minute requirement by 3.170 minutes.
 
 Any variation in atmospheric density, battery capacity, or efficiency values further degrades performance.
 
-Unlike a hybrid VTOL that can glide if the cruise motor fails, a rotorcraft crashes immediately if any rotor fails.
+A rotorcraft crashes immediately if any rotor fails, with no possibility of a glide approach.
 
-The fundamental limitation is the low equivalent lift-to-drag ratio inherent to rotorcraft in forward flight ($(L/D)_\text{eff} \approx 4$), resulting in forward flight power consumption (460 W) approximately 45% higher than hybrid VTOL cruise (318 W).
+The fundamental limitation is the low equivalent lift-to-drag ratio inherent to rotorcraft in forward flight ($(L/D)_\text{eff} \approx 4$), resulting in high forward flight power consumption (460 W).
 
 The feasibility assessment for the rotorcraft configuration is summarised in @tbl:rotorcraft-feasibility. The configuration comparison and selection rationale are presented in @sec:architecture-selection.

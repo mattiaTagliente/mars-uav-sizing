@@ -1,0 +1,62 @@
+# Source Attribution: Section 4.7 Aerodynamic Analysis
+# Companion to: sections_en/04_07_aerodynamic-analysis-and-airfoil-data-sec-aerodynamic-analysis.md
+#              sections_it/04_07_analisi-aerodinamica-e-dati-profili-sec-aerodynamic-analysis.md
+#
+# Last updated: 2026-01-01
+# Migrated from: source_grounding.txt
+
+seligSummaryLowSpeedAirfoil1995:
+  v1:e387:re61k:
+    excerpt: "CL_max=1.22, alpha_stall=10.2, ld_max=46.6, CL@ld_max=1.20"
+    context: "E387 performance at Re=61,000 from wind tunnel"
+  
+  v1:sd8000:re61k:
+    excerpt: "CL_max=1.15, alpha_stall=11.5, ld_max=45.4, CL@ld_max=0.94"
+    context: "SD8000 performance at Re=60,800 from wind tunnel"
+  
+  v1:s7055:re61k:
+    excerpt: "CL_max=1.23, alpha_stall=9.7, ld_max=41.6"
+    context: "S7055 performance at Re=60,700"
+  
+  v1:sd7037b:re61k:
+    excerpt: "CL_max=1.22, alpha_stall=11.1, ld_max=36.6"
+    context: "SD7037B performance at Re=60,500"
+
+williamsonSummaryLowSpeedAirfoil2012:
+  v5:ag455ct:re60k:
+    excerpt: "CL_max=1.06, alpha_stall=9.2, ld_max=40.0"
+    context: "AG455ct-02r reflexed airfoil at Re=60,157"
+  
+  v5:ag12:re60k:
+    excerpt: "CL_max=1.06, alpha_stall=10.3, ld_max=34.6"
+    context: "AG12 thin airfoil at Re=59,972"
+  
+  v5:ag35r:re60k:
+    excerpt: "CL_max=1.04, alpha_stall=11.4, ld_max=30.7"
+    context: "AG35-r reflexed airfoil at Re=59,904"
+
+sadraeyAircraftDesignSystems2013:
+  ch5:eq5.x:
+    excerpt: "C_D = C_D0 + C_L^2/(pi*AR*e)"
+    context: "Parabolic drag polar model"
+  
+  ch5:oswald:
+    excerpt: "e = 1.78*(1 - 0.045*AR^0.68) - 0.64"
+    context: "Oswald efficiency correlation for straight wings"
+  
+  ch5:oswald-range:
+    excerpt: "Typical Oswald e: 0.7 to 0.95"
+    context: "Expected range for span efficiency factor"
+
+gottenFullConfigurationDrag2021:
+  abs:
+    excerpt: "Fuselage and misc components: ~50% of total parasitic drag"
+    context: "UAV drag breakdown from component buildup"
+  
+  s4:cfe:
+    excerpt: "C_f,eq = 0.0128 for short-to-medium range UAVs"
+    context: "Equivalent skin friction coefficient for UAV category"
+  
+  tbl2:
+    excerpt: "Miscellaneous drag 36-60% of total for reconnaissance UAVs"
+    context: "Drag contribution from fixed gear, sensors, protrusions"

@@ -1,0 +1,47 @@
+# Section 04_04: Commercial VTOL benchmarks
+# Source attribution for commercial UAV specifications
+
+uavmodelUAVMODELX2400VTOL2024:
+  specs:
+    excerpt: "8.5 kg MTOW, 2.4m span, 220 min endurance"
+    context: "UAVMODEL X2400 specifications"
+
+deltaquadDeltaQuadEvoEnterprise2024:
+  specs:
+    excerpt: "10 kg MTOW, 2.69m span, 272 min endurance"
+    context: "DeltaQuad Evo specifications"
+
+elevonxElevonXSierraVTOL2024:
+  specs:
+    excerpt: "13.5 kg MTOW, 3.0m span, 150 min endurance"
+    context: "Elevon X Sierra specifications"
+
+airmobiAirmobiV25Full2024:
+  specs:
+    excerpt: "14 kg MTOW, 2.5m span, 180 min endurance"
+    context: "AirMobi V25 specifications"
+
+jouavJOUAVCW15Multipurpose2024:
+  specs:
+    excerpt: "14.5 kg MTOW, 3.54m span, 180 min endurance"
+    context: "JOUAV CW-15 specifications"
+
+airmobiAirmobiV32Full2024:
+  specs:
+    excerpt: "23.5 kg MTOW, 3.2m span, 195 min endurance"
+    context: "AirMobi V32 specifications"
+
+uavfordroneRTV320ElectricVTOL2024:
+  specs:
+    excerpt: "24 kg MTOW, 3.2m span, 180 min endurance"
+    context: "RTV320 E specifications"
+
+spideruavV135SentinelVTOL2024:
+  specs:
+    excerpt: "26.5 kg MTOW, 3.5m span, 44 m/s cruise"
+    context: "V13-5 Sentinel high-speed specifications"
+
+jouavJOUAVCW25ELong2024:
+  specs:
+    excerpt: "31.6 kg MTOW, 4.35m span, 210 min endurance"
+    context: "JOUAV CW-25E specifications"

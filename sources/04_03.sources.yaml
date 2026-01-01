@@ -1,0 +1,61 @@
+# Section 04_03: Mars UAV concepts
+# Source attribution sidecar for Mars UAV design heritage
+
+braunDesignARESMars2006:
+  abs:
+    excerpt: "175 kg, 6.25m wingspan, >600 km range, 1-2 km altitude"
+    context: "ARES fixed-wing Mars aircraft specifications"
+  s:propulsion:
+    excerpt: "Bipropellant rocket engine (MMH/MON3)"
+    context: "ARES propulsion system type"
+
+tzanetosIngenuityMarsHelicopter2022:
+  abs:
+    excerpt: "72 flights, 128.8 min total, 24.0 m max altitude, 17.0 km total"
+    context: "Ingenuity Mars helicopter flight statistics"
+  s:power:
+    excerpt: "~350 W average system input power during flight"
+    context: "Ingenuity total system power consumption"
+
+nasaIngenuityMarsHelicopter2024:
+  s:flights:
+    excerpt: "72 flights totaling 128.8 minutes"
+    context: "Ingenuity cumulative flight statistics"
+  fig:ingenuity:
+    excerpt: "Ingenuity on Martian surface image"
+    context: "NASA Ingenuity photo reference"
+
+balaramMarsHelicopterTechnology2018:
+  s:motor:
+    excerpt: "2x custom AeroVironment BLDC 46-pole outrunners, 2400-2900 RPM"
+    context: "Ingenuity main rotor motor specifications"
+  s:servo:
+    excerpt: "6x Maxon DCX 10S brushed DC (7.1g, ~1.4W) for swashplate"
+    context: "Ingenuity swashplate servo motors"
+
+johnsonMarsScienceHelicopter2020:
+  abs:
+    excerpt: "31 kg hexacopter, 2.5m aeroshell, ~3.3 kW hover power"
+    context: "Mars Science Helicopter final design specifications"
+  p4:rotor:
+    excerpt: "P = kT*sqrt(T/2rhoA) + rho*Ab*Vtip^3*(1/8)*cd_mean"
+    context: "Rotor power equation with induced and profile components"
+  fm:
+    excerpt: "Figure of merit 0.5-0.7 for Mars rotors"
+    context: "FM range accounting for Mars conditions"
+
+bertaniPreliminaryDesignFixedwing2023:
+  abs:
+    excerpt: "Hybrid VTOL preliminary design for Mars"
+    context: "Transition phase aerodynamic challenges"
+  exec:
+    excerpt: "20 kg MTOM, 6x20in rotors, 4.5kW VTOL, 635W cruise, 375km range"
+    context: "Hybrid VTOL concept design summary"
+  s:drag-penalty:
+    excerpt: "Stopped rotor drag penalty 5-10% increase"
+    context: "Parasitic drag from inactive lift rotors"
+
+barbatoPreliminaryDesignFixedWing2024:
+  abs:
+    excerpt: "Solar-powered drone with wingspan/AR optimization"
+    context: "Solar-powered Mars UAV concept"

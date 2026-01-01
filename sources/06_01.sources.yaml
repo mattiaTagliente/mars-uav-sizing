@@ -1,0 +1,19 @@
+# Source Attribution: Section 6.1 Architecture Selection
+# Companion to: sections_en/06_01_architecture-selection-sec-architecture-selection.md
+#              sections_it/06_01_selezione-architettura-sec-architecture-selection.md
+#
+# Last updated: 2026-01-01
+# Migrated from: source_grounding.txt Section 6.1
+
+roskamAirplaneDesign22004:
+  s:tractor-pusher:
+    excerpt: "Tractor propellers operate in undisturbed air ahead of fuselage"
+    context: "Tractor vs pusher configuration comparison"
+  
+  s:pusher-loss:
+    excerpt: "Pusher propellers: 2-15% efficiency loss from wake ingestion"
+    context: "Efficiency penalty for pusher configurations"
+  
+  s:contra-rotating:
+    excerpt: "Contra-rotating propellers cancel reactive torque"
+    context: "Torque cancellation advantage of coaxial props"

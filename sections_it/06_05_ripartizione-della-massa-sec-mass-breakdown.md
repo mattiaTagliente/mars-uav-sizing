@@ -2,13 +2,13 @@
 
 ## Ripartizione della massa {#sec:mass-breakdown}
 
-Questa sezione presenta la metodologia dettagliata di stima del peso dei componenti e la applica alla configurazione QuadPlane selezionata. La metodologia segue Sadraey [@sadraeyDesignUnmannedAerial2020; @sadraeyAircraftDesignSystems2013], adattata per le condizioni operative dell'UAV marziano e la geometria stabilita nell'analisi dei vincoli (@sec:constraint-analysis).
+Questa sezione presenta la metodologia dettagliata di stima del peso dei componenti e la applica alla configurazione QuadPlane selezionata. La metodologia segue Sadraey [@sadraeyDesignUnmannedAerial2020]<!-- #eq2.1 --> [@sadraeyAircraftDesignSystems2013]<!-- #eq10.3 -->, adattata per le condizioni operative dell'UAV marziano e la geometria stabilita nell'analisi dei vincoli (@sec:constraint-analysis).
 
 ### Metodologia di stima del peso
 
 #### Decomposizione del peso dell'UAV elettrico
 
-Per gli UAV a batteria elettrica, l'MTOW si decompone in quattro elementi primari [@sadraeyDesignUnmannedAerial2020, Eq. 2.1]:
+Per gli UAV a batteria elettrica, l'MTOW si decompone in quattro elementi primari [@sadraeyDesignUnmannedAerial2020, Eq. 2.1]<!-- #eq2.1 -->:
 
 $$W_{TO} = W_{PL} + W_A + W_B + W_E$$ {#eq:sadraey-mtow}
 
@@ -19,7 +19,7 @@ dove:
 * $W_B$ = peso batteria
 * $W_E$ = peso a vuoto (struttura, propulsione, cablaggio, carrello)
 
-Questo può essere riformulato in termini di frazioni di peso [@sadraeyDesignUnmannedAerial2020, Eq. 2.2b]:
+Questo può essere riformulato in termini di frazioni di peso [@sadraeyDesignUnmannedAerial2020, Eq. 2.2b]<!-- #eq2.2b -->:
 
 $$W_{TO} = \frac{W_{PL} + W_A}{1 - \left(\frac{W_B}{W_{TO}}\right) - \left(\frac{W_E}{W_{TO}}\right)}$$ {#eq:mtow-fractions}
 
@@ -27,7 +27,7 @@ Una differenza chiave rispetto agli aeromobili a combustione è che la massa del
 
 #### Dimensionamento della massa della batteria
 
-La massa della batteria è determinata dai requisiti energetici della missione [@sadraeyDesignUnmannedAerial2020, Eq. 2.20]:
+La massa della batteria è determinata dai requisiti energetici della missione [@sadraeyDesignUnmannedAerial2020, Eq. 2.20]<!-- #eq2.20 -->:
 
 $$W_B = \sum_{i=1}^{n} \frac{P_i \cdot t_i \cdot g_\text{Marte}}{E_D}$$ {#eq:battery-sadraey}
 
@@ -43,11 +43,11 @@ La sommatoria tiene conto dei diversi requisiti di potenza nelle varie fasi di v
 
 ### Stima del peso strutturale
 
-I pesi dei componenti strutturali sono stimati utilizzando correlazioni semi-empiriche da Sadraey [@sadraeyAircraftDesignSystems2013], adattate per l'UAV marziano con fattore di carico ultimo ridotto.
+I pesi dei componenti strutturali sono stimati utilizzando correlazioni semi-empiriche da Sadraey [@sadraeyAircraftDesignSystems2013]<!-- #eq10.3 -->, adattate per l'UAV marziano con fattore di carico ultimo ridotto.
 
 #### Peso dell'ala
 
-Il peso dell'ala è stimato da [@sadraeyAircraftDesignSystems2013, Eq. 10.3]:
+Il peso dell'ala è stimato da [@sadraeyAircraftDesignSystems2013, Eq. 10.3]<!-- #eq10.3 -->:
 
 $$W_W = S_W \cdot MAC \cdot \left(\frac{t}{c}\right)_{\max} \cdot \rho_{\text{mat}} \cdot K_\rho \cdot \left(\frac{AR \cdot n_{\text{ult}}}{\cos \Lambda_{0.25}}\right)^{0.6} \cdot \lambda^{0.04} \cdot g$$ {#eq:wing-weight}
 
@@ -65,7 +65,7 @@ dove:
 
 #### Peso della fusoliera
 
-Il peso della fusoliera è stimato da [@sadraeyAircraftDesignSystems2013, Eq. 10.7]:
+Il peso della fusoliera è stimato da [@sadraeyAircraftDesignSystems2013, Eq. 10.7]<!-- #eq10.7 -->:
 
 $$W_F = L_f \cdot D_{f_{\max}}^2 \cdot \rho_{\text{mat}} \cdot K_{\rho_f} \cdot n_{\text{ult}}^{0.25} \cdot K_{\text{inlet}} \cdot g$$ {#eq:fuselage-weight}
 
@@ -78,7 +78,7 @@ dove:
 
 ### Adattamento del fattore di carico
 
-Il fattore di carico ultimo è definito come [@sadraeyAircraftDesignSystems2013, Eq. 10.4]:
+Il fattore di carico ultimo è definito come [@sadraeyAircraftDesignSystems2013, Eq. 10.4]<!-- #eq10.4 -->:
 
 $$n_{\text{ult}} = 1.5 \times n_{\max}$$ {#eq:n-ult-def}
 
@@ -98,17 +98,17 @@ Da @eq:wing-weight, il peso dell'ala scala come $n_{\text{ult}}^{0.6}$. La riduz
 
 $$\frac{W_{W,Marte}}{W_{W,rif}} = \left(\frac{3.75}{5.7}\right)^{0.6} = 0.76$$
 
-Questo rappresenta circa una **riduzione del 24% del peso dell'ala**.
+Questo rappresenta circa una riduzione del 24% del peso dell'ala.
 
 Da @eq:fuselage-weight, il peso della fusoliera scala come $n_{\text{ult}}^{0.25}$:
 
 $$\frac{W_{F,Marte}}{W_{F,rif}} = \left(\frac{3.75}{5.7}\right)^{0.25} = 0.90$$
 
-Questo rappresenta circa una **riduzione del 10% del peso della fusoliera**.
+Questo rappresenta circa una riduzione del 10% del peso della fusoliera.
 
 #### Riduzione combinata del peso strutturale
 
-Assumendo che ala e fusoliera contribuiscano in egual misura al peso strutturale, la riduzione media è di circa il 16-17%. Per un aeromobile con MTOW di 3.3 kg con una frazione di peso a vuoto di 0.45 (circa 1.5 kg), questo si traduce in circa 0.24-0.26 kg di risparmio di massa strutturale.
+Assumendo che ala e fusoliera contribuiscano in egual misura al peso strutturale, la riduzione media è di circa il 16-17%. Per un aeromobile con MTOW di 10.0 kg con una frazione di peso a vuoto di 0.45 (circa 4.5 kg), questo si traduce in circa 0.72-0.77 kg di risparmio di massa strutturale.
 
 Questa riduzione di peso è un fattore abilitante significativo per la fattibilità della missione, poiché può essere riallocata alla capacità della batteria (estendendo l'autonomia) o al payload (migliorando la capacità di missione). Il fattore di carico ridotto è giustificato dall'operazione senza equipaggio, autonoma, e dai carichi di raffica ridotti nella rarefatta atmosfera marziana, come dettagliato in @sec:load-factor-selection.
 
@@ -120,15 +120,16 @@ Utilizzando la geometria dall'analisi dei vincoli (@sec:constraint-analysis) e i
 
 | Parametro | Valore | Fonte |
 |:----------|------:|:-------|
-| Superficie alare, $S_W$ | [DA CALCOLARE] | Analisi dei vincoli |
-| Corda media, $MAC$ | [DA CALCOLARE] | Analisi dei vincoli |
-| Allungamento, $AR$ | 12 | @sec:derived-requirements |
-| Rapporto di spessore, $(t/c)$ | 0.09 | Profilo E387 |
+| Superficie alare, $S_W$ | 2.686 m² | Analisi dei vincoli |
+| Corda media, $MAC$ | 0.669 m | Analisi dei vincoli |
+| Apertura alare, $b$ | 4.01 m | Analisi dei vincoli |
+| Allungamento, $AR$ | 6 | @sec:derived-requirements |
+| Rapporto di spessore, $(t/c)$ | 0.089 | Profilo SD8000 |
 | Rapporto di rastremazione, $\lambda$ | 0.5 | @sec:derived-requirements |
 | Angolo di freccia, $\Lambda$ | 0° | @sec:derived-requirements |
 | Fattore di carico ultimo, $n_{\text{ult}}$ | 3.75 | @sec:derived-requirements |
-| Lunghezza fusoliera, $L_f$ | [DA CALCOLARE] | @sec:geometry-selection |
-| Diametro fusoliera, $D_f$ | [DA CALCOLARE] | @sec:geometry-selection |
+| Lunghezza fusoliera, $L_f$ | 2.00 m | @sec:geometry-selection |
+| Diametro fusoliera, $D_f$ | 0.33 m | @sec:geometry-selection |
 
 ### Ripartizione della massa dei componenti
 
@@ -138,38 +139,42 @@ La ripartizione dettagliata della massa per la configurazione QuadPlane selezion
 
 | Componente | Massa (kg) | Frazione | Fonte |
 |:----------|----------:|---------:|:-------|
-| **Struttura** | | | |
-| Ala | [DA CALCOLARE] | N.D. | @eq:wing-weight |
-| Fusoliera | [DA CALCOLARE] | N.D. | @eq:fuselage-weight |
-| Impennaggio | [DA CALCOLARE] | N.D. | Scalatura dall'ala |
-| Boom | [DA CALCOLARE] | N.D. | Analisi strutturale |
-| Carrello | [DA CALCOLARE] | N.D. | 3-5% dell'MTOW |
-| **Propulsione** | | | |
-| Motori di sollevamento (×8) | [DA CALCOLARE] | N.D. | Selezione componenti |
-| Motori di crociera (×2) | [DA CALCOLARE] | N.D. | Selezione componenti |
-| ESC | [DA CALCOLARE] | N.D. | Selezione componenti |
-| Eliche | [DA CALCOLARE] | N.D. | Selezione componenti |
-| **Energia** | | | |
-| Batteria | [DA CALCOLARE] | N.D. | @eq:battery-sadraey |
-| **Payload** | | | |
-| Sistema camera | circa 0.30 | N.D. | @sec:payload-systems |
-| Relè radio | circa 0.15 | N.D. | @sec:payload-systems |
-| **Avionica** | | | |
-| Controllore di volo | [DA CALCOLARE] | N.D. | Selezione componenti |
-| Sensori e cablaggio | [DA CALCOLARE] | N.D. | 3-5% dell'MTOW |
-| **MTOW totale** | [DA CALCOLARE] | 100% | N.D. |
+| **Struttura** | 2.32 | 23.2% | |
+| Ala | 0.80 | 8.0% | @eq:wing-weight con CFRP |
+| Fusoliera | 0.45 | 4.5% | @eq:fuselage-weight con CFRP |
+| Impennaggio (coda a V) | 0.35 | 3.5% | Scalatura dall'ala (1.144 m²) |
+| Boom (4×) | 0.40 | 4.0% | Analisi strutturale |
+| Carrello | 0.32 | 3.2% | 3.2% dell'MTOW |
+| **Propulsione** | 1.18 | 11.8% | |
+| Motori di sollevamento (8×) | 0.528 | 5.3% | SunnySky V4006-380, 66 g cad. |
+| Motori di crociera (2×) | 0.120 | 1.2% | T-Motor AT2312-1150, 60 g cad. |
+| ESC (10×) | 0.060 | 0.6% | Hobbywing XRotor Micro 30A, 6 g cad. |
+| Eliche (10×) | 0.174 | 1.7% | 8× sollevamento (18 g) + 2× crociera (15 g) |
+| Montaggio + cablaggio | 0.300 | 3.0% | Stima ingegneristica |
+| **Energia** | 3.50 | 35.0% | |
+| Pacco batteria | 3.50 | 35.0% | @sec:energy-data, 945 Wh totali |
+| **Payload** | 1.50 | 15.0% | |
+| Sistema camera | 0.30 | 3.0% | @sec:payload-systems |
+| Relè radio | 0.15 | 1.5% | @sec:payload-systems |
+| Margine payload | 1.05 | 10.5% | Tolleranza di crescita |
+| **Avionica** | 0.50 | 5.0% | |
+| Controllore di volo | 0.10 | 1.0% | Autopilota classe Pixhawk |
+| Sensori e cablaggio | 0.40 | 4.0% | GPS, IMU, telemetria |
+| **Subtotale** | 9.00 | 90.0% | |
+| **Margine di progetto** | 1.00 | 10.0% | Contingenza |
+| **MTOW totale** | 10.00 | 100% | — |
 
 ### Limitazioni per piccoli UAV
 
-Le equazioni di stima del peso da Sadraey [@sadraeyAircraftDesignSystems2013] sono state sviluppate principalmente per aeromobili convenzionali con equipaggio e potrebbero non essere direttamente applicabili a piccoli UAV in composito sotto i 50 kg di MTOW. Per affrontare questa limitazione:
+Le equazioni di stima del peso da Sadraey [@sadraeyAircraftDesignSystems2013]<!-- #ch10:limits --> sono state sviluppate principalmente per aeromobili convenzionali con equipaggio e potrebbero non essere direttamente applicabili a piccoli UAV in composito sotto i 50 kg di MTOW. Per affrontare questa limitazione:
 
-1. **Validazione delle frazioni di massa**: I pesi stimati dei componenti sono verificati rispetto alle frazioni di massa empiriche da @tbl:design-mass-fractions derivate dai benchmark di UAV commerciali.
+1. Validazione delle frazioni di massa: i pesi stimati dei componenti sono verificati rispetto alle frazioni di massa empiriche da @tbl:design-mass-fractions derivate dai benchmark di UAV commerciali.
 
-2. **Approccio conservativo**: Dove esiste incertezza, vengono utilizzate stime di peso conservative (più alte) per mantenere i margini di progetto.
+2. Approccio conservativo: dove esiste incertezza, vengono utilizzate stime di peso conservative (più alte) per mantenere i margini di progetto.
 
-3. **Iterazione con dati dei componenti**: La stima del peso viene raffinata dopo la selezione dei componenti (@sec:component-verification) utilizzando i dati effettivi del produttore per motori, batterie e avionica.
+3. Iterazione con dati dei componenti: la stima del peso viene raffinata dopo la selezione dei componenti (@sec:component-verification) utilizzando i dati effettivi del produttore per motori, batterie e avionica.
 
-4. **Fattori dei materiali compositi**: I fattori di densità ($K_\rho$, $K_{\rho_f}$) sono regolati per riflettere la costruzione in CFRP piuttosto che in alluminio, secondo l'analisi dei compromessi sui materiali in @sec:materials-data.
+4. Fattori dei materiali compositi: i fattori di densità ($K_\rho$, $K_{\rho_f}$) sono regolati per riflettere la costruzione in CFRP piuttosto che in alluminio, secondo l'analisi dei compromessi sui materiali in @sec:materials-data.
 
 ### Verifica rispetto alle frazioni di massa
 
@@ -179,9 +184,12 @@ Le masse calcolate dei componenti sono verificate rispetto agli obiettivi delle 
 
 | Categoria | Frazione target | Frazione calcolata | Stato |
 |:---------|----------------:|--------------------:|:------:|
-| Batteria | 0.35 | [DA CALCOLARE] | N.D. |
-| Payload | 0.15 | [DA CALCOLARE] | N.D. |
-| A vuoto (struttura) | 0.45 | [DA CALCOLARE] | N.D. |
-| Propulsione | 0.15 | [DA CALCOLARE] | N.D. |
-| Avionica | 0.05 | [DA CALCOLARE] | N.D. |
-| **Totale** | 1.15 (con margine) | [DA CALCOLARE] | N.D. |
+| Batteria | 0.35 | 0.35 | CONFORME |
+| Payload | 0.15 | 0.15 | CONFORME |
+| Struttura | 0.23 | 0.23 | CONFORME |
+| Propulsione | 0.20 | 0.12 | INFERIORE (margine disponibile) |
+| Avionica | 0.05 | 0.05 | CONFORME |
+| Margine di progetto | — | 0.10 | ALLOCATO |
+| **Totale** | 1.00 | 1.00 | BILANCIATO |
+
+La frazione di massa della propulsione (11.8%) è significativamente inferiore al budget del 20%, fornendo un margine di 0.82 kg che è stato riallocato alla struttura e alla contingenza di progetto. Questo margine riflette la selezione di combinazioni moderne di motori/ESC leggeri e valida le ipotesi dell'analisi dei vincoli.

@@ -1,0 +1,27 @@
+# Section 06_05: Mass breakdown
+# Source attribution for weight estimation methodology
+
+sadraeyDesignUnmannedAerial2020:
+  eq2.1:
+    excerpt: "W_TO = W_PL + W_A + W_B + W_E"
+    context: "Electric UAV MTOW decomposition equation"
+  eq2.2b:
+    excerpt: "weight fraction formulation for component sizing"
+    context: "Reformulated MTOW equation in weight fractions"
+  eq2.20:
+    excerpt: "W_B = sum(P*t*g/E_D)"
+    context: "Battery mass from mission energy requirement"
+
+sadraeyAircraftDesignSystems2013:
+  eq10.3:
+    excerpt: "wing weight correlation with planform and loads"
+    context: "Semi-empirical wing weight estimation"
+  eq10.7:
+    excerpt: "fuselage weight correlation"
+    context: "Fuselage weight estimation from geometry"
+  eq10.4:
+    excerpt: "n_ult = n_limit x SF definition"
+    context: "Ultimate load factor definition"
+  ch10:limits:
+    excerpt: "equations for manned aircraft may not apply below 50 kg"
+    context: "Applicability limits of weight correlations"

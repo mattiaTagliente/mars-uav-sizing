@@ -1,0 +1,34 @@
+# Section 03_01: Operational environment
+# Source attribution sidecar for atmospheric model and Mars environment data
+
+desertAerodynamicDesignMartian2017:
+  tbl1:
+    excerpt: "rho=0.0145 kg/m3, T=214 K, mu=1.15e-5 Pa.s, a=233 m/s at 2km"
+    context: "Mars atmospheric conditions at 2 km altitude"
+  s:mars-atmosphere:
+    excerpt: "Mars atmospheric flight conditions differ from Earth"
+    context: "Mars environment overview for UAV design"
+
+esaArcadiaPlanitiaContext2025:
+  fig:arcadia:
+    excerpt: "Arcadia Planitia in Mars geographical context"
+    context: "Location map for operational environment"
+
+nasaMarsAtmosphereModel2021:
+  s:temp-lapse:
+    excerpt: "T = -31 - 0.000998*h (lower), T = -23.4 - 0.00222*h (upper, h>7km)"
+    context: "Mars temperature lapse rate equations for lower/upper atmosphere"
+  s:pressure:
+    excerpt: "p = 0.699 * exp(-0.00009*h) kPa"
+    context: "Mars barometric pressure equation"
+  s:density:
+    excerpt: "rho = p / [0.1921 * (T + 273.1)]"
+    context: "Mars density from ideal gas law"
+  s:composition:
+    excerpt: "95.3% CO2 composition"
+    context: "Mars atmospheric composition for model inputs"
+
+craneco.FlowFluidsValves2013:
+  appa:tbl3:
+    excerpt: "Sutherland constant for CO2: S = 240 K"
+    context: "CO2 dynamic viscosity calculation constant"

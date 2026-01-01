@@ -8,9 +8,11 @@
 
 ## Mathematical and Technical Formatting
 
-* always use 4 significant figures for reporting calculation results
+* Always use 4 significant figures for reporting calculation results.
 
 * For open-ended ranges, use mathematical inequality notation (e.g., "> 40") instead of plus notation (e.g., "40+"). This applies to tables, prose, and all numerical contexts.
+
+* Never use the tilde symbol (~) to indicate approximation. Use words such as "approximately," "about," or "roughly" instead.
 
 * Use LaTeX syntax for math expressions: `$...$` for inline math and `$$...$$` for display equations.
 
@@ -39,25 +41,27 @@
 
 * Write "and" instead of "&", except in "R&D".
 
-* it's a scientific document, never use ✓/❌ indicators
+* It's a scientific document, never use ✓/❌ indicators.
 
 ## Lists and Paragraph Structure
 
-* Always use asterisks (*) for bulleted lists, never hyphens (-). This convention ensures consistent formatting and correct conversion of the document via pandoc.
+* Use vertical lists (bulleted or numbered) only in cases strictly necessary for quick reference. In all other cases, use run-in lists integrated into paragraph flow, separating short items with commas and complex items or those with internal punctuation with semicolons.
 
-* Limit vertical (bulleted or numbered) lists to cases strictly necessary for quick reference. Otherwise, use run-in lists integrated into paragraph flow. Separate short items with commas; separate complex items or those with internal punctuation with semicolons.
+* When a vertical list is necessary, choose between bulleted and numbered format based on content: use numbered lists for sequential steps or ranked items; use bulleted lists for unordered collections.
 
-* Make ALL lists tight by removing ALL blank lines/extra paragraphs between list items. This rule applies WITHOUT EXCEPTIONS to:
-- Bulleted lists with an asterisk (*)
-- Bulleted lists with a bullet point (•)
-- Numbered lists (1, 2, 3)
-- Lists in ALL files in the document
+* For bulleted lists, always use asterisks (*), never hyphens (-). This convention ensures consistent formatting and correct conversion via pandoc.
+
+* Make all lists tight by removing all blank lines between list items. This rule applies without exception to bulleted lists, numbered lists, and lists in all files of the document.
 
 ## Tables, Figures, and Cross-References
 
 * Format tables using pipe table syntax with captions before the table: `: Caption text {#tbl:label}` followed by a blank line, then header row, separator row, and data rows. Use sentence case throughout. Consolidate multi-line entries into single lines with proper pipe delimiter alignment.
 
 * Use concise, single-word or single-concept table headers. For example: use "Metric" instead of "Metric/Aspect", use "Platform" instead of "Platform / Device".
+
+* Do not include bracketed parenthetical nor explanatory text within table cells. Present only the core data value; supplementary information belongs in the surrounding prose or, exceptionally, in table notes.
+
+* For empty or missing data in table cells, do not use dashes (-). Use "N.A." to indicate either "Not Available" (data not found or not provided) or "Not Applicable" (data does not apply to the context). The meaning should be clear from context or clarified in a table note if ambiguous.
 
 * Format images using standard markdown: `![Caption text](path/to/image.png){#fig:label}`. Place images inline with blank lines before and after. Specify width and height within curly braces when needed.
 

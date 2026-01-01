@@ -1,0 +1,52 @@
+# Section 04_01: Payload systems
+# Source attribution for camera and radio payload specifications
+
+djiDJIZenmuseP12024:
+  specs:
+    excerpt: "45 MP, 4.4um pixel pitch, 800-1350g with lens"
+    context: "Full-frame aerial mapping camera specifications"
+
+ricohimagingRicohGRIII2024:
+  specs:
+    excerpt: "24 MP APS-C, 227-257g, 109.4x61.9x33.2mm"
+    context: "Compact RGB camera specifications"
+
+phaseonePhaseOneIXM1002024:
+  specs:
+    excerpt: "100 MP medium format, 630-1170g, IP53"
+    context: "High-end aerial mapping camera specifications"
+
+micasenseMicaSenseRedEdgeMXIntegration2020:
+  specs:
+    excerpt: "5-band multispectral, 232g, 87x59x45.4mm"
+    context: "Multispectral camera specifications"
+
+djiDJIZenmuseH20T2024:
+  specs:
+    excerpt: "Thermal 640x512, 828g, -40 to +150C"
+    context: "Thermal/hybrid camera specifications"
+
+silvustechnologiesStreamCaster4200SC42002025:
+  specs:
+    excerpt: "425g, 300MHz-6GHz, IP68, -40 to +85C"
+    context: "Mesh radio specifications"
+
+persistentsystemsMPU5TechnicalSpecifications2025:
+  specs:
+    excerpt: "391-726g, 209km range, MIL-STD-810G"
+    context: "Mesh radio with autonomous network management"
+
+rajantcorporationBreadCrumbES1Specifications2025:
+  specs:
+    excerpt: "455g, 2.4/5GHz, -40 to +60C"
+    context: "Dual-band mesh radio specifications"
+
+rfdesignRFD900xModemSpecifications2024:
+  specs:
+    excerpt: "14.5g, 900MHz, >40km range, -40 to +85C"
+    context: "Ultra-lightweight telemetry modem"
+
+microhardPMDDL2450MiniatureMIMO2025:
+  specs:
+    excerpt: "7-165g, 2.4GHz, 25Mbps, 2x2 MIMO"
+    context: "Compact point-to-point data link"

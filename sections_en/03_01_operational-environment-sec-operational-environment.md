@@ -4,13 +4,13 @@
 
 Arcadia Planitia is selected as the reference operating location. This region offers several advantages for early Mars exploration: its low elevation (−3 km relative to datum) provides higher atmospheric density, the relatively flat terrain is suitable for habitat construction, subsurface water ice deposits present scientific interest, and the moderate latitude (47°11'24"N) balances solar illumination with ice stability.
 
-Mars atmospheric flight occurs under conditions different from Earth [@desertAerodynamicDesignMartian2017]. The thin CO₂ atmosphere exhibits surface pressures around 610 Pa mean, with significant variation depending on elevation and season. Surface temperatures average around 210 K with substantial diurnal swings. At the low elevations favorable for flight, atmospheric density remains approximately two orders of magnitude lower than Earth sea level, resulting in low Reynolds number aerodynamics and reduced lift generation. 
+Mars atmospheric flight occurs under conditions different from Earth [@desertAerodynamicDesignMartian2017]<!-- #s:mars-atmosphere -->. The thin CO₂ atmosphere exhibits surface pressures around 610 Pa mean, with significant variation depending on elevation and season. Surface temperatures average around 210 K with substantial diurnal swings. At the low elevations favorable for flight, atmospheric density remains approximately two orders of magnitude lower than Earth sea level, resulting in low Reynolds number aerodynamics and reduced lift generation. 
 
-![The area of Arcadia Planitia in the Mars geographical context [@esaArcadiaPlanitiaContext2025].](figures/Arcadia_Planitia_in_context_pillars.png){#fig:arcadia-context width=50%}
+![The area of Arcadia Planitia in the Mars geographical context [@esaArcadiaPlanitiaContext2025]<!-- #fig:arcadia -->.](figures/Arcadia_Planitia_in_context_pillars.png){#fig:arcadia-context width=50%}
 
 ### Mars atmosphere equations
 
-The Mars atmosphere is modeled using the barometric formula with a composition of 95.3% CO₂ [@nasaMarsAtmosphereModel2021]. The following equations describe atmospheric properties as functions of geometric altitude $h$ (in meters above the reference datum):
+The Mars atmosphere is modeled using the barometric formula with a composition of 95.3% CO₂ [@nasaMarsAtmosphereModel2021]<!-- #s:composition -->. The following equations describe atmospheric properties as functions of geometric altitude $h$ (in meters above the reference datum):
 
 $$T(h) = T_0 - L \cdot h$$ {#eq:temperature}
 
@@ -49,6 +49,6 @@ At the operating altitude of 50 m above Arcadia Planitia (−3 km datum elevatio
 | Temperature | $T$ | 216.6 | K |
 | Pressure | $p$ | 800.5 | Pa |
 | Density | $\rho$ | 0.01960 | kg/m³ |
-| Speed of sound | $a$ | 230.8 | m/s |
+| Speed of sound | $a$ | 229.7 | m/s |
 | Dynamic viscosity | $\mu$ | 1.080 × 10⁻⁵ | Pa·s |
 | Kinematic viscosity | $\nu$ | 5.170 × 10⁻⁴ | m²/s |

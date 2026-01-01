@@ -1,0 +1,325 @@
+﻿
+================================================================================
+MARS UAV FEASIBILITY STUDY (COUPLED)
+Section 5: Constraint Analysis
+================================================================================
+
+  Analysis run: 2025-12-30 18:49:11
+  Configuration: All parameters from config/ YAML files
+  Baseline MTOW: 10.0 kg
+
+
+--------------------------------------------------------------------------------
+ 1/5  ROTORCRAFT ANALYSIS (Section 5.1)
+--------------------------------------------------------------------------------
+
+================================================================================
+ROTORCRAFT FEASIBILITY ANALYSIS (Section 5.1)
+================================================================================
+Computed: 2025-12-30 18:49:11
+Config:   All values loaded from config/ YAML files
+
+INPUT PARAMETERS (from configuration)
+--------------------------------------------------
+  MTOW:               10.00 kg
+  Mars gravity:       3.711 m/s▓
+  Weight:             37.11 N
+  Disk loading:       30.0 N/m▓
+  Air density:        0.0196 kg/m│
+  Cruise velocity:    40.0 m/s
+
+PROPULSION EFFICIENCIES (from º4.5)
+--------------------------------------------------
+  Figure of Merit:    0.40
+  Motor efficiency:   0.85
+  ESC efficiency:     0.95
+  Combined eta_hover: 0.3230
+  Equivalent L/D:     4.0
+
+HOVER ANALYSIS (@eq:hover-power)
+--------------------------------------------------
+  Disk area:          1.237 m▓
+  Induced velocity:   27.69 m/s
+  Electrical power:   3181 W
+  Power loading:      318 W/kg
+
+FORWARD FLIGHT ANALYSIS (@eq:forward-power-ld)
+--------------------------------------------------
+  Cruise power:       459.6 W
+
+ENERGY BUDGET
+--------------------------------------------------
+  Battery mass:       3.50 kg
+  Total capacity:     945.0 Wh
+  Usable (after DoD): 718.2 Wh
+  After 20% reserve:  574.6 Wh
+  Hover energy:       106.0 Wh (2 min)
+  Cruise energy:      468.5 Wh
+
+PERFORMANCE
+--------------------------------------------------
+  Cruise time:        61.2 min
+  Total endurance:    63.2 min
+  Range:              147 km
+
+FEASIBILITY ASSESSMENT
+--------------------------------------------------
+  Requirement:        60 min endurance
+  Achieved:           63.2 min
+  Margin:             +5.3%
+  Status:             [PASS]
+
+CONCLUSION: Rotorcraft marginally meets requirement.
+           Margin of only 5.3% is insufficient for Mars operations.
+================================================================================
+
+--------------------------------------------------------------------------------
+ 2/5  FIXED-WING ANALYSIS (Section 5.2)
+--------------------------------------------------------------------------------
+
+================================================================================
+FIXED-WING FEASIBILITY ANALYSIS (Section 5.2)
+================================================================================
+Computed: 2025-12-30 18:49:11
+Config:   All values loaded from config/ YAML files
+
+INPUT PARAMETERS (from configuration)
+--------------------------------------------------
+  MTOW:               10.00 kg
+  Weight:             37.11 N
+  Air density:        0.0196 kg/m│
+  Cruise velocity:    40.0 m/s
+
+AERODYNAMIC PARAMETERS (from º4.7)
+--------------------------------------------------
+  Aspect ratio:       6
+  Oswald efficiency:  0.8690
+  CD0:                0.0300
+  CL_max:             1.20
+  K (induced):        0.0610
+  (L/D)_max:          11.68
+  CL_optimal:         0.701
+
+WING LOADING AND STALL
+--------------------------------------------------
+  Max wing loading:   14.42 N/m▓
+  Stall speed:        35.0 m/s
+
+CRUISE PERFORMANCE
+--------------------------------------------------
+  CL at cruise:       0.921
+  L/D at cruise:      11.26
+  Cruise power:       286.1 W
+  Combined eta_cruise:0.4441
+
+ENDURANCE AND RANGE
+--------------------------------------------------
+  Usable energy:      574.6 Wh
+  Endurance:          120.5 min
+  Range:              289 km
+
+TAKEOFF ANALYSIS (Disqualifying)
+--------------------------------------------------
+  Ground roll:        1061 m
+  Status:             IMPRACTICAL - No runway available on Mars
+
+FEASIBILITY ASSESSMENT
+--------------------------------------------------
+  Endurance req:      60 min -> 121 min -> [PASS]
+  VTOL requirement:   Required -> Not possible -> [FAIL]
+  Overall:            [FAIL]
+
+CONCLUSION: Fixed-wing FAILS due to VTOL requirement.
+           Despite excellent endurance (121 min, +101% margin),
+           ground roll of 1061 m is impractical without runway.
+================================================================================
+
+--------------------------------------------------------------------------------
+ 3/5  HYBRID VTOL ANALYSIS (Section 5.3)
+--------------------------------------------------------------------------------
+
+================================================================================
+HYBRID VTOL (QUADPLANE) FEASIBILITY ANALYSIS (Section 5.3)
+================================================================================
+Computed: 2025-12-30 18:49:11
+Config:   All values loaded from config/ YAML files
+
+INPUT PARAMETERS (from configuration)
+--------------------------------------------------
+  MTOW:               10.00 kg
+  Weight:             37.11 N
+  Air density:        0.0196 kg/m│
+  Cruise velocity:    40.0 m/s
+  Disk loading:       30.0 N/m▓
+
+AERODYNAMIC EFFICIENCY
+--------------------------------------------------
+  Pure wing (L/D)max: 11.68
+  Penalty factor:     0.90 (stopped rotors)
+  QuadPlane L/D:      10.52
+
+HOVER ANALYSIS (Lift rotors)
+--------------------------------------------------
+  Induced velocity:   27.69 m/s
+  Hover power:        3181 W
+  Hover time:         2 min
+  Hover energy:       106.0 Wh
+
+CRUISE ANALYSIS (Wing + cruise motor)
+--------------------------------------------------
+  Cruise power:       317.9 W
+  Cruise time:        86.6 min
+  Cruise energy:      302.0 Wh
+
+TRANSITION ANALYSIS (Conservative estimate)
+--------------------------------------------------
+  Number of transitions:  2
+  Energy per transition:  5.0 Wh (18000 J)
+  Total transition energy:10.0 Wh
+  Fraction of hover:      9.4%
+  Fraction of mission:    2.5%
+  Note: Transition energy conservatively lumped into budget.
+  Reference: Goetzendorf-Grabowski (ICAS 2022), Mathur & Atkins (2025)
+
+ENERGY BUDGET (with transition)
+--------------------------------------------------
+  Mission energy:     418.0 Wh
+    - Hover:          106.0 Wh (25%)
+    - Transition:     10.0 Wh (2%)
+    - Cruise:         302.0 Wh (72%)
+  Reserve (20%):      83.6 Wh
+  Required total:     501.6 Wh
+  Available:          718.2 Wh
+  Margin:             216.6 Wh (43.2%)
+
+PERFORMANCE
+--------------------------------------------------
+  Total endurance:    89.6 min
+  Range:              208 km
+  Operational radius: 104 km
+
+FEASIBILITY ASSESSMENT
+--------------------------------------------------
+  VTOL capability:    [PASS] (lift rotors)
+  Energy constraint:  [PASS] (+43.2% margin)
+  Endurance req:      60 min -> 90 min (+49.3%) -> [PASS]
+  Overall:            [PASS]
+
+CONCLUSION: Hybrid VTOL (QuadPlane) SATISFIES all requirements.
+           Endurance margin of 49% provides adequate safety buffer.
+           VTOL capability enables Mars operations without runway.
+================================================================================
+
+--------------------------------------------------------------------------------
+ 4/5  MATCHING CHART ANALYSIS (Section 5.4)
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCHING CHART ANALYSIS (Section 5.4) - COUPLED
+================================================================================
+Computed: 2025-12-30 18:49:11
+Config:   All values loaded from config/ YAML files
+
+INPUT PARAMETERS
+--------------------------------------------------
+  MTOW:               5.31 kg
+  Weight:             19.69 N
+  Air density:        0.0196 kg/m^3
+  Cruise velocity:    40.0 m/s
+  Disk loading:       30.0 N/m^2
+
+CONSTRAINT VALUES
+--------------------------------------------------
+  Hover P/W:          85.71 W/N (horizontal line)
+  Stall W/S limit:    14.42 N/m^2 (vertical line)
+
+DESIGN POINT
+--------------------------------------------------
+  Wing loading:       14.42 N/m^2
+  Power loading:      85.71 W/N
+  Active constraint:  HOVER
+
+COUPLED SOLVER
+--------------------------------------------------
+  Converged:          True
+  Iterations:         11
+  Message:            The solution converged.
+  MTOW (solved):      5.31 kg
+  Battery mass:       1.39 kg
+  Battery fraction:   0.26
+
+DERIVED GEOMETRY
+--------------------------------------------------
+  Wing area:          1.366 m^2
+  Wingspan:           2.86 m
+  Mean chord:         0.477 m
+  Installed power:    1688 W (hover)
+  Disk area:          0.656 m^2
+
+SUMMARY
+--------------------------------------------------
+  The matching chart shows:
+  1. Hover constraint at P/W = 85.7 W/N
+  2. Stall constraint limits W/S to 14.4 N/m^2
+  3. Cruise power at stall: 8.9 W/N
+================================================================================
+
+--------------------------------------------------------------------------------
+ 5/5  COMPARATIVE ANALYSIS
+--------------------------------------------------------------------------------
+
+================================================================================
+COMPARATIVE CONFIGURATION ANALYSIS
+================================================================================
+Computed: 2025-12-30 18:49:11
+Config:   All values loaded from config/ YAML files
+
+CONFIGURATION COMPARISON TABLE
+--------------------------------------------------------------------------------
+Metric                         Rotorcraft      Fixed-Wing     Hybrid VTOL
+--------------------------------------------------------------------------------
+VTOL Capability                   Yes [+]          No [-]         Yes [+]
+Endurance (min)                    63 [+]         121 [+]          90 [+]
+Range (km)                        147 [+]         289 [+]         208 [+]
+Cruise Power (W)                      460             286             318
+Hover Power (W)                      3181             N/A            3181
+L/D Cruise                            4.0            11.7            10.5
+Overall Feasible             Marginal [+]          No [-]         Yes [+]
+--------------------------------------------------------------------------------
+
+CONFIGURATION RANKING
+--------------------------------------------------
+  1. Hybrid Vtol
+  2. Rotorcraft
+  3. Fixed Wing
+
+ELIMINATION RATIONALE
+--------------------------------------------------------------------------------
+
+ROTORCRAFT:
+  ELIMINATED: Marginally meets endurance (63 min) with only 5% margin. Insufficient for mission with no abort capability.
+
+FIXED WING:
+  ELIMINATED: Cannot satisfy VTOL requirement. Despite excellent endurance (121 min, +101% margin), ground roll of 1061 m requires runway infrastructure.
+
+HYBRID VTOL:
+  SELECTED: Satisfies all requirements. VTOL capability with 90 min endurance (49% margin). Combines rotorcraft VTOL with fixed-wing cruise efficiency.
+
+================================================================================
+RECOMMENDATION
+================================================================================
+Selected configuration: HYBRID VTOL
+
+SELECTED: Satisfies all requirements. VTOL capability with 90 min endurance (49% margin). Combines rotorcraft VTOL with fixed-wing cruise efficiency.
+================================================================================
+
+--------------------------------------------------------------------------------
+ANALYSIS COMPLETE
+--------------------------------------------------------------------------------
+
+  Rotorcraft           FEASIBLE
+  Fixed Wing           NOT FEASIBLE
+  Hybrid Vtol          FEASIBLE
+
+  Selected configuration: HYBRID VTOL
+

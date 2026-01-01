@@ -42,12 +42,15 @@ drag_polar:
 # ==============================================================================
 airfoil:
   # Maximum lift coefficient at Re = 60,000
-  # Reference: UIUC Low-Speed Airfoil Tests, Vol.1 (E387 data)
-  cl_max: 1.20                 # CL_max, dimensionless
+  # Reference: UIUC Low-Speed Airfoil Tests, Vol.1 (SD8000 data)
+  # SD8000 selected for consistent drag behaviour and larger stall margin
+  cl_max: 1.15                 # CL_max, dimensionless
   
   # Selected airfoil
-  name: "E387"
+  name: "SD8000"
   source: "UIUC"
+  thickness_ratio: 0.089       # t/c, 8.9%
+  cd_min: 0.0142               # Cd_min, dimensionless
 
 # ==============================================================================
 # ROTORCRAFT-SPECIFIC (from §4.7.4)

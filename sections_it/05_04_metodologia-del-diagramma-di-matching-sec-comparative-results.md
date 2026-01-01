@@ -1,8 +1,8 @@
-# Analisi dei vincoli
+# Analisi dei vincoli {#sec:constraint-analysis-matching}
 
 ## Metodologia del diagramma di matching {#sec:comparative-results}
 
-Questa sezione presenta la metodologia del diagramma di matching (diagramma dei vincoli) per il dimensionamento preliminare dell'aeromobile e la applica per derivare i parametri del punto di progetto per l'UAV marziano. Il diagramma di matching visualizza tutti i vincoli di prestazioni simultaneamente, identificando lo spazio di progetto fattibile come l'intersezione di tutte le regioni accettabili [@roskamAirplaneDesign12005a].
+Questa sezione presenta la metodologia del diagramma di matching (diagramma dei vincoli) per il dimensionamento preliminare dell'aeromobile e la applica per derivare i parametri del punto di progetto per l'UAV marziano. Il diagramma di matching visualizza tutti i vincoli di prestazioni simultaneamente, identificando lo spazio di progetto fattibile come l'intersezione di tutte le regioni accettabili [@roskamAirplaneDesign12005a]<!-- #s:constraint -->.
 
 ### Riepilogo dei requisiti
 
@@ -13,7 +13,7 @@ Da @sec:user-needs e @sec:derived-requirements, l'UAV marziano deve soddisfare i
 | ID | Requisito | Soglia | Motivazione |
 |:---|:------------|:----------|:----------|
 | OR-1 | Raggio operativo | ≥50 km | Superare la distanza totale di 35 km di Curiosity in un singolo volo |
-| OR-4 | Autonomia di crociera | ≥60 min | Andata e ritorno + operazioni di rilevamento (42 min transito + 15 min rilevamento + 3 min hovering) |
+| OR-4 | Autonomia di crociera | ≥60 min | Andata e ritorno + operazioni di rilevamento (42 min transito + 15 min rilevamento + 2 min hovering + 1 min transizione) |
 | - | Capacità VTOL | Richiesta | Nessuna infrastruttura di pista su Marte |
 | - | Capacità di carico | ≥0.5 kg | Payload camera + relè radio |
 | N6 | Tolleranza ai guasti singoli | Richiesta | Sistema di missione senza capacità di abort |
@@ -74,6 +74,27 @@ La regione fattibile è l'intersezione di tutte le regioni accettabili: sopra il
 
 Il punto di progetto ottimale minimizza il carico di potenza all'interno della regione fattibile, poiché questo corrisponde a un sistema propulsivo più leggero e più efficiente. Tipicamente, il punto di progetto si trova all'intersezione di due o più vincoli attivi.
 
+### Definizione del caso di riferimento {#sec:baseline-case}
+
+L'analisi dei vincoli in questa sezione è eseguita per un **MTOW di riferimento fisso di 10.00 kg**, derivato dall'allocazione di massa basata sul payload in @sec:initial-mass-estimate. Si tratta di uno studio di caso di riferimento, non di un risultato di dimensionamento ad anello chiuso. Il diagramma di matching identifica le regioni dello spazio di progetto fattibile e le interazioni tra vincoli; i valori assoluti di geometria e potenza sono condizionati dall'MTOW assunto.
+
+@tbl:baseline-parameters riassume i parametri mantenuti costanti tra le configurazioni per garantire un confronto equo.
+
+: Parametri del caso di riferimento {#tbl:baseline-parameters}
+
+| Parametro | Valore | Note |
+|:----------|------:|:-----|
+| Massa del payload | 1.00 kg | Camera + relè radio |
+| MTOW | 10.00 kg | Valore di riferimento |
+| Frazione di massa batteria | 35% | 3.50 kg massa batteria |
+| Tecnologia batteria | 270 Wh/kg | Li-ion a stato solido |
+| Profondità di scarica | 80% | - |
+| Riserva energetica | 20% | - |
+| Tempo di hovering | 2 min | Decollo + atterraggio |
+| Tempo di transizione | 1 min | Due transizioni di 30 s |
+
+Il vincolo energetico è verificato mediante valutazione esplicita del bilancio energetico della missione al punto di progetto candidato, piuttosto che tracciato come linea di vincolo separata. Questo approccio è appropriato per il caso di riferimento a carico del disco fisso, dove la fattibilità energetica dipende dalle durate dei segmenti di missione piuttosto che dal carico alare.
+
 ### Diagrammi di matching delle configurazioni
 
 Prima di esaminare ogni configurazione individualmente, @fig:ld-comparison attraverso @fig:endurance-comparison presentano le metriche di prestazione chiave per tutte e tre le architetture candidate.
@@ -82,23 +103,27 @@ Prima di esaminare ogni configurazione individualmente, @fig:ld-comparison attra
 
 ![Confronto dei requisiti di potenza. La potenza di hovering (3178 W) è identica per velivolo a rotore e VTOL ibrido. La potenza di crociera varia con l'efficienza aerodinamica: velivolo a rotore 460 W, ala fissa 286 W, VTOL ibrido 318 W.](figures/power_comparison_it.png){#fig:power-comparison width=85%}
 
-![Confronto dell'autonomia rispetto al requisito di 60 minuti (linea tratteggiata). Il velivolo a rotore non soddisfa marginalmente a 57 min. L'ala fissa raggiunge 151 min ma non può soddisfare il requisito VTOL. Il VTOL ibrido raggiunge 81 min con margine adeguato.](figures/endurance_comparison_it.png){#fig:endurance-comparison width=80%}
+![Confronto dell'autonomia rispetto al requisito di 60 minuti (linea tratteggiata). Il velivolo a rotore soddisfa marginalmente a 63.17 min. L'ala fissa raggiunge 120.5 min ma non può soddisfare il requisito VTOL. Il VTOL ibrido raggiunge 89.55 min con margine adeguato.](figures/endurance_comparison_it.png){#fig:endurance-comparison width=80%}
 
 #### Analisi dei vincoli del velivolo a rotore
 
 Per la configurazione a velivolo a rotore puro, gli assi del diagramma di matching devono essere adattati poiché non c'è ala. Il parametro rilevante è il carico del disco ($DL = T/A$) piuttosto che il carico alare. Il vincolo dominante è la potenza di hovering, che aumenta drammaticamente con il carico del disco nella rarefatta atmosfera marziana.
 
-Lo spazio di progetto del velivolo a rotore è eliminato dalle prestazioni marginali di autonomia. Il bilancio energetico dominato dall'hovering (potenza di hovering 3178 W per 3 min consuma 158.9 Wh) lascia energia insufficiente per la crociera (459.7 W in volo avanzato). La configurazione raggiunge solo 57.27 minuti di autonomia, non soddisfacendo il requisito di 60 minuti con un margine del -4.5%.
+Lo spazio di progetto del velivolo a rotore è limitato dal margine ridotto di autonomia. Il bilancio energetico dominato dall'hovering (potenza di hovering 3178 W per 2 min consuma 106.0 Wh) lascia 468.5 Wh per la crociera (459.7 W in volo avanzato). La configurazione raggiunge 63.17 minuti di autonomia, con un margine del +5.284% sopra il requisito di 60 minuti.
+
+![Diagramma di matching per la configurazione a rotore. Il carico di potenza aumenta con il carico del disco secondo la teoria del disco attuatore. La curva rappresenta il vincolo di hovering da @eq:hover-constraint. Il punto di progetto (*) corrisponde al carico del disco selezionato di 30 N/m².](figures/matching_chart_rotorcraft_it.png){#fig:matching-chart-rotorcraft width=85%}
 
 #### Analisi dei vincoli dell'ala fissa
 
-Per la configurazione ad ala fissa pura, il diagramma di matching mostra un vincolo di crociera come curva poco profonda con minimo al carico alare ottimale (circa 11.00 N/m² per le condizioni marziane), un vincolo di stallo come linea verticale a $W/S_\text{max}$ = 7.300 N/m² per $V_\text{min}$ = 30.00 m/s e $C_{L,\text{max}}$ = 1.200, e nessun vincolo di hovering (l'ala fissa non può effettuare hovering).
+Per la configurazione ad ala fissa pura, il diagramma di matching mostra un vincolo di crociera come curva poco profonda con minimo al carico alare ottimale (circa 11.00 N/m² per le condizioni marziane), un vincolo di stallo come linea verticale a $W/S_\text{max}$ = 13.82 N/m² per $V_\text{min}$ = 35.04 m/s (dove $V_\text{min}$ = 1.2 × $V_\text{stall}$ secondo @eq:v-min-constraint) e $C_{L,\text{max}}$ = 1.150, e nessun vincolo di hovering (l'ala fissa non può effettuare hovering).
 
-La regione fattibile esiste e offre eccellente efficienza di potenza (286.4 W in crociera a MTOW 10.00 kg). Tuttavia, questa regione è inaccessibile perché l'aeromobile non può decollare senza una pista. La distanza di corsa di decollo di circa 536 m assicura che nessun punto di progetto nella regione fattibile sia raggiungibile operativamente.
+La regione fattibile esiste e offre eccellente efficienza di potenza (286.4 W in crociera a MTOW 10.00 kg). Tuttavia, questa regione è inaccessibile perché l'aeromobile non può decollare senza una pista. La distanza di corsa di decollo di circa 1060 m assicura che nessun punto di progetto nella regione fattibile sia raggiungibile operativamente.
+
+![Diagramma di matching per la configurazione ad ala fissa. La curva del vincolo di crociera (blu) mostra il carico di potenza minimo che diminuisce verso il carico alare ottimale. Il vincolo di stallo (linea verde verticale) limita il carico alare massimo. Il punto di progetto (*) si trova all'intersezione della curva di crociera e del vincolo di stallo. Si noti l'assenza di un vincolo di hovering, poiché gli aeromobili ad ala fissa non possono effettuare il volo stazionario.](figures/matching_chart_fixed_wing_it.png){#fig:matching-chart-fixed-wing width=85%}
 
 #### Analisi dei vincoli del VTOL ibrido
 
-Per la configurazione QuadPlane, il diagramma di matching combina un vincolo di hovering come linea orizzontale a $P/W$ = 85.64 W/N (domina il diagramma), un vincolo di crociera come curva ben al di sotto del vincolo di hovering (potenza di crociera circa 10× inferiore), e un vincolo di stallo come linea verticale al carico alare massimo ammissibile (7.300 N/m²).
+Per la configurazione QuadPlane, il diagramma di matching combina un vincolo di hovering come linea orizzontale a $P/W$ = 85.71 W/N (domina il diagramma), un vincolo di crociera come curva ben al di sotto del vincolo di hovering (potenza di crociera circa 10× inferiore), e un vincolo di stallo come linea verticale al carico alare massimo ammissibile (13.82 N/m²).
 
 Il diagramma di matching per il QuadPlane traccia il carico di potenza $(P/W)$ rispetto al carico alare $(W/S)$.
 
@@ -114,35 +139,35 @@ $$\left(\frac{W}{S}\right)_\text{max} = \frac{1}{2}\rho V_\text{min}^2 C_{L,\tex
 
 Vincolo energetico: Si manifesta come un confine della regione fattibile che accoppia il carico di potenza alla durata della missione. Un carico di potenza più alto (volo più veloce) generalmente riduce il tempo di missione ma può violare i vincoli energetici se la potenza di hovering è troppo alta.
 
-La regione fattibile si trova sopra la linea del vincolo di hovering, a sinistra del vincolo di stallo, con il vincolo energetico verificato (margine 29.7%).
+La regione fattibile si trova sopra la linea del vincolo di hovering, a sinistra del vincolo di stallo, con il vincolo energetico verificato (margine 43.20%).
 
-Il punto di progetto è dominato dall'hovering. La potenza installata è determinata interamente dai requisiti di hovering; la potenza di crociera è abbondante. Il dimensionamento dell'ala è determinato dalle considerazioni di stallo ed efficienza aerodinamica, indipendente dalla potenza.
+Il punto di progetto di riferimento è dominato dall'hovering. La potenza installata è determinata interamente dai requisiti di hovering; la potenza di crociera è abbondante. Il dimensionamento dell'ala è determinato dalle considerazioni di stallo ed efficienza aerodinamica, indipendente dalla potenza.
 
 ![Diagramma di matching (diagramma dei vincoli) per la configurazione VTOL ibrida. Il vincolo di hovering (linea rossa orizzontale) domina, stabilendo il carico di potenza minimo richiesto. Il vincolo di stallo (linea verde verticale) limita il carico alare massimo. Il vincolo di crociera (curva blu) è facilmente soddisfatto sotto la linea di hovering. Il punto di progetto (*) si trova all'intersezione dei vincoli di hovering e stallo.](figures/matching_chart_it.png){#fig:matching-chart width=90%}
 
-### Determinazione del punto di progetto
+### Determinazione del punto di progetto di riferimento
 
-Dall'analisi del diagramma di matching del VTOL ibrido (@fig:matching-chart), il punto di progetto del QuadPlane è caratterizzato da:
+Dall'analisi del diagramma di matching del VTOL ibrido (@fig:matching-chart), il punto di progetto di riferimento del QuadPlane è caratterizzato da:
 
-: Parametri del punto di progetto {#tbl:design-point}
+: Parametri del punto di progetto di riferimento {#tbl:design-point}
 
 | Parametro | Valore | Vincolo |
 |:----------|------:|:-----------|
-| Carico alare, $W/S$ | 7.300 N/m² | Fissato dal limite di stallo a $V_\text{min}$ = 30.00 m/s |
-| Carico di potenza, $P/W$ | 85.64 W/N | Fissato dal requisito di hovering |
-| Carico del disco, $DL$ | 30.00 N/m² | Compromesso tra dimensione del rotore e potenza |
+| Carico alare, $W/S$ | 13.82 N/m² | Fissato dal limite di stallo a $V_\text{min}$ = 35.04 m/s |
+| Carico di potenza, $P/W$ | 85.71 W/N | Fissato dal requisito di hovering |
+| Carico disco, $DL$ | 30.00 N/m² | Compromesso tra dimensione rotore e potenza |
 
 Questi valori implicano i seguenti parametri derivati per MTOW = 10.00 kg ($W$ = 37.11 N):
 
-: Parametri di progetto derivati {#tbl:design-parameters}
+: Parametri di progetto baseline {#tbl:design-parameters}
 
 | Parametro derivato | Valore | Calcolo |
 |:------------------|------:|:------------|
-| Superficie alare | $S = W/(W/S) = 37.11/7.300$ | 5.083 m² |
-| Apertura alare | $b = \sqrt{AR \times S}$ | 5.523 m (con AR = 6) |
-| Corda media | $c = S/b$ | 0.9203 m |
-| Potenza di hovering installata | $P = (P/W) \times W$ | 3178 W |
-| Potenza di crociera installata | - | circa 318.5 W |
+| Superficie alare | $S = W/(W/S) = 37.11/13.82$ | 2.686 m² |
+| Apertura alare | $b = \sqrt{AR \times S}$ | 4.01 m |
+| Corda media | $c = S/b$ | 0.669 m |
+| Potenza di hovering installata | $P = (P/W) \times W$ | 3181 W |
+| Potenza di crociera installata | - | 318 W |
 
 Questi valori preliminari saranno raffinati in @sec:design-decisions sulla base della selezione dettagliata dei componenti e dell'analisi dei compromessi. Il diagramma di matching fornisce punti di partenza per il progetto iterativo.
 

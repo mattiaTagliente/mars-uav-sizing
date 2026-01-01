@@ -1,4 +1,4 @@
-# Constraint analysis
+# Constraint analysis {#sec:constraint-analysis-hybrid}
 
 ## Hybrid VTOL configuration {#sec:hybrid-vtol-analysis}
 
@@ -8,13 +8,13 @@ This section evaluates whether a hybrid VTOL (QuadPlane) configuration can satis
 
 #### Configuration description
 
-The QuadPlane configuration consists of two distinct propulsion systems optimised for their respective flight regimes [@bertaniPreliminaryDesignFixedwing2023].
+The QuadPlane configuration consists of two distinct propulsion systems optimised for their respective flight regimes [@bertaniPreliminaryDesignFixedwing2023]<!-- #exec -->.
 
 The lift system (for hover) comprises four or more electric rotors in a quadcopter or similar layout, sized for hover thrust only (short duration operation), positioned to minimise interference with wing aerodynamics, and inactive during cruise (stopped or folded).
 
-The cruise system (for forward flight) uses a wing for lift generation and a single pusher or tractor propeller for thrust, sized for efficient cruise at $(L/D)_\text{max}$, and inactive during hover.
+The cruise system (for forward flight) uses a wing for lift generation and coaxial contra-rotating tractor propellers for thrust, sized for efficient cruise at $(L/D)_\text{max}$, and inactive during hover.
 
-This architecture enables decoupled optimisation: each propulsion system operates only in its optimal regime. The lift rotors are sized for hover thrust without compromise for forward flight efficiency, while the wing and cruise propeller are optimised for maximum aerodynamic efficiency without VTOL capability requirements.
+This architecture enables decoupled optimisation: each propulsion system operates only in its optimal regime. The lift rotors are sized for hover thrust without compromise for forward flight efficiency, while the wing and cruise propellers are optimised for maximum aerodynamic efficiency without VTOL capability requirements.
 
 This approach contrasts with pure rotorcraft (where rotors must operate efficiently in both hover and forward flight) and tiltrotor concepts (where mechanical complexity is required for thrust vectoring).
 
@@ -52,7 +52,7 @@ Using the efficiency values from @tbl:efficiency-parameters ($FM$ = 0.4000, $\et
 
 #### Difference from rotorcraft: hover duration
 
-The main advantage of the QuadPlane over pure rotorcraft is the reduced hover time. A pure rotorcraft uses hover or hover-like forward flight for the entire mission (~60 min), while the QuadPlane hovers only during takeoff and landing (~2 min).
+The main advantage of the QuadPlane over pure rotorcraft is the reduced hover time. A pure rotorcraft uses hover or hover-like forward flight for the entire mission (approximately 60 min), while the QuadPlane hovers only during takeoff and landing (approximately 2 min).
 
 This 30× reduction in hover time changes the energy equation. Even though hover is power-intensive, limiting it to approximately 3% of the mission duration makes the energy cost manageable.
 
@@ -94,7 +94,7 @@ where $V$ is cruise velocity and $(L/D)$ is the lift-to-drag ratio.
 
 During cruise, the QuadPlane achieves fixed-wing aerodynamic efficiency because the lift rotors are inactive. Two design approaches are possible: stopped rotors (rotors remain stationary, contributing only parasitic drag), and folded rotors (rotor blades fold against the motor pods, minimising drag).
 
-For stopped rotors, the parasitic drag of four motor pods with stationary propellers increases total drag by approximately 5-10% [@bertaniPreliminaryDesignFixedwing2023]. This reduces the effective lift-to-drag ratio:
+For stopped rotors, the parasitic drag of four motor pods with stationary propellers increases total drag by approximately 5-10% [@bertaniPreliminaryDesignFixedwing2023]<!-- #s:drag-penalty -->. This reduces the effective lift-to-drag ratio:
 
 $$(L/D)_\text{QuadPlane} \approx 0.9000 \times (L/D)_\text{pure} = 0.9000 \times 11.68 = 10.51$$ {#eq:ld-quadplane}
 
@@ -110,7 +110,7 @@ Using the values from @sec:derived-requirements ($V$ = 40.00 m/s, $(L/D)$ = 10.5
 
 For the baseline MTOW = 10.00 kg (weight $W$ = 37.11 N):
 
-$$P_\text{electric,cruise} = \frac{10.0 \times 3.711 \times 40}{10.5 \times 0.444} = \frac{1484}{4.66} = 318 \text{ W}$$ {#eq:cruise-power-value}
+$$P_\text{electric,cruise} = \frac{10.0 \times 3.711 \times 40}{10.5 \times 0.444} = \frac{1484}{4.66} = 318.5 \text{ W}$$ {#eq:cruise-power-value}
 
 This is approximately 10 times lower than the hover power (3178 W), showing the power difference between hover and cruise modes.
 
@@ -130,9 +130,9 @@ $$E_\text{cruise} = 318.5 \times (57.00/60.00) = 302.6 \text{ Wh}$$ {#eq:cruise-
 
 #### Transition phase significance
 
-The transition from hover to cruise (and back) represents a distinct flight phase that is often omitted in preliminary feasibility studies. Recent literature emphasises that "the phase which consumes a big amount of electric energy is the transition from the vertical to the horizontal flight" [@goetzendorf-grabowskiOptimizationEnergyConsumption2022]. Wind tunnel testing has revealed that simplified transition models significantly underestimate actual energy needs by not accounting for propeller drag effects in the airflow.
+The transition from hover to cruise (and back) represents a distinct flight phase that is often omitted in preliminary feasibility studies. Recent literature emphasises that "the phase which consumes a big amount of electric energy is the transition from the vertical to the horizontal flight" [@goetzendorf-grabowskiOptimizationEnergyConsumption2022]<!-- #s:transition -->. Wind tunnel testing has revealed that simplified transition models significantly underestimate actual energy needs by not accounting for propeller drag effects in the airflow.
 
-A counter-intuitive finding from multi-mode flight simulation is that hybrid mode (during transition) can consume higher power than pure hover mode at certain airspeeds, because of the additional forward thrust required to maintain desired pitch angle while lift rotors remain active [@mathurMultiModeFlightSimulation2025]. This phenomenon—termed the "hybrid mode power paradox"—means transition energy cannot be estimated by simple interpolation between hover and cruise power levels.
+A counter-intuitive finding from multi-mode flight simulation is that hybrid mode (during transition) can consume higher power than pure hover mode at certain airspeeds, because of the additional forward thrust required to maintain desired pitch angle while lift rotors remain active [@mathurMultiModeFlightSimulation2025]<!-- #s:hybrid-paradox -->. This phenomenon—termed the "hybrid mode power paradox"—means transition energy cannot be estimated by simple interpolation between hover and cruise power levels.
 
 For the Mars UAV, transition dynamics are further complicated by the thin atmosphere and different gravity, affecting both aerodynamic forces and propulsion efficiency during the acceleration/deceleration phases.
 
@@ -140,7 +140,7 @@ For the Mars UAV, transition dynamics are further complicated by the thin atmosp
 
 Given the complexity of transition modelling and the limited applicability of Earth-based measurements to Mars conditions, a conservative approach is adopted: transition energy is explicitly estimated and added to the energy budget rather than being ignored or absorbed into hover time.
 
-Reference data from @goetzendorf-grabowskiOptimizationEnergyConsumption2022 shows transition energy of approximately 45 kJ per transition for the PW Chimera, a 25 kg quad-plane tested under Earth conditions (baseline scenario without optimisation). Optimised transition trajectories achieved approximately 37 kJ per transition, representing a 20-42% reduction through trajectory shaping.
+Reference data from @goetzendorf-grabowskiOptimizationEnergyConsumption2022<!-- #tbl:energy --> shows transition energy of approximately 45 kJ per transition for the PW Chimera, a 25 kg quad-plane tested under Earth conditions (baseline scenario without optimisation). Optimised transition trajectories achieved approximately 37 kJ per transition, representing a 20-42% reduction through trajectory shaping.
 
 For the 10 kg Mars UAV, the reference energy is scaled linearly with mass:
 
@@ -158,21 +158,19 @@ This represents approximately 9% of the pure hover energy (106 Wh) or 2.4% of th
 
 #### Literature context
 
-The approach of omitting transition energy is common in preliminary design. A NASA simulation study explicitly stated that "the power required and energy consumption during the transition between the flight phases have been ignored in this study" [@kulkarniSimulationStudiesUrban2022]. However, for a Mars UAV where energy margins directly determine mission success, explicit modelling is preferred even if simplified.
+The approach of omitting transition energy is common in preliminary design. A NASA simulation study explicitly stated that "the power required and energy consumption during the transition between the flight phases have been ignored in this study" [@kulkarniSimulationStudiesUrban2022]<!-- #s:simplification -->. However, for a Mars UAV where energy margins directly determine mission success, explicit modelling is preferred even if simplified.
 
-Transition corridor theory from tilt-rotor VTOL analysis establishes that feasible transitions occur within a bounded region of the velocity-tilt angle space, constrained by stall limits at low speeds and available power at high speeds [@zhaoDevelopmentMultimodeFlight2023]. For a QuadPlane, the transition corridor is simpler since the tilt mechanism is replaced by a power transfer between propulsion systems, but the lift balance constraints remain relevant.
+Transition corridor theory from tilt-rotor VTOL analysis establishes that feasible transitions occur within a bounded region of the velocity-tilt angle space, constrained by stall limits at low speeds and available power at high speeds [@zhaoDevelopmentMultimodeFlight2023]<!-- #s:corridor -->. For a QuadPlane, the transition corridor is simpler since the tilt mechanism is replaced by a power transfer between propulsion systems, but the lift balance constraints remain relevant.
 
-Pattern flight simulations show that quad-mode operations (climb/descent) consume nearly 50% of total mission energy despite being a small fraction of flight time [@mathurMultiModeFlightSimulation2025]. This supports the manuscript's finding that vertical flight phases dominate the energy budget even when duration is limited.
+Pattern flight simulations show that quad-mode operations (climb/descent) consume nearly 50% of total mission energy despite being a small fraction of flight time [@mathurMultiModeFlightSimulation2025]<!-- #s:quad-mode -->. This supports the finding that vertical flight phases dominate the energy budget even when duration is limited.
 
 #### Limitations of the transition energy model
 
 The transition energy estimate used here is a simplified energy-only model with several acknowledged limitations:
 
-First, the linear mass scaling assumes transition energy scales proportionally with vehicle mass. This is a first-order approximation; actual scaling may be non-linear due to Reynolds number effects on rotor and wing performance, and different power-to-weight ratios between the reference vehicle and the Mars UAV.
-
-Second, the model does not capture peak transition power. During transition, instantaneous power demand may exceed steady hover power due to the simultaneous operation of lift rotors (providing residual lift) and forward thrust (for acceleration). The "hybrid mode power paradox" identified by @mathurMultiModeFlightSimulation2025 shows that at certain airspeeds, hybrid mode power exceeds pure hover power. This peak power constraint is not evaluated; the analysis assumes the propulsion system sized for hover can accommodate transition power demands.
-
-Third, the model does not address power-limited feasibility in the transition corridor sense. Transition corridor theory [@zhaoDevelopmentMultimodeFlight2023] establishes that feasible transitions must remain within a bounded region of velocity-pitch space, constrained by stall limits and available power. The current analysis verifies energy sufficiency but does not verify that a feasible transition trajectory exists within the power envelope.
+1. The linear mass scaling assumes transition energy scales proportionally with vehicle mass. This is a first-order approximation; actual scaling may be non-linear due to Reynolds number effects on rotor and wing performance, and different power-to-weight ratios between the reference vehicle and the Mars UAV.
+2. The model does not capture peak transition power. During transition, instantaneous power demand may exceed steady hover power due to the simultaneous operation of lift rotors (providing residual lift) and forward thrust (for acceleration). The "hybrid mode power paradox" identified by @mathurMultiModeFlightSimulation2025<!-- #s:hybrid-paradox --> shows that at certain airspeeds, hybrid mode power exceeds pure hover power. This peak power constraint is not evaluated; the analysis assumes the propulsion system sized for hover can accommodate transition power demands.
+3. The model does not address power-limited feasibility in the transition corridor sense. Transition corridor theory [@zhaoDevelopmentMultimodeFlight2023]<!-- #s:corridor --> establishes that feasible transitions must remain within a bounded region of velocity-pitch space, constrained by stall limits and available power. The current analysis verifies energy sufficiency but does not verify that a feasible transition trajectory exists within the power envelope.
 
 These limitations are acceptable for a preliminary feasibility assessment, where the objective is to screen configurations and establish that adequate energy margins exist. Detailed transition trajectory analysis and power verification would be required in subsequent design phases.
 
@@ -238,45 +236,41 @@ The minimum required battery fraction is 24.4%, below the baseline allocation of
 
 The QuadPlane configuration carries mass for both propulsion systems, resulting in a weight penalty compared to a pure fixed-wing aircraft.
 
-#### Dual propulsion mass breakdown
+#### Propulsion mass estimate
 
-The lift system comprises motors, ESCs, propellers, and mounting structure. For the 10.00 kg MTOW aircraft, the lift system scales from reference data: lift motors 4 × 0.2500 kg = 1.000 kg, lift ESCs 4 × 0.0600 kg = 0.2400 kg, lift propellers 4 × 0.0400 kg = 0.1600 kg, and mounting structure ~0.3000 kg.
+The dual propulsion system mass can be estimated using the propulsion mass fraction $f_\text{prop}$ from @tbl:design-mass-fractions:
 
-$$m_\text{lift,system} = 1.000 + 0.2400 + 0.1600 + 0.3000 = 1.700 \text{ kg}$$ {#eq:lift-system-mass}
+$$m_\text{propulsion} = f_\text{prop} \times MTOW = 0.2000 \times 10.00 = 2.000 \text{ kg}$$ {#eq:propulsion-mass-estimate}
 
-The cruise system comprises a single motor, ESC, and propeller: cruise motor ~0.2000 kg, cruise ESC ~0.0500 kg, and cruise propeller ~0.0500 kg.
+For QuadPlane configurations, the propulsion mass is divided between lift and cruise systems. Analysis of commercial reference data (@tbl:reference-vtol) suggests the following split:
 
-$$m_\text{cruise,system} = 0.2000 + 0.0500 + 0.0500 = 0.3000 \text{ kg}$$ {#eq:cruise-system-mass}
+* Lift system: approximately 60-70% of propulsion mass
+* Cruise system: approximately 30-40% of propulsion mass
+
+Using a 70:30 split (appropriate for the octocopter lift configuration with 8 motors):
+
+$$m_\text{lift,system} = 0.70 \times 2.000 = 1.400 \text{ kg}$$ {#eq:lift-system-estimate}
+
+$$m_\text{cruise,system} = 0.30 \times 2.000 = 0.600 \text{ kg}$$ {#eq:cruise-system-estimate}
 
 #### Mass penalty calculation
 
-A pure fixed-wing would require only the cruise system. The QuadPlane adds the entire lift system as additional mass:
+A pure fixed-wing would require only the cruise system. The QuadPlane adds the lift system as additional mass:
 
-$$\Delta m = m_\text{lift,system} = 1.700 \text{ kg}$$ {#eq:mass-penalty}
+$$\Delta m = m_\text{lift,system} \approx 1.4 \text{ kg}$$ {#eq:mass-penalty}
 
 As a fraction of MTOW:
 
-$$f_\text{penalty} = \frac{m_\text{lift,system}}{MTOW} = \frac{1.700}{10.00} = 0.1700 = 17.00\%$$ {#eq:mass-penalty-fraction}
+$$f_\text{penalty} = \frac{m_\text{lift,system}}{MTOW} = \frac{1.4}{10.00} = 0.14 = 14\%$$ {#eq:mass-penalty-fraction}
 
-This is a moderate mass penalty that is acceptable given the enabling VTOL capability. For comparison, commercial QuadPlane designs show similar lift system mass fractions.
-
-: Mass penalty scaling with MTOW (estimated) {#tbl:mass-penalty-scaling}
-
-| MTOW (kg) | Estimated $m_\text{lift,system}$ (kg) | $f_\text{penalty}$ |
-|:----------|:-------------------------------------:|:------------------:|
-| 5.0 | ~0.9 | 18% |
-| 10.0 (Mars UAV) | ~1.7 | 17% |
-| 14.0 (V25) | 1.42 | 10% |
-
-For the Mars UAV, a mass penalty of approximately 17% of MTOW is expected for the lift system.
+This is consistent with the 15-25% propulsion mass penalty observed in commercial QuadPlane designs. The specific component selection and detailed mass breakdown are presented in @sec:propulsion-selection.
 
 #### Mass penalty trade-off
 
-The dual propulsion mass penalty is acceptable because it enables mission feasibility. The trade-off is:
+The dual propulsion mass penalty is acceptable because it enables mission feasibility:
 
-Without VTOL capability, the mission is impossible—no means of takeoff or landing on Mars without runway infrastructure.
-
-With VTOL capability, the mission becomes possible with the mass penalty.
+* Without VTOL capability, the mission is impossible, as there is no means of takeoff or landing on Mars without runway infrastructure.
+* With VTOL capability, the mission becomes possible with the mass penalty.
 
 The mass penalty is the enabling cost for the Mars UAV mission, which has no alternative for vertical takeoff and landing from a habitat environment.
 
@@ -297,7 +291,7 @@ The QuadPlane must satisfy all constraints simultaneously. @tbl:quadplane-constr
 
 The matching chart methodology and constraint diagram analysis are presented in @sec:comparative-results.
 
-### Feasibility conclusion
+### Feasibility assessment
 
 #### Energy budget summary
 
@@ -326,13 +320,15 @@ The analysis shows that despite the high power requirement during hover (3178 W)
 
 | Requirement | Target | QuadPlane capability | Status |
 |:------------|:-------|:---------------------|:------:|
-| VTOL capability | Required | Yes (lift rotors) | PASS |
-| Cruise endurance | ≥60 min | 90 min (50% margin) | PASS |
-| Operational radius | ≥50 km | 104 km (108% margin) | PASS |
-| Hover time | 2 min | Limited by battery, not architecture | PASS |
+| VTOL capability | Required | Yes | PASS |
+| Cruise endurance | >60 min | 89.55 min | PASS |
+| Operational radius | ≥50 km | 104 km | PASS |
+| Hover time | 2 min | Limited by battery | PASS |
+
+Note: Cruise endurance includes 20% energy reserve. Endurance margin is 49.26% above requirement; operational radius margin is 108% above requirement. VTOL capability is provided by the lift rotor system.
 
 The hybrid VTOL (QuadPlane) configuration satisfies all mission requirements with adequate margin.
 
-The key insight is that by limiting hover to approximately 2 minutes (3% of flight time) and accounting explicitly for transition phases (1 minute), the QuadPlane exploits fixed-wing aerodynamics for the remaining 57 minutes. This achieves a fundamentally different energy budget than pure rotorcraft. A rotorcraft operates all flight time at low L/D (~4.0) with high power consumption throughout (459.7 W cruise), resulting in insufficient endurance (57.27 min). The QuadPlane, in contrast, operates only hover phases (2 min) at high power (3178 W), while the cruise phase (57 min) operates at wing-borne L/D (~10.5) with moderate power (318 W).
+The key insight is that by limiting hover to approximately 2 minutes (3% of flight time) and accounting explicitly for transition phases (1 minute), the QuadPlane exploits fixed-wing aerodynamics for the remaining 57 minutes. The hover phases (2 min) consume high power (3178 W), while the cruise phase (57 min) operates at wing-borne L/D (approximately 10.5) with moderate power (318 W).
 
 The feasibility assessment for the QuadPlane configuration is summarised in @tbl:quadplane-feasibility. The configuration comparison with rotorcraft and fixed-wing alternatives, design point determination, and selection rationale are presented in @sec:architecture-selection.

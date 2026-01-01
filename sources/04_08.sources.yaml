@@ -1,0 +1,52 @@
+# Section 04_08: Fuselage geometry
+# Source attribution for commercial UAV fuselage data
+
+uavmodelUAVMODELX2400VTOL2024:
+  geom:
+    excerpt: "2.40m span, 1.20m length, l/b=0.50"
+    context: "X2400 fuselage dimensions"
+
+deltaquadDeltaQuadEvoEnterprise2024:
+  geom:
+    excerpt: "2.69m span, 0.75m length, l/b=0.28"
+    context: "DeltaQuad Evo flying wing geometry"
+
+elevonxElevonXSierraVTOL2024:
+  geom:
+    excerpt: "3.00m span, 1.58m length, l/b=0.53"
+    context: "Elevon X Sierra dimensions"
+
+airmobiAirmobiV25Full2024:
+  geom:
+    excerpt: "2.50m span, 1.26m length, l/b=0.50"
+    context: "V25 fuselage dimensions"
+
+jouavJOUAVCW15Multipurpose2024:
+  geom:
+    excerpt: "3.54m span, 2.06m length, l/b=0.58"
+    context: "CW-15 fuselage dimensions"
+
+airmobiAirmobiV32Full2024:
+  geom:
+    excerpt: "3.20m span, 1.26m length, l/b=0.39"
+    context: "V32 fuselage dimensions"
+
+uavfordroneRTV320ElectricVTOL2024:
+  geom:
+    excerpt: "3.20m span, 2.00m length, l/b=0.63"
+    context: "RTV320 E fuselage dimensions"
+
+spideruavV135SentinelVTOL2024:
+  geom:
+    excerpt: "3.50m span, 1.88m length, l/b=0.54"
+    context: "V13-5 Sentinel dimensions"
+
+jouavJOUAVCW25ELong2024:
+  geom:
+    excerpt: "4.35m span, 2.18m length, l/b=0.50"
+    context: "CW-25E fuselage dimensions"
+
+gottenFullConfigurationDrag2021:
+  s:drag:
+    excerpt: "Fuselage/misc ~50% of total parasitic drag"
+    context: "UAV drag breakdown analysis"

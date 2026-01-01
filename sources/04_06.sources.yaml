@@ -1,0 +1,27 @@
+# Section 04_06: Energy storage characteristics
+# Source attribution for battery specifications
+
+uavmodelUAVMODELX2400VTOL2024:
+  specs:
+    excerpt: "LiPo 6S 30000mAh, 2.5kg, ~133 Wh/kg"
+    context: "X2400 battery specifications"
+
+deltaquadDeltaQuadEvoEnterprise2024:
+  specs:
+    excerpt: "Semi-solid Li-ion 44000mAh, 4.0kg, ~180 Wh/kg"
+    context: "DeltaQuad Evo battery specifications"
+
+gensace/tattuTattu25000mAh228V2024:
+  specs:
+    excerpt: "HV LiPo 6S x2 50000mAh, 5.05kg, ~150 Wh/kg"
+    context: "AirMobi V25 battery specifications"
+
+cgbtshenzhenchanggongbeitechnology222VUAVSolid2025:
+  specs:
+    excerpt: "Solid-state Li-ion x4 108000mAh, 9.36kg, 270 Wh/kg"
+    context: "RTV320 E solid-state battery"
+
+sadraeyDesignUnmannedAerial2020:
+  s:battery:
+    excerpt: "Discharge efficiency 0.93-0.97 at 3-5C"
+    context: "Battery discharge efficiency by C-rate"

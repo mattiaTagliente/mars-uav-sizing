@@ -1,0 +1,95 @@
+# TEMPLATE: Source Attribution Sidecar File
+# Copy this template when creating a new section's sidecar.
+# 
+# File naming: {section_number}.sources.yaml
+# Example: 05_01.sources.yaml for Section 5.1
+#
+# This file is LANGUAGE-INDEPENDENT: both EN and IT manuscripts
+# reference the same sidecar files.
+#
+# ─────────────────────────────────────────────────────────────────
+# KEY RULES
+# ─────────────────────────────────────────────────────────────────
+#
+# 1. LOCATOR FORMAT:
+#    - Inline (manuscript): <!-- #loc -->  (with hash, lowercase)
+#    - YAML key:            loc:           (no hash, lowercase)
+#
+# 2. ALLOWED CHARACTERS: a-z, 0-9, :, ., _, -
+#    - No spaces, no uppercase, no "--" sequence
+#
+# 3. RANGES: Use single dash, e.g., p12-15, tbl3:r2-5
+#
+# ─────────────────────────────────────────────────────────────────
+# STRUCTURE
+# ─────────────────────────────────────────────────────────────────
+#
+# citationKey:                    # Must match key in Mars_UAV.bib
+#   locator:                      # Matches <!-- #locator --> (minus hash)
+#     excerpt: "..."              # REQUIRED: Direct quote/formula (≤100 chars)
+#     context: "..."              # REQUIRED: What this proves (≤80 chars)
+#     verified: true              # OPTIONAL: Set after manual verification
+#     note: "..."                 # OPTIONAL: Extra disambiguation
+#
+# ─────────────────────────────────────────────────────────────────
+# LOCATOR FORMATS BY SOURCE TYPE
+# ─────────────────────────────────────────────────────────────────
+#
+# BOOKS:        ch{n}, ch{n}:p{m}, ch{n}:p{m}-{k}, eq{x}, fig{n}, tbl{n}, app{x}
+# ARTICLES:     p{n}, p{n}-{m}, s{n}, fig{n}, tbl{n}, tbl{n}:r{m}, abs
+# REPORTS:      p{n}, s:{name}, fig{n}
+# WEBPAGES:     sec:{name}, {anchor}, tbl:{name}
+# DATASETS:     file:{name}, v{n}:{file}, v{n}:{file}:re{k}
+# THESES:       ch{n}:s{x}, exec, p{n}
+#
+# ─────────────────────────────────────────────────────────────────
+# EXAMPLE ENTRIES
+# ─────────────────────────────────────────────────────────────────
+
+# Example 1: Book with equation reference
+# Manuscript: [@sadraeyAircraftDesignSystems2013]<!-- #ch10:eq10.9 -->
+# sadraeyAircraftDesignSystems2013:
+#   ch10:eq10.9:
+#     excerpt: "e = 1.78(1 - 0.045×AR^0.68) - 0.64"
+#     context: "Oswald efficiency correlation for straight wings"
+#     verified: true
+
+# Example 2: Journal article with figure reference
+# Manuscript: [@hasslerMarsSurfaceRadiation2014]<!-- #fig3a -->
+# hasslerMarsSurfaceRadiation2014:
+#   fig3a:
+#     excerpt: "Surface dose rate: 76 ± 12 mGy/year"
+#     context: "Mars surface radiation measurement from MSL RAD"
+
+# Example 3: Technical report with abstract
+# Manuscript: [@johnsonMarsScienceHelicopter2020]<!-- #abs -->
+# johnsonMarsScienceHelicopter2020:
+#   abs:
+#     excerpt: "31 kg hexacopter, ~3.3 kW hover power"
+#     context: "Final MSH design parameters"
+
+# Example 4: Wind tunnel dataset
+# Manuscript: [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:e387:re61k -->
+# seligSummaryLowSpeedAirfoil1995:
+#   v1:e387:re61k:
+#     excerpt: "CL_max=1.22, alpha_stall=10.2, ld_max=46.6"
+#     context: "E387 performance at Re=61,000"
+#     note: "Data from E387A.DRG tabulated file"
+
+# Example 5: Webpage with section anchor
+# Manuscript: [@djiDJIZenmuseP12024]<!-- #sec:specs -->
+# djiDJIZenmuseP12024:
+#   sec:specs:
+#     excerpt: "Body mass: 800 g, with 35mm lens: 1350 g"
+#     context: "Zenmuse P1 mass specifications"
+
+# Example 6: Page range
+# Manuscript: [@torenbeekSynthesis1982]<!-- #ch5:p120-125 -->
+# torenbeekSynthesis1982:
+#   ch5:p120-125:
+#     excerpt: "Cruise drag equation derivation"
+#     context: "Full derivation of level flight drag"
+
+# ─────────────────────────────────────────────────────────────────
+# BEGIN ACTUAL ENTRIES BELOW
+# ─────────────────────────────────────────────────────────────────

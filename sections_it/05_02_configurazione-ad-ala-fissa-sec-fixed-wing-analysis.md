@@ -1,4 +1,4 @@
-# Analisi dei vincoli
+# Analisi dei vincoli {#sec:constraint-analysis-fixed-wing}
 
 ## Configurazione ad ala fissa {#sec:fixed-wing-analysis}
 
@@ -8,7 +8,7 @@ Questa sezione valuta se una configurazione ad ala fissa pura (aeroplano convenz
 
 #### Equilibrio delle forze
 
-Nel volo livellato, stazionario e non accelerato, due coppie di forze devono essere in equilibrio [@torenbeekSynthesisSubsonicAirplane1982, Capitolo 5]:
+Nel volo livellato, stazionario e non accelerato, due coppie di forze devono essere in equilibrio [@torenbeekSynthesisSubsonicAirplane1982, Capitolo 5]<!-- #ch5 -->:
 
 $$L = W$$ {#eq:lift-weight-equilibrium}
 
@@ -18,7 +18,7 @@ dove $L$ è la portanza, $W$ è il peso dell'aeromobile, $T$ è la spinta, e $D$
 
 #### Equazione della portanza
 
-La forza di portanza aerodinamica è espressa come [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.3]:
+La forza di portanza aerodinamica è espressa come [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.3]<!-- #ch5:s3 -->:
 
 $$L = \frac{1}{2} \rho V^2 S C_L$$ {#eq:lift-equation}
 
@@ -30,7 +30,7 @@ $$C_L = \frac{2W}{\rho V^2 S} = \frac{2(W/S)}{\rho V^2}$$ {#eq:cl-required}
 
 Questa equazione rivela un vincolo fondamentale per il volo su Marte: la bassa densità atmosferica ($\rho \approx 0.02000$ kg/m³) richiede alta velocità, grande superficie alare, o alto coefficiente di portanza per generare sufficiente portanza.
 
-La resistenza aerodinamica totale è [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.3]:
+La resistenza aerodinamica totale è [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.3]<!-- #ch5:s3:drag -->:
 
 $$D = \frac{1}{2} \rho V^2 S C_D$$ {#eq:drag-equation}
 
@@ -46,7 +46,7 @@ Utilizzando i valori da @tbl:aero-coefficients: $C_{D,0}$ = 0.03000, $e$ = 0.869
 
 #### L/D dalla polare di resistenza
 
-Il rapporto portanza-resistenza quantifica l'efficienza aerodinamica e determina direttamente le prestazioni di crociera [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.4]:
+Il rapporto portanza-resistenza quantifica l'efficienza aerodinamica e determina direttamente le prestazioni di crociera [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.4]<!-- #ch5:s4 -->:
 
 $$\frac{L}{D} = \frac{C_L}{C_D} = \frac{C_L}{C_{D,0} + C_L^2/(\pi \cdot AR \cdot e)}$$ {#eq:ld-ratio}
 
@@ -66,17 +66,17 @@ La velocità alla quale si verifica $(L/D)_\text{max}$ si trova sostituendo $C_L
 
 $$V_{(L/D)\text{max}} = \sqrt{\frac{2(W/S)}{\rho C_L^*}}$$ {#eq:v-ld-max}
 
-Per l'UAV marziano con stima $W/S \approx 7.300$ N/m² (dal vincolo di stallo), $\rho$ = 0.01960 kg/m³, e $C_L^*$ = 0.7011:
+Per l'UAV marziano con stima $W/S \approx 13.82$ N/m² (dal vincolo di stallo a $V_\text{min}$ = 35.04 m/s), $\rho$ = 0.01960 kg/m³, e $C_L^*$ = 0.7011:
 
-$$V_{(L/D)\text{max}} = \sqrt{\frac{2 \times 7.300}{0.01960 \times 0.7011}} = \sqrt{1063} = 32.61 \text{ m/s}$$
+$$V_{(L/D)\text{max}} = \sqrt{\frac{2 \times 13.82}{0.01960 \times 0.7011}} = \sqrt{2012} = 44.86 \text{ m/s}$$
 
-Questa velocità ottimale è inferiore alla velocità di crociera di progetto di 40.00 m/s, indicando che l'UAV marziano opererà a un coefficiente di portanza inferiore a $C_L^*$ durante la crociera. A 40.00 m/s, l'L/D effettivo rimane alto (circa 10.50 per l'ala pura, ridotto leggermente per la configurazione QuadPlane).
+Questa velocità ottimale è superiore alla velocità di crociera di progetto di 40.00 m/s, indicando che l'UAV marziano opererà a un coefficiente di portanza superiore a $C_L^*$ durante la crociera (nel regime dominato dalla resistenza indotta). A 40.00 m/s, l'L/D effettivo rimane vicino al massimo (circa 11.0 per l'ala pura, ridotto leggermente per la configurazione QuadPlane a causa della resistenza dei rotori fermi).
 
 ### Analisi della potenza di crociera
 
 #### Potenza richiesta per il volo livellato
 
-La potenza richiesta per vincere la resistenza in volo livellato è il prodotto della forza di resistenza e della velocità [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.4]:
+La potenza richiesta per vincere la resistenza in volo livellato è il prodotto della forza di resistenza e della velocità [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.4]<!-- #ch5:s4:power -->:
 
 $$P_\text{aero} = D \times V$$ {#eq:power-aero}
 
@@ -88,7 +88,7 @@ Questa è la potenza aerodinamica che deve essere fornita al flusso d'aria per m
 
 #### Potenza all'albero ed efficienza dell'elica
 
-La potenza all'albero richiesta dal motore tiene conto dell'efficienza dell'elica [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.3.4]:
+La potenza all'albero richiesta dal motore tiene conto dell'efficienza dell'elica [@torenbeekSynthesisSubsonicAirplane1982, Sezione 5.3.4]<!-- #ch5:s3.4 -->:
 
 $$P_\text{albero} = \frac{P_\text{aero}}{\eta_\text{elica}} = \frac{W \times V}{(L/D) \times \eta_\text{elica}}$$ {#eq:shaft-power}
 
@@ -142,13 +142,15 @@ Il vincolo di stallo, espresso come carico alare massimo ammissibile, è derivat
 
 $$\frac{W}{S} \leq \frac{1}{2} \rho V_\text{min}^2 C_{L,\text{max}}$$
 
-Utilizzando $C_{L,\text{max}}$ = 1.200 (da @tbl:aero-coefficients), $\rho$ = 0.01960 kg/m³, e una velocità di stallo target di $V_\text{stallo}$ = 30.00 m/s:
+Utilizzando $C_{L,\text{max}}$ = 1.150 (da @tbl:aero-coefficients), $\rho$ = 0.01960 kg/m³, e $V_\text{min}$ = 35.04 m/s (dove $V_\text{min}$ = 1.2 × $V_\text{stallo}$ secondo @eq:v-min-constraint, con $V_\text{stallo}$ = 29.2 m/s):
 
-$$\frac{W}{S} \leq \frac{1}{2} \times 0.01960 \times 30.00^2 \times 1.200 = 10.58 \text{ N/m}^2$$
+$$\frac{W}{S} \leq \frac{1}{2} \times 0.01960 \times 35.04^2 \times 1.150 = 13.82 \text{ N/m}^2$$
 
 Questo vincola il carico alare massimo ammissibile. Su un diagramma di matching, questo appare come una linea verticale (W/S costante) indipendente dal carico di potenza.
 
 Il vincolo di carico alare su Marte è estremamente basso rispetto agli aeromobili terrestri (tipico $W/S$ = 1500-5000 N/m² per aeromobili leggeri). Questa è una conseguenza diretta dell'atmosfera rarefatta e rappresenta un driver significativo della geometria dell'aeromobile.
+
+Il diagramma di matching dell'ala fissa è presentato in @fig:matching-chart-fixed-wing in @sec:comparative-results.
 
 ### Analisi dell'autonomia
 
@@ -217,7 +219,7 @@ La configurazione ad ala fissa dimostra eccellenti prestazioni di crociera. Tutt
 
 #### Analisi della corsa di decollo
 
-La distanza di corsa di decollo per un decollo convenzionale è [@torenbeekSynthesisSubsonicAirplane1982; @sadraeyAircraftDesignSystems2013]:
+La distanza di corsa di decollo per un decollo convenzionale è [@torenbeekSynthesisSubsonicAirplane1982]<!-- #appk --> [@sadraeyAircraftDesignSystems2013]<!-- #ch4:s3.4 -->:
 
 $$S_\text{TO} = \frac{V_\text{TO}^2}{2 \bar{a}}$$ {#eq:takeoff-roll}
 
@@ -233,39 +235,29 @@ dove $\mu_r$ è il coefficiente di attrito di rotolamento (tipicamente 0.02-0.05
 
 Su Marte, diversi fattori aumentano la distanza di decollo:
 
-Riguardo all'effetto della bassa densità sulla velocità di stallo, la velocità di stallo scala inversamente con la radice quadrata della densità. Per l'UAV marziano con $W/S = 7.3$ N/m² (al limite del vincolo di stallo), $C_{L,\text{max}} = 1.20$, e $\rho = 0.0196$ kg/m³:
+Riguardo all'effetto della bassa densità sulla velocità di stallo, la velocità di stallo scala inversamente con la radice quadrata della densità. Per l'UAV marziano con $W/S$ = 13.82 N/m² (al limite del vincolo di stallo), $C_{L,\text{max}}$ = 1.15, e $\rho$ = 0.0196 kg/m³:
 
-$$V_\text{stallo} = \sqrt{\frac{2 \times 7.3}{0.0196 \times 1.20}} = \sqrt{619} = 24.9 \text{ m/s}$$
+$$V_\text{stallo} = \sqrt{\frac{2 \times 13.82}{0.0196 \times 1.15}} = \sqrt{1228} = 35.0 \text{ m/s}$$
 
-$$V_\text{TO} = 1.1 \times 24.9 = 27.4 \text{ m/s}$$
+$$V_\text{TO} = 1.1 \times 35.0 = 38.5 \text{ m/s}$$
 
-Riguardo all'effetto della bassa densità sull'accelerazione, sia la spinta (dall'elica) che l'assistenza dell'attrito di rotolamento (dalla portanza durante la corsa) sono ridotti dalla bassa densità. La spinta disponibile da un'elica scala approssimativamente con la densità, e la portanza che solleva il carico sulle ruote è anch'essa ridotta.
+Riguardo all'effetto della bassa densità sull'accelerazione, sia la spinta (dall'elica) che l'assistenza dell'attrito di rotolamento (dalla portanza durante la corsa) sono ridotti dalla bassa densità. La spinta disponibile da un'elica scala approssimativamente con la densità, e la portanza che alleggerisce il carico sulle ruote è anch'essa ridotta.
 
-Per la stima della corsa di decollo, utilizzando la stima standard della corsa di decollo con la spinta disponibile e le condizioni marziane, assumendo un'accelerazione media di circa $a \approx 0.7$ m/s² (tenendo conto della riduzione di spinta e gravità):
+Per la stima della corsa di decollo, utilizzando la stima standard della corsa di decollo con spinta disponibile e condizioni marziane, assumendo un'accelerazione media di circa $a \approx 0.7$ m/s² (tenendo conto della spinta ridotta e della gravità):
 
-$$S_\text{TO} = \frac{27.40^2}{2 \times 0.7000} = \frac{750.8}{1.400} = 536.3 \text{ m}$$ {#eq:takeoff-distance}
+$$S_\text{TO} = \frac{38.5^2}{2 \times 0.7000} = \frac{1482}{1.400} = 1059 \text{ m}$$ {#eq:takeoff-distance}
 
-La corsa di decollo di circa 536 m è impraticabile per le operazioni su Marte—non esiste una pista preparata di questa lunghezza né può essere ragionevolmente costruita vicino a un habitat.
+La corsa di decollo di circa 1060 m è impraticabile per le operazioni su Marte—nessuna pista preparata di questa lunghezza esiste o può ragionevolmente essere costruita vicino a un habitat.
 
-Anche con il basso carico alare vincolato dalla velocità di stallo (7.3 N/m²), la lunghezza della pista richiesta è proibitiva. Il problema è che la bassa densità atmosferica richiede una distanza di corsa di decollo sostanziale indipendentemente dal dimensionamento dell'ala.
+Anche con il carico alare vincolato dal requisito di velocità di stallo (13.82 N/m² al punto di progetto), la lunghezza della pista richiesta è proibitiva. Il problema è che la bassa densità atmosferica richiede una distanza di corsa di decollo sostanziale indipendentemente dal dimensionamento dell'ala.
 
 #### Metodi di lancio alternativi
 
-Esistono diversi metodi di lancio alternativi per aeromobili ad ala fissa senza piste, ma nessuno è pratico per le operazioni marziane da un habitat.
-
-Il lancio con catapulta o rotaia richiede un'infrastruttura di terra sostanziale, inclusi il meccanismo di lancio, le rotaie guida e i sistemi di accumulo di energia, nessuno dei quali è disponibile in un ambiente abitativo marziano. Questo approccio aggiunge complessità operativa e carico di lavoro per l'equipaggio, poiché ogni lancio richiede l'installazione e il recupero dell'equipaggiamento.
-
-Il decollo assistito da razzo (RATO) richiede booster a razzo solido che aggiungono massa significativa e sono monouso per volo, richiedendo set multipli per operazioni ripetute. Questo metodo presenta un pericolo per la sicurezza vicino a un habitat con equipaggio, e i prodotti di scarico possono contaminare le operazioni scientifiche.
-
-Il lancio con sgancio da pallone richiede il trasporto dell'aeromobile in quota tramite pallone prima di rilasciarlo, ma non esiste un'infrastruttura di palloni su Marte. Questo approccio aggiunge complessità al concetto operativo, e il tempo di ascesa combinato con i vincoli di posizionamento limita la flessibilità operativa.
-
-Il lancio aereo da un aeromobile portante non è applicabile perché non esiste un aeromobile portante su Marte.
-
-Tutti i metodi di lancio alternativi non soddisfano i requisiti operativi per operazioni ripetute e autonome da un habitat marziano senza un'infrastruttura complessa.
+Esistono diversi metodi di lancio alternativi per aeromobili ad ala fissa senza piste, ma nessuno è pratico per le operazioni marziane da un habitat: il lancio con catapulta o rotaia richiede un'infrastruttura di terra sostanziale, inclusi il meccanismo di lancio, le rotaie guida e i sistemi di accumulo di energia, nessuno dei quali è disponibile in un ambiente abitativo marziano; il decollo assistito da razzo (RATO) richiede booster a razzo solido che aggiungono massa significativa e sono monouso per volo, presentando un pericolo per la sicurezza vicino a un habitat con equipaggio; il lancio con sgancio da pallone richiede il trasporto dell'aeromobile in quota tramite pallone prima di rilasciarlo, ma non esiste un'infrastruttura di palloni su Marte; e il lancio aereo da un aeromobile portante non è applicabile perché non esiste un aeromobile portante su Marte. Tutti i metodi di lancio alternativi non soddisfano i requisiti operativi per operazioni ripetute e autonome da un habitat marziano senza un'infrastruttura complessa.
 
 #### Problema dell'atterraggio
 
-L'atterraggio convenzionale presenta sfide simili. La velocità di avvicinamento di circa $V_\text{avvicinamento} \approx 1.3 \times V_\text{stallo} = 40.00$ m/s è alta. La decelerazione è limitata dalle basse forze di attrito, richiedendo centinaia o migliaia di metri di corsa di atterraggio. È richiesta una superficie preparata per evitare ostacoli e fornire una frenata costante. L'alta velocità di avvicinamento aumenta anche la sensibilità ai disturbi del vento. Il problema dell'atterraggio è potenzialmente più vincolante del decollo, poiché c'è meno margine di errore e nessuna opportunità per una riattaccata in emergenza senza capacità di hovering.
+L'atterraggio convenzionale presenta sfide simili. La velocità di avvicinamento di circa $V_\text{avvicinamento} \approx 1.3 \times V_\text{stallo}$ = 45.5 m/s è alta. La decelerazione è limitata dalle basse forze di attrito, richiedendo centinaia o migliaia di metri di corsa di atterraggio. È richiesta una superficie preparata per evitare ostacoli e fornire una frenata costante. L'alta velocità di avvicinamento aumenta anche la sensibilità ai disturbi del vento. Il problema dell'atterraggio è potenzialmente più vincolante del decollo, poiché c'è meno margine di errore e nessuna opportunità per una riattaccata in emergenza senza capacità di hovering.
 
 ### Valutazione di fattibilità
 
@@ -277,10 +269,10 @@ L'atterraggio convenzionale presenta sfide simili. La velocità di avvicinamento
 
 | Requisito | Obiettivo | Capacità ala fissa | Stato |
 |:------------|:-------|:----------------------|:------:|
-| Autonomia di crociera | 60-90 min | 120.9 min | CONFORME |
-| Raggio operativo | 50 km | 145.1 km | CONFORME |
+| Autonomia di crociera | 60-90 min | 120.5 min | CONFORME |
+| Raggio operativo | 50 km | 144.6 km | CONFORME |
 | Capacità VTOL | Richiesta | Non possibile | NON CONFORME |
-| Requisito di pista | Nessuno | 536 m di corsa | NON CONFORME |
+| Requisito di pista | Nessuno | 1060 m di corsa | NON CONFORME |
 
 La configurazione ad ala fissa supera i requisiti di autonomia e raggio (margine di autonomia +101%), mostrando l'effetto della crociera ad alto L/D. Tuttavia, non soddisfa il requisito VTOL, che è non negoziabile per le operazioni marziane senza infrastruttura di pista.
 
@@ -288,7 +280,7 @@ La configurazione ad ala fissa supera i requisiti di autonomia e raggio (margine
 
 La configurazione ad ala fissa pura non può soddisfare il requisito VTOL per le operazioni dell'UAV marziano.
 
-Nonostante raggiunga $(L/D)$ = 11.68 e dimostri autonomia teorica (120.9 min) e raggio (290.3 km) che superano sostanzialmente i requisiti di missione, la configurazione ad ala fissa non può decollare o atterrare senza una pista preparata di circa 536 m. Tale infrastruttura non esiste su Marte e non può essere ragionevolmente costruita per operazioni UAV ripetute da un habitat con equipaggio.
+Nonostante raggiunga $(L/D)$ = 11.68 e dimostri autonomia teorica (120.5 min con riserva energetica del 20%) e raggio (289 km) che superano sostanzialmente i requisiti di missione, la configurazione ad ala fissa non può decollare o atterrare senza una pista preparata di circa 1060 m. Tale infrastruttura non esiste su Marte e non può essere ragionevolmente costruita per operazioni UAV ripetute da un habitat con equipaggio.
 
 L'analisi dell'ala fissa dimostra tre punti chiave. Primo, l'efficienza aerodinamica non è il fattore limitante per l'autonomia dell'UAV marziano; piuttosto, il vincolo infrastrutturale (VTOL) domina la selezione della configurazione. Secondo, un L/D moderato è raggiungibile con un'attenta selezione del profilo alare ai bassi numeri di Reynolds caratteristici del volo marziano, sebbene i valori siano inferiori rispetto agli aeromobili terrestri a causa del difficile ambiente aerodinamico. Terzo, la crociera ad ala fissa dovrebbe essere sfruttata in qualsiasi configurazione fattibile per massimizzare il raggio e l'autonomia.
 

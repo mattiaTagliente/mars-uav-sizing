@@ -1,0 +1,505 @@
+# Airfoil Performance Data for Mars UAV Feasibility Study
+# =========================================================
+#
+# Sources:
+# - UIUC Low-Speed Airfoil Tests Vol. 1 (Selig et al., 1995)
+# - UIUC Low-Speed Airfoil Tests Vol. 5 (Williamson et al., 2012)
+#
+# Primary Reference:
+#   Selig, M.S., Guglielmo, J.J., Broeren, A.P., and Giguère, P.
+#   "Summary of Low-Speed Airfoil Data, Vol. 1"
+#   SoarTech Publications, Virginia Beach, VA, 1995
+#   ISBN: 0-9646747-1-8
+#
+# Additional Reference:
+#   Williamson, G.A., McGranahan, B.D., Broughton, B.A., Deters, R.W.,
+#   Brandt, J.B., and Selig, M.S.
+#   "Summary of Low-Speed Airfoil Data, Vol. 5"
+#   University of Illinois at Urbana-Champaign, 2012
+#
+# Data URL: https://m-selig.ae.illinois.edu/pd.html
+# Citation Keys: @seligSummaryLowSpeedAirfoil1995, @williamsonSummaryLowSpeedAirfoil2012
+# Access Date: 2025-12-26
+#
+# Notes:
+# - All airfoils selected have experimental data at Re ≈ 60,000 (target Mars conditions)
+# - Data extracted from original UIUC tabulated files (DRG format)
+# - All tests performed with "clean" (no trip) configurations
+
+metadata:
+  sources:
+    - reference_key: "@seligSummaryLowSpeedAirfoil1995"
+      authors: ["M.S. Selig", "J.J. Guglielmo", "A.P. Broeren", "P. Giguère"]
+      title: "Summary of Low-Speed Airfoil Data, Vol. 1"
+      publisher: "SoarTech Publications"
+      year: 1995
+      isbn: "0-9646747-1-8"
+    - reference_key: "@williamsonSummaryLowSpeedAirfoil2012"
+      authors: ["G.A. Williamson", "B.D. McGranahan", "B.A. Broughton", "R.W. Deters", "J.B. Brandt", "M.S. Selig"]
+      title: "Summary of Low-Speed Airfoil Data, Vol. 5"
+      publisher: "University of Illinois at Urbana-Champaign"
+      year: 2012
+  data_source:
+    url: "https://m-selig.ae.illinois.edu/pd.html"
+    format: "ASCII tabulated data files"
+    access_date: "2025-12-26"
+  test_facility:
+    name: "UIUC Subsonic Aerodynamics Laboratory"
+    description: "3x4 ft low-speed wind tunnel"
+    reynolds_range: [30000, 500000]
+
+# Mars UAV Operating Conditions Summary
+# Re = ρVc/μ = 0.020 × 40 × 0.825 / (1.1×10⁻⁵) = 60,000
+# Chord sized to match available experimental data at Re = 60,000
+
+airfoils:
+  # ==========================================================================
+  # E387 (Eppler 387) - Widely-studied low-Reynolds benchmark airfoil
+  # ==========================================================================
+  - name: e387
+    full_name: "Eppler 387"
+    designer: "Richard Eppler"
+    model_builder: "B. Champine"
+    source_volume: 1
+    characteristics:
+      type: "Low-Reynolds cambered airfoil"
+      thickness_ratio: 0.091  # 9.1% t/c
+      max_camber: 0.037      # 3.7% camber at ~40% chord
+      notes: "Extensively validated benchmark for low-Re applications"
+    
+    source_file_drag: "E387A.DRG"
+    
+    performance_data:
+      # Re = 61,000 (closest to Mars operating conditions)
+      - reynolds: 61000
+        source_location: "E387A.DRG, Average Reynolds 61000"
+        data_points: 11
+        cl_max: 1.222
+        alpha_at_cl_max: 10.15
+        cd_min: 0.0228
+        cl_at_cd_min: 0.247
+        ld_data:
+          - {alpha: -5.36, cl: -0.250, cd: 0.0427, ld: -5.85}
+          - {alpha: -3.71, cl: -0.124, cd: 0.0245, ld: -5.06}
+          - {alpha: -2.12, cl: 0.058, cd: 0.0233, ld: 2.49}
+          - {alpha: -0.68, cl: 0.247, cd: 0.0228, ld: 10.83}
+          - {alpha: 0.93, cl: 0.436, cd: 0.0281, ld: 15.52}
+          - {alpha: 2.59, cl: 0.610, cd: 0.0325, ld: 18.77}
+          - {alpha: 4.18, cl: 0.773, cd: 0.0371, ld: 20.84}
+          - {alpha: 5.42, cl: 0.888, cd: 0.0387, ld: 22.95}
+          - {alpha: 6.99, cl: 1.039, cd: 0.0377, ld: 27.56}
+          - {alpha: 8.82, cl: 1.198, cd: 0.0257, ld: 46.61}  # (L/D)_max
+          - {alpha: 10.15, cl: 1.222, cd: 0.0393, ld: 31.09}
+        derived_metrics:
+          ld_max: 46.61
+          cl_at_ld_max: 1.198
+          alpha_at_ld_max: 8.82
+
+  # ==========================================================================
+  # SD8000 - Low-drag symmetric-like airfoil
+  # ==========================================================================
+  - name: sd8000
+    full_name: "Selig/Donovan 8000"
+    designer: "M. Selig / P. Donovan"
+    model_builder: "R. Wagner / R. Olsen"
+    source_volume: 1
+    characteristics:
+      type: "Low-drag thin airfoil"
+      thickness_ratio: 0.10  # ~10% t/c
+      notes: "Designed for low drag at low Reynolds numbers"
+    
+    source_file_drag: "SD8000.DRG"
+    
+    performance_data:
+      - reynolds: 60800
+        source_location: "SD8000.DRG, Average Reynolds 60800"
+        data_points: 12
+        cl_max: 1.153
+        alpha_at_cl_max: 11.52
+        cd_min: 0.0142
+        cl_at_cd_min: -0.076
+        ld_data:
+          - {alpha: -5.55, cl: -0.344, cd: 0.0302, ld: -11.39}
+          - {alpha: -3.88, cl: -0.201, cd: 0.0208, ld: -9.66}
+          - {alpha: -2.36, cl: -0.076, cd: 0.0142, ld: -5.35}
+          - {alpha: -0.81, cl: 0.065, cd: 0.0160, ld: 4.06}
+          - {alpha: 0.80, cl: 0.241, cd: 0.0144, ld: 16.74}
+          - {alpha: 2.29, cl: 0.476, cd: 0.0149, ld: 31.95}
+          - {alpha: 3.97, cl: 0.682, cd: 0.0172, ld: 39.65}
+          - {alpha: 5.36, cl: 0.796, cd: 0.0200, ld: 39.80}
+          - {alpha: 6.96, cl: 0.935, cd: 0.0206, ld: 45.39}  # (L/D)_max
+          - {alpha: 8.36, cl: 1.034, cd: 0.0276, ld: 37.46}
+          - {alpha: 10.01, cl: 1.130, cd: 0.0341, ld: 33.14}
+          - {alpha: 11.52, cl: 1.153, cd: 0.0657, ld: 17.55}
+        derived_metrics:
+          ld_max: 45.39
+          cl_at_ld_max: 0.935
+          alpha_at_ld_max: 6.96
+
+  # ==========================================================================
+  # SD7037B - Popular general low-Re airfoil
+  # ==========================================================================
+  - name: sd7037b
+    full_name: "Selig/Donovan 7037 (B)"
+    designer: "M. Selig / P. Donovan"
+    model_builder: "D. Thompson"
+    source_volume: 1
+    characteristics:
+      type: "General-purpose low-Reynolds airfoil"
+      thickness_ratio: 0.097  # ~9.7% t/c
+      notes: "Popular for RC sailplanes and low-Re applications"
+    
+    source_file_drag: "SD7037B.DRG"
+    
+    performance_data:
+      - reynolds: 60500
+        source_location: "SD7037B.DRG, Average Reynolds 60500"
+        data_points: 11
+        cl_max: 1.221
+        alpha_at_cl_max: 11.13
+        cd_min: 0.0145
+        cl_at_cd_min: 0.053
+        ld_data:
+          - {alpha: -4.35, cl: -0.176, cd: 0.0300, ld: -5.87}
+          - {alpha: -2.87, cl: -0.083, cd: 0.0230, ld: -3.61}
+          - {alpha: -1.24, cl: 0.053, cd: 0.0145, ld: 3.66}
+          - {alpha: 0.28, cl: 0.226, cd: 0.0174, ld: 12.99}
+          - {alpha: 1.86, cl: 0.486, cd: 0.0216, ld: 22.50}
+          - {alpha: 3.42, cl: 0.659, cd: 0.0258, ld: 25.54}
+          - {alpha: 5.02, cl: 0.800, cd: 0.0257, ld: 31.13}
+          - {alpha: 6.34, cl: 0.921, cd: 0.0252, ld: 36.55}  # (L/D)_max
+          - {alpha: 8.24, cl: 1.051, cd: 0.0289, ld: 36.37}
+          - {alpha: 9.39, cl: 1.137, cd: 0.0335, ld: 33.94}
+          - {alpha: 11.13, cl: 1.221, cd: 0.0414, ld: 29.49}
+        derived_metrics:
+          ld_max: 36.55
+          cl_at_ld_max: 0.921
+          alpha_at_ld_max: 6.34
+
+  # ==========================================================================
+  # S7055 - Moderate camber design balancing lift and drag
+  # ==========================================================================
+  - name: s7055
+    full_name: "Selig 7055"
+    designer: "Michael Selig"
+    model_builder: "G. Jones"
+    source_volume: 1
+    characteristics:
+      type: "Balanced low-Reynolds airfoil"
+      thickness_ratio: 0.100  # 10% t/c
+      max_camber: 0.046      # 4.6% camber
+      notes: "Compromise design - moderate lift with low drag"
+    
+    source_file_drag: "S7055.DRG"
+    
+    performance_data:
+      - reynolds: 60700
+        source_location: "S7055.DRG, Average Reynolds 60700"
+        data_points: 10
+        cl_max: 1.230
+        alpha_at_cl_max: 9.65
+        cd_min: 0.0229
+        cl_at_cd_min: 0.180
+        ld_data:
+          - {alpha: -4.55, cl: -0.207, cd: 0.0341, ld: -6.07}
+          - {alpha: -2.72, cl: 0.008, cd: 0.0277, ld: 0.29}
+          - {alpha: -0.93, cl: 0.180, cd: 0.0229, ld: 7.86}
+          - {alpha: 0.40, cl: 0.348, cd: 0.0271, ld: 12.84}
+          - {alpha: 2.33, cl: 0.563, cd: 0.0298, ld: 18.89}
+          - {alpha: 3.49, cl: 0.688, cd: 0.0329, ld: 20.91}
+          - {alpha: 5.29, cl: 0.875, cd: 0.0333, ld: 26.28}
+          - {alpha: 6.57, cl: 0.993, cd: 0.0311, ld: 31.93}
+          - {alpha: 8.32, cl: 1.137, cd: 0.0329, ld: 34.56}
+          - {alpha: 9.65, cl: 1.230, cd: 0.0296, ld: 41.55}  # (L/D)_max
+        derived_metrics:
+          ld_max: 41.55
+          cl_at_ld_max: 1.230
+          alpha_at_ld_max: 9.65
+
+  # ==========================================================================
+  # AG455ct-02r - Thin reflexed camber
+  # ==========================================================================
+  - name: ag455ct-02r
+    full_name: "AG455ct-02r"
+    designer: "Mark Drela / Ashok Gopalarathnam"
+    source_volume: 5
+    characteristics:
+      type: "Thin cambered airfoil with reflex"
+      notes: "Designed for flying wings; reflexed trailing edge"
+    
+    source_file_drag: "AG455ct-02r.DRG"
+    
+    performance_data:
+      - reynolds: 60157
+        source_location: "AG455ct-02r.DRG (Williamson Vol.5, run bm05458)"
+        data_points: 17
+        cl_max: 1.061
+        alpha_at_cl_max: 9.22
+        cd_min: 0.0109
+        cl_at_cd_min: 0.205
+        ld_data:
+          - {alpha: -3.06, cl: -0.002, cd: 0.0121, ld: -0.17}
+          - {alpha: -2.02, cl: 0.096, cd: 0.0125, ld: 7.68}
+          - {alpha: -1.45, cl: 0.162, cd: 0.0126, ld: 12.86}
+          - {alpha: -1.01, cl: 0.205, cd: 0.0109, ld: 18.81}
+          - {alpha: -0.47, cl: 0.253, cd: 0.0121, ld: 20.91}
+          - {alpha: 0.02, cl: 0.301, cd: 0.0158, ld: 19.05}
+          - {alpha: 0.61, cl: 0.346, cd: 0.0126, ld: 27.46}
+          - {alpha: 1.09, cl: 0.390, cd: 0.0162, ld: 24.07}
+          - {alpha: 2.14, cl: 0.560, cd: 0.0140, ld: 40.00}
+          - {alpha: 3.20, cl: 0.652, cd: 0.0188, ld: 34.68}
+          - {alpha: 4.13, cl: 0.721, cd: 0.0218, ld: 33.07}
+          - {alpha: 5.24, cl: 0.807, cd: 0.0275, ld: 29.35}
+          - {alpha: 6.17, cl: 0.881, cd: 0.0280, ld: 31.46}  # (L/D)_max region
+          - {alpha: 7.17, cl: 0.954, cd: 0.0324, ld: 29.44}
+          - {alpha: 8.25, cl: 1.024, cd: 0.0405, ld: 25.28}
+          - {alpha: 9.22, cl: 1.061, cd: 0.0547, ld: 19.40}
+          - {alpha: 10.26, cl: 1.030, cd: 0.1461, ld: 7.05}
+        derived_metrics:
+          ld_max: 40.00
+          cl_at_ld_max: 0.560
+          alpha_at_ld_max: 2.14
+
+  # ==========================================================================
+  # AG35-r - Low-drag reflexed airfoil
+  # ==========================================================================
+  - name: ag35-r
+    full_name: "AG35-r"
+    designer: "Mark Drela / Ashok Gopalarathnam"
+    source_volume: 5
+    characteristics:
+      type: "Thin reflexed airfoil"
+      notes: "Designed for flying wings and tailless aircraft"
+    
+    source_file_drag: "AG35-r.DRG"
+    
+    performance_data:
+      - reynolds: 59904
+        source_location: "AG35-r.DRG (Williamson Vol.5, run bm05388)"
+        data_points: 23
+        cl_max: 1.035
+        alpha_at_cl_max: 11.43
+        cd_min: 0.0121
+        cl_at_cd_min: -0.082
+        ld_data:
+          - {alpha: -5.90, cl: -0.375, cd: 0.0441, ld: -8.50}
+          - {alpha: -4.90, cl: -0.298, cd: 0.0284, ld: -10.49}
+          - {alpha: -3.87, cl: -0.225, cd: 0.0222, ld: -10.14}
+          - {alpha: -2.89, cl: -0.153, cd: 0.0187, ld: -8.18}
+          - {alpha: -1.90, cl: -0.082, cd: 0.0121, ld: -6.78}
+          - {alpha: -1.37, cl: -0.055, cd: 0.0140, ld: -3.93}
+          - {alpha: -0.79, cl: 0.003, cd: 0.0149, ld: 0.20}
+          - {alpha: -0.36, cl: 0.051, cd: 0.0143, ld: 3.57}
+          - {alpha: 0.20, cl: 0.096, cd: 0.0144, ld: 6.67}
+          - {alpha: 0.60, cl: 0.146, cd: 0.0172, ld: 8.49}
+          - {alpha: 1.21, cl: 0.251, cd: 0.0229, ld: 10.96}
+          - {alpha: 1.78, cl: 0.371, cd: 0.0206, ld: 18.01}
+          - {alpha: 2.30, cl: 0.428, cd: 0.0224, ld: 19.11}
+          - {alpha: 2.79, cl: 0.471, cd: 0.0229, ld: 20.57}
+          - {alpha: 3.33, cl: 0.518, cd: 0.0260, ld: 19.92}
+          - {alpha: 4.32, cl: 0.594, cd: 0.0263, ld: 22.59}
+          - {alpha: 5.36, cl: 0.675, cd: 0.0263, ld: 25.67}
+          - {alpha: 6.38, cl: 0.760, cd: 0.0278, ld: 27.34}
+          - {alpha: 7.38, cl: 0.836, cd: 0.0299, ld: 27.96}
+          - {alpha: 8.40, cl: 0.901, cd: 0.0302, ld: 29.83}
+          - {alpha: 9.42, cl: 0.962, cd: 0.0313, ld: 30.73}  # (L/D)_max
+          - {alpha: 10.44, cl: 1.002, cd: 0.0394, ld: 25.43}
+          - {alpha: 11.43, cl: 1.035, cd: 0.0518, ld: 19.98}
+        derived_metrics:
+          ld_max: 30.73
+          cl_at_ld_max: 0.962
+          alpha_at_ld_max: 9.42
+
+  # ==========================================================================
+  # AG12 - Thin symmetric-like airfoil
+  # ==========================================================================
+  - name: ag12
+    full_name: "AG12"
+    designer: "Mark Drela / Ashok Gopalarathnam"
+    source_volume: 5
+    characteristics:
+      type: "Thin low-camber airfoil"
+      notes: "Low-drag design for high-speed gliders"
+    
+    source_file_drag: "AG12.DRG"
+    
+    performance_data:
+      - reynolds: 59972
+        source_location: "AG12.DRG (Williamson Vol.5, run bb05637)"
+        data_points: 18
+        cl_max: 1.055
+        alpha_at_cl_max: 10.27
+        cd_min: 0.0105
+        cl_at_cd_min: 0.059
+        ld_data:
+          - {alpha: -3.01, cl: -0.105, cd: 0.0138, ld: -7.61}
+          - {alpha: -1.97, cl: -0.028, cd: 0.0127, ld: -2.20}
+          - {alpha: -1.54, cl: 0.012, cd: 0.0112, ld: 1.07}
+          - {alpha: -1.03, cl: 0.059, cd: 0.0105, ld: 5.62}
+          - {alpha: -0.46, cl: 0.116, cd: 0.0122, ld: 9.51}
+          - {alpha: 0.04, cl: 0.159, cd: 0.0116, ld: 13.71}
+          - {alpha: 1.12, cl: 0.262, cd: 0.0119, ld: 22.02}
+          - {alpha: 2.11, cl: 0.393, cd: 0.0148, ld: 26.55}
+          - {alpha: 3.21, cl: 0.541, cd: 0.0159, ld: 34.03}
+          - {alpha: 4.16, cl: 0.612, cd: 0.0184, ld: 33.26}
+          - {alpha: 5.24, cl: 0.705, cd: 0.0204, ld: 34.56}
+          - {alpha: 6.23, cl: 0.795, cd: 0.0248, ld: 32.06}  # (L/D)_max region
+          - {alpha: 7.24, cl: 0.884, cd: 0.0275, ld: 32.15}
+          - {alpha: 8.23, cl: 0.947, cd: 0.0402, ld: 23.56}
+          - {alpha: 9.30, cl: 0.997, cd: 0.0676, ld: 14.75}
+          - {alpha: 10.27, cl: 1.055, cd: 0.1340, ld: 7.87}
+          - {alpha: 11.32, cl: 0.993, cd: 0.1693, ld: 5.87}
+        derived_metrics:
+          ld_max: 34.56
+          cl_at_ld_max: 0.705
+          alpha_at_ld_max: 5.24
+
+# ==========================================================================
+# Summary Comparison Table (for manuscript Table 5.1)
+# ==========================================================================
+comparison_summary:
+  # Target: Re ~ 60,000 (Mars operating conditions)
+  target_reynolds: 60000
+  target_application: "Mars UAV cruise at Re ≈ 60,000"
+  
+  # All airfoils now have data at the target Reynolds number
+  
+  comparison:
+    - airfoil: e387
+      test_reynolds: 61000
+      cl_max: 1.22
+      alpha_stall: 10.2
+      ld_max: 46.6
+      cl_at_ld_max: 1.20
+      cd_at_ld_max: 0.026
+      source_file: "E387A.DRG"
+      source_ref: "@seligSummaryLowSpeedAirfoil1995"
+      notes: "Best overall efficiency; extensively validated benchmark"
+    
+    - airfoil: sd8000
+      test_reynolds: 60800
+      cl_max: 1.15
+      alpha_stall: 11.5
+      ld_max: 45.4
+      cl_at_ld_max: 0.94
+      cd_at_ld_max: 0.021
+      source_file: "SD8000.DRG"
+      source_ref: "@seligSummaryLowSpeedAirfoil1995"
+      notes: "Very low drag; second-best efficiency"
+    
+    - airfoil: s7055
+      test_reynolds: 60700
+      cl_max: 1.23
+      alpha_stall: 9.7
+      ld_max: 41.6
+      cl_at_ld_max: 1.23
+      cd_at_ld_max: 0.030
+      source_file: "S7055.DRG"
+      source_ref: "@seligSummaryLowSpeedAirfoil1995"
+      notes: "High Cl at (L/D)_max; good stall characteristics"
+    
+    - airfoil: ag455ct-02r
+      test_reynolds: 60157
+      cl_max: 1.06
+      alpha_stall: 9.2
+      ld_max: 40.0
+      cl_at_ld_max: 0.56
+      cd_at_ld_max: 0.014
+      source_file: "AG455ct-02r.DRG"
+      source_ref: "@williamsonSummaryLowSpeedAirfoil2012"
+      notes: "Reflexed; very low Cd but lower Cl_max"
+    
+    - airfoil: sd7037b
+      test_reynolds: 60500
+      cl_max: 1.22
+      alpha_stall: 11.1
+      ld_max: 36.6
+      cl_at_ld_max: 0.92
+      cd_at_ld_max: 0.025
+      source_file: "SD7037B.DRG"
+      source_ref: "@seligSummaryLowSpeedAirfoil1995"
+      notes: "Popular low-Re airfoil; late stall"
+    
+    - airfoil: ag12
+      test_reynolds: 59972
+      cl_max: 1.06
+      alpha_stall: 10.3
+      ld_max: 34.6
+      cl_at_ld_max: 0.71
+      cd_at_ld_max: 0.020
+      source_file: "AG12.DRG"
+      source_ref: "@williamsonSummaryLowSpeedAirfoil2012"
+      notes: "Low camber; moderate performance"
+    
+    - airfoil: ag35-r
+      test_reynolds: 59904
+      cl_max: 1.04
+      alpha_stall: 11.4
+      ld_max: 30.7
+      cl_at_ld_max: 0.96
+      cd_at_ld_max: 0.031
+      source_file: "AG35-r.DRG"
+      source_ref: "@williamsonSummaryLowSpeedAirfoil2012"
+      notes: "Reflexed for tailless; lowest efficiency"
+  
+  # Ranking by (L/D)_max at Re ≈ 60,000:
+  # 1. E387:       46.6
+  # 2. SD8000:     45.4
+  # 3. S7055:      41.6
+  # 4. AG455ct:    40.0
+  # 5. SD7037B:    36.6
+  # 6. AG12:       34.6
+  # 7. AG35-r:     30.7
+  
+  selection_rationale: |
+    The E387 is selected for the Mars UAV wing design based on:
+    
+    1. Highest (L/D)_max of 46.6 at Re = 61,000 - the target operating condition
+    2. Extensive validation in UIUC wind tunnel with well-documented behavior
+    3. Good Cl_max of 1.22, providing adequate stall margin
+    4. Stall at α = 10°, allowing wide operating envelope
+    5. Achieves (L/D)_max at high Cl = 1.20, enabling smaller wing area
+    
+    Secondary candidate: SD8000
+    - Nearly equal efficiency (L/D)_max = 45.4
+    - Lower drag coefficient Cd_min = 0.014 vs 0.023
+    - However, achieves (L/D)_max at lower Cl = 0.94, requiring larger wing
+    
+    The S7055 offers the highest Cl at (L/D)_max (1.23) but 11% lower efficiency.
+    The AG-series reflexed airfoils are designed for tailless aircraft and show
+    lower overall efficiency due to their self-stabilizing characteristics.
+    
+    For Mars UAV operations where efficiency is critical (limited battery),
+    the E387 provides the best combination of high L/D and adequate lift.
+
+# Source Grounding Entry (for source_grounding.txt)
+source_grounding:
+  section: "5.2 Airfoil selection"
+  entries:
+    - claim: "E387 Cl_max = 1.22, (L/D)_max = 46.6 at Re = 61,000"
+      source: "@seligSummaryLowSpeedAirfoil1995"
+      location: "E387A.DRG file, Re = 61,000 dataset"
+    
+    - claim: "SD8000 Cl_max = 1.15, (L/D)_max = 45.4 at Re = 60,800"
+      source: "@seligSummaryLowSpeedAirfoil1995"
+      location: "SD8000.DRG file, Re = 60,800 dataset"
+    
+    - claim: "S7055 Cl_max = 1.23, (L/D)_max = 41.6 at Re = 60,700"
+      source: "@seligSummaryLowSpeedAirfoil1995"
+      location: "S7055.DRG file, Re = 60,700 dataset"
+    
+    - claim: "AG455ct-02r Cl_max = 1.06, (L/D)_max = 40.0 at Re = 60,157"
+      source: "@williamsonSummaryLowSpeedAirfoil2012"
+      location: "AG455ct-02r.DRG, run bm05458"
+    
+    - claim: "SD7037B Cl_max = 1.22, (L/D)_max = 36.6 at Re = 60,500"
+      source: "@seligSummaryLowSpeedAirfoil1995"
+      location: "SD7037B.DRG file, Re = 60,500 dataset"
+    
+    - claim: "AG12 Cl_max = 1.06, (L/D)_max = 34.6 at Re = 59,972"
+      source: "@williamsonSummaryLowSpeedAirfoil2012"
+      location: "AG12.DRG, run bb05637"
+    
+    - claim: "AG35-r Cl_max = 1.04, (L/D)_max = 30.7 at Re = 59,904"
+      source: "@williamsonSummaryLowSpeedAirfoil2012"
+      location: "AG35-r.DRG, run bm05388"

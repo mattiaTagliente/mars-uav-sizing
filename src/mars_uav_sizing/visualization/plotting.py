@@ -33,6 +33,8 @@ TRANSLATIONS = {
     'en': {
         # Matching chart
         'matching_chart_title': 'Matching Chart - Mars UAV',
+        'matching_chart_rotorcraft_title': 'Matching Chart - Rotorcraft',
+        'matching_chart_fixed_wing_title': 'Matching Chart - Fixed-Wing',
         'hover_constraint': 'Hover constraint',
         'stall_limit': 'Stall limit',
         'cruise_constraint': 'Cruise constraint',
@@ -40,6 +42,7 @@ TRANSLATIONS = {
         'feasible_region': 'Feasible Region',
         'wing_loading': 'Wing Loading W/S (N/m²)',
         'power_loading': 'Power Loading P/W (W/N)',
+        'disk_loading': 'Disk Loading DL (N/m²)',
         
         # Power comparison
         'power_title': 'Power Requirements by Configuration',
@@ -80,6 +83,8 @@ TRANSLATIONS = {
     'it': {
         # Matching chart
         'matching_chart_title': 'Diagramma di Matching - UAV Marte',
+        'matching_chart_rotorcraft_title': 'Diagramma di Matching - Rotorcraft',
+        'matching_chart_fixed_wing_title': 'Diagramma di Matching - Ala fissa',
         'hover_constraint': 'Vincolo hovering',
         'stall_limit': 'Limite di stallo',
         'cruise_constraint': 'Vincolo crociera',
@@ -87,6 +92,7 @@ TRANSLATIONS = {
         'feasible_region': 'Regione ammissibile',
         'wing_loading': 'Carico alare W/S (N/m²)',
         'power_loading': 'Carico di potenza P/W (W/N)',
+        'disk_loading': 'Carico del disco DL (N/m²)',
         
         # Power comparison
         'power_title': 'Requisiti di potenza per configurazione',
@@ -211,12 +217,12 @@ def plot_constraint_diagram(
     # Create figure
     fig, ax = plt.subplots(figsize=(10, 7))
     
-    # Plot constraints with translated labels
+    # Plot constraints with translated labels (no bracketed numerical values)
     ax.axhline(y=pw_hover, color='red', linestyle='-', linewidth=2, 
-               label=f'{get_text("hover_constraint", lang)} (P/W = {pw_hover:.1f} W/N)')
+               label=get_text('hover_constraint', lang))
     
     ax.axvline(x=ws_stall, color='green', linestyle='--', linewidth=2,
-               label=f'{get_text("stall_limit", lang)} (W/S = {ws_stall:.1f} N/m²)')
+               label=get_text('stall_limit', lang))
     
     ax.plot(ws_range, pw_cruise, 'b-', linewidth=2,
             label=get_text('cruise_constraint', lang))
@@ -233,7 +239,7 @@ def plot_constraint_diagram(
     
     # Mark design point
     ax.scatter(*design_point, s=200, c='black', marker='*', zorder=5,
-               label=f'{get_text("design_point", lang)} ({design_point[0]:.1f}, {design_point[1]:.1f})')
+               label=get_text('design_point', lang))
     
     # Formatting with translated labels
     ax.set_xlabel(get_text('wing_loading', lang), fontsize=12)
@@ -247,6 +253,203 @@ def plot_constraint_diagram(
     # Add annotations
     ax.annotate(get_text('feasible_region', lang), 
                 xy=(ws_stall/2, pw_hover*1.05),
+                fontsize=10, ha='center')
+    
+    plt.tight_layout()
+    
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Saved: {save_path}")
+    
+    if show:
+        plt.show()
+    else:
+        plt.close()
+
+
+def plot_rotorcraft_matching_chart(
+    title: str = None,
+    save_path: Optional[str] = None,
+    show: bool = True,
+    lang: str = 'en',
+) -> None:
+    """
+    Plot matching chart for pure rotorcraft configuration.
+    
+    For rotorcraft, the only design driver is hover power. The chart shows
+    power loading (P/W) vs disk loading (DL), with the constraint curve
+    from actuator disk theory.
+    
+    The relationship is: P/W = (1/η_hover) × sqrt(DL/(2ρ))
+    
+    Parameters
+    ----------
+    title : str
+        Plot title (default: translated)
+    save_path : str, optional
+        Path to save figure
+    show : bool
+        Whether to display the plot
+    lang : str
+        Language code ('en' or 'it')
+    """
+    check_matplotlib()
+    
+    if title is None:
+        title = get_text('matching_chart_rotorcraft_title', lang)
+    
+    # Get atmospheric parameters
+    from ..config import get_density, get_propulsion_efficiencies
+    rho = get_density()
+    prop = get_propulsion_efficiencies()
+    
+    # Combined hover efficiency
+    eta_hover = prop['figure_of_merit'] * prop['eta_motor'] * prop['eta_esc']
+    
+    # Disk loading range (N/m²)
+    dl_range = np.linspace(10, 100, 100)
+    
+    # Power loading from actuator disk theory: P/W = (1/η) × sqrt(DL/(2ρ))
+    pw_hover = (1 / eta_hover) * np.sqrt(dl_range / (2 * rho))
+    
+    # Get design disk loading from config
+    from ..config import get_param
+    dl_design = get_param('geometry.rotor.disk_loading_N_m2')
+    pw_design = (1 / eta_hover) * np.sqrt(dl_design / (2 * rho))
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(10, 7))
+    
+    # Plot hover constraint curve
+    ax.plot(dl_range, pw_hover, 'r-', linewidth=2.5,
+            label=get_text('hover_constraint', lang))
+    
+    # Mark design point
+    ax.scatter(dl_design, pw_design, s=200, c='black', marker='*', zorder=5,
+               label=get_text('design_point', lang))
+    
+    # Shade infeasible region (below the curve is infeasible - need more power)
+    ax.fill_between(dl_range, 0, pw_hover, alpha=0.1, color='red')
+    
+    # Formatting with translated labels
+    ax.set_xlabel(get_text('disk_loading', lang), fontsize=12)
+    ax.set_ylabel(get_text('power_loading', lang), fontsize=12)
+    ax.set_title(title, fontsize=14, fontweight='bold')
+    ax.legend(loc='upper left', fontsize=10)
+    ax.grid(True, alpha=0.3)
+    ax.set_xlim(0, dl_range[-1] * 1.1)
+    ax.set_ylim(0, max(pw_hover) * 1.2)
+    
+    # Add annotation
+    ax.annotate(get_text('feasible_region', lang), 
+                xy=(dl_range[-1] * 0.7, max(pw_hover) * 1.05),
+                fontsize=10, ha='center')
+    
+    plt.tight_layout()
+    
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Saved: {save_path}")
+    
+    if show:
+        plt.show()
+    else:
+        plt.close()
+
+
+def plot_fixed_wing_matching_chart(
+    title: str = None,
+    save_path: Optional[str] = None,
+    show: bool = True,
+    lang: str = 'en',
+) -> None:
+    """
+    Plot matching chart for pure fixed-wing configuration.
+    
+    For fixed-wing aircraft, the constraints are:
+    - Cruise constraint: P/W = V / (L/D × η_cruise)
+    - Stall constraint: (W/S)_max = 0.5 × ρ × V_min² × C_L,max
+    
+    Parameters
+    ----------
+    title : str
+        Plot title (default: translated)
+    save_path : str, optional
+        Path to save figure
+    show : bool
+        Whether to display the plot
+    lang : str
+        Language code ('en' or 'it')
+    """
+    check_matplotlib()
+    
+    if title is None:
+        title = get_text('matching_chart_fixed_wing_title', lang)
+    
+    # Get parameters from config
+    from ..config import get_density, get_mission_params, get_aerodynamic_params, get_param
+    from ..section5.fixed_wing import cruise_lift_coefficient, lift_to_drag, cruise_power_loading, stall_wing_loading_limit
+    
+    rho = get_density()
+    mission = get_mission_params()
+    aero = get_aerodynamic_params()
+    
+    v_cruise = mission['v_cruise']
+    v_stall = mission['v_stall']
+    v_min_factor = get_param('mission.velocity.v_min_factor')
+    v_min = v_stall * v_min_factor
+    cl_max = aero['cl_max']
+    
+    # Wing loading range (N/m²)
+    ws_range = np.linspace(2, 15, 100)
+    
+    # Calculate cruise constraint curve (no QuadPlane penalty for pure fixed-wing)
+    pw_cruise = []
+    for ws in ws_range:
+        cl = cruise_lift_coefficient(ws, rho, v_cruise)
+        ld = lift_to_drag(cl)  # Pure L/D without penalty
+        pw = cruise_power_loading(v_cruise, ld)
+        pw_cruise.append(pw)
+    pw_cruise = np.array(pw_cruise)
+    
+    # Stall constraint (vertical line)
+    ws_stall = stall_wing_loading_limit(rho, v_min, cl_max)
+    
+    # Design point: maximum W/S (at stall) with corresponding cruise P/W
+    cl_design = cruise_lift_coefficient(ws_stall, rho, v_cruise)
+    ld_design = lift_to_drag(cl_design)
+    pw_design = cruise_power_loading(v_cruise, ld_design)
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(10, 7))
+    
+    # Plot cruise constraint
+    ax.plot(ws_range, pw_cruise, 'b-', linewidth=2,
+            label=get_text('cruise_constraint', lang))
+    
+    # Plot stall constraint (vertical line)
+    ax.axvline(x=ws_stall, color='green', linestyle='--', linewidth=2,
+               label=get_text('stall_limit', lang))
+    
+    # Shade infeasible region (right of stall)
+    ax.axvspan(ws_stall, ws_range[-1], alpha=0.1, color='green')
+    
+    # Mark design point
+    ax.scatter(ws_stall, pw_design, s=200, c='black', marker='*', zorder=5,
+               label=get_text('design_point', lang))
+    
+    # Formatting with translated labels
+    ax.set_xlabel(get_text('wing_loading', lang), fontsize=12)
+    ax.set_ylabel(get_text('power_loading', lang), fontsize=12)
+    ax.set_title(title, fontsize=14, fontweight='bold')
+    ax.legend(loc='upper right', fontsize=10)
+    ax.grid(True, alpha=0.3)
+    ax.set_xlim(0, ws_range[-1] * 1.1)
+    ax.set_ylim(0, max(pw_cruise) * 1.3)
+    
+    # Add annotation
+    ax.annotate(get_text('feasible_region', lang), 
+                xy=(ws_stall/2, max(pw_cruise) * 0.9),
                 fontsize=10, ha='center')
     
     plt.tight_layout()
@@ -610,9 +813,23 @@ def generate_all_figures(output_dir: str = "./figures", lang: str = 'en') -> Non
     
     print(f"Generating figures ({lang.upper()})...")
     
-    # Constraint diagram
+    # Constraint diagram - Hybrid VTOL (QuadPlane)
     plot_constraint_diagram(
         save_path=out_path / f"matching_chart{suffix}.png",
+        show=False,
+        lang=lang
+    )
+    
+    # Constraint diagram - Rotorcraft
+    plot_rotorcraft_matching_chart(
+        save_path=out_path / f"matching_chart_rotorcraft{suffix}.png",
+        show=False,
+        lang=lang
+    )
+    
+    # Constraint diagram - Fixed-Wing
+    plot_fixed_wing_matching_chart(
+        save_path=out_path / f"matching_chart_fixed_wing{suffix}.png",
         show=False,
         lang=lang
     )

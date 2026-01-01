@@ -7,15 +7,41 @@
 # Last Updated: 2025-12-29
 
 # ==============================================================================
-# ROTOR CONFIGURATION (from §4.12.6)
+# ROTOR CONFIGURATION (from §4.12.6 and §6.1)
 # ==============================================================================
 rotor:
   # Disk loading - compromise between hover power and rotor size
   # Reference: §4.12 analysis, Mars rotorcraft precedents
   disk_loading_N_m2: 30.0      # DL = T/A, N/m²
 
-  # Number of lift rotors (QuadPlane configuration)
-  n_rotors: 4                  # dimensionless
+  # Total disk area for lift system
+  # Derived: A_disk = W / DL = 37.11 N / 30 N/m² = 1.237 m²
+  # Note: Computed in code from MTOW and disk_loading
+
+# ==============================================================================
+# PROPULSION CONFIGURATION (from §6.1)
+# ==============================================================================
+# QuadPlane with octocopter lift system (8 motors in 4 coaxial pairs)
+# and coaxial tractor cruise system (2 motors at bow)
+propulsion_config:
+  # Lift system (VTOL)
+  lift:
+    n_motors: 8                # Total lift motors
+    n_rotors: 8                # One rotor per motor (coaxial pairs)
+    n_arms: 4                  # Number of motor arms
+    motors_per_arm: 2          # Coaxial configuration (upper + lower)
+    configuration: "octocopter_coaxial"
+    description: "8 motors in 4 coaxial pairs on wing-mounted booms"
+
+  # Cruise system (forward flight)
+  cruise:
+    n_motors: 2                # Coaxial contra-rotating pair
+    n_rotors: 2                # One rotor per motor
+    configuration: "coaxial_tractor"
+    description: "2 contra-rotating motors at bow nacelle"
+
+  # Total motor count
+  n_total_motors: 10           # 8 lift + 2 cruise
 
 # ==============================================================================
 # WING GEOMETRY (from §4.12)
@@ -31,14 +57,26 @@ wing:
   sweep_angle_deg: 0           # Λ, degrees
 
 # ==============================================================================
-# FUSELAGE GEOMETRY (from §4.12)
+# FUSELAGE GEOMETRY - BENCHMARK DATA (from §4.8)
 # ==============================================================================
-fuselage:
-  # Length-to-wingspan ratio (from commercial VTOL benchmarks)
-  length_to_span_ratio: 0.50   # L_fus/b, dimensionless
+# NOTE: This is Section 4 reference data. The actual design selection
+# is made in Section 6 and stored in design_decisions.yaml.
+fuselage_benchmark:
+  # Commercial VTOL benchmark range (from @tbl:reference-fuselage)
+  length_to_span_ratio_min: 0.28   # DeltaQuad Evo (flying wing)
+  length_to_span_ratio_max: 0.63   # RTV320 E
+  length_to_span_ratio_median: 0.50
   
-  # Fineness ratio (slenderness)
-  fineness_ratio: 6.0          # L/D_fus, dimensionless
+  # Typical fineness ratios for low-drag profiles
+  fineness_ratio_min: 5.0
+  fineness_ratio_max: 7.0
+  fineness_ratio_typical: 6.0
+
+# Active fuselage parameters (uses benchmark median as baseline)
+# Can be overridden by design_decisions.yaml
+fuselage:
+  length_to_span_ratio: 0.50     # Benchmark median
+  fineness_ratio: 6.0            # Typical value
 
 # ==============================================================================
 # TAIL GEOMETRY (from §4.12)

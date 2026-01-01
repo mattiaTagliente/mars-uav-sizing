@@ -1,0 +1,40 @@
+﻿================================================================================
+MATCHING CHART ANALYSIS (Section 5.4) - UNCoupled
+================================================================================
+Computed: 2025-12-30 19:13:02
+Config:   All values loaded from config/ YAML files
+
+INPUT PARAMETERS
+--------------------------------------------------
+  MTOW:               10.00 kg
+  Weight:             37.11 N
+  Air density:        0.0196 kg/m^3
+  Cruise velocity:    40.0 m/s
+  Disk loading:       30.0 N/m^2
+
+CONSTRAINT VALUES
+--------------------------------------------------
+  Hover P/W:          85.71 W/N (horizontal line)
+  Stall W/S limit:    14.42 N/m^2 (vertical line)
+
+DESIGN POINT
+--------------------------------------------------
+  Wing loading:       14.42 N/m^2
+  Power loading:      85.71 W/N
+  Active constraint:  HOVER
+
+DERIVED GEOMETRY
+--------------------------------------------------
+  Wing area:          2.574 m^2
+  Wingspan:           3.93 m
+  Mean chord:         0.655 m
+  Installed power:    3181 W (hover)
+  Disk area:          1.237 m^2
+
+SUMMARY
+--------------------------------------------------
+  The matching chart shows:
+  1. Hover constraint at P/W = 85.7 W/N
+  2. Stall constraint limits W/S to 14.4 N/m^2
+  3. Cruise power at stall: 8.9 W/N
+================================================================================

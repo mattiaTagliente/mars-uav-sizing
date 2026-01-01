@@ -50,6 +50,14 @@ src/mars_uav_sizing/
 │   ├── hybrid_vtol.py                # Hybrid VTOL analysis (§5.3)
 │   ├── matching_chart.py             # Constraint diagram (§5.4)
 │   └── comparative.py                # Configuration comparison (§5.4)
+├── section6/                         # Design Decisions (§6)
+│   ├── __init__.py
+│   ├── airfoil_selection.py          # Airfoil comparison and selection (§6.2)
+│   └── airfoil_plots.py              # Airfoil visualization (§6.2 figures)
+├── section7/                         # Component Selection (§7)
+│   ├── __init__.py
+│   ├── component_selection.py        # Component trade-off analysis (§7.1-7.4)
+│   └── mass_breakdown.py             # Propulsion mass breakdown (§7.2)
 ├── visualization/                    # Plotting functions
 │   ├── __init__.py
 │   └── plotting.py                   # Matplotlib-based plots

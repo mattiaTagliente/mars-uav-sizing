@@ -14,3 +14,11 @@ Il processo di progettazione procede attraverso quattro fasi distinte, con cicli
 @fig:sizing-loop illustra la natura iterativa di questo processo. Ogni iterazione restringe lo spazio di progettazione man mano che emergono i vincoli a livello di componente e i requisiti vengono progressivamente soddisfatti.
 
 ![Il ciclo iterativo di dimensionamento per la progettazione di UAV marziani.](figures/sizing_loop.jpg){#fig:sizing-loop}
+
+### Ambito dello studio attuale
+
+Questo studio di fattibilità rappresenta la **prima iterazione** del ciclo a quattro fasi descritto. Le fasi 1 (ipotesi iniziali) e 2 (dimensionamento preliminare) sono complete: l'analisi dei dati di riferimento stabilisce i parametri iniziali (@sec:reference-data), il dimensionamento basato sui vincoli determina il punto di progetto (@sec:constraint-analysis) e i trade-off tra configurazioni identificano il VTOL ibrido come architettura selezionata (@sec:architecture-selection). Le fasi 3 (selezione dei componenti) e 4 (verifica) sono parzialmente affrontate attraverso componenti commerciali rappresentativi e verifica analitica rispetto ai requisiti di missione.
+
+I risultati numerici presentati in @sec:constraint-analysis sono valutati a un **MTOW di riferimento fisso di 10.00 kg**, derivato dall'analisi delle frazioni di massa (@sec:initial-mass-estimate). Questo approccio di caso di riferimento consente il confronto diretto delle prestazioni delle configurazioni sotto vincoli di massa ed energia identici. Un'iterazione di dimensionamento a ciclo chiuso, dove l'MTOW viene aggiustato per soddisfare esattamente i requisiti di missione, è rinviata alle fasi di progettazione successive.
+
+Aspetti non modellati in questa prima iterazione includono vincoli dettagliati di packaging e volume, analisi dei margini termici durante i cicli operativi, verifica di stabilità e controllo e considerazioni di fabbricazione e assemblaggio. Questi sono riservati alle iterazioni successive man mano che il progetto matura verso la progettazione di dettaglio.

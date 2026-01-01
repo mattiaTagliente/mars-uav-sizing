@@ -2,7 +2,7 @@
 
 ## Initial mass estimate {#sec:initial-mass-estimate}
 
-This section establishes the initial MTOW (Maximum Takeoff Weight) estimate using the mass fraction approach, a standard technique in aircraft conceptual design [@roskamAirplaneDesign12005a; @sadraeyAircraftDesignSystems2013]. The MTOW range established here provides the starting point for constraint analysis in @sec:constraint-analysis.
+This section establishes the initial MTOW (Maximum Takeoff Weight) estimate using the mass fraction approach, a standard technique in aircraft conceptual design [@roskamAirplaneDesign12005a]<!-- #s:mass-fraction --> [@sadraeyAircraftDesignSystems2013]<!-- #s:mass-fraction -->. The MTOW range established here provides the starting point for constraint analysis in @sec:constraint-analysis.
 
 ### Mass fraction methodology
 
@@ -53,7 +53,7 @@ Based on the reference data analysis and Mars mission requirements, the followin
 | Propulsion | $f_\text{prop}$ | 0.20 | 0.15-0.25 | Redundant dual propulsion system (lift + cruise) |
 | Avionics | $f_\text{avionics}$ | 0.05 | 0.03-0.07 | Standard estimate with Mars-specific sensors |
 
-The propulsion fraction is higher than commercial UAV benchmarks due to the need for redundancy in the dual propulsion system (both lift rotors and cruise propeller), operating without possibility of in-flight repair.
+The propulsion fraction is higher than commercial UAV benchmarks due to the need for redundancy in the dual propulsion system (both lift rotors and cruise propellers), operating without possibility of in-flight repair.
 
 The empty fraction accounts for Mars-specific requirements: thermal insulation and active heating systems for the −80 to +20 °C operating environment, dust ingress protection (equivalent to IP55 or higher), potential radiation-tolerant component selection, and structural margins for thermal cycling fatigue.
 
@@ -74,11 +74,13 @@ The sensitivity to payload fraction selection:
 
 | Payload fraction | MTOW estimate |
 |:---:|---:|
-| 0.08 (very conservative) | 12.5 kg |
-| 0.10 (baseline) | 10.0 kg |
-| 0.15 (optimistic) | 6.7 kg |
+| 0.08 | 12.5 kg |
+| 0.10 | 10.0 kg |
+| 0.15 | 6.7 kg |
 
 A baseline MTOW of 10 kg is adopted for initial sizing. This value will be refined through the constraint analysis in @sec:constraint-analysis, where power requirements, wing loading, and endurance constraints are evaluated simultaneously.
+
+The payload mass of 1.00 kg is a **fixed mission constraint** derived from the selected camera and radio relay components (@sec:payload-systems). This payload-driven sizing ensures that the mission payload requirement is satisfied by construction. Any configuration that cannot carry 1.00 kg within the 10.00 kg MTOW envelope is infeasible.
 
 ### Mass fraction validation
 

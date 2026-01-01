@@ -1,0 +1,42 @@
+# Section 04_02: Architecture comparison
+# Source attribution for UAV architecture trade-offs
+
+tzanetosIngenuityMarsHelicopter2022:
+  abs:
+    excerpt: "Ingenuity completed 72 flights on Mars"
+    context: "Rotorcraft flight demonstration heritage"
+
+nasaIngenuityMarsHelicopter2024:
+  s:flights:
+    excerpt: "72 flights totaling 128.8 minutes"
+    context: "Ingenuity cumulative flight statistics"
+
+johnsonMarsScienceHelicopter2020:
+  eq:hover:
+    excerpt: "P_hover = T^1.5 / sqrt(2*rho*A) / FM"
+    context: "Hover power momentum theory equation"
+
+nasaMarsAtmosphereModel2021:
+  s:density:
+    excerpt: "Surface density approx 0.020 kg/m3"
+    context: "Mars atmospheric density comparison to Earth"
+
+proutyHelicopterPerformanceStability2002:
+  ch3:ld:
+    excerpt: "Rotorcraft effective L/D of 3-5 in forward flight"
+    context: "Rotorcraft vs fixed-wing aerodynamic efficiency"
+
+gottenFullConfigurationDrag2021:
+  s:drag:
+    excerpt: "Fuselage and misc components account for ~50% parasitic drag"
+    context: "UAV parasitic drag breakdown analysis"
+
+nugrohoPerformanceAnalysisEmpennage2022:
+  s:comparison:
+    excerpt: "V-tail reduces wetted area, inverted U provides 18 deg stall"
+    context: "Tail configuration CFD comparison"
+
+latourabOxeonPartOwnedHoldings2025:
+  s:textreme:
+    excerpt: "TeXtreme spread tow carbon fabrics for microcracking resistance"
+    context: "Ingenuity material selection for thermal cycling"

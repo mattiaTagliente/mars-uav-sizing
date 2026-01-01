@@ -397,14 +397,14 @@ were removed from inline citations and documented here instead.
   Calculation: E = f_batt × MTOW × e_spec × DoD × η_batt = 0.35 × 10 × 270 × 0.80 × 0.95 = 718.2 Wh
   Inputs: f_batt = 0.35, e_spec = 270 Wh/kg, DoD = 0.80, η_batt = 0.95 (from @sec:energy-data)
 
-- "Theoretical rotorcraft forward flight endurance = 95.39 min"
+- "Theoretical rotorcraft forward flight endurance = 93.77 min"
   Source: Calculated from @eq:endurance-simple
   Inputs: All parameters from @tbl:endurance-parameters
 
-- "Practical rotorcraft endurance = 57.27 min"
+- "Practical rotorcraft endurance = 63.17 min"
   Source: Calculated considering hover energy consumption
-  Calculation: Hover energy (3 min × 3178 W) = 158.9 Wh; Remaining for cruise = 574.6 - 158.9 = 415.7 Wh
-  Forward flight power = 459.7 W; Flight time = 415.7/459.7 = 0.904 h = 54.27 min; Total = 57.27 min
+  Calculation: Hover energy (2 min ? 3178 W) = 106.0 Wh; Remaining for cruise = 574.6 - 106.0 = 468.5 Wh
+  Forward flight power = 459.7 W; Flight time = 468.5/459.7 = 1.019 h = 61.17 min; Total = 63.17 min
 
 - "Rotorcraft effective L/D = 4.0"
   Source: Design value from @sec:rotorcraft-ld
@@ -488,10 +488,16 @@ were removed from inline citations and documented here instead.
   Source: Calculated from available vs required energy
   Calculation: Margin = (718.2 - 501.6) / 501.6 = 0.432 = 43.2%
 
-- "Lift system mass penalty = 1.700 kg (17.0% of MTOW)"
-  Source: Estimated from commercial QuadPlane reference data
-  Components: Motors 1.0 kg, ESCs 0.24 kg, Propellers 0.16 kg, Structure 0.30 kg
-  Reference: Analysis of reference_drones.yaml specifications
+- "Lift system mass penalty = 1.608 kg (16.1% of MTOW)"
+  Source: Component specifications from T-Motor datasheets and commercial QuadPlane reference data
+  Components breakdown (@tbl:propulsion-mass-breakdown):
+    - Lift motors: 4 × 0.225 kg = 0.900 kg (T-Motor MN505-S KV260, [@t-motorMN505SKV260Brushless2024])
+    - Lift ESCs: 4 × 0.074 kg = 0.296 kg (T-Motor FLAME 60A, 73.5g per unit)
+    - Lift propellers: 4 × 0.028 kg = 0.112 kg (T-Motor NS16×5.4, 28g per pair = 14g per blade × 2)
+    - Mounting structure: 0.300 kg (estimate)
+    - Subtotal: 1.608 kg
+  Cruise system: 0.498 kg (motor 0.408 kg [@t-motorMN505SKV260Brushless2024] + ESC 0.050 kg + propeller 0.040 kg)
+  Reference: T-Motor official specifications, reference_drones.yaml (AirMobi V25 configuration)
 
 - "QuadPlane endurance = 86.7 min"
   Source: Calculated from available energy minus hover and transition consumption
@@ -584,6 +590,55 @@ location for the recommendation rationale.
         article which cites studies showing 12% efficiency loss for canard-pusher configurations,
         and Cambridge Aeronautics research indicating 6–16% efficiency gains for contra-rotating 
         propellers via swirl recovery.
+
+### Section 6.2: Airfoil selection (@sec:airfoil-selection)
+[RESTRUCTURED - 2026-01-01: Added general comparison of all 7 candidates before E387/SD8000 focus]
+
+NOTE: Section 6.2 presents a comprehensive comparison of all seven candidate airfoils before
+narrowing to the detailed E387 vs SD8000 analysis. All performance data comes from the UIUC
+Low-Speed Airfoil Tests database.
+
+### Tier classification of candidate airfoils
+
+- "First tier: E387, SD8000, S7055 with (L/D)_max > 41"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: E387A.DRG, SD8000.DRG, S7055.DRG files in Vol. 1
+  Verified Data: E387 (L/D)_max = 46.6, SD8000 (L/D)_max = 45.4, S7055 (L/D)_max = 41.6
+
+- "Second tier: SD7037B and AG455ct-02r with moderate efficiency"
+  Source: [@seligSummaryLowSpeedAirfoil1995; @williamsonSummaryLowSpeedAirfoil2012]
+  Location: SD7037B.DRG (Vol. 1), AG455ct-02r (Vol. 5)
+  Verified Data: SD7037B (L/D)_max = 36.6, AG455ct-02r (L/D)_max = 40.0
+
+- "Third tier: AG12 and AG35-r reflexed airfoils for flying wings"
+  Source: [@williamsonSummaryLowSpeedAirfoil2012]
+  Location: AG12.DRG, AG35-r.DRG files in Vol. 5
+  Verified Data: AG12 (L/D)_max = 34.6, AG35-r (L/D)_max = 30.7
+
+- "S7055 excluded: stall at α = 9.7°, lowest of all candidates"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: S7055.DRG file in Vol. 1
+  Note: Insufficient stall margin for safe Mars operation despite high CL_max = 1.23
+
+### E387 vs SD8000 detailed comparison
+
+- "E387 peak efficiency at α = 8.8°, only 1.3° from stall at 10.2°"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: E387A.DRG file, tabulated data at Re = 61,000
+
+- "E387 anomalous drag reduction at α ≈ 9° due to LSB collapse"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: E387A.DRG file
+  Verified Data: Cd = 0.0257 at α = 9° vs Cd = 0.0377 at α = 7°, Cd = 0.0393 at α = 10.2°
+  Note: Laminar separation bubble collapse causes discontinuous drag behavior
+
+- "SD8000 stall margin: 4.6° between best L/D (α = 7.0°) and stall (α = 11.5°)"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: SD8000.DRG file, tabulated data at Re = 60,800
+
+- "SD8000 minimum drag: Cd_min = 0.0142, 38% lower than E387 (0.0228)"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: E387A.DRG and SD8000.DRG files
 
 ### Section 6.3: Geometry selection - Tail configuration
 [IMPLEMENTED]
@@ -1509,7 +1564,7 @@ Data file: sources/reference_drones_mass_fractions.yaml
 - "Flight endurance requirement: ≥ 60 minutes"
   Source: Derived from user need N5 (extended endurance) + operational radius
   Location: Section 4.12, Flight endurance subsection
-  Derivation: Mission profile requires 42 min transit + 15 min survey + 3 min hover
+  Derivation: Mission profile requires 42 min transit + 15 min survey + 2 min hover + 1 min transition
   Comparison: Ingenuity max single flight 169 s, total 129 min over 72 flights
   Reference: [@nasaIngenuityMarsHelicopter2024; @tzanetosIngenuityMarsHelicopter2022]
   Verification: Full mission profile flight test
@@ -1743,9 +1798,9 @@ Data file: sources/reference_drones_mass_fractions.yaml
   Source: Design decision based on low Mach number
   Location: Section 4.12, Sweep angle subsection
   Justification:
-    - Mars cruise Mach M = V/a = 40/230 ≈ 0.17
+    - Mars cruise Mach M = V/a = 40/229.7 ? 0.1741
     - Sweep used to delay compressibility effects at M > 0.7
-    - No aerodynamic benefit at M = 0.17
+    - No aerodynamic benefit at M = 0.1741
 
 - "Wing sweep delays compressibility effects at transonic speeds"
   Source: [@sadraeyAircraftDesignSystems2013]
@@ -1760,10 +1815,10 @@ Data file: sources/reference_drones_mass_fractions.yaml
     - Reduced lift curve slope C_L,α
     - Poor stall characteristics (tip stall)
 
-- "Mars UAV cruise Mach number M ≈ 0.17"
+- "Mars UAV cruise Mach number M ≈ 0.1741"
   Source: Calculated from atmospheric model
   Location: Section 3.1, @eq:mach-cruise
-  Calculation: M = 40 m/s / 230 m/s = 0.17
+  Calculation: M = 40 m/s / 229.7 m/s = 0.1741
   Reference for speed of sound: [@desertAerodynamicDesignMartian2017]
 
 ### Geometry parameter summary
@@ -1787,7 +1842,7 @@ Data file: sources/reference_drones_mass_fractions.yaml
   Location: Section 4.12, @eq:cruise-velocity-value
   Constraints satisfied:
     - Reynolds number Re ≈ 60,000 at chord ~0.8 m (matches airfoil experimental data)
-    - Mach number M ≈ 0.17 (well below critical Mach of 0.6-0.7)
+    - Mach number M ≈ 0.1741 (well below critical Mach of 0.6-0.7)
     - Mission time ~42 min round-trip for 100 km (50 km radius)
 
 - "Reynolds number constraint: V × c = Re × μ / ρ = 31 m²/s at Re = 60,000"
@@ -1806,13 +1861,13 @@ Data file: sources/reference_drones_mass_fractions.yaml
     - V = 38 m/s: chord = 0.82 m, S = 8.1 m² (at AR = 12)
     - V = 40 m/s: chord = 0.78 m, S = 7.3 m² (at AR = 12)
 
-- "Mars speed of sound a ≈ 230.8 m/s at operating altitude"
+- "Mars speed of sound a ≈ 229.7 m/s at operating altitude"
   Source: [@nasaMarsAtmosphereModel2021] via @sec:operational-environment
   Location: @tbl:atmosphere in Section 3.1
-  Calculation: a = sqrt(γ × R_CO2 × T) = sqrt(1.29 × 188.92 × 216.6) = 230.8 m/s
+  Calculation: a = sqrt(γ × R_CO2 × T) = sqrt(1.29 × 188.92 × 216.6) = 229.7 m/s
 
-- "Cruise Mach number M ≈ 0.17"
-  Source: Calculated from V/a = 40/230.8
+- "Cruise Mach number M ≈ 0.1741"
+  Source: Calculated from V/a = 40/229.7
   Location: Section 4.12, Mach number limit
   Verification: Well below critical Mach, compressibility effects negligible
 
@@ -1842,20 +1897,18 @@ Data file: sources/reference_drones_mass_fractions.yaml
 
 ### Hover time allocation
 
-- "Total hover time: 180 s (3 minutes)"
+- "Total hover time: 120 s (2 minutes)"
   Source: Mission profile analysis in Section 4.12
   Location: @tbl:hover-allocation
   Breakdown:
     - Takeoff climb (vertical to 30 m): 30 s
-    - Takeoff transition (hover to cruise): 30 s
-    - Landing transition (cruise to hover): 30 s
+    - Takeoff hover (station keeping): 30 s
+    - Landing hover (station keeping): 30 s
     - Landing descent: 30 s
-    - Contingency reserve: 60 s
   Rationale:
     - Conservative for thin atmosphere (slow climb rate 1-2 m/s)
-    - Extended transitions due to lower control authority
-    - Contingency for abort/obstacle scenarios
-
+    - Transition time accounted separately in @tbl:hover-allocation
+    - Contingency for abort and obstacle scenarios
 - "Ingenuity flight times: 90-170 seconds typical"
   Source: [@nasaIngenuityMarsHelicopter2024]
   Location: NASA Ingenuity mission page, flight statistics
@@ -3034,7 +3087,7 @@ SECTION 5.4: HYBRID VTOL CONFIGURATION ANALYSIS
   Location: Section 5.4, Architecture description
   Rationale: Lift rotors optimized for hover, wing + cruise propeller for efficient cruise
 
-- "Total hover time limited to ~3 minutes (takeoff, landing, contingency)"
+- "Total hover time limited to ~2 minutes (takeoff and landing), with 1 minute allocated for transitions"
   Source: Derived from mission profile, @tbl:hover-allocation
   Location: Section 4.12, Mission parameters
 
@@ -3415,3 +3468,142 @@ SECTION 5.5: COMPARATIVE RESULTS AND CONFIGURATION SELECTION
   Calculation: (718.2 - 501.6) / 501.6 = 43.2%
   Note: Transition energy already included in required energy calculation
   Note: Still comfortably above 20% reserve requirement
+
+### Dual Propulsion Mass Breakdown (@tbl:propulsion-mass-breakdown)
+[UPDATED - 2025-12-31: Added proper citations for all T-Motor components, corrected cruise system to 2 motors/ESCs/propellers]
+
+- "Lift motors: 4 × T-Motor MN505-S KV260, 0.225 kg each"
+  Source: [@t-motorMN505SKV260Brushless2024]
+  Location: https://tmotor.com/en/product/MN505S_KV260
+  Weight: 225g per motor
+
+- "Lift ESCs: 4 × T-Motor FLAME 60A 12S V2.0, 0.074 kg each"
+  Source: [@t-motorFLAME60A12S2024]
+  Location: https://store.tmotor.com/product/flame-60a-12s-V2-esc.html
+  Weight: 73.5g with wires, rounded to 74g for calculation
+  Current: 60A continuous, 80A burst (10s)
+  Voltage: 6-12S LiPo
+
+- "Lift propellers: 4 × T-Motor NS16×5.4, 0.028 kg each"
+  Source: [@t-motorNS16x54Prop2PCSPAIR2024]
+  Location: https://store.tmotor.com/product/ns16x5_4-prop-uav-carbon-fiber.html
+  Weight: 13g per blade, 26g per pair (two blades)
+  Diameter: 16 inches (406.6mm)
+  Pitch: 5.4 inches (137.16mm)
+  Material: Carbon fiber + epoxy composite
+
+- "Cruise motors: 2 × T-Motor MN505-S KV260 (coaxial), 0.408 kg each"
+  Source: [@t-motorMN505SKV260Brushless2024]
+  Location: https://tmotor.com/en/product/MN505S_KV260
+  Note: Same motor as lift system for parts commonality
+
+- "Cruise ESCs: 2 × T-Motor FLAME 60A 12S V2.0, 0.074 kg each"
+  Source: [@t-motorFLAME60A12S2024]
+  Location: https://store.tmotor.com/product/flame-60a-12s-V2-esc.html
+
+- "Cruise propellers: 2 × T-Motor NS15×5, 0.026 kg each"
+  Source: [@t-motorNS15x5Prop2PCSPAIR2024]
+  Location: https://store.tmotor.com/product/ns15x5-prop-uav-carbon-fiber.html
+  Weight: 13g per blade, 26g per pair (two blades)
+  Diameter: 15 inches (381.1mm)
+  Pitch: 5 inches (127mm)
+  Material: Carbon fiber + T800 carbon fibers + epoxy
+
+- "Cruise system: coaxial contra-rotating tractor configuration"
+  Source: Section 6.1 Architecture Selection (@sec:architecture-selection)
+  Location: Line 141: "Two cruise propellers are mounted coaxially at the bow of the fuselage,
+           driven by independent motors and rotating in opposite directions."
+  Rationale: Single-fault tolerance for cruise phase
+
+================================================================================
+## Section 7: Component Selection
+================================================================================
+
+### Propulsion Component Selection (2025-12-31)
+
+- "SunnySky V4006-380: 66g, 375W, 380KV"
+  Source: [@sunnyskySunnySkyV4006Multicopter2024]
+  Location: Product specifications page
+
+- "MAD 4008 EEE: 88g, 2700g max thrust, 380KV"
+  Source: [@madcomponentsMAD4008EEE2024]
+  Location: Product specifications page
+
+- "Hobbywing XRotor Micro 30A: 6g, 30A continuous"
+  Source: [@hobbywingHobbywingXRotorMicro2024]
+  Location: Product specifications page
+
+- "T-Motor AT2312-1150: 60g, 350W, 1150KV"
+  Source: [@t-motorTMotorAT2312FixedWing2024]
+  Location: Product specifications page
+
+- "T-Motor MN5008-400: 135g, 800W, 4200g max thrust"
+  Source: [@t-motorTMotorMN5008Antigravity2024]
+  Location: Product specifications page
+
+- "Total propulsion mass: 1.182 kg"
+  Source: Calculated from propulsion_parameters.yaml
+  Location: mars_uav_sizing/section5/mass_breakdown.py
+
+- "Propulsion fraction actual: 11.8% of MTOW"
+  Source: Calculated from YAML configuration
+  Location: m_propulsion / MTOW = 1.182 / 10.00
+
+
+================================================================================
+## Section 6.2: Airfoil Selection
+================================================================================
+
+- "E387: Cl_max = 1.22, (L/D)_max = 46.6 at Re = 61,000"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: E387A.DRG file, Re = 61,000 dataset
+
+- "SD8000: Cl_max = 1.15, (L/D)_max = 45.4 at Re = 60,800"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: SD8000.DRG file, Re = 60,800 dataset
+
+- "S7055: Cl_max = 1.23, (L/D)_max = 41.6 at Re = 60,700"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: S7055.DRG file, Re = 60,700 dataset
+
+- "AG455ct-02r: Cl_max = 1.06, (L/D)_max = 40.0 at Re = 60,157"
+  Source: [@williamsonSummaryLowSpeedAirfoil2012]
+  Location: AG455ct-02r.DRG, run bm05458
+
+- "SD7037B: Cl_max = 1.22, (L/D)_max = 36.6 at Re = 60,500"
+  Source: [@seligSummaryLowSpeedAirfoil1995]
+  Location: SD7037B.DRG file, Re = 60,500 dataset
+
+- "AG12: Cl_max = 1.06, (L/D)_max = 34.6 at Re = 59,972"
+  Source: [@williamsonSummaryLowSpeedAirfoil2012]
+  Location: AG12.DRG, run bb05637
+
+- "AG35-r: Cl_max = 1.04, (L/D)_max = 30.7 at Re = 59,904"
+  Source: [@williamsonSummaryLowSpeedAirfoil2012]
+  Location: AG35-r.DRG, run bm05388
+
+- "E387 selected as wing airfoil for Mars UAV"
+  Source: Weighted comparison analysis
+  Location: config/airfoil_data.yaml, section6/airfoil_selection.py
+
+
+## AIRFOIL CHANGE (2025-12-31)
+
+Changed baseline airfoil from E387 to SD8000.
+
+Rationale for SD8000 selection:
+- Lower Cd_min (0.0142 vs 0.0228): 38% lower minimum drag
+- Larger stall margin (4.6 deg vs 1.3 deg): 3.5x more margin
+- Consistent drag behaviour: no anomalous LSB transitions
+- E387's peak L/D (46.6) occurs very close to stall (1.3 deg margin)
+- SD8000's peak L/D (45.4) at safer operating condition (4.6 deg margin)
+
+Updated values:
+- Cl_max: 1.20 -> 1.15
+- 2D airfoil L/D: 46.6 -> 45.4
+- Thickness ratio: 9.1% -> 8.9%
+- Cd_min: 0.0228 -> 0.0142
+
+Source: [@seligSummaryLowSpeedAirfoil1995]
+Location: SD8000.DRG file, Re = 60,800 dataset
+

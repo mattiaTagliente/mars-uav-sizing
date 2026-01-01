@@ -1,0 +1,23 @@
+# Section 07_02: Payload selection
+# Source attribution for camera and radio selection trade-offs
+# Generated: 2026-01-01
+
+ricohimagingRicohGRIII2024:
+  specs:
+    excerpt: "24 MP APS-C, 227g body, 257g complete, 109.4x61.9x33.2mm"
+    context: "Selected camera mass and dimensions"
+
+micasenseMicaSenseRedEdgeMXIntegration2020:
+  specs:
+    excerpt: "5-band multispectral, 232g complete with DLS"
+    context: "Alternative camera for multispectral capability"
+
+rfdesignRFD900xModemSpecifications2024:
+  specs:
+    excerpt: "14.5g, >40km LOS, -40 to +85C, 5W max"
+    context: "Selected radio specifications"
+
+microhardPMDDL2450MiniatureMIMO2025:
+  specs:
+    excerpt: "165g enclosed, 25Mbps, 2x2 MIMO"
+    context: "Alternative radio for high-throughput video"

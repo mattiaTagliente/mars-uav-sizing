@@ -1,0 +1,109 @@
+# Section 04_12: Derived requirements
+# Source attribution sidecar for design requirements and parameters
+
+nasaMarsScienceLaboratory2025:
+  s:distance:
+    excerpt: "Curiosity traversed ~35 km total over more than a decade"
+    context: "Rover traverse distance reference for UAV radius justification"
+
+golombekRockSizeFrequencyDistributions2021:
+  abs:
+    excerpt: "hazardous rocks 0.5m high or 1m diameter"
+    context: "Rock size distribution for altitude clearance requirement"
+
+djiDJIAir2S2021:
+  specs:
+    excerpt: "2.4um pixel pitch, 8.8mm focal length, 1-inch sensor"
+    context: "Reference camera specs for GSD calculation"
+
+nasaIngenuityMarsHelicopter2024:
+  s:flights:
+    excerpt: "up to 169s individual, ~129 min total over 72 flights"
+    context: "Ingenuity flight time reference for endurance comparison"
+
+tzanetosIngenuityMarsHelicopter2022:
+  abs:
+    excerpt: "72 flights total, cumulative flight time ~129 min"
+    context: "Ingenuity mission statistics"
+
+viudez-moreirasWindsMars20202022:
+  abs:
+    excerpt: "mean winds 3.2+/-2.3 m/s, peaks 6.1+/-2.2 m/s, 99% below 10 m/s"
+    context: "Mars wind measurements for wind tolerance requirement"
+
+nasaFactFictionMartian2015:
+  s:storms:
+    excerpt: "dust storm winds can reach 27 m/s"
+    context: "Extreme Mars wind conditions"
+
+internationalelectrotechnicalcommissionDegreesProtectionProvided2013:
+  s:ip6x:
+    excerpt: "IP6X denotes dust-tight enclosures"
+    context: "IP Code dust protection standard definition"
+
+hasslerMarsSurfaceRadiation2014:
+  abs:
+    excerpt: "~76 mGy/year (7.6 rad/year) absorbed dose rate on surface"
+    context: "Mars surface radiation dose for electronics requirement"
+
+brunettiCOTSDevicesSpace2024:
+  abs:
+    excerpt: "COTS typically tolerate 5-20 krad without rad-hardening"
+    context: "Commercial electronics radiation tolerance capability"
+
+europeanunionaviationsafetyagencyCertificationSpecificationsNormalCategory2017:
+  cs23.2230:
+    excerpt: "SF = 1.5 is standard aerospace factor of safety"
+    context: "Load factor certification standard CS 23.2230(a)(2)"
+
+johnsonMarsScienceHelicopter2020:
+  s:loads:
+    excerpt: "aerodynamic loads on blade are small due to low density"
+    context: "Mars rotorcraft reduced loading precedent"
+
+sadraeyAircraftDesignSystems2013:
+  ch10:ar:
+    excerpt: "wing weight increases as AR^0.6"
+    context: "Aspect ratio effect on wing weight"
+  ch10:tc:
+    excerpt: "wing weight scales as (t/c)^-0.3"
+    context: "Thickness ratio effect on wing weight"
+  ch5:taper:
+    excerpt: "lambda=0.4 approximates elliptical loading"
+    context: "Optimal taper ratio for induced drag"
+  ch5:sweep:
+    excerpt: "sweep delays compressibility above M=0.7"
+    context: "No sweep needed for low Mach flight"
+  ch4:vmin:
+    excerpt: "V_min >= 1.2 x V_stall for safety margin"
+    context: "Minimum velocity safety factor"
+
+braunDesignARESMars2006:
+  s:ar:
+    excerpt: "ARES Mars airplane AR = 5.6"
+    context: "Mars aircraft aspect ratio precedent"
+
+barbatoPreliminaryDesignFixedWing2024:
+  s:ar:
+    excerpt: "optimal AR = 5.3-6.3 for 24 kg solar Mars UAV"
+    context: "Optimal aspect ratio study for Mars UAV"
+
+seligSummaryLowSpeedAirfoil1995:
+  v1:thickness:
+    excerpt: "E387 t/c=9.1%, SD8000 t/c=8.9%, SD7037 t/c=9.2%"
+    context: "Airfoil thickness ratios for geometry bounds"
+
+williamsonSummaryLowSpeedAirfoil2012:
+  v5:thickness:
+    excerpt: "AG12 t/c=6.2%, AG455ct t/c=7.1%"
+    context: "AG-series airfoil thickness ratios"
+
+goetzendorf-grabowskiOptimizationEnergyConsumption2022:
+  s:vtol-time:
+    excerpt: "total VTOL time ~2 min: 20s takeoff, 10-15s landing"
+    context: "Reference hover time allocation"
+
+mathurMultiModeFlightSimulation2025:
+  s:transition-time:
+    excerpt: "30s transition depends on corridor and control strategy"
+    context: "Transition duration estimate basis"

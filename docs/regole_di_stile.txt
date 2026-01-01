@@ -12,6 +12,8 @@
 
 * Per intervalli aperti, usare la notazione matematica di disuguaglianza (es. "> 40") invece della notazione con il più (es. "40+"). Questo si applica a tabelle, prosa e tutti i contesti numerici.
 
+* Non usare mai il simbolo tilde (~) per indicare approssimazione. Usare invece parole come "circa", "approssimativamente" o "all'incirca".
+
 * Utilizzare la sintassi LaTeX per le espressioni matematiche: `$...$` per la matematica inline e `$$...$$` per le equazioni in display.
 
 * **Pedici e apici nel testo corrente**: usare SEMPRE la sintassi LaTeX inline per pedici e apici, anche per simboli semplici. La notazione con underscore semplice (es. `T_ref`, `μ_max`) NON viene renderizzata correttamente nell'output Word via Pandoc. Usare invece:
@@ -43,21 +45,23 @@
 
 ## Liste e Struttura dei Paragrafi
 
-* Utilizzare sempre asterischi (*) per le liste puntate, mai trattini (-). Questa convenzione garantisce consistenza nella formattazione e la corretta conversione tramite pandoc del documento.
+* Utilizzare liste verticali (puntate o numerate) solo nei casi strettamente necessari per riferimento rapido. In tutti gli altri casi, utilizzare liste integrate nel flusso del paragrafo, separando elementi brevi con virgole ed elementi complessi o con punteggiatura interna con punto e virgola.
 
-* Limitare le liste verticali (puntate o numerate) ai casi strettamente necessari per riferimento rapido. Altrimenti, utilizzare liste integrate nel flusso del paragrafo. Separare elementi brevi con virgole; separare elementi complessi o con punteggiatura interna con punto e virgola.
+* Quando una lista verticale è necessaria, scegliere tra formato puntato e numerato in base al contenuto: usare liste numerate per passaggi sequenziali o elementi classificati; usare liste puntate per raccolte non ordinate.
 
-* Rendere TUTTE le liste compatte (tight lists) rimuovendo TUTTE le righe vuote/paragrafi extra tra gli elementi della lista. Questa regola si applica SENZA ECCEZIONI a:
-  - Liste puntate con asterisco (*)
-  - Liste puntate con bullet point (•)
-  - Liste numerate (1. 2. 3.)
-  - Liste in TUTTI i file del documento
+* Per le liste puntate, usare sempre asterischi (*), mai trattini (-). Questa convenzione garantisce consistenza nella formattazione e corretta conversione via pandoc.
+
+* Rendere tutte le liste compatte rimuovendo tutte le righe vuote tra gli elementi. Questa regola si applica senza eccezioni a liste puntate, liste numerate e liste in tutti i file del documento.
 
 ## Tabelle, Figure e Riferimenti Incrociati
 
 * Formattare le tabelle usando la sintassi pipe table con didascalie prima della tabella: `: Testo didascalia {#tbl:etichetta}` seguito da una riga vuota, poi riga di intestazione, riga separatore e righe dati. Utilizzare le maiuscole standard. Consolidare le voci multilinea in righe singole con allineamento corretto dei delimitatori pipe.
 
 * Usare intestazioni di tabella concise, di una parola o un concetto singolo. Ad esempio: usare "Metrica" invece di "Metrica/Aspetto", usare "Piattaforma" invece di "Piattaforma / Dispositivo".
+
+* Non includere testo tra parentesi, né incidentale né esplicativo, nelle celle delle tabelle. Presentare solo il valore del dato; le informazioni supplementari appartengono alla prosa circostante o, eccezionalmente, alle note della tabella.
+
+* Per dati vuoti o mancanti nelle celle delle tabelle, non usare trattini (-). Usare "N.D." per indicare "Non Disponibile" (dato non trovato o non fornito) oppure "N.A." per indicare "Non Applicabile" (dato che non si applica al contesto). Il significato deve essere chiaro dal contesto o chiarito in una nota della tabella se ambiguo.
 
 * Formattare le immagini usando markdown standard: `![Testo didascalia](percorso/immagine.png){#fig:etichetta}`. Posizionare le immagini inline con righe vuote prima e dopo. Specificare larghezza e altezza tra parentesi graffe quando necessario.
 

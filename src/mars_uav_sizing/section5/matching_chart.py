@@ -374,7 +374,7 @@ def print_analysis(results: Dict[str, Any] = None) -> None:
     print(f"  1. Hover constraint dominates at P/W = {results['hover_pw']:.1f} W/N")
     print(f"  2. Stall constraint limits W/S to {results['stall_ws']:.1f} N/m²")
     print(f"  3. Cruise power ({dp['cruise_pw_at_stall']:.1f} W/N) is ~{results['hover_pw']/dp['cruise_pw_at_stall']:.0f}× lower than hover")
-    print("  → Design is HOVER-DOMINATED; cruise power is abundant")
+    print("  -> Design is HOVER-DOMINATED; cruise power is abundant")
     print()
     
     print("=" * 80)

@@ -1,0 +1,36 @@
+# Section 06_03: Geometry selection
+# Source attribution for tail, fuselage, and propeller geometry decisions
+
+nugrohoPerformanceAnalysisEmpennage2022:
+  s:inverted-u:
+    excerpt: "inverted U boom designs provided superior stability for surveillance"
+    context: "CFD study of VTOL empennage configurations"
+
+gottenFullConfigurationDrag2021:
+  s:fineness:
+    excerpt: "fineness ratio 5-7 for streamlined fuselage profile"
+    context: "Fuselage geometry guideline for drag reduction"
+
+# Propeller sizing theory (momentum theory)
+leishmanPrinciplesHelicopterAerodynamics2006:
+  ch2:
+    excerpt: "momentum theory relates thrust T, disk area A, and induced velocity"
+    context: "Chapter 2 covers fundamentals of rotor aerodynamics"
+  eq2.13:
+    excerpt: "DL = T/A (disk loading definition)"
+    context: "Disk loading as thrust per unit disk area"
+  s:compressibility:
+    excerpt: "compressibility effects degrade performance above Mach 0.7"
+    context: "Tip Mach constraint for rotor efficiency"
+
+# V-tail sizing theory (volume coefficient method)
+roskamAirplaneDesign22004:
+  s8.1:
+    excerpt: "volume coefficient method for empennage sizing"
+    context: "Chapter 8 step-by-step method for tail sizing"
+  eq8.1-8.2:
+    excerpt: "Vh = xh*Sh/(S*c), Vv = xv*Sv/(S*b)"
+    context: "Volume coefficient definitions (Eq. 8.1 and 8.2)"
+  eq8.5:
+    excerpt: "tan^2(Gamma) = Sv/Sh for butterfly empennage"
+    context: "Butterfly dihedral angle relation for V-tail"

@@ -1,0 +1,20 @@
+# Source attribution for Section 08_01 (Habitat Hangar)
+# Created: 2026-01-01
+
+solaerotechnologiesrocketlabSolAeroIMMalphaInverted2024:
+  specs:
+    excerpt: "IMM-alpha: 33% efficiency, 49 mg/cm2, 42% lighter than conventional"
+    context: "SolAero IMM-alpha solar cell specifications from Rocket Lab product page"
+    verified: true
+
+spectrolabboeingSpectrolabXTJPrime2023:
+  specs:
+    excerpt: "XTJ Prime: 30.7% avg BOL, 31.9% max, 50-84 mg/cm2, GaInP/GaAs/Ge"
+    context: "Spectrolab XTJ Prime triple-junction solar cell datasheet"
+    verified: true
+
+azurspacesolarpowerAzurSpace3G30CAdvanced2023:
+  specs:
+    excerpt: "3G30C-Advanced: 30% BOL, 86 mg/cm2, 150um, InGaP/GaAs/Ge on Ge"
+    context: "Azur Space 3G30C-Advanced triple-junction solar cell datasheet"
+    verified: true

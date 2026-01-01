@@ -1,0 +1,10 @@
+# Section 06_02: Airfoil selection
+# Source attribution for airfoil comparison and selection rationale
+
+seligSummaryLowSpeedAirfoil1995:
+  v1:lsb:
+    excerpt: "E387 drag reduction at alpha~9deg due to LSB collapse"
+    context: "Laminar separation bubble phenomenon documentation"
+  v1:sd8000:
+    excerpt: "SD8000 designed by Selig and Donovan for low-Re applications"
+    context: "SD8000 design origin and purpose"
