@@ -8,6 +8,8 @@
 
 ## Mathematical and Technical Formatting
 
+* Use United States conventions for numerical formatting: period (.) as the decimal separator (e.g., 3.1416, 0.005) and comma (,) as the thousands separator (e.g., 1,000, 1,250,000). Do not use spaces as digit grouping separators.
+
 * Always use 4 significant figures for reporting calculation results.
 
 * For open-ended ranges, use mathematical inequality notation (e.g., "> 40") instead of plus notation (e.g., "40+"). This applies to tables, prose, and all numerical contexts.

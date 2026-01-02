@@ -71,24 +71,9 @@ The horizontal (pitch) constraint is active, meaning the tail is sized primarily
 
 The commercial benchmarks exhibit a length-to-wingspan ratio ranging from 0.28 to 0.63, with a median of approximately 0.50 (@tbl:reference-fuselage). The selection involves trade-offs between competing effects:
 
-**Shorter fuselage (lower ratio):**
+A shorter fuselage (lower ratio) yields less structural mass, less wetted area (reduced parasitic drag), and less internal volume, but requires a boom extension for the tail moment arm. A longer fuselage (higher ratio) provides more fuselage lift contribution, a longer tail moment arm allowing smaller tail surfaces, and more internal volume for payload growth and thermal management, but increases structural mass and wetted area.
 
-* Less fuselage structural mass
-* Less fuselage wetted area (reduced parasitic drag)
-* Shorter tail moment arm requiring boom extension
-* Less internal volume
-
-**Longer fuselage (higher ratio):**
-
-* More fuselage lift contribution
-* Longer tail moment arm allowing smaller tail surfaces
-* More internal volume for payload growth and thermal management
-* More fuselage structural mass
-* More fuselage wetted area
-
-**Selection: 0.30** (lower end of benchmark range)
-
-For the Mars UAV, most of the internal volume is occupied by the compact payload and energy storage systems requiring only 4–5 L. The 170 L volume provided by the 0.50 ratio is excessive. Selecting the lower end of the benchmark range (0.30) minimises structural mass and parasitic drag while providing adequate volume for all systems. The required tail moment arm is instead achieved through the boom extension, which is structurally efficient since it serves the dual purpose of supporting both the lift rotors and the V-tail surfaces.
+A ratio of 0.30 (lower end of benchmark range) is selected. For the Mars UAV, most of the internal volume is occupied by the compact payload and energy storage systems requiring only 4–5 L. The 170 L volume provided by the 0.50 ratio is excessive. Selecting the lower end of the benchmark range minimises structural mass and parasitic drag while providing adequate volume for all systems. The required tail moment arm is instead achieved through the boom extension, which is structurally efficient since it serves the dual purpose of supporting both the lift rotors and the V-tail surfaces.
 
 The resulting fuselage dimensions are:
 
@@ -123,21 +108,21 @@ The fuselage cross-section is approximately circular to simplify structural anal
 
 The boom-mounted V-tail configuration extends beyond the fuselage aft end. The total aircraft length is determined by the tail position required to achieve the target moment arm:
 
-**Wing position:**
+Wing position:
 
 $$x_\text{wing,LE} = 0.40 \times L_f = 0.40 \times 1.20 = 0.48 \text{ m from nose}$$
 
 $$x_\text{wing,AC} = x_\text{wing,LE} + 0.25 \times MAC = 0.48 + 0.25 \times 0.669 = 0.65 \text{ m}$$
 
-**Tail position (from wing AC + moment arm):**
+Tail position (from wing AC + moment arm):
 
 $$x_\text{tail,AC} = x_\text{wing,AC} + l_H = 0.65 + 1.20 = 1.85 \text{ m from nose}$$
 
-**Tail trailing edge (AC at 25% chord from LE):**
+Tail trailing edge (AC at 25% chord from LE):
 
 $$x_\text{tail,TE} = x_\text{tail,AC} + 0.75 \times c_{V\text{-tail}} = 1.85 + 0.75 \times 0.535 = 2.25 \text{ m}$$
 
-The total aircraft length is therefore **2.25 m**, with the tail booms extending **1.05 m** beyond the fuselage aft end. This boom extension is structurally integrated with the rear lift motor arms, which serve the dual purpose of supporting the octocopter rotors and the V-tail surfaces.
+The total aircraft length is therefore 2.25 m, with the tail booms extending 1.05 m beyond the fuselage aft end. This boom extension is structurally integrated with the rear lift motor arms, which serve the dual purpose of supporting the octocopter rotors and the V-tail surfaces.
 
 | Parameter | Symbol | Value | Notes |
 |:----------|:------:|------:|:------|

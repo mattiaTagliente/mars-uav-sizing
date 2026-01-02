@@ -36,7 +36,7 @@ The selection of CFRP and advanced composite construction techniques affects the
 
 | Parameter | Aluminium baseline | CFRP composite | Reduction |
 |:----------|-------------------:|---------------:|----------:|
-| Specific strength (MPa·m³/kg) | 110 | 450 | — |
+| Specific strength (MPa·m³/kg) | 110 | 450 | N/A |
 | Structural mass fraction | 0.35–0.40 | 0.25–0.30 | 25–30% |
 | Wing density factor, $K_\rho$ | 1.0 | 0.50–0.60 | 40–50% |
 

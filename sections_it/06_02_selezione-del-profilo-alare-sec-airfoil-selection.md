@@ -8,11 +8,11 @@ Questa sezione presenta la logica di selezione del profilo alare per la progetta
 
 La selezione del profilo alare è guidata da tre criteri primari, ponderati in base alla loro importanza per il successo della missione:
 
-1. **Efficienza di crociera (peso 60%)**: Il rapporto portanza-resistenza massimo $(L/D)_\text{max}$ determina direttamente l'autonomia e la durata di crociera. Un $(L/D)_\text{max}$ più elevato riduce la potenza di crociera e prolunga la durata della batteria.
+1. Efficienza di crociera (peso 60%): Il rapporto portanza-resistenza massimo $(L/D)_\text{max}$ determina direttamente l'autonomia e la durata di crociera. Un $(L/D)_\text{max}$ più elevato riduce la potenza di crociera e prolunga la durata della batteria.
 
-2. **Margine di stallo (peso 25%)**: Il coefficiente di portanza massimo $C_{L,\text{max}}$ determina la velocità minima di volo e fornisce margine contro raffiche o manovre. Un $C_{L,\text{max}}$ più elevato consente un'area alare più piccola o velocità di avvicinamento inferiori.
+2. Margine di stallo (peso 25%): Il coefficiente di portanza massimo $C_{L,\text{max}}$ determina la velocità minima di volo e fornisce margine contro raffiche o manovre. Un $C_{L,\text{max}}$ più elevato consente un'area alare più piccola o velocità di avvicinamento inferiori.
 
-3. **Angolo di stallo (peso 15%)**: Un angolo di stallo $\alpha_\text{stallo}$ più elevato fornisce un inviluppo operativo più ampio e caratteristiche di stallo più graduali, migliorando la controllabilità nell'atmosfera marziana a bassa densità.
+3. Angolo di stallo (peso 15%): Un angolo di stallo $\alpha_\text{stallo}$ più elevato fornisce un inviluppo operativo più ampio e caratteristiche di stallo più graduali, migliorando la controllabilità nell'atmosfera marziana a bassa densità.
 
 ### Confronto prestazionale
 
@@ -45,7 +45,7 @@ Inoltre, l'E387 presenta una riduzione anomala della resistenza a α ≈ 9° ($C
 | Resistenza minima $C_{D,\text{min}}$ | 0.0228 | 0.0142 | SD8000 (38% inferiore) |
 | Efficienza massima $(L/D)_\text{max}$ | 46.6 | 45.4 | E387 (3% superiore) |
 | Portanza massima $C_{L,\text{max}}$ | 1.22 | 1.15 | E387 (6% superiore) |
-| Angolo a $(L/D)_\text{max}$ | 8.8° | 7.0° | — |
+| Angolo a $(L/D)_\text{max}$ | 8.8° | 7.0° | N.D. |
 | Angolo di stallo | 10.2° | 11.5° | SD8000 |
 | Margine allo stallo | 1.3° | 4.6° | SD8000 (3.5× maggiore) |
 
@@ -61,14 +61,14 @@ Le curve di portanza in @fig:airfoil-cl-alpha mostrano le caratteristiche di sta
 
 ### Motivazione della selezione
 
-Sulla base dell'analisi comparativa, il **Selig/Donovan SD8000** è selezionato per la progettazione dell'ala dell'UAV marziano. Mentre l'E387 raggiunge un'efficienza di picco marginalmente superiore, l'SD8000 offre vantaggi critici per un'operatività affidabile su Marte:
+Sulla base dell'analisi comparativa, il Selig/Donovan SD8000 è selezionato per la progettazione dell'ala dell'UAV marziano. Mentre l'E387 raggiunge un'efficienza di picco marginalmente superiore, l'SD8000 offre vantaggi importanti per un'operatività affidabile su Marte:
 
-* **Minore resistenza nell'intervallo operativo**: $C_{D,\text{min}}$ = 0.0142, 38% inferiore all'E387
-* **Maggiore margine di stallo**: 4.6° di margine tra il miglior L/D e lo stallo, rispetto a solo 1.3° per l'E387
-* **Comportamento di resistenza coerente**: Nessuna transizione anomala o sensibilità alla dinamica delle LSB
-* **Prestazioni robuste**: L/D più elevato alle condizioni di crociera pratiche ($C_L$ = 0.7–0.9)
-* **Progettato per basso numero di Reynolds**: L'SD8000 è stato specificamente progettato da Selig e Donovan per applicazioni a basso Re, con prestazioni documentate in UAV e applicazioni simili [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
-* **Stallo tardivo**: Stallo a α = 11.5° fornisce un ampio inviluppo operativo
+* Minore resistenza nell'intervallo operativo: $C_{D,\text{min}}$ = 0.0142, 38% inferiore all'E387
+* Maggiore margine di stallo: 4.6° di margine tra il miglior L/D e lo stallo, rispetto a solo 1.3° per l'E387
+* Comportamento di resistenza coerente: nessuna transizione anomala o sensibilità alla dinamica delle LSB
+* Prestazioni robuste: L/D più elevato alle condizioni di crociera pratiche ($C_L$ = 0.7–0.9)
+* Progettato per basso numero di Reynolds: l'SD8000 è stato specificamente progettato da Selig e Donovan per applicazioni a basso Re, con prestazioni documentate in UAV e applicazioni simili [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
+* Stallo tardivo: stallo a α = 11.5° fornisce un ampio inviluppo operativo
 
 Il vantaggio di efficienza di picco del 3% dell'E387 è compensato dal rischio operativo di mirare a un angolo di attacco entro 1.3° dallo stallo. Per una missione su Marte senza opportunità di recupero, la selezione più conservativa dell'SD8000 fornisce un margine di sicurezza appropriato.
 

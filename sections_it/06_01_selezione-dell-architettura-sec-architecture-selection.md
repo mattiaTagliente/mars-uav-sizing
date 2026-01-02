@@ -14,25 +14,25 @@ Questa sezione consolida il confronto delle configurazioni dall'analisi dei vinc
 
 | Criterio | Velivolo a rotore | Ala fissa | VTOL ibrido |
 |:----------|:----------:|:----------:|:-----------:|
-| **Efficienza aerodinamica** | | | |
+| Efficienza aerodinamica | | | |
 | L/D o $(L/D)_	ext{eff}$ | 4.0 | 11.7 | 10.5 |
-| **Requisiti di potenza** | | | |
+| Requisiti di potenza | | | |
 | P/W hovering (W/N) | 85.7 | N.D. | 85.7 |
 | P/W crociera (W/N) | 12.4$^a$ | 7.7 | 8.6 |
 | Potenza di crociera (W) | 460$^a$ | 286 | 318 |
-| **Capacità di missione** | | | |
+| Capacità di missione | | | |
 | Autonomia (min) | 63.17 | 120.5 | 89.55 |
 | Margine di autonomia | +5.284% | +100.8% | +49.26% |
 | Raggio (km) | 146.8 | 289 | 207.7 |
 | Margine di raggio | +46.81% | +189% | +107.7% |
-| **Operatività** | | | |
+| Operatività | | | |
 | Capacità VTOL | Sì | No | Sì |
 | Infrastruttura | Nessuna | Circa 1 km pista | Nessuna |
 | Capacità di planata | No | Sì | Sì$^b$ |
-| **Budget di massa** | | | |
+| Budget di massa | | | |
 | Frazione propulsiva | circa 15% | circa 8% | circa 25% |
 | Penalità di massa | N.D. | N.D. | +17% |
-| **Conformità ai requisiti** | | | |
+| Conformità ai requisiti | | | |
 | Soddisfa autonomia | Sì (marginale) | Sì | Sì |
 | Soddisfa raggio | Sì | Sì | Sì |
 | Soddisfa VTOL | Sì | No | Sì |

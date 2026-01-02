@@ -38,7 +38,7 @@ La selezione del CFRP e delle tecniche di costruzione in composito avanzato infl
 
 | Parametro | Base alluminio | Composito CFRP | Riduzione |
 |:----------|-------------------:|---------------:|----------:|
-| Resistenza specifica (MPa·m³/kg) | 110 | 450 | — |
+| Resistenza specifica (MPa·m³/kg) | 110 | 450 | N.D. |
 | Frazione di massa strutturale | 0.35–0.40 | 0.25–0.30 | 25–30% |
 | Fattore di densità alare, $K_\rho$ | 1.0 | 0.50–0.60 | 40–50% |
 

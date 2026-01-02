@@ -12,25 +12,25 @@ This section consolidates the configuration comparison from the constraint analy
 
 | Criterion | Rotorcraft | Fixed-Wing | Hybrid VTOL |
 |:----------|:----------:|:----------:|:-----------:|
-| **Aerodynamic efficiency** | | | |
+| Aerodynamic efficiency | | | |
 | L/D or $(L/D)_\text{eff}$ | 4.0 | 11.7 | 10.5 |
-| **Power requirements** | | | |
-| Hover P/W (W/N) | 85.7 | — | 85.7 |
+| Power requirements | | | |
+| Hover P/W (W/N) | 85.7 | N/A | 85.7 |
 | Cruise P/W (W/N) | 12.4$^a$ | 7.7 | 8.6 |
 | Cruise power (W) | 460$^a$ | 286 | 318 |
-| **Mission capability** | | | |
+| Mission capability | | | |
 | Endurance (min) | 63.17 | 120.5 | 89.55 |
 | Endurance margin | +5.284% | +100.8% | +49.26% |
 | Range (km) | 146.8 | 289 | 207.7 |
 | Range margin | +46.81% | +189% | +107.7% |
-| **Operational** | | | |
+| Operational | | | |
 | VTOL capable | Yes | No | Yes |
 | Infrastructure | None | Approximately 1 km runway | None |
 | Glide capability | No | Yes | Yes$^b$ |
-| **Mass budget** | | | |
+| Mass budget | | | |
 | Propulsion fraction | Approximately 15% | Approximately 8% | Approximately 25% |
-| Mass penalty | — | — | +17% |
-| **Requirements compliance** | | | |
+| Mass penalty | N/A | N/A | +17% |
+| Requirements compliance | | | |
 | Meets endurance | No | Yes | Yes |
 | Meets range | Yes | Yes | Yes |
 | Meets VTOL | Yes | No | Yes |

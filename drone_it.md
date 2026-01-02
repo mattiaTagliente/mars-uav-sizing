@@ -2226,25 +2226,25 @@ Questa sezione consolida il confronto delle configurazioni dall'analisi dei vinc
 
 | Criterio | Velivolo a rotore | Ala fissa | VTOL ibrido |
 |:----------|:----------:|:----------:|:-----------:|
-| **Efficienza aerodinamica** | | | |
+| Efficienza aerodinamica | | | |
 | L/D o $(L/D)_	ext{eff}$ | 4.0 | 11.7 | 10.5 |
-| **Requisiti di potenza** | | | |
+| Requisiti di potenza | | | |
 | P/W hovering (W/N) | 85.7 | N.D. | 85.7 |
 | P/W crociera (W/N) | 12.4$^a$ | 7.7 | 8.6 |
 | Potenza di crociera (W) | 460$^a$ | 286 | 318 |
-| **Capacità di missione** | | | |
+| Capacità di missione | | | |
 | Autonomia (min) | 63.17 | 120.5 | 89.55 |
 | Margine di autonomia | +5.284% | +100.8% | +49.26% |
 | Raggio (km) | 146.8 | 289 | 207.7 |
 | Margine di raggio | +46.81% | +189% | +107.7% |
-| **Operatività** | | | |
+| Operatività | | | |
 | Capacità VTOL | Sì | No | Sì |
 | Infrastruttura | Nessuna | Circa 1 km pista | Nessuna |
 | Capacità di planata | No | Sì | Sì$^b$ |
-| **Budget di massa** | | | |
+| Budget di massa | | | |
 | Frazione propulsiva | circa 15% | circa 8% | circa 25% |
 | Penalità di massa | N.D. | N.D. | +17% |
-| **Conformità ai requisiti** | | | |
+| Conformità ai requisiti | | | |
 | Soddisfa autonomia | Sì (marginale) | Sì | Sì |
 | Soddisfa raggio | Sì | Sì | Sì |
 | Soddisfa VTOL | Sì | No | Sì |
@@ -2364,11 +2364,11 @@ Questa sezione presenta la logica di selezione del profilo alare per la progetta
 
 La selezione del profilo alare è guidata da tre criteri primari, ponderati in base alla loro importanza per il successo della missione:
 
-1. **Efficienza di crociera (peso 60%)**: Il rapporto portanza-resistenza massimo $(L/D)_\text{max}$ determina direttamente l'autonomia e la durata di crociera. Un $(L/D)_\text{max}$ più elevato riduce la potenza di crociera e prolunga la durata della batteria.
+1. Efficienza di crociera (peso 60%): Il rapporto portanza-resistenza massimo $(L/D)_\text{max}$ determina direttamente l'autonomia e la durata di crociera. Un $(L/D)_\text{max}$ più elevato riduce la potenza di crociera e prolunga la durata della batteria.
 
-2. **Margine di stallo (peso 25%)**: Il coefficiente di portanza massimo $C_{L,\text{max}}$ determina la velocità minima di volo e fornisce margine contro raffiche o manovre. Un $C_{L,\text{max}}$ più elevato consente un'area alare più piccola o velocità di avvicinamento inferiori.
+2. Margine di stallo (peso 25%): Il coefficiente di portanza massimo $C_{L,\text{max}}$ determina la velocità minima di volo e fornisce margine contro raffiche o manovre. Un $C_{L,\text{max}}$ più elevato consente un'area alare più piccola o velocità di avvicinamento inferiori.
 
-3. **Angolo di stallo (peso 15%)**: Un angolo di stallo $\alpha_\text{stallo}$ più elevato fornisce un inviluppo operativo più ampio e caratteristiche di stallo più graduali, migliorando la controllabilità nell'atmosfera marziana a bassa densità.
+3. Angolo di stallo (peso 15%): Un angolo di stallo $\alpha_\text{stallo}$ più elevato fornisce un inviluppo operativo più ampio e caratteristiche di stallo più graduali, migliorando la controllabilità nell'atmosfera marziana a bassa densità.
 
 ### Confronto prestazionale
 
@@ -2401,7 +2401,7 @@ Inoltre, l'E387 presenta una riduzione anomala della resistenza a α ≈ 9° ($C
 | Resistenza minima $C_{D,\text{min}}$ | 0.0228 | 0.0142 | SD8000 (38% inferiore) |
 | Efficienza massima $(L/D)_\text{max}$ | 46.6 | 45.4 | E387 (3% superiore) |
 | Portanza massima $C_{L,\text{max}}$ | 1.22 | 1.15 | E387 (6% superiore) |
-| Angolo a $(L/D)_\text{max}$ | 8.8° | 7.0° | — |
+| Angolo a $(L/D)_\text{max}$ | 8.8° | 7.0° | N.D. |
 | Angolo di stallo | 10.2° | 11.5° | SD8000 |
 | Margine allo stallo | 1.3° | 4.6° | SD8000 (3.5× maggiore) |
 
@@ -2417,14 +2417,14 @@ Le curve di portanza in @fig:airfoil-cl-alpha mostrano le caratteristiche di sta
 
 ### Motivazione della selezione
 
-Sulla base dell'analisi comparativa, il **Selig/Donovan SD8000** è selezionato per la progettazione dell'ala dell'UAV marziano. Mentre l'E387 raggiunge un'efficienza di picco marginalmente superiore, l'SD8000 offre vantaggi critici per un'operatività affidabile su Marte:
+Sulla base dell'analisi comparativa, il Selig/Donovan SD8000 è selezionato per la progettazione dell'ala dell'UAV marziano. Mentre l'E387 raggiunge un'efficienza di picco marginalmente superiore, l'SD8000 offre vantaggi importanti per un'operatività affidabile su Marte:
 
-* **Minore resistenza nell'intervallo operativo**: $C_{D,\text{min}}$ = 0.0142, 38% inferiore all'E387
-* **Maggiore margine di stallo**: 4.6° di margine tra il miglior L/D e lo stallo, rispetto a solo 1.3° per l'E387
-* **Comportamento di resistenza coerente**: Nessuna transizione anomala o sensibilità alla dinamica delle LSB
-* **Prestazioni robuste**: L/D più elevato alle condizioni di crociera pratiche ($C_L$ = 0.7–0.9)
-* **Progettato per basso numero di Reynolds**: L'SD8000 è stato specificamente progettato da Selig e Donovan per applicazioni a basso Re, con prestazioni documentate in UAV e applicazioni simili [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
-* **Stallo tardivo**: Stallo a α = 11.5° fornisce un ampio inviluppo operativo
+* Minore resistenza nell'intervallo operativo: $C_{D,\text{min}}$ = 0.0142, 38% inferiore all'E387
+* Maggiore margine di stallo: 4.6° di margine tra il miglior L/D e lo stallo, rispetto a solo 1.3° per l'E387
+* Comportamento di resistenza coerente: nessuna transizione anomala o sensibilità alla dinamica delle LSB
+* Prestazioni robuste: L/D più elevato alle condizioni di crociera pratiche ($C_L$ = 0.7–0.9)
+* Progettato per basso numero di Reynolds: l'SD8000 è stato specificamente progettato da Selig e Donovan per applicazioni a basso Re, con prestazioni documentate in UAV e applicazioni simili [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
+* Stallo tardivo: stallo a α = 11.5° fornisce un ampio inviluppo operativo
 
 Il vantaggio di efficienza di picco del 3% dell'E387 è compensato dal rischio operativo di mirare a un angolo di attacco entro 1.3° dallo stallo. Per una missione su Marte senza opportunità di recupero, la selezione più conservativa dell'SD8000 fornisce un margine di sicurezza appropriato.
 
@@ -2510,24 +2510,9 @@ Il vincolo orizzontale (beccheggio) è attivo, il che significa che la coda è d
 
 I benchmark commerciali mostrano un rapporto lunghezza-apertura alare che varia da 0.28 a 0.63, con una mediana di circa 0.50 (@tbl:reference-fuselage). La selezione comporta trade-off tra effetti in competizione:
 
-**Fusoliera più corta (rapporto inferiore):**
+Una fusoliera più corta (rapporto inferiore) produce meno massa strutturale, meno area bagnata (resistenza parassitica ridotta) e meno volume interno, ma richiede un'estensione del boom per il braccio di momento della coda. Una fusoliera più lunga (rapporto superiore) fornisce maggiore contributo di portanza, un braccio di momento della coda più lungo che consente superfici di coda più piccole, e più volume interno per crescita del payload e gestione termica, ma aumenta la massa strutturale e l'area bagnata.
 
-* Meno massa strutturale della fusoliera
-* Meno area bagnata della fusoliera (resistenza parassitica ridotta)
-* Richiede estensione del boom per il braccio di momento della coda
-* Meno volume interno
-
-**Fusoliera più lunga (rapporto superiore):**
-
-* Maggiore contributo di portanza della fusoliera
-* Braccio di momento della coda più lungo senza estensione boom
-* Più volume interno per crescita del payload e gestione termica
-* Più massa strutturale della fusoliera
-* Più area bagnata della fusoliera
-
-**Selezione: 0.30** (limite inferiore dell'intervallo benchmark)
-
-Per l'UAV marziano, la maggior parte del volume interno è occupata dal payload compatto e dai sistemi di accumulo energetico che richiedono solo 4–5 L. Il volume di 170 L fornito dal rapporto 0.50 è eccessivo. Selezionando il limite inferiore dell'intervallo benchmark (0.30) si minimizza la massa strutturale e la resistenza parassitica fornendo al contempo volume adeguato per tutti i sistemi. Il braccio di momento della coda richiesto è invece ottenuto attraverso l'estensione del boom, che è strutturalmente efficiente poiché serve al duplice scopo di supportare sia i rotori di sollevamento che le superfici della coda a V.
+Viene selezionato un rapporto di 0.30 (limite inferiore dell'intervallo benchmark). Per l'UAV marziano, la maggior parte del volume interno è occupata dal payload compatto e dai sistemi di accumulo energetico che richiedono solo 4–5 L. Il volume di 170 L fornito dal rapporto 0.50 è eccessivo. Selezionando il limite inferiore dell'intervallo benchmark si minimizza la massa strutturale e la resistenza parassitica fornendo al contempo volume adeguato per tutti i sistemi. Il braccio di momento della coda richiesto è invece ottenuto attraverso l'estensione del boom, che è strutturalmente efficiente poiché serve al duplice scopo di supportare sia i rotori di sollevamento che le superfici della coda a V.
 
 Le dimensioni risultanti della fusoliera sono:
 
@@ -2562,21 +2547,21 @@ La sezione trasversale della fusoliera è approssimativamente circolare per semp
 
 La configurazione della coda a V montata su boom si estende oltre l'estremità poppiera della fusoliera. La lunghezza totale dell'aeromobile è determinata dalla posizione della coda richiesta per raggiungere il braccio di momento target:
 
-**Posizione dell'ala:**
+Posizione dell'ala:
 
 $$x_\text{ala,LE} = 0.40 \times L_f = 0.40 \times 1.20 = 0.48 \text{ m dal muso}$$
 
 $$x_\text{ala,AC} = x_\text{ala,LE} + 0.25 \times MAC = 0.48 + 0.25 \times 0.669 = 0.65 \text{ m}$$
 
-**Posizione della coda (da CA ala + braccio di momento):**
+Posizione della coda (da CA ala + braccio di momento):
 
 $$x_\text{coda,AC} = x_\text{ala,AC} + l_H = 0.65 + 1.20 = 1.85 \text{ m dal muso}$$
 
-**Bordo d'uscita coda (CA al 25% corda dal bordo d'attacco):**
+Bordo d'uscita coda (CA al 25% corda dal bordo d'attacco):
 
 $$x_\text{coda,TE} = x_\text{coda,AC} + 0.75 \times c_{V\text{-tail}} = 1.85 + 0.75 \times 0.535 = 2.25 \text{ m}$$
 
-La lunghezza totale dell'aeromobile è quindi **2.25 m**, con i boom di coda che si estendono **1.05 m** oltre l'estremità poppiera della fusoliera. Questa estensione del boom è strutturalmente integrata con i bracci dei motori di sollevamento posteriori, che servono al duplice scopo di supportare i rotori dell'octocopter e le superfici della coda a V.
+La lunghezza totale dell'aeromobile è quindi 2.25 m, con i boom di coda che si estendono 1.05 m oltre l'estremità poppiera della fusoliera. Questa estensione del boom è strutturalmente integrata con i bracci dei motori di sollevamento posteriori, che servono al duplice scopo di supportare i rotori dell'octocopter e le superfici della coda a V.
 
 | Parametro | Simbolo | Valore | Note |
 |:----------|:------:|------:|:------|
@@ -2612,7 +2597,7 @@ dove $n$ è la velocità di rotazione (giri/s) e $a$ è la velocità del suono. 
 
 $$M_\text{tip} = \frac{\pi \times (4850/60) \times 0.44}{229.7} = 0.49$$
 
-Questo è inferiore al limite di 0.7, quindi non si applica alcun vincolo sulla velocità dell'estremità. Il diametro teorico dal carico del disco è 0.44 m. Il diametro selezionato dell'elica di sollevamento è **0.36 m** (14 pollici), basato sulle dimensioni disponibili e sulla compatibilità con il motore.
+Questo è inferiore al limite di 0.7, quindi non si applica alcun vincolo sulla velocità dell'estremità. Il diametro teorico dal carico del disco è 0.44 m. Il diametro selezionato dell'elica di sollevamento è 0.36 m (14 pollici), basato sulle dimensioni disponibili e sulla compatibilità con il motore.
 
 #### Dimensionamento eliche di crociera
 
@@ -2620,7 +2605,7 @@ I due motori di crociera forniscono spinta in avanti durante il volo orizzontale
 
 $$P_\text{indotta} = T v_i = \frac{T^{3/2}}{\sqrt{2 \rho A}}$$ {#eq:induced-power}
 
-La spinta di crociera è fissata dal requisito di resistenza aerodinamica, $T = W/(L/D)$. Per la configurazione di base, la spinta totale in crociera è 3.53 N (1.76 N per motore). Il diametro selezionato dell'elica di crociera è **0.31 m** (12 pollici). A 8000 rpm, il numero di Mach all'estremità è 0.56, inferiore al limite di 0.7.
+La spinta di crociera è fissata dal requisito di resistenza aerodinamica, $T = W/(L/D)$. Per la configurazione di base, la spinta totale in crociera è 3.53 N (1.76 N per motore). Il diametro selezionato dell'elica di crociera è 0.31 m (12 pollici). A 8000 rpm, il numero di Mach all'estremità è 0.56, inferiore al limite di 0.7.
 
 | Parametro | Elica di sollevamento | Elica di crociera |
 |:----------|----------------------:|------------------:|
@@ -2670,7 +2655,7 @@ La selezione del CFRP e delle tecniche di costruzione in composito avanzato infl
 
 | Parametro | Base alluminio | Composito CFRP | Riduzione |
 |:----------|-------------------:|---------------:|----------:|
-| Resistenza specifica (MPa·m³/kg) | 110 | 450 | — |
+| Resistenza specifica (MPa·m³/kg) | 110 | 450 | N.D. |
 | Frazione di massa strutturale | 0.35–0.40 | 0.25–0.30 | 25–30% |
 | Fattore di densità alare, $K_\rho$ | 1.0 | 0.50–0.60 | 40–50% |
 
@@ -2815,30 +2800,30 @@ La ripartizione dettagliata della massa per la configurazione QuadPlane selezion
 
 | Componente | Massa (kg) | Frazione | Fonte |
 |:----------|----------:|---------:|:-------|
-| **Struttura** | 2.32 | 23.2% | |
+| Struttura | 2.32 | 23.2% | |
 | Ala | 0.80 | 8.0% | @eq:wing-weight con CFRP |
 | Fusoliera | 0.45 | 4.5% | @eq:fuselage-weight con CFRP |
 | Impennaggio (coda a V) | 0.35 | 3.5% | Scalatura dall'ala (1.144 m²) |
 | Boom (4×) | 0.40 | 4.0% | Analisi strutturale |
 | Carrello | 0.32 | 3.2% | 3.2% dell'MTOW |
-| **Propulsione** | 1.18 | 11.8% | |
+| Propulsione | 1.18 | 11.8% | |
 | Motori di sollevamento (8×) | 0.528 | 5.3% | SunnySky V4006-380, 66 g cad. |
 | Motori di crociera (2×) | 0.120 | 1.2% | T-Motor AT2312-1150, 60 g cad. |
 | ESC (10×) | 0.060 | 0.6% | Hobbywing XRotor Micro 30A, 6 g cad. |
 | Eliche (10×) | 0.174 | 1.7% | 8× sollevamento (18 g) + 2× crociera (15 g) |
 | Montaggio + cablaggio | 0.300 | 3.0% | Stima ingegneristica |
-| **Energia** | 3.50 | 35.0% | |
+| Energia | 3.50 | 35.0% | |
 | Pacco batteria | 3.50 | 35.0% | @sec:energy-data, 945 Wh totali |
-| **Payload** | 1.50 | 15.0% | |
+| Payload | 1.50 | 15.0% | |
 | Sistema camera | 0.30 | 3.0% | @sec:payload-systems |
 | Relè radio | 0.15 | 1.5% | @sec:payload-systems |
 | Margine payload | 1.05 | 10.5% | Tolleranza di crescita |
-| **Avionica** | 0.50 | 5.0% | |
+| Avionica | 0.50 | 5.0% | |
 | Controllore di volo | 0.10 | 1.0% | Autopilota classe Pixhawk |
 | Sensori e cablaggio | 0.40 | 4.0% | GPS, IMU, telemetria |
-| **Subtotale** | 9.00 | 90.0% | |
-| **Margine di progetto** | 1.00 | 10.0% | Contingenza |
-| **MTOW totale** | 10.00 | 100% | — |
+| Subtotale | 9.00 | 90.0% | |
+| Margine di progetto | 1.00 | 10.0% | Contingenza |
+| MTOW totale | 10.00 | 100% | N.D. |
 
 ### Limitazioni per piccoli UAV
 
@@ -2865,8 +2850,8 @@ Le masse calcolate dei componenti sono verificate rispetto agli obiettivi delle 
 | Struttura | 0.23 | 0.23 | CONFORME |
 | Propulsione | 0.20 | 0.12 | INFERIORE (margine disponibile) |
 | Avionica | 0.05 | 0.05 | CONFORME |
-| Margine di progetto | — | 0.10 | ALLOCATO |
-| **Totale** | 1.00 | 1.00 | BILANCIATO |
+| Margine di progetto | N.D. | 0.10 | ALLOCATO |
+| Totale | 1.00 | 1.00 | BILANCIATO |
 
 La frazione di massa della propulsione (11.8%) è significativamente inferiore al budget del 20%, fornendo un margine di 0.82 kg che è stato riallocato alla struttura e alla contingenza di progetto. Questo margine riflette la selezione di combinazioni moderne di motori/ESC leggeri e valida le ipotesi dell'analisi dei vincoli.
 
@@ -2874,7 +2859,7 @@ La frazione di massa della propulsione (11.8%) è significativamente inferiore a
 
 Questa sezione presenta la selezione di componenti specifici basata sui risultati del dimensionamento dall'analisi dei vincoli (@sec:hybrid-vtol-analysis). La selezione dei componenti segue un approccio sistematico di trade-off, valutando i candidati rispetto ai requisiti derivati dai calcoli della Sezione 5.
 
-## Metodologia di selezione
+## Metodologia di selezione {#sec:selection-methodology}
 
 ### Requisiti dall'analisi dei vincoli
 
@@ -2900,37 +2885,31 @@ Allocando il 70% al sistema di sollevamento e il 30% al sistema di crociera:
 
 : Allocazione della massa di propulsione {#tbl:mass-allocation}
 
-| Categoria componente | Massa target (kg) | Target per unità |
-|:-------------------|----------------:|:----------------|
-| Motori di sollevamento (8) | 0.560 | 70 g ciascuno |
-| ESC di sollevamento (8) | 0.160 | 20 g ciascuno |
-| Eliche di sollevamento (8) | 0.160 | 20 g ciascuno |
-| Montaggio sollevamento | 0.200 | totale |
-| **Subtotale sollevamento** | **1.080** | - |
-| Motori di crociera (2) | 0.200 | 100 g ciascuno |
-| ESC di crociera (2) | 0.060 | 30 g ciascuno |
-| Eliche di crociera (2) | 0.040 | 20 g ciascuno |
-| **Subtotale crociera** | **0.300** | - |
-| Cablaggio, connettori | 0.320 | margine |
-| **Totale propulsione** | **1.700** | - |
+| Categoria componente | Quantità | Massa target (kg) | Target per unità |
+|:-------------------|:--------:|----------------:|:----------------|
+| Motori di sollevamento | 8 | 0.560 | 70 g ciascuno |
+| ESC di sollevamento | 8 | 0.160 | 20 g ciascuno |
+| Eliche di sollevamento | 8 | 0.160 | 20 g ciascuno |
+| Montaggio sollevamento | 1 | 0.200 | totale |
+| Subtotale sollevamento | N.A. | 1.080 | N.A. |
+| Motori di crociera | 2 | 0.200 | 100 g ciascuno |
+| ESC di crociera | 2 | 0.060 | 30 g ciascuno |
+| Eliche di crociera | 2 | 0.040 | 20 g ciascuno |
+| Subtotale crociera | N.A. | 0.300 | N.A. |
+| Cablaggio, connettori | 1 | 0.320 | margine |
+| Totale propulsione | N.A. | 1.700 | N.A. |
 
 ### Criteri di selezione
 
-I componenti sono valutati rispetto ai seguenti criteri, in ordine di priorità:
+I componenti sono valutati rispetto ai seguenti criteri, in ordine di priorità: (1) adeguatezza di potenza, soddisfacendo o superando i requisiti di potenza dell'analisi dei vincoli; (2) conformità di massa, rimanendo entro i target di massa per unità; (3) compatibilità di tensione con LiPo 6S nominale 22.2V per uniformità di sistema; (4) intervallo di temperatura per operazione alle temperature della superficie marziana fino a −60°C; (5) affidabilità, con preferenza per design collaudati con heritage di volo.
 
-1. **Adeguatezza di potenza**: soddisfare o superare i requisiti di potenza dell'analisi dei vincoli
-2. **Conformità di massa**: rimanere entro i target di massa per unità
-3. **Compatibilità di tensione**: LiPo 6S (22.2V nominale) per uniformità di sistema
-4. **Intervallo di temperatura**: operazione alle temperature della superficie marziana (fino a −60°C)
-5. **Affidabilità**: preferenza per design collaudati con heritage di volo
-
-## Sistema di propulsione {#sec:propulsion-selection}
+## Selezione del sistema di propulsione {#sec:propulsion-selection}
 
 ### Motori di sollevamento {#sec:lift-motor-selection}
 
 #### Requisiti
 
-Ogni motore di sollevamento deve fornire almeno 400 W di potenza continua rimanendo sotto i 100 g (target 70 g) per rispettare il budget di massa. I motori devono essere compatibili con eliche da 12-16 pollici per allinearsi alla classe di eliche di sollevamento selezionata.
+Ogni motore di sollevamento deve fornire almeno 400 W di potenza continua rimanendo sotto i 100 g per rispettare il budget di massa, con un target di 70 g. I motori devono essere compatibili con eliche da 12-16 pollici per allinearsi alla classe di eliche di sollevamento selezionata.
 
 #### Confronto candidati
 
@@ -2940,19 +2919,14 @@ Ogni motore di sollevamento deve fornire almeno 400 W di potenza continua rimane
 
 | Motore | Massa (g) | Potenza (W) | Spinta (g) | KV | LiPo | Elica (in) | Stato |
 |:------|:--------:|----------:|:----------:|---:|:----:|:---------:|:-------|
-| SunnySky V4006-380 | 66 | 375 | 2560 | 380 | 4-6S | 12-15 | **Selezionato** |
-| MAD 4008 EEE-380 | 88 | ~400 | 2700 | 380 | 4-6S | 14-18 | Alternativa |
+| SunnySky V4006-380 | 66 | 375 | 2560 | 380 | 4-6S | 12-15 | Selezionato |
+| MAD 4008 EEE-380 | 88 | circa 400 | 2700 | 380 | 4-6S | 14-18 | Alternativa |
 | T-Motor MN5008-400 | 135 | 800 | 4200 | 400 | 6S | 15-17 | Troppo pesante |
-| T-Motor MN505-S-260 | 225 | 2500 | - | 260 | 12S | 16-17 | Troppo pesante |
+| T-Motor MN505-S-260 | 225 | 2500 | N.D. | 260 | 12S | 16-17 | Troppo pesante |
 
 #### Motivazione della selezione
 
-Il **SunnySky V4006-380** è selezionato per i motori di sollevamento in base a:
-
-* **Massa**: 66 g per motore è ben entro il target di 70 g, consentendo 8 motori a 528 g totali
-* **Potenza**: 375 W continui sono adeguati per il requisito di 398 W con appropriato abbinamento dell'elica
-* **Spinta**: 2560 g di spinta massima fornisce margine 2:1 spinta-peso per motore
-* **Disponibilità**: ampiamente disponibile da più fornitori
+Il SunnySky V4006-380 è selezionato per i motori di sollevamento in base a: massa di 66 g per motore, ben entro il target di 70 g e consentendo 8 motori a 528 g totali; potenza di 375 W continui, adeguata per il requisito di 398 W con appropriato abbinamento dell'elica; spinta massima di 2560 g, fornendo margine 2:1 spinta-peso per motore; e ampia disponibilità da più fornitori.
 
 Il MAD 4008 EEE è mantenuto come alternativa se è richiesto margine di potenza aggiuntivo.
 
@@ -2968,17 +2942,13 @@ Ogni ESC di sollevamento deve gestire almeno 25A di corrente continua (basato su
 
 | ESC | Massa (g) | Continua (A) | Picco (A) | LiPo | BEC | Stato |
 |:----|:--------:|---------------:|----------:|:----:|:---:|:-------|
-| Hobbywing XRotor Micro 30A | 6 | 30 | 40 | 2-4S | No | **Selezionato** |
+| Hobbywing XRotor Micro 30A | 6 | 30 | 40 | 2-4S | No | Selezionato |
 | T-Motor F35A | 6.7 | 35 | 45 | 3-6S | No | Alternativa |
 | T-Motor FLAME 60A 12S | 74 | 60 | 80 | 12S | No | Troppo pesante |
 
 #### Motivazione della selezione
 
-L'**Hobbywing XRotor Micro 30A** è selezionato per gli ESC di sollevamento in base a:
-
-* **Massa**: 6 g per ESC consente 8 ESC a soli 48 g totali
-* **Corrente**: 30A continui superano il requisito di ~25A
-* **Compatibilità**: firmware BLHeli_32 per controllo motore affidabile
+L'Hobbywing XRotor Micro 30A è selezionato per gli ESC di sollevamento in base a: massa di 6 g per ESC, consentendo 8 ESC a soli 48 g totali; corrente di 30A continui, superando il requisito di circa 25A; e compatibilità con firmware BLHeli_32 per controllo motore affidabile.
 
 ### Motori di crociera {#sec:cruise-motor-selection}
 
@@ -2992,17 +2962,13 @@ Ogni motore di crociera deve fornire almeno 200 W di potenza continua (con margi
 
 | Motore | Massa (g) | Potenza (W) | KV | LiPo | Stato |
 |:------|:--------:|----------:|---:|:----:|:-------|
-| T-Motor AT2312-1150 | 60 | 350 | 1150 | 2-4S | **Selezionato** |
+| T-Motor AT2312-1150 | 60 | 350 | 1150 | 2-4S | Selezionato |
 | T-Motor AT2814-1000 | 109 | 370 | 1000 | 2-4S | Alternativa |
 | T-Motor AT4130-230 | 408 | 2500 | 230 | 12S | Troppo pesante |
 
 #### Motivazione della selezione
 
-Il **T-Motor AT2312-1150** è selezionato per i motori di crociera in base a:
-
-* **Massa**: 60 g per motore consente 2 motori a soli 120 g totali
-* **Potenza**: 350 W continui superano il requisito di 159 W con margine 2:1
-* **Design**: la serie AT è ottimizzata per l'efficienza di crociera ad ala fissa
+Il T-Motor AT2312-1150 è selezionato per i motori di crociera in base a: massa di 60 g per motore, consentendo 2 motori a soli 120 g totali; potenza di 350 W continui, superando il requisito di 159 W con margine 2:1; e design della serie AT ottimizzato per l'efficienza di crociera ad ala fissa.
 
 ### Riepilogo massa propulsione {#sec:propulsion-mass-summary}
 
@@ -3015,29 +2981,25 @@ Il **T-Motor AT2312-1150** è selezionato per i motori di crociera in base a:
 | Motori sollevamento | SunnySky V4006-380 | 8 | 66 | 0.528 |
 | ESC sollevamento | Hobbywing XRotor Micro 30A | 8 | 6 | 0.048 |
 | Eliche sollevamento | NS14×4.8 | 8 | 18 | 0.144 |
-| **Subtotale sollevamento** | - | - | - | **0.720** |
+| Subtotale sollevamento | N.A. | N.A. | N.A. | 0.720 |
 | Motori crociera | T-Motor AT2312-1150 | 2 | 60 | 0.120 |
 | ESC crociera | Hobbywing XRotor Micro 30A | 2 | 6 | 0.012 |
 | Eliche crociera | NS12×6 | 2 | 15 | 0.030 |
-| **Subtotale crociera** | - | - | - | **0.162** |
+| Subtotale crociera | N.A. | N.A. | N.A. | 0.162 |
 | Montaggio | Bracci, navicella | 1 | 200 | 0.200 |
 | Cablaggio | Distribuzione, connettori | 1 | 100 | 0.100 |
-| **Subtotale condiviso** | - | - | - | **0.300** |
-| **Totale propulsione** | - | - | - | **1.182** |
+| Subtotale condiviso | N.A. | N.A. | N.A. | 0.300 |
+| Totale propulsione | N.A. | N.A. | N.A. | 1.182 |
 
 Nota: I subtotali di sollevamento e crociera includono dati componenti con fonti. I componenti condivisi (montaggio, cablaggio) sono stime ingegneristiche senza schede tecniche.
 
 ### Confronto con budget di massa
 
-I componenti selezionati producono una massa di propulsione totale di **1.18 kg**, ben entro il budget di 2.00 kg allocato dalla frazione di propulsione $f_\text{prop}$ = 0.20.
+I componenti selezionati producono una massa di propulsione totale di 1.18 kg, ben entro il budget di 2.00 kg allocato dalla frazione di propulsione $f_\text{prop}$ = 0.20.
 
 $$f_\text{prop,effettivo} = \frac{m_\text{propulsione}}{MTOW} = \frac{1.182}{10.00} = 0.118 = 11.8\%$$
 
-Questo rappresenta una **riduzione del 40%** dal budget allocato, fornendo margine per:
-
-* Motori alternativi più pesanti se è necessaria potenza aggiuntiva
-* Componenti di gestione termica per l'operazione su Marte
-* Flessibilità di iterazione progettuale
+Questo rappresenta una riduzione del 40% dal budget allocato, fornendo margine per motori alternativi più pesanti se è necessaria potenza aggiuntiva, componenti di gestione termica per l'operazione su Marte e flessibilità di iterazione progettuale.
 
 La riduzione della massa di propulsione rialloca 0.82 kg ad altre categorie di sistema, potenzialmente aumentando la capacità di payload o la massa strutturale.
 
@@ -3061,7 +3023,7 @@ Allocando circa il 60% alla camera e il 40% al sistema radio si ottiene un targe
 
 : Analisi trade-off selezione camera {#tbl:camera-selection}
 
-| Camera | Massa (g) | Risoluzione | Temp. (°C) | Valutazione |
+| Camera | Massa (g) | Risoluzione | Temp. (°C) | Stato |
 |:-------|:--------:|:-----------|:----------------:|:------:|
 | Ricoh GR III | 227-257 | 24 MP (APS-C) | N.D. | Selezionata |
 | MicaSense RedEdge-MX | 232 | 1.2 MP/banda (5 bande) | N.D. | Alternativa |
@@ -3073,14 +3035,9 @@ Nota: N.D. indica temperatura operativa non specificata dal produttore.
 
 #### Motivazione della selezione
 
-La **Ricoh GR III** è selezionata come camera primaria in base a:
+La Ricoh GR III è selezionata come camera primaria in base a: massa di 227 g corpo e 257 g completa con batteria [@ricohimagingRicohGRIII2024]<!-- #specs -->, l'opzione RGB più leggera; risoluzione del sensore APS-C da 24 MP, adeguata per la mappatura; dimensioni compatte di 109.4 × 61.9 × 33.2 mm [@ricohimagingRicohGRIII2024]<!-- #specs -->; e obiettivo integrato da 18.3 mm (equivalente 28 mm), eliminando la complessità degli obiettivi intercambiabili.
 
-* **Massa**: 227 g corpo, 257 g completa con batteria [@ricohimagingRicohGRIII2024]<!-- #specs -->, l'opzione RGB più leggera
-* **Risoluzione**: sensore APS-C da 24 MP fornisce risoluzione adeguata per la mappatura
-* **Dimensioni**: form factor compatto 109.4 × 61.9 × 33.2 mm [@ricohimagingRicohGRIII2024]<!-- #specs -->
-* **Obiettivo**: obiettivo integrato da 18.3 mm (equivalente 28 mm) elimina la complessità degli obiettivi intercambiabili
-
-La **MicaSense RedEdge-MX** è mantenuta come alternativa se è richiesta capacità multispettrale per l'analisi geologica [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. A 232 g, fornisce imaging a cinque bande (blu, verde, rosso, red-edge, NIR) adatto per l'identificazione minerale.
+La MicaSense RedEdge-MX è mantenuta come alternativa se è richiesta capacità multispettrale per l'analisi geologica [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. A 232 g, fornisce imaging a cinque bande (blu, verde, rosso, red-edge, NIR) adatto per l'identificazione minerale.
 
 Le DJI Zenmuse P1 e Phase One iXM-100 sono respinte per massa superiore al target di 600 g di un fattore due o più. Il sistema termico DJI Zenmuse H20T è respinto poiché l'imaging termico non è un requisito di missione primario.
 
@@ -3110,11 +3067,7 @@ La Ricoh GR III non specifica un intervallo di temperatura operativa, indicando 
 
 La missione di relay telecomunicazioni richiede un sistema radio capace di estendere la portata di comunicazione tra gli astronauti EVA in superficie e la stazione base dell'habitat. In base all'allocazione radio del 40% dal budget payload di 1.00 kg, il target di massa radio è circa 400 g.
 
-I requisiti operativi includono:
-
-* Portata: corrispondere o superare il raggio operativo di 50 km
-* Temperatura: operazione alle temperature superficiali marziane (−60 a +20 °C)
-* Potenza: minimizzare il consumo energetico per l'autonomia della batteria
+I requisiti operativi includono: portata corrispondente o superiore al raggio operativo di 50 km, tolleranza termica per le condizioni superficiali marziane da −60 a +20 °C, e consumo energetico minimo per l'autonomia della batteria.
 
 #### Valutazione dei candidati
 
@@ -3122,7 +3075,7 @@ I requisiti operativi includono:
 
 : Analisi trade-off selezione radio {#tbl:radio-selection}
 
-| Radio | Massa (g) | Portata (km) | Temp. (°C) | Valutazione |
+| Radio | Massa (g) | Portata (km) | Temp. (°C) | Stato |
 |:------|:--------:|:----------:|:----------------:|:------:|
 | RFD900x | 14.5 | > 40 | −40 a +85 | Selezionata |
 | Microhard pMDDL2450 (chiuso) | 165 | N.D. | −40 a +85 | Alternativa |
@@ -3132,15 +3085,9 @@ I requisiti operativi includono:
 
 #### Motivazione della selezione
 
-La **RFD900x** è selezionata come radio primaria in base a:
+La RFD900x è selezionata come radio primaria in base a: massa di 14.5 g, l'opzione più leggera e ben sotto il target di 400 g [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; portata superiore a 40 km in linea di vista, soddisfacendo il raggio operativo di 50 km con ottimizzazione antenna [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; intervallo di temperatura operativa da −40 a +85 °C, superando i requisiti della superficie marziana; consumo massimo di 5 W a 1 W di trasmissione; e ampio utilizzo in applicazioni UAV con firmware open-source SiK.
 
-* **Massa**: 14.5 g è l'opzione più leggera, ben sotto il target di 400 g [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Portata**: >40 km in linea di vista soddisfa il raggio operativo di 50 km con ottimizzazione antenna [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Temperatura**: intervallo operativo da −40 a +85 °C supera i requisiti della superficie marziana
-* **Potenza**: 5 W di consumo massimo a 1 W di trasmissione
-* **Heritage**: ampiamente usata in applicazioni UAV con firmware open-source SiK
-
-La **Microhard pMDDL2450** è mantenuta come alternativa se è richiesto throughput dati maggiore (25 Mbps vs 0.75 Mbps) per potenziali applicazioni di video relay [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
+La Microhard pMDDL2450 è mantenuta come alternativa se è richiesto throughput dati maggiore (25 Mbps vs 0.75 Mbps) per potenziali applicazioni di video relay [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
 
 I sistemi radio mesh (Rajant, Silvus, Persistent Systems) sono respinti poiché la funzionalità mesh non è richiesta per una missione relay con singolo UAV. La loro massa di 400-700 g consumerebbe l'intero budget radio senza vantaggio per il profilo di missione.
 
@@ -3179,11 +3126,7 @@ I componenti selezionati producono una massa payload totale di **0.42 kg**, ben 
 
 $$f_\text{payload,effettivo} = \frac{m_\text{payload}}{MTOW} = \frac{0.422}{10.00} = 0.042 = 4.2\%$$
 
-Questo rappresenta una **riduzione del 58%** dal budget allocato, fornendo margine per:
-
-* Payload aggiuntivo se i requisiti di missione si espandono
-* Componenti di gestione termica per l'operazione marziana
-* Flessibilità di iterazione progettuale
+Questo rappresenta una riduzione del 58% dal budget allocato, fornendo margine per payload aggiuntivo se i requisiti di missione si espandono, componenti di gestione termica per l'operazione marziana e flessibilità di iterazione progettuale.
 
 La riduzione della massa payload rialloca 0.58 kg ad altre categorie di sistema, potenzialmente aumentando la capacità batteria per autonomia estesa.
 
@@ -3211,7 +3154,7 @@ I requisiti energetici sono derivati dall'analisi QuadPlane in @sec:hybrid-vtol-
 
 : Analisi trade-off selezione tecnologia batteria {#tbl:battery-selection}
 
-| Tecnologia | Energia spec. (Wh/kg) | Temp. (°C) | Cicli vita | Valutazione |
+| Tecnologia | Energia spec. (Wh/kg) | Temp. (°C) | Cicli vita | Stato |
 |:-----------|:--------------------:|:----------------:|:----------:|:------:|
 | Li-ion stato solido | 270 | −20 a +60 | 1000 | Selezionata |
 | Li-ion semi-solido | 180 | −20 a +45 | 500 | Alternativa |
@@ -3220,29 +3163,15 @@ I requisiti energetici sono derivati dall'analisi QuadPlane in @sec:hybrid-vtol-
 
 ### Motivazione della selezione
 
-Le **batterie litio-ione a stato solido** sono selezionate in base a:
+Le batterie litio-ione a stato solido sono selezionate in base a: energia specifica di 270 Wh/kg, superando il requisito di 200 Wh/kg del 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; intervallo di temperatura da −20 a +60 °C, fornendo tolleranza base al freddo [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; vita ciclica di 1000 cicli all'80% DoD, supportando una campagna missione lunga; e costruzione con elettrolita solido, riducendo il rischio di thermal runaway nell'habitat marziano.
 
-* **Energia specifica**: 270 Wh/kg supera il requisito di 200 Wh/kg del 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Intervallo temperatura**: da −20 a +60 °C fornisce tolleranza base al freddo [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Vita ciclica**: 1000 cicli all'80% DoD supporta campagna missione lunga
-* **Sicurezza**: elettrolita solido riduce il rischio di thermal runaway nell'habitat marziano
+La tecnologia litio-ione semi-solido è mantenuta come alternativa se la disponibilità stato solido è limitata. A 180 Wh/kg, soddisfa comunque i requisiti di missione con margine ridotto.
 
-La tecnologia **litio-ione semi-solido** è mantenuta come alternativa se la disponibilità stato solido è limitata. A 180 Wh/kg, soddisfa comunque i requisiti di missione con margine ridotto.
-
-Le batterie LiPo standard sono respinte per:
-
-* Energia specifica inferiore (130-150 Wh/kg)
-* Intervallo temperatura operativa ristretto (tipicamente 0 a +40 °C senza preriscaldamento)
-* Vita ciclica più breve (circa 300 cicli)
+Le batterie LiPo standard sono respinte per energia specifica inferiore (130-150 Wh/kg), intervallo di temperatura operativa ristretto (tipicamente 0 a +40 °C senza preriscaldamento) e vita ciclica più breve (circa 300 cicli).
 
 ### Considerazioni termiche marziane
 
-L'intervallo operativo batteria stato solido (−20°C minimo) non copre completamente le temperature superficiali marziane (−60 a +20 °C). La strategia di gestione termica batteria include:
-
-* Vano batteria isolato per ridurre la perdita di calore
-* Elementi riscaldanti resistivi attivati durante i periodi di cold soak
-* Condizionamento batteria pre-volo nell'hangar habitat
-* Operazioni di volo limitate alla finestra termica diurna
+L'intervallo operativo batteria stato solido (−20°C minimo) non copre completamente le temperature superficiali marziane (−60 a +20 °C). La strategia di gestione termica batteria include un vano batteria isolato per ridurre la perdita di calore, elementi riscaldanti resistivi attivati durante i periodi di cold soak, condizionamento batteria pre-volo nell'hangar habitat e operazioni di volo limitate alla finestra termica diurna.
 
 La massa del sistema di controllo termico è allocata nella frazione di massa avionica/sistemi.
 
@@ -3328,10 +3257,7 @@ Tuttavia, si raccomanda di mantenere la massa batteria baseline di 3.50 kg per p
 | Hovering totale | 3181 | 8 × 375 = 3000 | −6% |
 | Crociera totale | 318 | 2 × 350 = 700 | +120% |
 
-Il margine di potenza hovering è leggermente negativo (−6%), indicando che i motori SunnySky V4006-380 operano vicino alla loro potenza nominale durante l'hovering. Questo è accettabile per la breve durata dell'hovering (2 minuti totali per volo) ma richiede:
-
-* Progetto termico adeguato per il raffreddamento motori nell'atmosfera rarefatta marziana
-* Considerazione dell'alternativa MAD 4008 EEE (88 g, 400 W) se i test rivelano problemi termici
+Il margine di potenza hovering è leggermente negativo (−6%), indicando che i motori SunnySky V4006-380 operano vicino alla loro potenza nominale durante l'hovering. Questo è accettabile per la breve durata dell'hovering (2 minuti totali per volo) ma richiede progetto termico adeguato per il raffreddamento motori nell'atmosfera rarefatta marziana e considerazione dell'alternativa MAD 4008 EEE (88 g, 400 W) se i test rivelano problemi termici.
 
 Il margine di potenza crociera è sostanziale (+120%), confermando che i motori T-Motor AT2312-1150 sono adeguatamente dimensionati con significativo headroom termico.
 
@@ -3380,26 +3306,23 @@ Raggio andata-ritorno: 115.3 km, superando il requisito di 100 km del 15%.
 
 | Requisito | Target | Raggiunto | Stato |
 |:------------|-------:|---------:|:------:|
-| MTOW | 10.00 kg | 8.60 kg | ✓ Conforme |
-| Autonomia | ≥ 60 min | 89.5 min | ✓ Conforme |
-| Raggio | ≥ 100 km | 115.3 km | ✓ Conforme |
-| Raggio operativo | ≥ 50 km | 57.7 km | ✓ Conforme |
-| Capacità payload | ≥ 1.0 kg | 0.42 kg (usato) | ✓ Conforme |
-| Capacità VTOL | Richiesta | QuadPlane | ✓ Conforme |
+| MTOW | 10.00 kg | 8.60 kg | Conforme |
+| Autonomia | ≥ 60 min | 89.5 min | Conforme |
+| Raggio | ≥ 100 km | 115.3 km | Conforme |
+| Raggio operativo | ≥ 50 km | 57.7 km | Conforme |
+| Capacità payload | ≥ 1.0 kg | 0.42 kg (usato) | Conforme |
+| Capacità VTOL | Richiesta | QuadPlane | Conforme |
 
 Tutti i requisiti di missione sono soddisfatti con margini positivi. Il punto di progetto è verificato come fattibile con i componenti commerciali selezionati.
 
 ### Sensibilità di progetto
 
-Le sensibilità chiave identificate durante la verifica:
+Le sensibilità chiave identificate durante la verifica sono:
 
-1. **Dimensionamento motori hovering**: Il deficit di potenza del 6% richiede verifica termica nelle condizioni atmosferiche marziane. Il passaggio al MAD 4008 EEE (88 g, 400 W) aggiungerebbe 176 g alla massa propulsione fornendo margine di potenza adeguato.
-
-2. **Temperatura batteria**: L'intervallo operativo batteria stato solido (−20°C minimo) non copre le condizioni superficiali marziane più fredde. La gestione termica attiva è obbligatoria.
-
-3. **Controllo termico camera**: La Ricoh GR III non ha specifiche per basse temperature. Sono richiesti test di qualifica o un involucro isolato con riscaldamento.
-
-4. **Crescita massa**: Il margine di massa di 1.40 kg fornisce buffer per la crescita progettuale durante la progettazione di dettaglio, sistemi di controllo termico e rinforzo strutturale se richiesto.
+1. Dimensionamento motori hovering: il deficit di potenza del 6% richiede verifica termica nelle condizioni atmosferiche marziane. Il passaggio al MAD 4008 EEE (88 g, 400 W) aggiungerebbe 176 g alla massa propulsione fornendo margine di potenza adeguato.
+2. Temperatura batteria: l'intervallo operativo batteria stato solido (−20°C minimo) non copre le condizioni superficiali marziane più fredde. La gestione termica attiva è obbligatoria.
+3. Controllo termico camera: la Ricoh GR III non ha specifiche per basse temperature. Sono richiesti test di qualifica o un involucro isolato con riscaldamento.
+4. Crescita massa: il margine di massa di 1.40 kg fornisce buffer per la crescita progettuale durante la progettazione di dettaglio, sistemi di controllo termico e rinforzo strutturale se richiesto.
 
 # Requisiti infrastrutturali
 
@@ -3428,7 +3351,7 @@ Le dimensioni dell'hangar sono determinate dalla geometria dell'UAV derivata in 
 | Diametro elica di sollevamento | $D_p$ | 0.36 m | @sec:propeller-sizing |
 | Diametro elica di crociera | $D_{p,c}$ | 0.31 m | @sec:propeller-sizing |
 
-L'ingombro UAV per lo stoccaggio è **4.01 × 2.25 m** (apertura alare × lunghezza totale). I rotori di sollevamento sono montati su bracci alari all'interno dell'apertura alare. L'estensione della trave oltre la fusoliera sostiene le superfici del V-tail e fornisce il braccio del momento richiesto.
+L'ingombro UAV per lo stoccaggio è 4.01 × 2.25 m (apertura alare × lunghezza totale). I rotori di sollevamento sono montati su bracci alari all'interno dell'apertura alare. L'estensione della trave oltre la fusoliera sostiene le superfici del V-tail e fornisce il braccio del momento richiesto.
 
 ### Zone dell'hangar
 
@@ -3478,15 +3401,9 @@ La piattaforma esterna fornisce un'area libera per le operazioni VTOL:
 
 Il sistema di ricarica è dimensionato sulla base delle specifiche della batteria da @sec:energy-storage:
 
-**Parametri batteria:**
+I parametri della batteria sono i seguenti: capacità totale batteria di 945 Wh, energia da ripristinare (da 20% a 100% di carica) di 756 Wh, tempo di ricarica obiettivo di 2–3 ore, potenza caricatore a rate 0.5C di 472 W e potenza caricatore a rate 1C di 945 W.
 
-* Capacità totale batteria: 945 Wh
-* Energia da ripristinare (da 20% a 100% di carica): 756 Wh
-* Tempo di ricarica obiettivo: 2–3 ore
-* Potenza caricatore a rate 0.5C: 472 W
-* Potenza caricatore a rate 1C: 945 W
-
-È specificato un **caricatore da 1000 W** per consentire un rapido turnaround con margine.
+È specificato un caricatore da 1000 W per consentire un rapido turnaround con margine.
 
 ### Sistema di alimentazione solare
 
@@ -3508,7 +3425,7 @@ L'energia solare disponibile su Marte differisce significativamente dalla Terra 
 | Ore di luce efficaci | 6 h/sol | Luce diurna utilizzabile per generazione |
 | Fattore di incidenza medio | 0.7 | Perdite per coseno per pannelli a inclinazione fissa |
 
-**Filosofia di progetto**: Il dimensionamento dei pannelli utilizza **condizioni di caso peggiore** (afelio + carico di polvere tipico, 350 W/m²) invece di valori ottimistici di cielo sereno a mezzogiorno (500 W/m²). Ciò garantisce che il sistema possa fornire una ricarica adeguata durante tutto l'anno marziano, incluso l'inverno e i periodi di polvere atmosferica elevata.
+Il dimensionamento dei pannelli utilizza condizioni di caso peggiore (afelio + carico di polvere tipico, 350 W/m²) invece di valori ottimistici di cielo sereno a mezzogiorno (500 W/m²). Ciò garantisce che il sistema possa fornire una ricarica adeguata durante tutto l'anno marziano, incluso l'inverno e i periodi di polvere atmosferica elevata.
 
 #### Selezione delle celle solari
 
@@ -3522,40 +3439,35 @@ Celle solari spaziali a tripla giunzione sono valutate per il sistema di ricaric
 | Spectrolab XTJ Prime | 30.7% | 50–84 | Satelliti LEO/GEO |
 | Azur Space 3G30C | 30.0% | 86 | MER Spirit/Opportunity |
 
-**SolAero IMM-α** [@solaerotechnologiesrocketlabSolAeroIMMalphaInverted2024]<!-- #specs -->: Questa cella multi-giunzione metamorfica invertita (IMM) raggiunge la massima efficienza al 33% BOL. A 49 mg/cm² (0.49 kg/m²), è il 42% più leggera delle celle spaziali convenzionali. L'IMM-α ha heritage diretto su Marte, alimentando il pannello solare dell'elicottero Ingenuity attraverso oltre 70 voli.
+SolAero IMM-α [@solaerotechnologiesrocketlabSolAeroIMMalphaInverted2024]<!-- #specs -->: Questa cella multi-giunzione metamorfica invertita (IMM) raggiunge la massima efficienza al 33% BOL. A 49 mg/cm² (0.49 kg/m²), è il 42% più leggera delle celle spaziali convenzionali. L'IMM-α ha heritage diretto su Marte, alimentando il pannello solare dell'elicottero Ingenuity attraverso oltre 70 voli.
 
-**Spectrolab XTJ Prime** [@spectrolabboeingSpectrolabXTJPrime2023]<!-- #specs -->: Questa cella a tripla giunzione GaInP/GaAs/Ge raggiunge un'efficienza media del 30.7% (31.9% massimo dimostrato). La massa varia da 50–84 mg/cm² a seconda dello spessore (80–225 μm). Qualificata secondo gli standard AIAA-S111 e AIAA-S112 con ampio heritage di volo LEO e GEO.
+Spectrolab XTJ Prime [@spectrolabboeingSpectrolabXTJPrime2023]<!-- #specs -->: Questa cella a tripla giunzione GaInP/GaAs/Ge raggiunge un'efficienza media del 30.7% (31.9% massimo dimostrato). La massa varia da 50–84 mg/cm² a seconda dello spessore (80–225 μm). Qualificata secondo gli standard AIAA-S111 e AIAA-S112 con ampio heritage di volo LEO e GEO.
 
-**Azur Space 3G30C-Advanced** [@azurspacesolarpowerAzurSpace3G30CAdvanced2023]<!-- #specs -->: Questa cella InGaP/GaAs/Ge con efficienza del 30% su substrato di germanio ha una massa di 86 mg/cm² a 150 μm di spessore. Qualificata secondo ECSS-E-ST-20-08C con heritage sui Mars Exploration Rovers Spirit e Opportunity.
+Azur Space 3G30C-Advanced [@azurspacesolarpowerAzurSpace3G30CAdvanced2023]<!-- #specs -->: Questa cella InGaP/GaAs/Ge con efficienza del 30% su substrato di germanio ha una massa di 86 mg/cm² a 150 μm di spessore. Qualificata secondo ECSS-E-ST-20-08C con heritage sui Mars Exploration Rovers Spirit e Opportunity.
 
-**Selezione: SolAero IMM-α** è selezionata sulla base di:
-
-* Massima efficienza (33%) massimizza la potenza per unità di area
-* Minima massa per area (49 mg/cm² = 0.49 kg/m²)
-* Heritage marziano comprovato sull'elicottero Ingenuity
-* Ottimizzata per lo spettro marziano per prestazioni ottimali
+SolAero IMM-α è selezionata sulla base della massima efficienza (33%) che massimizza la potenza per unità di area, della minima massa per area (49 mg/cm² = 0.49 kg/m²), dell'heritage marziano comprovato sull'elicottero Ingenuity e dell'ottimizzazione per lo spettro marziano per prestazioni ottimali.
 
 #### Dimensionamento dei pannelli
 
 Il dimensionamento dei pannelli utilizza l'irraggiamento di progetto conservativo (350 W/m², afelio + polvere tipica) per garantire l'operatività durante tutto l'anno.
 
-**Potenza in uscita per unità di area (a irraggiamento di progetto):**
+Potenza in uscita per unità di area (a irraggiamento di progetto):
 
 $$P_\text{progetto} = \eta_\text{cella} \times I_\text{progetto} = 0.33 \times 350 = 115.5 \text{ W/m}^2$$
 
-**Resa energetica giornaliera:**
+Resa energetica giornaliera:
 
 $$E_\text{pannello} = P_\text{progetto} \times t_\text{sole} \times \cos\theta_\text{medio} = 115.5 \times 6 \times 0.7 = 485.1 \text{ Wh/m}^2/\text{sol}$$
 
-**Fabbisogno energetico per ciclo di ricarica:**
+Fabbisogno energetico per ciclo di ricarica:
 
 $$E_\text{ricarica} = \frac{756 \text{ Wh}}{0.90} = 840 \text{ Wh}$$ (inclusa l'efficienza del caricatore)
 
-**Area pannello minima:**
+Area pannello minima:
 
 $$A_\text{min} = \frac{E_\text{ricarica}}{E_\text{pannello}} = \frac{840}{485.1} = 1.73 \text{ m}^2$$
 
-**Margine di progetto (×1.5 per degradazione celle e margine operativo):**
+Margine di progetto (×1.5 per degradazione celle e margine operativo):
 
 $$A_\text{progetto} = 1.73 \times 1.5 = 2.60 \text{ m}^2 \approx 3.0 \text{ m}^2$$
 
@@ -3565,16 +3477,9 @@ L'area del pannello è arrotondata a 3.0 m² per garantire che la generazione gi
 
 Il pannello solare genera energia solo durante le ore diurne, mentre la ricarica dell'UAV può essere richiesta in qualsiasi momento (incluso il turnaround notturno o dopo missioni serali). Una batteria tampone immagazzina l'energia solare per la ricarica su richiesta.
 
-**Decisione progettuale: stessa tecnologia di batteria dell'UAV**
+La batteria tampone utilizza la stessa tecnologia agli ioni di litio allo stato solido della batteria UAV (serie CGBT SLD1, 270 Wh/kg) invece di celle Li-ion convenzionali (180 Wh/kg). Questa decisione fornisce semplificazione logistica (la stessa chimica della batteria significa ricambi condivisi, apparecchiature di ricarica e procedure di gestione), compatibilità marziana comprovata (la batteria allo stato solido CGBT è già stata selezionata per le operazioni UAV in base al suo ampio intervallo di temperatura da -20 a +60°C), riduzione della massa (270 vs 180 Wh/kg riduce la massa del tampone del 33%) e flessibilità operativa (i pacchi batteria UAV possono servire come ricambi del tampone se necessario, consentendo la rotazione delle batterie per uniformare l'usura dei cicli).
 
-La batteria tampone utilizza la **stessa tecnologia agli ioni di litio allo stato solido** della batteria UAV (serie CGBT SLD1, 270 Wh/kg) invece di celle Li-ion convenzionali (180 Wh/kg). Questa decisione fornisce:
-
-1. **Semplificazione logistica**: La stessa chimica della batteria significa ricambi condivisi, apparecchiature di ricarica e procedure di gestione
-2. **Compatibilità marziana comprovata**: La batteria allo stato solido CGBT è già stata selezionata per le operazioni UAV in base al suo ampio intervallo di temperatura (-20 a +60°C)
-3. **Riduzione della massa**: 270 vs 180 Wh/kg riduce la massa del tampone del 33%
-4. **Flessibilità operativa**: I pacchi batteria UAV possono servire come ricambi del tampone se necessario, consentendo la rotazione delle batterie per uniformare l'usura dei cicli
-
-**Dimensionamento batteria tampone:**
+Dimensionamento batteria tampone:
 
 : Dimensionamento batteria tampone {#tbl:buffer-battery}
 
@@ -3591,14 +3496,7 @@ La batteria tampone utilizza la **stessa tecnologia agli ioni di litio allo stat
 
 La batteria tampone da 1260 Wh consente una ricarica completa dell'UAV durante la notte o in condizioni di tempesta di polvere quando non è disponibile input solare. Il fattore di 1.5 fornisce margine per il degrado della batteria e le perdite di sistema. Durante tempeste di polvere prolungate (settimane o mesi), la ricarica ricade sull'alimentazione nucleare dell'habitat.
 
-**Ciclo di carica/scarica del tampone:**
-
-Durante un tipico sol:
-
-1. **Giorno (6 h efficaci)**: I pannelli solari generano 1455 Wh (3.0 m² × 485.1 Wh/m²)
-2. **Ricarica tampone**: 1260 Wh immagazzinati nella batteria tampone
-3. **Ricarica UAV (2–3 h)**: 840 Wh forniti alla batteria UAV (756 Wh immagazzinati dopo le perdite)
-4. **Energia in eccesso**: Circa 195 Wh restituiti alla rete dell'habitat
+Durante un tipico sol il ciclo di carica/scarica del tampone funziona come segue: durante il giorno (6 h efficaci) i pannelli solari generano 1455 Wh (3.0 m² × 485.1 Wh/m²); durante la ricarica del tampone 1260 Wh sono immagazzinati nella batteria tampone; durante la ricarica UAV (2–3 h) 840 Wh sono forniti alla batteria UAV (756 Wh immagazzinati dopo le perdite); e l'energia in eccesso di circa 195 Wh è restituita alla rete dell'habitat.
 
 : Specifiche sistema di alimentazione solare {#tbl:solar-spec}
 
@@ -3645,15 +3543,15 @@ Una tipica sortita UAV consiste nelle seguenti fasi:
 | 12. Ispezione post-volo | Baia pressurizzata | 30 min | Download dati, controllo sistema |
 | 13. Ricarica batteria | Baia pressurizzata | 2-3 h | Ricarica a piena capacità |
 
-**Durata totale sortita**: 2.5-4.5 ore (fasi a terra), 1-2 ore (fasi di volo).
+Durata totale sortita: 2.5-4.5 ore (fasi a terra), 1-2 ore (fasi di volo).
 
 ### Ruoli dell'equipaggio
 
 Le operazioni UAV richiedono coinvolgimento minimo dell'equipaggio grazie alla capacità di volo autonomo:
 
-**Operatore UAV (1 persona)**: Responsabile della pianificazione missione, monitoraggio volo e analisi dati. Le operazioni sono condotte dall'interno dell'habitat usando la stazione di controllo a terra.
+Operatore UAV (1 persona): Responsabile della pianificazione missione, monitoraggio volo e analisi dati. Le operazioni sono condotte dall'interno dell'habitat usando la stazione di controllo a terra.
 
-**Supporto EVA (opzionale)**: Per manutenzione non di routine o operazioni di recupero fuori dalla baia pressurizzata.
+Supporto EVA (opzionale): Per manutenzione non di routine o operazioni di recupero fuori dalla baia pressurizzata.
 
 ### Ritmo operativo
 
@@ -3671,12 +3569,7 @@ Con due UAV pronti al volo, le operazioni giornaliere sono fattibili con voli al
 
 ### Operazioni di contingenza
 
-Le procedure di contingenza affrontano i modi di guasto prevedibili:
-
-* **Decollo abortito**: L'UAV rimane sulla piattaforma; l'equipaggio recupera tramite procedura airlock
-* **Emergenza in volo**: Ritorno autonomo alla base; atterraggio di emergenza su terreno pianeggiante alternativo
-* **Perdita comunicazioni**: Ritorno alla base pre-programmato dopo timeout (configurabile, default 5 min)
-* **Guasto atterraggio**: Zona di atterraggio secondaria designata; recupero EVA se richiesto
+Le procedure di contingenza affrontano i modi di guasto prevedibili: decollo abortito (l'UAV rimane sulla piattaforma e l'equipaggio recupera tramite procedura airlock); emergenza in volo (ritorno autonomo alla base o atterraggio di emergenza su terreno pianeggiante alternativo); perdita comunicazioni (ritorno alla base pre-programmato dopo timeout configurabile, default 5 min); e guasto atterraggio (zona di atterraggio secondaria designata con recupero EVA se richiesto).
 
 ### Programma manutenzione
 
@@ -3699,20 +3592,20 @@ Questo studio di fattibilità ha valutato la possibilità di impiegare un UAV au
 
 Lo studio ha valutato tre architetture candidate—velivolo a rotore, ad ala fissa e VTOL ibrido—attraverso un'analisi di dimensionamento basata su vincoli. I risultati chiave includono:
 
-* L'**architettura ibrida QuadPlane** fornisce un compromesso efficace tra capacità VTOL e efficienza di crociera, raggiungendo un margine energetico del 49% rispetto ai requisiti di missione
-* Gli **effetti a basso numero di Reynolds** (Re ≈ 55,000) impattano significativamente il progetto aerodinamico; il profilo SD8000 offre prestazioni di resistenza consistenti con adeguato margine di stallo (4.6°)
-* La **potenza di hovering domina il dimensionamento dei motori**; la potenza di crociera ad ala fissa è sostanzialmente inferiore alla potenza di hovering, favorendo configurazioni che minimizzano la durata dell'hovering
-* L'attuale **tecnologia delle batterie** (150 Wh/kg) consente durate di missione pratiche di circa 90 minuti con riserva del 20%
-* La configurazione a solo rotore è **marginalmente fattibile** ma offre margine operativo limitato; la configurazione ad ala fissa **non è fattibile** senza infrastruttura di pista
+* L'architettura ibrida QuadPlane fornisce un compromesso efficace tra capacità VTOL e efficienza di crociera, raggiungendo un margine energetico del 49% rispetto ai requisiti di missione
+* Gli effetti a basso numero di Reynolds (Re ≈ 55,000) impattano significativamente il progetto aerodinamico; il profilo SD8000 offre prestazioni di resistenza consistenti con adeguato margine di stallo (4.6°)
+* La potenza di hovering domina il dimensionamento dei motori; la potenza di crociera ad ala fissa è sostanzialmente inferiore alla potenza di hovering, favorendo configurazioni che minimizzano la durata dell'hovering
+* L'attuale tecnologia delle batterie (150 Wh/kg) consente durate di missione pratiche di circa 90 minuti con riserva del 20%
+* La configurazione a solo rotore è marginalmente fattibile ma offre margine operativo limitato; la configurazione ad ala fissa non è fattibile senza infrastruttura di pista
 
 ## Raccomandazioni {#sec:recommendations}
 
 Sulla base dell'analisi, si formulano le seguenti raccomandazioni per la fase di progettazione preliminare:
 
-1. **Procedere con l'architettura QuadPlane**: Il sistema di sollevamento a ottorotore con configurazione di elica di crociera coassiale offre il miglior equilibrio tra prestazioni, affidabilità e flessibilità operativa
-2. **Sviluppo tecnologico**: Prioritizzare il miglioramento dell'energia specifica delle batterie (>200 Wh/kg) per significativi guadagni prestazionali nelle future iterazioni
-3. **Validazione del profilo**: I test in galleria del vento del profilo SD8000 ai numeri di Reynolds rappresentativi di Marte sono giustificati per confermare le previsioni aerodinamiche a bassa velocità
-4. **Mitigazione della polvere**: Gli effetti della contaminazione superficiale sulle prestazioni del rotore e dell'ala richiedono indagine, in particolare per operazioni di superficie di lunga durata
+1. Procedere con l'architettura QuadPlane: il sistema di sollevamento a ottorotore con configurazione di elica di crociera coassiale offre il miglior equilibrio tra prestazioni, affidabilità e flessibilità operativa
+2. Sviluppo tecnologico: prioritizzare il miglioramento dell'energia specifica delle batterie (>200 Wh/kg) per significativi guadagni prestazionali nelle future iterazioni
+3. Validazione del profilo: i test in galleria del vento del profilo SD8000 ai numeri di Reynolds rappresentativi di Marte sono giustificati per confermare le previsioni aerodinamiche a bassa velocità
+4. Mitigazione della polvere: gli effetti della contaminazione superficiale sulle prestazioni del rotore e dell'ala richiedono indagine, in particolare per operazioni di superficie di lunga durata
 
 ## Lavori futuri {#sec:future-work}
 
@@ -3722,23 +3615,23 @@ Questo studio di fattibilità ha impiegato una metodologia a caso base con MTOW 
 
 L'attuale approccio a caso base utilizza frazioni di massa fisse e un MTOW di riferimento. Le future iterazioni dovrebbero implementare:
 
-* **Chiusure accoppiate specifiche per configurazione**: Dimensionamento iterativo che risolve simultaneamente MTOW e massa della batteria per ciascuna architettura, dati massa del carico utile, tempi dei segmenti di missione e requisiti di riserva energetica. Ciò consentirebbe l'ottimizzazione anziché la sola verifica di fattibilità
-* **Modello di massa basato sui componenti**: Sostituzione delle frazioni di massa fisse con un modello costruttivo per i sottosistemi batteria, carico utile, propulsione e struttura. La plausibilità della frazione di carico utile dovrebbe essere vincolata utilizzando il database dei droni di riferimento
-* **Diagrammi di vincolo appropriati per configurazione**: Rapporto potenza-peso versus carico del disco (P/W vs DL) per velivoli a rotore; rapporto potenza-peso versus carico alare (P/W vs W/S) per ala fissa e VTOL ibrido, con sweep parametrici nel carico del disco e nei tempi dei segmenti di missione
+* Chiusure accoppiate specifiche per configurazione: dimensionamento iterativo che risolve simultaneamente MTOW e massa della batteria per ciascuna architettura, dati massa del carico utile, tempi dei segmenti di missione e requisiti di riserva energetica. Ciò consentirebbe l'ottimizzazione anziché la sola verifica di fattibilità
+* Modello di massa basato sui componenti: sostituzione delle frazioni di massa fisse con un modello costruttivo per i sottosistemi batteria, carico utile, propulsione e struttura. La plausibilità della frazione di carico utile dovrebbe essere vincolata utilizzando il database dei droni di riferimento
+* Diagrammi di vincolo appropriati per configurazione: rapporto potenza-peso versus carico del disco (P/W vs DL) per velivoli a rotore; rapporto potenza-peso versus carico alare (P/W vs W/S) per ala fissa e VTOL ibrido, con sweep parametrici nel carico del disco e nei tempi dei segmenti di missione
 
 ### Analisi dei sottosistemi
 
 Diversi sottosistemi critici sono stati identificati ma rinviati alle successive fasi di progettazione:
 
-* **Progettazione del sistema avionico**: Selezione e integrazione del controllore di volo, unità di misura inerziale, altimetro e sensori di dati aria appropriati per l'atmosfera marziana a bassa densità. Definizione dell'architettura del collegamento telemetrico tra UAV e habitat
-* **Analisi della gestione termica**: Modellazione termica dettagliata per l'estremo intervallo di temperatura diurna marziana (circa da −80 °C a −20 °C). Progettazione di sistemi di riscaldamento attivo per la protezione termica di batteria e avionica durante lo stoccaggio notturno e le operazioni di volo
-* **Analisi strutturale e progettazione di dettaglio**: Analisi agli elementi finiti della cellula, ala e struttura del boom. Analisi delle vibrazioni per i carichi indotti dal rotore. Qualificazione dei materiali per l'ambiente radiativo e termico marziano
+* Progettazione del sistema avionico: selezione e integrazione del controllore di volo, unità di misura inerziale, altimetro e sensori di dati aria appropriati per l'atmosfera marziana a bassa densità. Definizione dell'architettura del collegamento telemetrico tra UAV e habitat
+* Analisi della gestione termica: modellazione termica dettagliata per l'estremo intervallo di temperatura diurna marziana (circa da −80 °C a −20 °C). Progettazione di sistemi di riscaldamento attivo per la protezione termica di batteria e avionica durante lo stoccaggio notturno e le operazioni di volo
+* Analisi strutturale e progettazione di dettaglio: analisi agli elementi finiti della cellula, ala e struttura del boom. Analisi delle vibrazioni per i carichi indotti dal rotore. Qualificazione dei materiali per l'ambiente radiativo e termico marziano
 
 Questi miglioramenti metodologici e analisi dei sottosistemi sono prerequisiti essenziali per avanzare dalla fattibilità alla revisione del progetto preliminare (PDR).
 
 ---
 
-Il concetto di UAV marziano è **tecnicamente fattibile** con la tecnologia attuale o a breve termine. La configurazione QuadPlane soddisfa tutti i requisiti di missione primari con margine adeguato, fornendo una piattaforma praticabile per estendere la portata operativa delle missioni di superficie marziane con equipaggio.
+Il concetto di UAV marziano è tecnicamente fattibile con la tecnologia attuale o a breve termine. La configurazione QuadPlane soddisfa tutti i requisiti di missione primari con margine adeguato, fornendo una piattaforma praticabile per estendere la portata operativa delle missioni di superficie marziane con equipaggio.
 
 # Riferimenti
 

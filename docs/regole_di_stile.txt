@@ -8,6 +8,8 @@
 
 ## Formattazione Matematica e Tecnica
 
+* Utilizzare le convenzioni statunitensi per la formattazione numerica: punto (.) come separatore decimale (es. 3.1416, 0.005) e virgola (,) come separatore delle migliaia (es. 1,000, 1,250,000). Non utilizzare spazi per il raggruppamento delle cifre.
+
 * Usare sempre 4 cifre significative per i risultati dei calcoli.
 
 * Per intervalli aperti, usare la notazione matematica di disuguaglianza (es. "> 40") invece della notazione con il più (es. "40+"). Questo si applica a tabelle, prosa e tutti i contesti numerici.

@@ -2226,25 +2226,25 @@ This section consolidates the configuration comparison from the constraint analy
 
 | Criterion | Rotorcraft | Fixed-Wing | Hybrid VTOL |
 |:----------|:----------:|:----------:|:-----------:|
-| **Aerodynamic efficiency** | | | |
+| Aerodynamic efficiency | | | |
 | L/D or $(L/D)_\text{eff}$ | 4.0 | 11.7 | 10.5 |
-| **Power requirements** | | | |
-| Hover P/W (W/N) | 85.7 | — | 85.7 |
+| Power requirements | | | |
+| Hover P/W (W/N) | 85.7 | N/A | 85.7 |
 | Cruise P/W (W/N) | 12.4$^a$ | 7.7 | 8.6 |
 | Cruise power (W) | 460$^a$ | 286 | 318 |
-| **Mission capability** | | | |
+| Mission capability | | | |
 | Endurance (min) | 63.17 | 120.5 | 89.55 |
 | Endurance margin | +5.284% | +100.8% | +49.26% |
 | Range (km) | 146.8 | 289 | 207.7 |
 | Range margin | +46.81% | +189% | +107.7% |
-| **Operational** | | | |
+| Operational | | | |
 | VTOL capable | Yes | No | Yes |
 | Infrastructure | None | Approximately 1 km runway | None |
 | Glide capability | No | Yes | Yes$^b$ |
-| **Mass budget** | | | |
+| Mass budget | | | |
 | Propulsion fraction | Approximately 15% | Approximately 8% | Approximately 25% |
-| Mass penalty | — | — | +17% |
-| **Requirements compliance** | | | |
+| Mass penalty | N/A | N/A | +17% |
+| Requirements compliance | | | |
 | Meets endurance | No | Yes | Yes |
 | Meets range | Yes | Yes | Yes |
 | Meets VTOL | Yes | No | Yes |
@@ -2378,11 +2378,11 @@ This section presents the airfoil selection rationale for the Mars UAV wing desi
 
 The airfoil selection is driven by three primary criteria, weighted by their importance to mission success:
 
-1. **Cruise efficiency (60% weight)**: Maximum lift-to-drag ratio $(L/D)_\text{max}$ directly determines cruise range and endurance. Higher $(L/D)_\text{max}$ reduces cruise power and extends battery life.
+1. Cruise efficiency (60% weight): Maximum lift-to-drag ratio $(L/D)_\text{max}$ directly determines cruise range and endurance. Higher $(L/D)_\text{max}$ reduces cruise power and extends battery life.
 
-2. **Stall margin (25% weight)**: Maximum lift coefficient $C_{L,\text{max}}$ determines the minimum flight speed and provides margin against gusts or manoeuvres. A higher $C_{L,\text{max}}$ enables smaller wing area or lower approach speeds.
+2. Stall margin (25% weight): Maximum lift coefficient $C_{L,\text{max}}$ determines the minimum flight speed and provides margin against gusts or manoeuvres. A higher $C_{L,\text{max}}$ enables smaller wing area or lower approach speeds.
 
-3. **Stall angle (15% weight)**: A higher stall angle $\alpha_\text{stall}$ provides a wider operational envelope and gentler stall characteristics, improving controllability in the low-density Martian atmosphere.
+3. Stall angle (15% weight): A higher stall angle $\alpha_\text{stall}$ provides a wider operational envelope and gentler stall characteristics, improving controllability in the low-density Martian atmosphere.
 
 ### Performance comparison
 
@@ -2415,7 +2415,7 @@ Furthermore, the E387 exhibits an anomalous drag reduction at α ≈ 9° ($C_d$ 
 | Minimum drag $C_{D,\text{min}}$ | 0.0228 | 0.0142 | SD8000 (38% lower) |
 | Maximum efficiency $(L/D)_\text{max}$ | 46.6 | 45.4 | E387 (3% higher) |
 | Maximum lift $C_{L,\text{max}}$ | 1.22 | 1.15 | E387 (6% higher) |
-| Angle at $(L/D)_\text{max}$ | 8.8° | 7.0° | — |
+| Angle at $(L/D)_\text{max}$ | 8.8° | 7.0° | N/A |
 | Stall angle | 10.2° | 11.5° | SD8000 |
 | Margin to stall | 1.3° | 4.6° | SD8000 (3.5× larger) |
 
@@ -2431,14 +2431,14 @@ The lift curves in @fig:airfoil-cl-alpha show the stall characteristics of each 
 
 ### Selection rationale
 
-Based on the comparative analysis, the **Selig/Donovan SD8000** is selected for the Mars UAV wing design. While the E387 achieves marginally higher peak efficiency, the SD8000 offers critical advantages for reliable Mars operation:
+Based on the comparative analysis, the Selig/Donovan SD8000 is selected for the Mars UAV wing design. While the E387 achieves marginally higher peak efficiency, the SD8000 offers important advantages for reliable Mars operation:
 
-* **Lower drag across operating range**: $C_{D,\text{min}}$ = 0.0142, 38% lower than E387
-* **Larger stall margin**: 4.6° margin between best L/D and stall, compared to only 1.3° for E387
-* **Consistent drag behaviour**: No anomalous transitions or sensitivity to LSB dynamics
-* **Robust performance**: Higher L/D at practical cruise conditions ($C_L$ = 0.7–0.9)
-* **Designed for low Reynolds number**: The SD8000 was specifically designed by Selig and Donovan for low-Re applications, with documented performance in UAV and similar applications [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
-* **Late stall**: Stall at α = 11.5° provides a wide operational envelope
+* Lower drag across operating range: $C_{D,\text{min}}$ = 0.0142, 38% lower than E387
+* Larger stall margin: 4.6° margin between best L/D and stall, compared to only 1.3° for E387
+* Consistent drag behaviour: no anomalous transitions or sensitivity to LSB dynamics
+* Robust performance: higher L/D at practical cruise conditions ($C_L$ = 0.7–0.9)
+* Designed for low Reynolds number: the SD8000 was specifically designed by Selig and Donovan for low-Re applications, with documented performance in UAV and similar applications [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
+* Late stall: stall at α = 11.5° provides a wide operational envelope
 
 The E387's peak efficiency advantage of 3% is offset by the operational risk of targeting an angle of attack within 1.3° of stall. For a Mars mission with no opportunity for recovery, the more conservative SD8000 selection provides appropriate safety margin.
 
@@ -2524,24 +2524,9 @@ The horizontal (pitch) constraint is active, meaning the tail is sized primarily
 
 The commercial benchmarks exhibit a length-to-wingspan ratio ranging from 0.28 to 0.63, with a median of approximately 0.50 (@tbl:reference-fuselage). The selection involves trade-offs between competing effects:
 
-**Shorter fuselage (lower ratio):**
+A shorter fuselage (lower ratio) yields less structural mass, less wetted area (reduced parasitic drag), and less internal volume, but requires a boom extension for the tail moment arm. A longer fuselage (higher ratio) provides more fuselage lift contribution, a longer tail moment arm allowing smaller tail surfaces, and more internal volume for payload growth and thermal management, but increases structural mass and wetted area.
 
-* Less fuselage structural mass
-* Less fuselage wetted area (reduced parasitic drag)
-* Shorter tail moment arm requiring boom extension
-* Less internal volume
-
-**Longer fuselage (higher ratio):**
-
-* More fuselage lift contribution
-* Longer tail moment arm allowing smaller tail surfaces
-* More internal volume for payload growth and thermal management
-* More fuselage structural mass
-* More fuselage wetted area
-
-**Selection: 0.30** (lower end of benchmark range)
-
-For the Mars UAV, most of the internal volume is occupied by the compact payload and energy storage systems requiring only 4–5 L. The 170 L volume provided by the 0.50 ratio is excessive. Selecting the lower end of the benchmark range (0.30) minimises structural mass and parasitic drag while providing adequate volume for all systems. The required tail moment arm is instead achieved through the boom extension, which is structurally efficient since it serves the dual purpose of supporting both the lift rotors and the V-tail surfaces.
+A ratio of 0.30 (lower end of benchmark range) is selected. For the Mars UAV, most of the internal volume is occupied by the compact payload and energy storage systems requiring only 4–5 L. The 170 L volume provided by the 0.50 ratio is excessive. Selecting the lower end of the benchmark range minimises structural mass and parasitic drag while providing adequate volume for all systems. The required tail moment arm is instead achieved through the boom extension, which is structurally efficient since it serves the dual purpose of supporting both the lift rotors and the V-tail surfaces.
 
 The resulting fuselage dimensions are:
 
@@ -2576,21 +2561,21 @@ The fuselage cross-section is approximately circular to simplify structural anal
 
 The boom-mounted V-tail configuration extends beyond the fuselage aft end. The total aircraft length is determined by the tail position required to achieve the target moment arm:
 
-**Wing position:**
+Wing position:
 
 $$x_\text{wing,LE} = 0.40 \times L_f = 0.40 \times 1.20 = 0.48 \text{ m from nose}$$
 
 $$x_\text{wing,AC} = x_\text{wing,LE} + 0.25 \times MAC = 0.48 + 0.25 \times 0.669 = 0.65 \text{ m}$$
 
-**Tail position (from wing AC + moment arm):**
+Tail position (from wing AC + moment arm):
 
 $$x_\text{tail,AC} = x_\text{wing,AC} + l_H = 0.65 + 1.20 = 1.85 \text{ m from nose}$$
 
-**Tail trailing edge (AC at 25% chord from LE):**
+Tail trailing edge (AC at 25% chord from LE):
 
 $$x_\text{tail,TE} = x_\text{tail,AC} + 0.75 \times c_{V\text{-tail}} = 1.85 + 0.75 \times 0.535 = 2.25 \text{ m}$$
 
-The total aircraft length is therefore **2.25 m**, with the tail booms extending **1.05 m** beyond the fuselage aft end. This boom extension is structurally integrated with the rear lift motor arms, which serve the dual purpose of supporting the octocopter rotors and the V-tail surfaces.
+The total aircraft length is therefore 2.25 m, with the tail booms extending 1.05 m beyond the fuselage aft end. This boom extension is structurally integrated with the rear lift motor arms, which serve the dual purpose of supporting the octocopter rotors and the V-tail surfaces.
 
 | Parameter | Symbol | Value | Notes |
 |:----------|:------:|------:|:------|
@@ -2682,7 +2667,7 @@ The selection of CFRP and advanced composite construction techniques affects the
 
 | Parameter | Aluminium baseline | CFRP composite | Reduction |
 |:----------|-------------------:|---------------:|----------:|
-| Specific strength (MPa·m³/kg) | 110 | 450 | — |
+| Specific strength (MPa·m³/kg) | 110 | 450 | N/A |
 | Structural mass fraction | 0.35–0.40 | 0.25–0.30 | 25–30% |
 | Wing density factor, $K_\rho$ | 1.0 | 0.50–0.60 | 40–50% |
 
@@ -2827,30 +2812,30 @@ The detailed mass breakdown for the selected QuadPlane configuration:
 
 | Component | Mass (kg) | Fraction | Source |
 |:----------|----------:|---------:|:-------|
-| **Structure** | 2.32 | 23.2% | |
+| Structure | 2.32 | 23.2% | |
 | Wing | 0.80 | 8.0% | @eq:wing-weight with CFRP |
 | Fuselage | 0.45 | 4.5% | @eq:fuselage-weight with CFRP |
 | Empennage (V-tail) | 0.35 | 3.5% | Scaling from wing (1.144 m²) |
 | Booms (4×) | 0.40 | 4.0% | Structural analysis |
 | Landing gear | 0.32 | 3.2% | 3.2% of MTOW |
-| **Propulsion** | 1.18 | 11.8% | |
+| Propulsion | 1.18 | 11.8% | |
 | Lift motors (8×) | 0.528 | 5.3% | SunnySky V4006-380, 66 g each |
 | Cruise motors (2×) | 0.120 | 1.2% | T-Motor AT2312-1150, 60 g each |
 | ESCs (10×) | 0.060 | 0.6% | Hobbywing XRotor Micro 30A, 6 g each |
 | Propellers (10×) | 0.174 | 1.7% | 8× lift (18 g) + 2× cruise (15 g) |
 | Mounting + wiring | 0.300 | 3.0% | Engineering estimate |
-| **Energy** | 3.50 | 35.0% | |
+| Energy | 3.50 | 35.0% | |
 | Battery pack | 3.50 | 35.0% | @sec:energy-data, 945 Wh total |
-| **Payload** | 1.50 | 15.0% | |
+| Payload | 1.50 | 15.0% | |
 | Camera system | 0.30 | 3.0% | @sec:payload-systems |
 | Radio relay | 0.15 | 1.5% | @sec:payload-systems |
 | Payload margin | 1.05 | 10.5% | Growth allowance |
-| **Avionics** | 0.50 | 5.0% | |
+| Avionics | 0.50 | 5.0% | |
 | Flight controller | 0.10 | 1.0% | Pixhawk-class autopilot |
 | Sensors & wiring | 0.40 | 4.0% | GPS, IMU, telemetry |
-| **Subtotal** | 9.00 | 90.0% | |
-| **Design margin** | 1.00 | 10.0% | Contingency |
-| **Total MTOW** | 10.00 | 100% | — |
+| Subtotal | 9.00 | 90.0% | |
+| Design margin | 1.00 | 10.0% | Contingency |
+| Total MTOW | 10.00 | 100% | N/A |
 
 : QuadPlane mass breakdown {#tbl:quadplane-mass-breakdown}
 
@@ -2877,8 +2862,8 @@ The calculated component masses are verified against the mass fraction targets f
 | Structure | 0.23 | 0.23 | MATCH |
 | Propulsion | 0.20 | 0.12 | UNDER (margin available) |
 | Avionics | 0.05 | 0.05 | MATCH |
-| Design margin | — | 0.10 | ALLOCATED |
-| **Total** | 1.00 | 1.00 | BALANCED |
+| Design margin | N/A | 0.10 | ALLOCATED |
+| Total | 1.00 | 1.00 | BALANCED |
 
 : Mass fraction verification {#tbl:mass-fraction-verification}
 
@@ -2888,7 +2873,7 @@ The propulsion mass fraction (11.8%) is significantly below the 20% budget, prov
 
 This section presents the selection of specific components based on the sizing results from the constraint analysis (@sec:hybrid-vtol-analysis). Component selection follows a systematic trade-off approach, evaluating candidates against requirements derived from Section 5 calculations.
 
-## Selection methodology
+## Selection methodology {#sec:selection-methodology}
 
 ### Requirements from constraint analysis
 
@@ -2914,37 +2899,31 @@ Allocating 70% to lift system and 30% to cruise system:
 
 : Propulsion mass allocation {#tbl:mass-allocation}
 
-| Component category | Target mass (kg) | Per-unit target |
-|:-------------------|----------------:|:----------------|
-| Lift motors (8) | 0.560 | 70 g each |
-| Lift ESCs (8) | 0.160 | 20 g each |
-| Lift propellers (8) | 0.160 | 20 g each |
-| Lift mounting | 0.200 | total |
-| **Lift subtotal** | **1.080** | - |
-| Cruise motors (2) | 0.200 | 100 g each |
-| Cruise ESCs (2) | 0.060 | 30 g each |
-| Cruise propellers (2) | 0.040 | 20 g each |
-| **Cruise subtotal** | **0.300** | - |
-| Wiring, connectors | 0.320 | margin |
-| **Total propulsion** | **1.700** | - |
+| Component category | Quantity | Target mass (kg) | Per-unit target |
+|:-------------------|:--------:|----------------:|:----------------|
+| Lift motors | 8 | 0.560 | 70 g each |
+| Lift ESCs | 8 | 0.160 | 20 g each |
+| Lift propellers | 8 | 0.160 | 20 g each |
+| Lift mounting | 1 | 0.200 | total |
+| Lift subtotal | N.A. | 1.080 | N.A. |
+| Cruise motors | 2 | 0.200 | 100 g each |
+| Cruise ESCs | 2 | 0.060 | 30 g each |
+| Cruise propellers | 2 | 0.040 | 20 g each |
+| Cruise subtotal | N.A. | 0.300 | N.A. |
+| Wiring, connectors | 1 | 0.320 | margin |
+| Total propulsion | N.A. | 1.700 | N.A. |
 
 ### Selection criteria
 
-Components are evaluated against the following criteria, in priority order:
+Components are evaluated against the following criteria, in priority order: (1) power adequacy, meeting or exceeding the constraint analysis power requirements; (2) mass compliance, staying within the per-unit mass targets; (3) voltage compatibility with 6S LiPo nominal 22.2V for system commonality; (4) temperature range for operation at Mars surface temperatures down to −60°C; (5) reliability, with preference for proven designs with flight heritage.
 
-1. **Power adequacy**: meet or exceed the constraint analysis power requirements
-2. **Mass compliance**: stay within the per-unit mass targets
-3. **Voltage compatibility**: 6S LiPo (22.2V nominal) for system commonality
-4. **Temperature range**: operation at Mars surface temperatures (down to −60°C)
-5. **Reliability**: preference for proven designs with flight heritage
-
-## Propulsion system {#sec:propulsion-selection}
+## Propulsion system selection {#sec:propulsion-selection}
 
 ### Lift motors {#sec:lift-motor-selection}
 
 #### Requirements
 
-Each lift motor must provide at least 400 W continuous power while remaining under 100 g (70 g target) to meet the mass budget. Motors must be compatible with 12-16 inch propellers to match the selected lift propeller class.
+Each lift motor must provide at least 400 W continuous power while remaining under 100 g to meet the mass budget, with a target of 70 g. Motors must be compatible with 12-16 inch propellers to match the selected lift propeller class.
 
 #### Candidate comparison
 
@@ -2954,19 +2933,14 @@ Each lift motor must provide at least 400 W continuous power while remaining und
 
 | Motor | Mass (g) | Power (W) | Thrust (g) | KV | LiPo | Prop (in) | Status |
 |:------|:--------:|----------:|:----------:|---:|:----:|:---------:|:-------|
-| SunnySky V4006-380 | 66 | 375 | 2560 | 380 | 4-6S | 12-15 | **Selected** |
-| MAD 4008 EEE-380 | 88 | ~400 | 2700 | 380 | 4-6S | 14-18 | Alternative |
+| SunnySky V4006-380 | 66 | 375 | 2560 | 380 | 4-6S | 12-15 | Selected |
+| MAD 4008 EEE-380 | 88 | approximately 400 | 2700 | 380 | 4-6S | 14-18 | Alternative |
 | T-Motor MN5008-400 | 135 | 800 | 4200 | 400 | 6S | 15-17 | Too heavy |
-| T-Motor MN505-S-260 | 225 | 2500 | - | 260 | 12S | 16-17 | Too heavy |
+| T-Motor MN505-S-260 | 225 | 2500 | N.A. | 260 | 12S | 16-17 | Too heavy |
 
 #### Selection rationale
 
-The **SunnySky V4006-380** is selected for the lift motors based on:
-
-* **Mass**: 66 g per motor is well within the 70 g target, enabling 8 motors at 528 g total
-* **Power**: 375 W continuous is adequate for the 398 W requirement with appropriate propeller matching
-* **Thrust**: 2560 g maximum thrust provides 2:1 thrust-to-weight margin per motor
-* **Availability**: widely available from multiple suppliers
+The SunnySky V4006-380 is selected for the lift motors based on: mass of 66 g per motor, well within the 70 g target and enabling 8 motors at 528 g total; power of 375 W continuous, adequate for the 398 W requirement with appropriate propeller matching; thrust of 2560 g maximum, providing 2:1 thrust-to-weight margin per motor; and wide availability from multiple suppliers.
 
 The MAD 4008 EEE is retained as an alternative if additional power margin is required.
 
@@ -2998,17 +2972,13 @@ Each lift ESC must handle at least 25A continuous current (based on 400 W at 16V
 
 | ESC | Mass (g) | Continuous (A) | Burst (A) | LiPo | BEC | Status |
 |:----|:--------:|---------------:|----------:|:----:|:---:|:-------|
-| Hobbywing XRotor Micro 30A | 6 | 30 | 40 | 2-4S | No | **Selected** |
+| Hobbywing XRotor Micro 30A | 6 | 30 | 40 | 2-4S | No | Selected |
 | T-Motor F35A | 6.7 | 35 | 45 | 3-6S | No | Alternative |
 | T-Motor FLAME 60A 12S | 74 | 60 | 80 | 12S | No | Too heavy |
 
 #### Selection rationale
 
-The **Hobbywing XRotor Micro 30A** is selected for the lift ESCs based on:
-
-* **Mass**: 6 g per ESC enables 8 ESCs at only 48 g total
-* **Current**: 30A continuous exceeds the ~25A requirement
-* **Compatibility**: BLHeli_32 firmware for reliable motor control
+The Hobbywing XRotor Micro 30A is selected for the lift ESCs based on: mass of 6 g per ESC, enabling 8 ESCs at only 48 g total; current of 30A continuous, exceeding the approximately 25A requirement; and compatibility with BLHeli_32 firmware for reliable motor control.
 
 #### Selected specification
 
@@ -3031,7 +3001,7 @@ Lift propellers must be in the 13-15 inch class to match motor compatibility whi
 
 #### Selected specification
 
-Carbon fiber propellers in the 13-14 inch range typically weigh 15-20 g per blade pair. The **T-Motor NS14×4.8** or equivalent is suitable.
+Carbon fiber propellers in the 13-14 inch range typically weigh 15-20 g per blade pair. The T-Motor NS14×4.8 or equivalent is suitable.
 
 : Lift propeller specifications {#tbl:lift-prop-spec}
 
@@ -3054,17 +3024,13 @@ Each cruise motor must provide at least 200 W continuous power (with margin over
 
 | Motor | Mass (g) | Power (W) | KV | LiPo | Status |
 |:------|:--------:|----------:|---:|:----:|:-------|
-| T-Motor AT2312-1150 | 60 | 350 | 1150 | 2-4S | **Selected** |
+| T-Motor AT2312-1150 | 60 | 350 | 1150 | 2-4S | Selected |
 | T-Motor AT2814-1000 | 109 | 370 | 1000 | 2-4S | Alternative |
 | T-Motor AT4130-230 | 408 | 2500 | 230 | 12S | Too heavy |
 
 #### Selection rationale
 
-The **T-Motor AT2312-1150** is selected for the cruise motors based on:
-
-* **Mass**: 60 g per motor enables 2 motors at only 120 g total
-* **Power**: 350 W continuous exceeds the 159 W requirement by 2:1 margin
-* **Design**: AT series is optimised for fixed-wing cruise efficiency
+The T-Motor AT2312-1150 is selected for the cruise motors based on: mass of 60 g per motor, enabling 2 motors at only 120 g total; power of 350 W continuous, exceeding the 159 W requirement by 2:1 margin; and AT series design optimised for fixed-wing cruise efficiency.
 
 #### Selected specification
 
@@ -3087,7 +3053,7 @@ Each cruise ESC must handle at least 20A continuous current while remaining unde
 
 #### Selected specification
 
-The **Hobbywing XRotor Micro 30A** (same as lift) is selected for component commonality.
+The Hobbywing XRotor Micro 30A, the same as for lift, is selected for component commonality.
 
 ### Cruise propellers {#sec:cruise-prop-selection}
 
@@ -3117,29 +3083,25 @@ Cruise propellers must be optimised for the cruise velocity of 40 m/s with 12-14
 | Lift motors | SunnySky V4006-380 | 8 | 66 | 0.528 |
 | Lift ESCs | Hobbywing XRotor Micro 30A | 8 | 6 | 0.048 |
 | Lift propellers | NS14×4.8 | 8 | 18 | 0.144 |
-| **Lift subtotal** | - | - | - | **0.720** |
+| Lift subtotal | N.A. | N.A. | N.A. | 0.720 |
 | Cruise motors | T-Motor AT2312-1150 | 2 | 60 | 0.120 |
 | Cruise ESCs | Hobbywing XRotor Micro 30A | 2 | 6 | 0.012 |
 | Cruise propellers | NS12×6 | 2 | 15 | 0.030 |
-| **Cruise subtotal** | - | - | - | **0.162** |
+| Cruise subtotal | N.A. | N.A. | N.A. | 0.162 |
 | Mounting | Motor pods, booms, nacelle | 1 | 200 | 0.200 |
 | Wiring | Power distribution, connectors | 1 | 100 | 0.100 |
-| **Shared subtotal** | - | - | - | **0.300** |
-| **Total propulsion** | - | - | - | **1.182** |
+| Shared subtotal | N.A. | N.A. | N.A. | 0.300 |
+| Total propulsion | N.A. | N.A. | N.A. | 1.182 |
 
 Note: Lift and cruise subtotals include source-grounded component data. Shared components (mounting, wiring) are engineering estimates without manufacturer datasheets.
 
 ### Comparison with mass budget
 
-The selected components yield a total propulsion mass of **1.18 kg**, well within the 2.00 kg budget allocated by the propulsion fraction $f_\text{prop}$ = 0.20.
+The selected components yield a total propulsion mass of 1.18 kg, well within the 2.00 kg budget allocated by the propulsion fraction $f_\text{prop}$ = 0.20.
 
 $$f_\text{prop,actual} = \frac{m_\text{propulsion}}{MTOW} = \frac{1.182}{10.00} = 0.118 = 11.8\%$$
 
-This represents a **40% reduction** from the allocated budget, providing margin for:
-
-* Heavier alternative motors if additional power is needed
-* Thermal management components for Mars operation
-* Design iteration flexibility
+This represents a 40% reduction from the allocated budget, providing margin for heavier alternative motors if additional power is needed, thermal management components for Mars operation, and design iteration flexibility.
 
 The propulsion mass reduction reallocates 0.82 kg to other system categories, potentially increasing payload capacity or structural mass.
 
@@ -3163,7 +3125,7 @@ Allocating approximately 60% to the camera and 40% to the radio system yields a 
 
 : Camera selection trade-off analysis {#tbl:camera-selection}
 
-| Camera | Mass (g) | Resolution | Temp. range (°C) | Rating |
+| Camera | Mass (g) | Resolution | Temp. range (°C) | Status |
 |:-------|:--------:|:-----------|:----------------:|:------:|
 | Ricoh GR III | 227-257 | 24 MP (APS-C) | N.A. | Selected |
 | MicaSense RedEdge-MX | 232 | 1.2 MP/band (5 bands) | N.A. | Alternative |
@@ -3175,14 +3137,9 @@ Note: N.A. indicates operating temperature not specified by manufacturer.
 
 #### Selection rationale
 
-The **Ricoh GR III** is selected as the primary camera based on:
+The Ricoh GR III is selected as the primary camera based on: mass of 227 g body and 257 g complete with battery [@ricohimagingRicohGRIII2024]<!-- #specs -->, the lightest RGB option; 24 MP APS-C sensor resolution, adequate for mapping; compact dimensions of 109.4 × 61.9 × 33.2 mm [@ricohimagingRicohGRIII2024]<!-- #specs -->; and integrated 18.3 mm lens (28 mm equivalent), eliminating interchangeable lens complexity.
 
-* **Mass**: 227 g body, 257 g complete with battery [@ricohimagingRicohGRIII2024]<!-- #specs -->, the lightest RGB option
-* **Resolution**: 24 MP APS-C sensor provides adequate resolution for mapping
-* **Dimensions**: 109.4 × 61.9 × 33.2 mm compact form factor [@ricohimagingRicohGRIII2024]<!-- #specs -->
-* **Lens**: Integrated 18.3 mm lens (28 mm equivalent) eliminates interchangeable lens complexity
-
-The **MicaSense RedEdge-MX** is retained as an alternative if multispectral capability is required for geological analysis [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. At 232 g, it provides five-band imaging (blue, green, red, red-edge, NIR) suitable for mineral identification.
+The MicaSense RedEdge-MX is retained as an alternative if multispectral capability is required for geological analysis [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. At 232 g, it provides five-band imaging (blue, green, red, red-edge, NIR) suitable for mineral identification.
 
 The DJI Zenmuse P1 and Phase One iXM-100 are rejected due to mass exceeding the 600 g target by a factor of two or more. The DJI Zenmuse H20T thermal system is rejected as thermal imaging is not a primary mission requirement.
 
@@ -3212,11 +3169,7 @@ The Ricoh GR III does not specify an operating temperature range, indicating con
 
 The telecommunication relay mission requires a radio system capable of extending communication range between surface EVA astronauts and the habitat ground station. Based on the 40% radio allocation from the 1.00 kg payload budget, the radio mass target is approximately 400 g.
 
-Operating requirements include:
-
-* Range: match or exceed the 50 km operational radius
-* Temperature: operation at Mars surface temperatures (−60 to +20 °C)
-* Power: minimise power consumption for battery endurance
+Operating requirements include: range matching or exceeding the 50 km operational radius, temperature tolerance for Mars surface conditions (−60 to +20 °C), and minimal power consumption for battery endurance.
 
 #### Candidate evaluation
 
@@ -3224,7 +3177,7 @@ Operating requirements include:
 
 : Radio selection trade-off analysis {#tbl:radio-selection}
 
-| Radio | Mass (g) | Range (km) | Temp. range (°C) | Rating |
+| Radio | Mass (g) | Range (km) | Temp. range (°C) | Status |
 |:------|:--------:|:----------:|:----------------:|:------:|
 | RFD900x | 14.5 | > 40 | −40 to +85 | Selected |
 | Microhard pMDDL2450 (enclosed) | 165 | N.A. | −40 to +85 | Alternative |
@@ -3234,15 +3187,9 @@ Operating requirements include:
 
 #### Selection rationale
 
-The **RFD900x** is selected as the primary radio based on:
+The RFD900x is selected as the primary radio based on: mass of 14.5 g, the lightest option and well under the 400 g target [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; range exceeding 40 km line-of-sight, meeting the 50 km operational radius with antenna optimisation [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; operating temperature range of −40 to +85 °C, exceeding Mars surface requirements; maximum power consumption of 5 W at 1 W transmit; and wide use in UAV applications with open-source SiK firmware.
 
-* **Mass**: 14.5 g is the lightest option, well under the 400 g target [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Range**: >40 km line-of-sight range meets the 50 km operational radius with antenna optimisation [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Temperature**: −40 to +85 °C operating range exceeds Mars surface requirements
-* **Power**: 5 W maximum power consumption at 1 W transmit
-* **Heritage**: widely used in UAV applications with open-source SiK firmware
-
-The **Microhard pMDDL2450** is retained as an alternative if higher data throughput is required (25 Mbps vs 0.75 Mbps) for potential video relay applications [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
+The Microhard pMDDL2450 is retained as an alternative if higher data throughput is required (25 Mbps vs 0.75 Mbps) for potential video relay applications [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
 
 The mesh radio systems (Rajant, Silvus, Persistent Systems) are rejected as mesh functionality is not required for a single UAV relay mission. Their mass of 400-700 g would consume the entire radio budget with no advantage for the mission profile.
 
@@ -3281,11 +3228,7 @@ The selected components yield a total payload mass of **0.42 kg**, well within t
 
 $$f_\text{payload,actual} = \frac{m_\text{payload}}{MTOW} = \frac{0.422}{10.00} = 0.042 = 4.2\%$$
 
-This represents a **58% reduction** from the allocated budget, providing margin for:
-
-* Additional payload if mission requirements expand
-* Thermal management components for Mars operation
-* Design iteration flexibility
+This represents a 58% reduction from the allocated budget, providing margin for additional payload if mission requirements expand, thermal management components for Mars operation, and design iteration flexibility.
 
 The payload mass reduction reallocates 0.58 kg to other system categories, potentially increasing battery capacity for extended endurance.
 
@@ -3313,7 +3256,7 @@ The energy requirements are derived from the QuadPlane analysis in @sec:hybrid-v
 
 : Battery technology selection trade-off analysis {#tbl:battery-selection}
 
-| Technology | Spec. energy (Wh/kg) | Temp. range (°C) | Cycle life | Rating |
+| Technology | Spec. energy (Wh/kg) | Temp. range (°C) | Cycle life | Status |
 |:-----------|:--------------------:|:----------------:|:----------:|:------:|
 | Solid-state Li-ion | 270 | −20 to +60 | 1000 | Selected |
 | Semi-solid Li-ion | 180 | −20 to +45 | 500 | Alternative |
@@ -3322,29 +3265,15 @@ The energy requirements are derived from the QuadPlane analysis in @sec:hybrid-v
 
 ### Selection rationale
 
-**Solid-state lithium-ion batteries** are selected based on:
+Solid-state lithium-ion batteries are selected based on: specific energy of 270 Wh/kg, exceeding the 200 Wh/kg requirement by 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; temperature range of −20 to +60 °C, providing baseline cold tolerance [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; cycle life of 1000 cycles at 80% DoD, supporting a long mission campaign; and solid electrolyte construction, reducing thermal runaway risk in the Mars habitat.
 
-* **Specific energy**: 270 Wh/kg exceeds the 200 Wh/kg requirement by 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Temperature range**: −20 to +60 °C provides baseline cold tolerance [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Cycle life**: 1000 cycles at 80% DoD supports long mission campaign
-* **Safety**: solid electrolyte reduces thermal runaway risk in Mars habitat
+The semi-solid lithium-ion technology is retained as an alternative if solid-state availability is limited. At 180 Wh/kg, it still meets mission requirements with reduced margin.
 
-The **semi-solid lithium-ion** technology is retained as an alternative if solid-state availability is limited. At 180 Wh/kg, it still meets mission requirements with reduced margin.
-
-Standard LiPo batteries are rejected due to:
-
-* Lower specific energy (130-150 Wh/kg)
-* Narrower operating temperature (typically 0 to +40 °C without preheating)
-* Shorter cycle life (approximately 300 cycles)
+Standard LiPo batteries are rejected due to lower specific energy (130-150 Wh/kg), narrower operating temperature (typically 0 to +40 °C without preheating), and shorter cycle life (approximately 300 cycles).
 
 ### Mars thermal considerations
 
-The solid-state battery operating range (−20 to +60 °C) does not fully cover Mars surface temperatures (−60 to +20 °C). The battery thermal management strategy includes:
-
-* Insulated battery compartment to reduce heat loss
-* Resistive heating elements activated during cold soak periods
-* Pre-flight battery conditioning in the habitat hangar
-* Flight operations limited to daytime thermal window
+The solid-state battery operating range (−20 to +60 °C) does not fully cover Mars surface temperatures (−60 to +20 °C). The battery thermal management strategy includes an insulated battery compartment to reduce heat loss, resistive heating elements activated during cold soak periods, pre-flight battery conditioning in the habitat hangar, and flight operations limited to the daytime thermal window.
 
 The thermal control system mass is allocated within the avionics/systems mass fraction.
 
@@ -3430,10 +3359,7 @@ However, maintaining the baseline 3.50 kg battery mass is recommended to preserv
 | Total hover | 3181 | 8 × 375 = 3000 | −6% |
 | Total cruise | 318 | 2 × 350 = 700 | +120% |
 
-The hover power margin is slightly negative (−6%), indicating the SunnySky V4006-380 motors operate near their rated power during hover. This is acceptable for the short hover duration (2 minutes total per flight) but requires:
-
-* Adequate thermal design for motor cooling in the thin Mars atmosphere
-* Consideration of the MAD 4008 EEE alternative (88 g, 400 W) if testing reveals thermal issues
+The hover power margin is slightly negative (−6%), indicating the SunnySky V4006-380 motors operate near their rated power during hover. This is acceptable for the short hover duration (2 minutes total per flight) but requires adequate thermal design for motor cooling in the thin Mars atmosphere and consideration of the MAD 4008 EEE alternative (88 g, 400 W) if testing reveals thermal issues.
 
 The cruise power margin is substantial (+120%), confirming the T-Motor AT2312-1150 motors are adequately sized with significant thermal headroom.
 
@@ -3482,26 +3408,23 @@ Round-trip range: 115.3 km, exceeding the 100 km requirement by 15%.
 
 | Requirement | Target | Achieved | Status |
 |:------------|-------:|---------:|:------:|
-| MTOW | 10.00 kg | 8.60 kg | ✓ Pass |
-| Endurance | ≥ 60 min | 89.5 min | ✓ Pass |
-| Range | ≥ 100 km | 115.3 km | ✓ Pass |
-| Operational radius | ≥ 50 km | 57.7 km | ✓ Pass |
-| Payload capacity | ≥ 1.0 kg | 0.42 kg (used) | ✓ Pass |
-| VTOL capability | Required | QuadPlane | ✓ Pass |
+| MTOW | 10.00 kg | 8.60 kg | Pass |
+| Endurance | ≥ 60 min | 89.5 min | Pass |
+| Range | ≥ 100 km | 115.3 km | Pass |
+| Operational radius | ≥ 50 km | 57.7 km | Pass |
+| Payload capacity | ≥ 1.0 kg | 0.42 kg (used) | Pass |
+| VTOL capability | Required | QuadPlane | Pass |
 
 All mission requirements are satisfied with positive margins. The design point is verified as feasible with the selected commercial components.
 
 ### Design sensitivities
 
-The key sensitivities identified during verification:
+The key sensitivities identified during verification are:
 
-1. **Hover motor sizing**: The 6% power deficit requires thermal verification in Mars atmosphere conditions. Upgrading to the MAD 4008 EEE (88 g, 400 W) would add 176 g to the propulsion mass while providing adequate power margin.
-
-2. **Battery temperature**: The solid-state battery operating range (−20°C minimum) does not cover the coldest Mars surface conditions. Active thermal management is mandatory.
-
-3. **Camera thermal control**: The Ricoh GR III lacks cold-weather specifications. Qualification testing or an insulated enclosure with heating is required.
-
-4. **Mass growth**: The 1.40 kg mass margin provides buffer for design growth during detailed design, thermal control systems, and structural reinforcement if required.
+1. Hover motor sizing: the 6% power deficit requires thermal verification in Mars atmosphere conditions. Upgrading to the MAD 4008 EEE (88 g, 400 W) would add 176 g to the propulsion mass while providing adequate power margin.
+2. Battery temperature: the solid-state battery operating range (−20°C minimum) does not cover the coldest Mars surface conditions. Active thermal management is mandatory.
+3. Camera thermal control: the Ricoh GR III lacks cold-weather specifications. Qualification testing or an insulated enclosure with heating is required.
+4. Mass growth: the 1.40 kg mass margin provides buffer for design growth during detailed design, thermal control systems, and structural reinforcement if required.
 
 # Infrastructure requirements
 
@@ -3530,7 +3453,7 @@ The hangar dimensions are driven by the UAV geometry derived in @sec:geometry-se
 | Lift propeller diameter | $D_p$ | 0.36 m | @sec:propeller-sizing |
 | Cruise propeller diameter | $D_{p,c}$ | 0.31 m | @sec:propeller-sizing |
 
-The UAV footprint for storage is **4.01 × 2.25 m** (wingspan × total aircraft length). The lift rotors are mounted on wing booms within the wingspan envelope. The boom extension beyond the fuselage supports the V-tail surfaces and provides the required tail moment arm.
+The UAV footprint for storage is 4.01 × 2.25 m (wingspan × total aircraft length). The lift rotors are mounted on wing booms within the wingspan envelope. The boom extension beyond the fuselage supports the V-tail surfaces and provides the required tail moment arm.
 
 ### Hangar zones
 
@@ -3580,15 +3503,9 @@ The external platform provides a clear area for VTOL operations:
 
 The charging system is sized based on the battery specifications from @sec:energy-storage:
 
-**Battery parameters:**
+The battery parameters are as follows: total battery capacity of 945 Wh, energy to replenish (20% to 100% charge) of 756 Wh, target charge time of 2–3 hours, charger power at 0.5C rate of 472 W, and charger power at 1C rate of 945 W.
 
-* Total battery capacity: 945 Wh
-* Energy to replenish (20% to 100% charge): 756 Wh
-* Target charge time: 2–3 hours
-* Charger power at 0.5C rate: 472 W
-* Charger power at 1C rate: 945 W
-
-A **1000 W charger** is specified to allow rapid turnaround with margin.
+A 1000 W charger is specified to allow rapid turnaround with margin.
 
 ### Solar power system
 
@@ -3611,7 +3528,7 @@ The solar energy available on Mars differs significantly from Earth due to orbit
 | Average incidence factor | 0.7 | Cosine losses for fixed-tilt panels |
 
 
-**Design philosophy**: Panel sizing uses **worst-case conditions** (aphelion + typical dust loading, 350 W/m²) rather than optimistic clear-sky noon values (500 W/m²). This ensures the system can provide adequate charging throughout the Martian year, including during winter and periods of elevated atmospheric dust.
+The panel sizing uses worst-case conditions (aphelion + typical dust loading, 350 W/m²) rather than optimistic clear-sky noon values (500 W/m²). This ensures the system can provide adequate charging throughout the Martian year, including during winter and periods of elevated atmospheric dust.
 
 #### Solar cell selection
 
@@ -3625,40 +3542,35 @@ Space-grade triple-junction solar cells are evaluated for the habitat-integrated
 | Spectrolab XTJ Prime | 30.7% | 50–84 | LEO/GEO satellites |
 | Azur Space 3G30C | 30.0% | 86 | MER Spirit/Opportunity |
 
-**SolAero IMM-α** [@solaerotechnologiesrocketlabSolAeroIMMalphaInverted2024]<!-- #specs -->: This inverted metamorphic multi-junction (IMM) cell achieves the highest efficiency at 33% BOL. At 49 mg/cm² (0.49 kg/m²), it is 42% lighter than conventional space-grade cells. The IMM-α has direct Mars heritage, powering the Ingenuity helicopter's solar panel through over 70 flights.
+SolAero IMM-α [@solaerotechnologiesrocketlabSolAeroIMMalphaInverted2024]<!-- #specs -->: This inverted metamorphic multi-junction (IMM) cell achieves the highest efficiency at 33% BOL. At 49 mg/cm² (0.49 kg/m²), it is 42% lighter than conventional space-grade cells. The IMM-α has direct Mars heritage, powering the Ingenuity helicopter's solar panel through over 70 flights.
 
-**Spectrolab XTJ Prime** [@spectrolabboeingSpectrolabXTJPrime2023]<!-- #specs -->: This triple-junction GaInP/GaAs/Ge cell achieves 30.7% average efficiency (31.9% maximum demonstrated). Mass ranges from 50–84 mg/cm² depending on thickness (80–225 μm). Qualified to AIAA-S111 and AIAA-S112 standards with extensive LEO and GEO flight heritage.
+Spectrolab XTJ Prime [@spectrolabboeingSpectrolabXTJPrime2023]<!-- #specs -->: This triple-junction GaInP/GaAs/Ge cell achieves 30.7% average efficiency (31.9% maximum demonstrated). Mass ranges from 50–84 mg/cm² depending on thickness (80–225 μm). Qualified to AIAA-S111 and AIAA-S112 standards with extensive LEO and GEO flight heritage.
 
-**Azur Space 3G30C-Advanced** [@azurspacesolarpowerAzurSpace3G30CAdvanced2023]<!-- #specs -->: This 30% efficiency InGaP/GaAs/Ge cell on germanium substrate has a mass of 86 mg/cm² at 150 μm thickness. Qualified to ECSS-E-ST-20-08C with heritage on the Mars Exploration Rovers Spirit and Opportunity.
+Azur Space 3G30C-Advanced [@azurspacesolarpowerAzurSpace3G30CAdvanced2023]<!-- #specs -->: This 30% efficiency InGaP/GaAs/Ge cell on germanium substrate has a mass of 86 mg/cm² at 150 μm thickness. Qualified to ECSS-E-ST-20-08C with heritage on the Mars Exploration Rovers Spirit and Opportunity.
 
-**Selection: SolAero IMM-α** is selected based on:
-
-* Highest efficiency (33%) maximises power per unit area
-* Lowest mass per area (49 mg/cm² = 0.49 kg/m²)
-* Proven Mars heritage on Ingenuity helicopter
-* Tuned to Mars spectrum for optimal performance
+SolAero IMM-α is selected based on its highest efficiency (33%) which maximises power per unit area, lowest mass per area (49 mg/cm² = 0.49 kg/m²), proven Mars heritage on Ingenuity helicopter, and tuning to the Mars spectrum for optimal performance.
 
 #### Panel sizing
 
 Panel sizing uses the conservative design irradiance (350 W/m², aphelion + typical dust) to ensure year-round operability.
 
-**Power output per unit area (at design irradiance):**
+Power output per unit area (at design irradiance):
 
 $$P_\text{design} = \eta_\text{cell} \times I_\text{design} = 0.33 \times 350 = 115.5 \text{ W/m}^2$$
 
-**Daily energy yield:**
+Daily energy yield:
 
 $$E_\text{panel} = P_\text{design} \times t_\text{sun} \times \cos\theta_\text{avg} = 115.5 \times 6 \times 0.7 = 485.1 \text{ Wh/m}^2/\text{sol}$$
 
-**Energy requirement per charge cycle:**
+Energy requirement per charge cycle:
 
 $$E_\text{charge} = \frac{756 \text{ Wh}}{0.90} = 840 \text{ Wh}$$ (including charger efficiency)
 
-**Minimum panel area:**
+Minimum panel area:
 
 $$A_\text{min} = \frac{E_\text{charge}}{E_\text{panel}} = \frac{840}{485.1} = 1.73 \text{ m}^2$$
 
-**Design margin (×1.5 for cell degradation and operational margin):**
+Design margin (×1.5 for cell degradation and operational margin):
 
 $$A_\text{design} = 1.73 \times 1.5 = 2.60 \text{ m}^2 \approx 3.0 \text{ m}^2$$
 
@@ -3668,16 +3580,9 @@ The panel area is rounded up to 3.0 m² to ensure the daily solar energy generat
 
 The solar panel generates energy only during daylight hours, while UAV charging may be required at any time (including overnight turnaround or after evening missions). A buffer battery stores the solar energy for on-demand charging.
 
-**Design decision: same battery technology as UAV**
+The buffer battery uses the same solid-state lithium-ion technology as the UAV battery (CGBT SLD1 series, 270 Wh/kg) rather than conventional Li-ion cells (180 Wh/kg). This decision provides logistics simplification (same battery chemistry means shared spares, charging equipment, and handling procedures), proven Mars compatibility (the CGBT solid-state battery was already selected for UAV operations based on its wide temperature range of -20 to +60°C), mass reduction (270 vs 180 Wh/kg reduces buffer mass by 33%), and operational flexibility (UAV battery packs can serve as buffer spares if needed, enabling battery rotation to even out cycle wear).
 
-The buffer battery uses the **same solid-state lithium-ion technology** as the UAV battery (CGBT SLD1 series, 270 Wh/kg) rather than conventional Li-ion cells (180 Wh/kg). This decision provides:
-
-1. **Logistics simplification**: Same battery chemistry means shared spares, charging equipment, and handling procedures
-2. **Proven Mars compatibility**: The CGBT solid-state battery was already selected for UAV operations based on its wide temperature range (-20 to +60°C)
-3. **Mass reduction**: 270 vs 180 Wh/kg reduces buffer mass by 33%
-4. **Operational flexibility**: UAV battery packs can serve as buffer spares if needed, enabling battery rotation to even out cycle wear
-
-**Buffer battery sizing:**
+Buffer battery sizing:
 
 : Buffer battery dimensioning {#tbl:buffer-battery}
 
@@ -3694,14 +3599,7 @@ The buffer battery uses the **same solid-state lithium-ion technology** as the U
 
 The 1260 Wh buffer battery allows one complete UAV charge during nighttime or dust storm conditions when no solar input is available. The factor of 1.5 provides margin for battery degradation and system losses. During extended dust storms (weeks to months), charging falls back to habitat nuclear power.
 
-**Buffer charge/discharge cycle:**
-
-During a typical sol:
-
-1. **Daytime (6 h effective)**: Solar panels generate 1455 Wh (3.0 m² × 485.1 Wh/m²)
-2. **Buffer charging**: 1260 Wh stored in buffer battery
-3. **UAV charging (2–3 h)**: 840 Wh delivered to UAV battery (756 Wh stored after losses)
-4. **Excess energy**: Approximately 195 Wh returned to habitat grid
+During a typical sol the buffer charge/discharge cycle operates as follows: during daytime (6 h effective) solar panels generate 1455 Wh (3.0 m² × 485.1 Wh/m²); during buffer charging 1260 Wh is stored in the buffer battery; during UAV charging (2–3 h) 840 Wh is delivered to the UAV battery (756 Wh stored after losses); and excess energy of approximately 195 Wh is returned to the habitat grid.
 
 : Solar power system specifications {#tbl:solar-spec}
 
@@ -3748,15 +3646,15 @@ A typical UAV sortie consists of the following phases:
 | 12. Post-flight inspection | Pressurised bay | 30 min | Data download, system check |
 | 13. Battery charging | Pressurised bay | 2-3 h | Recharge to full capacity |
 
-**Total sortie duration**: 2.5-4.5 hours (ground phases), 1-2 hours (flight phases).
+Total sortie duration: 2.5-4.5 hours (ground phases), 1-2 hours (flight phases).
 
 ### Crew roles
 
 UAV operations require minimal crew involvement due to autonomous flight capability:
 
-**UAV operator (1 person)**: Responsible for mission planning, flight monitoring, and data analysis. Operations are conducted from inside the habitat using ground control station.
+UAV operator (1 person): Responsible for mission planning, flight monitoring, and data analysis. Operations are conducted from inside the habitat using ground control station.
 
-**EVA support (optional)**: For non-routine maintenance or recovery operations outside the pressurised bay.
+EVA support (optional): For non-routine maintenance or recovery operations outside the pressurised bay.
 
 ### Operational tempo
 
@@ -3774,12 +3672,7 @@ With two flight-ready UAVs, daily operations are feasible with alternating fligh
 
 ### Contingency operations
 
-Contingency procedures address foreseeable failure modes:
-
-* **Aborted takeoff**: UAV remains on platform; crew retrieves via airlock procedure
-* **In-flight emergency**: Autonomous return-to-base; emergency landing at alternate flat terrain
-* **Communication loss**: Pre-programmed return-to-base after timeout (configurable, default 5 min)
-* **Landing failure**: Secondary landing zone designated; EVA recovery if required
+Contingency procedures address foreseeable failure modes: aborted takeoff (UAV remains on platform and crew retrieves via airlock procedure); in-flight emergency (autonomous return-to-base or emergency landing at alternate flat terrain); communication loss (pre-programmed return-to-base after configurable timeout, default 5 min); and landing failure (secondary landing zone designated with EVA recovery if required).
 
 ### Maintenance schedule
 
@@ -3802,20 +3695,20 @@ This feasibility study has assessed the viability of deploying an autonomous UAV
 
 The study evaluated three candidate architectures—rotorcraft, fixed-wing, and hybrid VTOL—through constraint-based sizing analysis. Key findings include:
 
-* The **QuadPlane hybrid architecture** provides an effective compromise between VTOL capability and cruise efficiency, achieving a 49% energy margin over mission requirements
-* **Low Reynolds number effects** (Re ≈ 55,000) significantly impact aerodynamic design; the SD8000 airfoil offers consistent low-drag performance with adequate stall margin (4.6°)
-* **Hover power dominates motor sizing**; fixed-wing cruise power is substantially lower than hover power, favoring configurations that minimize hover duration
-* Current **battery technology** (150 Wh/kg) enables practical mission durations of approximately 90 minutes with 20% reserve
-* The pure rotorcraft configuration is **marginally feasible** but offers limited operational margin; the fixed-wing configuration is **not feasible** without runway infrastructure
+* The QuadPlane hybrid architecture provides an effective compromise between VTOL capability and cruise efficiency, achieving a 49% energy margin over mission requirements
+* Low Reynolds number effects (Re ≈ 55,000) significantly impact aerodynamic design; the SD8000 airfoil offers consistent low-drag performance with adequate stall margin (4.6°)
+* Hover power dominates motor sizing; fixed-wing cruise power is substantially lower than hover power, favoring configurations that minimize hover duration
+* Current battery technology (150 Wh/kg) enables practical mission durations of approximately 90 minutes with 20% reserve
+* The pure rotorcraft configuration is marginally feasible but offers limited operational margin; the fixed-wing configuration is not feasible without runway infrastructure
 
 ## Recommendations {#sec:recommendations}
 
 Based on the analysis, the following recommendations are made for the preliminary design phase:
 
-1. **Proceed with QuadPlane architecture**: The octocopter lift system with coaxial cruise propeller configuration offers the best balance of performance, reliability, and operational flexibility
-2. **Technology development**: Prioritize improved battery specific energy (>200 Wh/kg) for significant performance gains in future iterations
-3. **Airfoil validation**: Wind tunnel testing of the SD8000 airfoil at Mars-representative Reynolds numbers is warranted to confirm the low-speed aerodynamic predictions
-4. **Dust mitigation**: Surface contamination effects on rotor and wing performance require investigation, particularly for long-duration surface operations
+1. Proceed with QuadPlane architecture: the octocopter lift system with coaxial cruise propeller configuration offers the best balance of performance, reliability, and operational flexibility
+2. Technology development: prioritize improved battery specific energy (>200 Wh/kg) for significant performance gains in future iterations
+3. Airfoil validation: wind tunnel testing of the SD8000 airfoil at Mars-representative Reynolds numbers is warranted to confirm the low-speed aerodynamic predictions
+4. Dust mitigation: surface contamination effects on rotor and wing performance require investigation, particularly for long-duration surface operations
 
 ## Future work {#sec:future-work}
 
@@ -3825,23 +3718,23 @@ This feasibility study employed a baseline-case methodology with fixed reference
 
 The current baseline approach uses fixed mass fractions and a reference MTOW. Future iterations should implement:
 
-* **Configuration-specific coupled closures**: Iterative sizing that solves for MTOW and battery mass simultaneously for each architecture, given payload mass, mission segment times, and energy reserve requirements. This would enable optimization rather than feasibility checking
-* **Component-based mass model**: Replacing fixed mass fractions with a build-up model for battery, payload, propulsion, and structure subsystems. Payload fraction plausibility should be constrained using the reference drone database
-* **Configuration-appropriate constraint diagrams**: Power-to-weight versus disk loading (P/W vs DL) for rotorcraft; power-to-weight versus wing loading (P/W vs W/S) for fixed-wing and hybrid VTOL, with parametric sweeps in disk loading and mission segment times
+* Configuration-specific coupled closures: iterative sizing that solves for MTOW and battery mass simultaneously for each architecture, given payload mass, mission segment times, and energy reserve requirements. This would enable optimization rather than feasibility checking
+* Component-based mass model: replacing fixed mass fractions with a build-up model for battery, payload, propulsion, and structure subsystems. Payload fraction plausibility should be constrained using the reference drone database
+* Configuration-appropriate constraint diagrams: power-to-weight versus disk loading (P/W vs DL) for rotorcraft; power-to-weight versus wing loading (P/W vs W/S) for fixed-wing and hybrid VTOL, with parametric sweeps in disk loading and mission segment times
 
 ### Subsystem analyses
 
 Several critical subsystems were identified but deferred to subsequent design phases:
 
-* **Avionics system design**: Selection and integration of the flight controller, inertial measurement unit, altimeter, and air data sensors appropriate for the low-density Mars atmosphere. Definition of the telemetry link architecture between the UAV and habitat
-* **Thermal management analysis**: Detailed thermal modeling for the extreme Mars diurnal temperature range (approximately −80 °C to −20 °C). Design of active heating systems for battery and avionics thermal protection during night storage and flight operations
-* **Structural analysis and detailed design**: Finite element analysis of the airframe, wing, and boom structure. Vibration analysis for rotor-induced loads. Material qualification for the Mars radiation and thermal environment. **Fuselage length trade-off analysis**: The benchmark-median fuselage ratio (0.50) was adopted without detailed optimization; shorter fuselages reduce structural mass and wetted area while longer fuselages provide more tail moment arm (enabling smaller tail surfaces) and more internal volume margin. Quantitative analysis of these competing effects is needed to identify the optimal configuration
+* Avionics system design: selection and integration of the flight controller, inertial measurement unit, altimeter, and air data sensors appropriate for the low-density Mars atmosphere. Definition of the telemetry link architecture between the UAV and habitat
+* Thermal management analysis: detailed thermal modeling for the extreme Mars diurnal temperature range (approximately −80 °C to −20 °C). Design of active heating systems for battery and avionics thermal protection during night storage and flight operations
+* Structural analysis and detailed design: finite element analysis of the airframe, wing, and boom structure. Vibration analysis for rotor-induced loads. Material qualification for the Mars radiation and thermal environment. Fuselage length trade-off analysis: the benchmark-median fuselage ratio (0.50) was adopted without detailed optimization; shorter fuselages reduce structural mass and wetted area while longer fuselages provide more tail moment arm (enabling smaller tail surfaces) and more internal volume margin. Quantitative analysis of these competing effects is needed to identify the optimal configuration
 
 These methodology improvements and subsystem analyses are essential prerequisites for advancing from feasibility to preliminary design review (PDR).
 
 ---
 
-The Mars UAV concept is **technically feasible** with current or near-term technology. The QuadPlane configuration meets all primary mission requirements with adequate margin, providing a viable platform for extending the operational reach of crewed Mars surface missions.
+The Mars UAV concept is technically feasible with current or near-term technology. The QuadPlane configuration meets all primary mission requirements with adequate margin, providing a viable platform for extending the operational reach of crewed Mars surface missions.
 
 # References
 

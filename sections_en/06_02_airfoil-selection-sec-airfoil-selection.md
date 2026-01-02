@@ -8,11 +8,11 @@ This section presents the airfoil selection rationale for the Mars UAV wing desi
 
 The airfoil selection is driven by three primary criteria, weighted by their importance to mission success:
 
-1. **Cruise efficiency (60% weight)**: Maximum lift-to-drag ratio $(L/D)_\text{max}$ directly determines cruise range and endurance. Higher $(L/D)_\text{max}$ reduces cruise power and extends battery life.
+1. Cruise efficiency (60% weight): Maximum lift-to-drag ratio $(L/D)_\text{max}$ directly determines cruise range and endurance. Higher $(L/D)_\text{max}$ reduces cruise power and extends battery life.
 
-2. **Stall margin (25% weight)**: Maximum lift coefficient $C_{L,\text{max}}$ determines the minimum flight speed and provides margin against gusts or manoeuvres. A higher $C_{L,\text{max}}$ enables smaller wing area or lower approach speeds.
+2. Stall margin (25% weight): Maximum lift coefficient $C_{L,\text{max}}$ determines the minimum flight speed and provides margin against gusts or manoeuvres. A higher $C_{L,\text{max}}$ enables smaller wing area or lower approach speeds.
 
-3. **Stall angle (15% weight)**: A higher stall angle $\alpha_\text{stall}$ provides a wider operational envelope and gentler stall characteristics, improving controllability in the low-density Martian atmosphere.
+3. Stall angle (15% weight): A higher stall angle $\alpha_\text{stall}$ provides a wider operational envelope and gentler stall characteristics, improving controllability in the low-density Martian atmosphere.
 
 ### Performance comparison
 
@@ -45,7 +45,7 @@ Furthermore, the E387 exhibits an anomalous drag reduction at α ≈ 9° ($C_d$ 
 | Minimum drag $C_{D,\text{min}}$ | 0.0228 | 0.0142 | SD8000 (38% lower) |
 | Maximum efficiency $(L/D)_\text{max}$ | 46.6 | 45.4 | E387 (3% higher) |
 | Maximum lift $C_{L,\text{max}}$ | 1.22 | 1.15 | E387 (6% higher) |
-| Angle at $(L/D)_\text{max}$ | 8.8° | 7.0° | — |
+| Angle at $(L/D)_\text{max}$ | 8.8° | 7.0° | N/A |
 | Stall angle | 10.2° | 11.5° | SD8000 |
 | Margin to stall | 1.3° | 4.6° | SD8000 (3.5× larger) |
 
@@ -61,14 +61,14 @@ The lift curves in @fig:airfoil-cl-alpha show the stall characteristics of each 
 
 ### Selection rationale
 
-Based on the comparative analysis, the **Selig/Donovan SD8000** is selected for the Mars UAV wing design. While the E387 achieves marginally higher peak efficiency, the SD8000 offers critical advantages for reliable Mars operation:
+Based on the comparative analysis, the Selig/Donovan SD8000 is selected for the Mars UAV wing design. While the E387 achieves marginally higher peak efficiency, the SD8000 offers important advantages for reliable Mars operation:
 
-* **Lower drag across operating range**: $C_{D,\text{min}}$ = 0.0142, 38% lower than E387
-* **Larger stall margin**: 4.6° margin between best L/D and stall, compared to only 1.3° for E387
-* **Consistent drag behaviour**: No anomalous transitions or sensitivity to LSB dynamics
-* **Robust performance**: Higher L/D at practical cruise conditions ($C_L$ = 0.7–0.9)
-* **Designed for low Reynolds number**: The SD8000 was specifically designed by Selig and Donovan for low-Re applications, with documented performance in UAV and similar applications [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
-* **Late stall**: Stall at α = 11.5° provides a wide operational envelope
+* Lower drag across operating range: $C_{D,\text{min}}$ = 0.0142, 38% lower than E387
+* Larger stall margin: 4.6° margin between best L/D and stall, compared to only 1.3° for E387
+* Consistent drag behaviour: no anomalous transitions or sensitivity to LSB dynamics
+* Robust performance: higher L/D at practical cruise conditions ($C_L$ = 0.7–0.9)
+* Designed for low Reynolds number: the SD8000 was specifically designed by Selig and Donovan for low-Re applications, with documented performance in UAV and similar applications [@seligSummaryLowSpeedAirfoil1995]<!-- #v1:sd8000 -->
+* Late stall: stall at α = 11.5° provides a wide operational envelope
 
 The E387's peak efficiency advantage of 3% is offset by the operational risk of targeting an angle of attack within 1.3° of stall. For a Mars mission with no opportunity for recovery, the more conservative SD8000 selection provides appropriate safety margin.
 

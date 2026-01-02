@@ -137,30 +137,30 @@ The detailed mass breakdown for the selected QuadPlane configuration:
 
 | Component | Mass (kg) | Fraction | Source |
 |:----------|----------:|---------:|:-------|
-| **Structure** | 2.32 | 23.2% | |
+| Structure | 2.32 | 23.2% | |
 | Wing | 0.80 | 8.0% | @eq:wing-weight with CFRP |
 | Fuselage | 0.45 | 4.5% | @eq:fuselage-weight with CFRP |
 | Empennage (V-tail) | 0.35 | 3.5% | Scaling from wing (1.144 m²) |
 | Booms (4×) | 0.40 | 4.0% | Structural analysis |
 | Landing gear | 0.32 | 3.2% | 3.2% of MTOW |
-| **Propulsion** | 1.18 | 11.8% | |
+| Propulsion | 1.18 | 11.8% | |
 | Lift motors (8×) | 0.528 | 5.3% | SunnySky V4006-380, 66 g each |
 | Cruise motors (2×) | 0.120 | 1.2% | T-Motor AT2312-1150, 60 g each |
 | ESCs (10×) | 0.060 | 0.6% | Hobbywing XRotor Micro 30A, 6 g each |
 | Propellers (10×) | 0.174 | 1.7% | 8× lift (18 g) + 2× cruise (15 g) |
 | Mounting + wiring | 0.300 | 3.0% | Engineering estimate |
-| **Energy** | 3.50 | 35.0% | |
+| Energy | 3.50 | 35.0% | |
 | Battery pack | 3.50 | 35.0% | @sec:energy-data, 945 Wh total |
-| **Payload** | 1.50 | 15.0% | |
+| Payload | 1.50 | 15.0% | |
 | Camera system | 0.30 | 3.0% | @sec:payload-systems |
 | Radio relay | 0.15 | 1.5% | @sec:payload-systems |
 | Payload margin | 1.05 | 10.5% | Growth allowance |
-| **Avionics** | 0.50 | 5.0% | |
+| Avionics | 0.50 | 5.0% | |
 | Flight controller | 0.10 | 1.0% | Pixhawk-class autopilot |
 | Sensors & wiring | 0.40 | 4.0% | GPS, IMU, telemetry |
-| **Subtotal** | 9.00 | 90.0% | |
-| **Design margin** | 1.00 | 10.0% | Contingency |
-| **Total MTOW** | 10.00 | 100% | — |
+| Subtotal | 9.00 | 90.0% | |
+| Design margin | 1.00 | 10.0% | Contingency |
+| Total MTOW | 10.00 | 100% | N/A |
 
 : QuadPlane mass breakdown {#tbl:quadplane-mass-breakdown}
 
@@ -187,8 +187,8 @@ The calculated component masses are verified against the mass fraction targets f
 | Structure | 0.23 | 0.23 | MATCH |
 | Propulsion | 0.20 | 0.12 | UNDER (margin available) |
 | Avionics | 0.05 | 0.05 | MATCH |
-| Design margin | — | 0.10 | ALLOCATED |
-| **Total** | 1.00 | 1.00 | BALANCED |
+| Design margin | N/A | 0.10 | ALLOCATED |
+| Total | 1.00 | 1.00 | BALANCED |
 
 : Mass fraction verification {#tbl:mass-fraction-verification}
 

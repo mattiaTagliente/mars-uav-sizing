@@ -139,30 +139,30 @@ La ripartizione dettagliata della massa per la configurazione QuadPlane selezion
 
 | Componente | Massa (kg) | Frazione | Fonte |
 |:----------|----------:|---------:|:-------|
-| **Struttura** | 2.32 | 23.2% | |
+| Struttura | 2.32 | 23.2% | |
 | Ala | 0.80 | 8.0% | @eq:wing-weight con CFRP |
 | Fusoliera | 0.45 | 4.5% | @eq:fuselage-weight con CFRP |
 | Impennaggio (coda a V) | 0.35 | 3.5% | Scalatura dall'ala (1.144 m²) |
 | Boom (4×) | 0.40 | 4.0% | Analisi strutturale |
 | Carrello | 0.32 | 3.2% | 3.2% dell'MTOW |
-| **Propulsione** | 1.18 | 11.8% | |
+| Propulsione | 1.18 | 11.8% | |
 | Motori di sollevamento (8×) | 0.528 | 5.3% | SunnySky V4006-380, 66 g cad. |
 | Motori di crociera (2×) | 0.120 | 1.2% | T-Motor AT2312-1150, 60 g cad. |
 | ESC (10×) | 0.060 | 0.6% | Hobbywing XRotor Micro 30A, 6 g cad. |
 | Eliche (10×) | 0.174 | 1.7% | 8× sollevamento (18 g) + 2× crociera (15 g) |
 | Montaggio + cablaggio | 0.300 | 3.0% | Stima ingegneristica |
-| **Energia** | 3.50 | 35.0% | |
+| Energia | 3.50 | 35.0% | |
 | Pacco batteria | 3.50 | 35.0% | @sec:energy-data, 945 Wh totali |
-| **Payload** | 1.50 | 15.0% | |
+| Payload | 1.50 | 15.0% | |
 | Sistema camera | 0.30 | 3.0% | @sec:payload-systems |
 | Relè radio | 0.15 | 1.5% | @sec:payload-systems |
 | Margine payload | 1.05 | 10.5% | Tolleranza di crescita |
-| **Avionica** | 0.50 | 5.0% | |
+| Avionica | 0.50 | 5.0% | |
 | Controllore di volo | 0.10 | 1.0% | Autopilota classe Pixhawk |
 | Sensori e cablaggio | 0.40 | 4.0% | GPS, IMU, telemetria |
-| **Subtotale** | 9.00 | 90.0% | |
-| **Margine di progetto** | 1.00 | 10.0% | Contingenza |
-| **MTOW totale** | 10.00 | 100% | — |
+| Subtotale | 9.00 | 90.0% | |
+| Margine di progetto | 1.00 | 10.0% | Contingenza |
+| MTOW totale | 10.00 | 100% | N.D. |
 
 ### Limitazioni per piccoli UAV
 
@@ -189,7 +189,7 @@ Le masse calcolate dei componenti sono verificate rispetto agli obiettivi delle 
 | Struttura | 0.23 | 0.23 | CONFORME |
 | Propulsione | 0.20 | 0.12 | INFERIORE (margine disponibile) |
 | Avionica | 0.05 | 0.05 | CONFORME |
-| Margine di progetto | — | 0.10 | ALLOCATO |
-| **Totale** | 1.00 | 1.00 | BILANCIATO |
+| Margine di progetto | N.D. | 0.10 | ALLOCATO |
+| Totale | 1.00 | 1.00 | BILANCIATO |
 
 La frazione di massa della propulsione (11.8%) è significativamente inferiore al budget del 20%, fornendo un margine di 0.82 kg che è stato riallocato alla struttura e alla contingenza di progetto. Questo margine riflette la selezione di combinazioni moderne di motori/ESC leggeri e valida le ipotesi dell'analisi dei vincoli.

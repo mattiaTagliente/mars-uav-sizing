@@ -71,24 +71,9 @@ Il vincolo orizzontale (beccheggio) è attivo, il che significa che la coda è d
 
 I benchmark commerciali mostrano un rapporto lunghezza-apertura alare che varia da 0.28 a 0.63, con una mediana di circa 0.50 (@tbl:reference-fuselage). La selezione comporta trade-off tra effetti in competizione:
 
-**Fusoliera più corta (rapporto inferiore):**
+Una fusoliera più corta (rapporto inferiore) produce meno massa strutturale, meno area bagnata (resistenza parassitica ridotta) e meno volume interno, ma richiede un'estensione del boom per il braccio di momento della coda. Una fusoliera più lunga (rapporto superiore) fornisce maggiore contributo di portanza, un braccio di momento della coda più lungo che consente superfici di coda più piccole, e più volume interno per crescita del payload e gestione termica, ma aumenta la massa strutturale e l'area bagnata.
 
-* Meno massa strutturale della fusoliera
-* Meno area bagnata della fusoliera (resistenza parassitica ridotta)
-* Richiede estensione del boom per il braccio di momento della coda
-* Meno volume interno
-
-**Fusoliera più lunga (rapporto superiore):**
-
-* Maggiore contributo di portanza della fusoliera
-* Braccio di momento della coda più lungo senza estensione boom
-* Più volume interno per crescita del payload e gestione termica
-* Più massa strutturale della fusoliera
-* Più area bagnata della fusoliera
-
-**Selezione: 0.30** (limite inferiore dell'intervallo benchmark)
-
-Per l'UAV marziano, la maggior parte del volume interno è occupata dal payload compatto e dai sistemi di accumulo energetico che richiedono solo 4–5 L. Il volume di 170 L fornito dal rapporto 0.50 è eccessivo. Selezionando il limite inferiore dell'intervallo benchmark (0.30) si minimizza la massa strutturale e la resistenza parassitica fornendo al contempo volume adeguato per tutti i sistemi. Il braccio di momento della coda richiesto è invece ottenuto attraverso l'estensione del boom, che è strutturalmente efficiente poiché serve al duplice scopo di supportare sia i rotori di sollevamento che le superfici della coda a V.
+Viene selezionato un rapporto di 0.30 (limite inferiore dell'intervallo benchmark). Per l'UAV marziano, la maggior parte del volume interno è occupata dal payload compatto e dai sistemi di accumulo energetico che richiedono solo 4–5 L. Il volume di 170 L fornito dal rapporto 0.50 è eccessivo. Selezionando il limite inferiore dell'intervallo benchmark si minimizza la massa strutturale e la resistenza parassitica fornendo al contempo volume adeguato per tutti i sistemi. Il braccio di momento della coda richiesto è invece ottenuto attraverso l'estensione del boom, che è strutturalmente efficiente poiché serve al duplice scopo di supportare sia i rotori di sollevamento che le superfici della coda a V.
 
 Le dimensioni risultanti della fusoliera sono:
 
@@ -123,21 +108,21 @@ La sezione trasversale della fusoliera è approssimativamente circolare per semp
 
 La configurazione della coda a V montata su boom si estende oltre l'estremità poppiera della fusoliera. La lunghezza totale dell'aeromobile è determinata dalla posizione della coda richiesta per raggiungere il braccio di momento target:
 
-**Posizione dell'ala:**
+Posizione dell'ala:
 
 $$x_\text{ala,LE} = 0.40 \times L_f = 0.40 \times 1.20 = 0.48 \text{ m dal muso}$$
 
 $$x_\text{ala,AC} = x_\text{ala,LE} + 0.25 \times MAC = 0.48 + 0.25 \times 0.669 = 0.65 \text{ m}$$
 
-**Posizione della coda (da CA ala + braccio di momento):**
+Posizione della coda (da CA ala + braccio di momento):
 
 $$x_\text{coda,AC} = x_\text{ala,AC} + l_H = 0.65 + 1.20 = 1.85 \text{ m dal muso}$$
 
-**Bordo d'uscita coda (CA al 25% corda dal bordo d'attacco):**
+Bordo d'uscita coda (CA al 25% corda dal bordo d'attacco):
 
 $$x_\text{coda,TE} = x_\text{coda,AC} + 0.75 \times c_{V\text{-tail}} = 1.85 + 0.75 \times 0.535 = 2.25 \text{ m}$$
 
-La lunghezza totale dell'aeromobile è quindi **2.25 m**, con i boom di coda che si estendono **1.05 m** oltre l'estremità poppiera della fusoliera. Questa estensione del boom è strutturalmente integrata con i bracci dei motori di sollevamento posteriori, che servono al duplice scopo di supportare i rotori dell'octocopter e le superfici della coda a V.
+La lunghezza totale dell'aeromobile è quindi 2.25 m, con i boom di coda che si estendono 1.05 m oltre l'estremità poppiera della fusoliera. Questa estensione del boom è strutturalmente integrata con i bracci dei motori di sollevamento posteriori, che servono al duplice scopo di supportare i rotori dell'octocopter e le superfici della coda a V.
 
 | Parametro | Simbolo | Valore | Note |
 |:----------|:------:|------:|:------|
@@ -173,7 +158,7 @@ dove $n$ è la velocità di rotazione (giri/s) e $a$ è la velocità del suono. 
 
 $$M_\text{tip} = \frac{\pi \times (4850/60) \times 0.44}{229.7} = 0.49$$
 
-Questo è inferiore al limite di 0.7, quindi non si applica alcun vincolo sulla velocità dell'estremità. Il diametro teorico dal carico del disco è 0.44 m. Il diametro selezionato dell'elica di sollevamento è **0.36 m** (14 pollici), basato sulle dimensioni disponibili e sulla compatibilità con il motore.
+Questo è inferiore al limite di 0.7, quindi non si applica alcun vincolo sulla velocità dell'estremità. Il diametro teorico dal carico del disco è 0.44 m. Il diametro selezionato dell'elica di sollevamento è 0.36 m (14 pollici), basato sulle dimensioni disponibili e sulla compatibilità con il motore.
 
 #### Dimensionamento eliche di crociera
 
@@ -181,7 +166,7 @@ I due motori di crociera forniscono spinta in avanti durante il volo orizzontale
 
 $$P_\text{indotta} = T v_i = \frac{T^{3/2}}{\sqrt{2 \rho A}}$$ {#eq:induced-power}
 
-La spinta di crociera è fissata dal requisito di resistenza aerodinamica, $T = W/(L/D)$. Per la configurazione di base, la spinta totale in crociera è 3.53 N (1.76 N per motore). Il diametro selezionato dell'elica di crociera è **0.31 m** (12 pollici). A 8000 rpm, il numero di Mach all'estremità è 0.56, inferiore al limite di 0.7.
+La spinta di crociera è fissata dal requisito di resistenza aerodinamica, $T = W/(L/D)$. Per la configurazione di base, la spinta totale in crociera è 3.53 N (1.76 N per motore). Il diametro selezionato dell'elica di crociera è 0.31 m (12 pollici). A 8000 rpm, il numero di Mach all'estremità è 0.56, inferiore al limite di 0.7.
 
 | Parametro | Elica di sollevamento | Elica di crociera |
 |:----------|----------------------:|------------------:|
