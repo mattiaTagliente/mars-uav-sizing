@@ -94,19 +94,23 @@ This document defines the authoritative structure of the Mars UAV feasibility st
        - Subsystem weight estimates
 
 7. Component selection and verification
-   7.1 Propulsion system selection
-       7.1.1 Lift motors (octocopter configuration)
-       7.1.2 Cruise motors (coaxial tractor)
-       7.1.3 Lift propellers
-       7.1.4 Cruise propellers
-   7.2 Payload selection
-       7.2.1 Camera selection (mapping payload)
-       7.2.2 Radio selection (telecommunication relay payload)
-   7.3 Energy storage selection
-       - Battery specifications
-   7.4 Performance verification
-       - Updated calculations with selected components
-       - Requirements compliance check
+   7.1 Selection methodology
+        - Requirements from constraint analysis
+        - Mass budget constraints
+        - Selection criteria
+   7.2 Propulsion system selection
+        7.2.1 Lift motors (octocopter configuration)
+        7.2.2 Cruise motors (coaxial tractor)
+        7.2.3 Lift propellers
+        7.2.4 Cruise propellers
+   7.3 Payload selection
+        7.3.1 Camera selection (mapping payload)
+        7.3.2 Radio selection (telecommunication relay payload)
+   7.4 Energy storage selection
+        - Battery specifications
+   7.5 Performance verification
+        - Updated calculations with selected components
+        - Requirements compliance check
 
 8. Infrastructure requirements
    8.1 Habitat hangar specifications
@@ -212,12 +216,22 @@ Location: `sections_en/`
 | 05_01_*.md - 05_04_*.md | Section 5 subsections |
 | 06_00_design-decisions-*.md | Section 6 header |
 | 06_01_*.md - 06_05_*.md | Section 6 subsections |
-| 07_00_component-selection-*.md | Section 7 |
+| 07_00_component-selection-*.md | Section 7 header |
+| 07_01_*.md - 07_05_*.md | Section 7 subsections (methodology, propulsion, payload, energy, verification) |
 | 08_00_infrastructure-*.md | Section 8 header |
 | 08_01_*.md, 08_02_*.md | Section 8 subsections |
-| 09_00_conclusions-*.md | Conclusions |
+| 09_00_conclusions-*.md | Section 9 header |
+| 09_01_*.md - 09_03_*.md | Section 9 subsections (summary, recommendations, future work) |
 | 10_00_references.md | Bibliography |
-| 11_00_appendix-a-*.md - 15_00_*.md | Appendices |
+| 11_00_appendix-a-*.md | Appendix A header |
+| 11_01_*.md | Appendix A content (physical constants tables) |
+| 12_00_appendix-b-*.md | Appendix B header |
+| 12_01_*.md - 12_03_*.md | Appendix B subsections (propulsion, payload, energy storage) |
+| 13_00_appendix-c-*.md | Appendix C header |
+| 13_01_*.md | Appendix C content (package documentation) |
+| 14_00_appendix-d-*.md | Appendix D header |
+| 14_01_*.md | Appendix D content (model derivation) |
+| 15_00_*.md | Example usage |
 
 ### Manuscript Sections (Italian)
 Location: `sections_it/`
@@ -349,7 +363,7 @@ Key labels used for cross-references in the manuscript:
 - `@sec:hybrid-vtol-analysis`, `@sec:comparative-results`
 - `@sec:design-decisions`, `@sec:architecture-selection`, `@sec:airfoil-selection`
 - `@sec:geometry-selection`, `@sec:propeller-sizing`, `@sec:material-selection`, `@sec:mass-breakdown`
-- `@sec:component-verification`, `@sec:propulsion-selection`, `@sec:payload-selection`
+- `@sec:component-verification`, `@sec:selection-methodology`, `@sec:propulsion-selection`, `@sec:payload-selection`
 - `@sec:habitat-hangar`, `@sec:operations-concept`
 - `@sec:conclusions`, `@sec:summary-findings`, `@sec:recommendations`, `@sec:future-work`
 

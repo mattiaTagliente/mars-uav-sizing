@@ -20,7 +20,7 @@ Allocando circa il 60% alla camera e il 40% al sistema radio si ottiene un targe
 
 : Analisi trade-off selezione camera {#tbl:camera-selection}
 
-| Camera | Massa (g) | Risoluzione | Temp. (°C) | Valutazione |
+| Camera | Massa (g) | Risoluzione | Temp. (°C) | Stato |
 |:-------|:--------:|:-----------|:----------------:|:------:|
 | Ricoh GR III | 227-257 | 24 MP (APS-C) | N.D. | Selezionata |
 | MicaSense RedEdge-MX | 232 | 1.2 MP/banda (5 bande) | N.D. | Alternativa |
@@ -32,14 +32,9 @@ Nota: N.D. indica temperatura operativa non specificata dal produttore.
 
 #### Motivazione della selezione
 
-La **Ricoh GR III** è selezionata come camera primaria in base a:
+La Ricoh GR III è selezionata come camera primaria in base a: massa di 227 g corpo e 257 g completa con batteria [@ricohimagingRicohGRIII2024]<!-- #specs -->, l'opzione RGB più leggera; risoluzione del sensore APS-C da 24 MP, adeguata per la mappatura; dimensioni compatte di 109.4 × 61.9 × 33.2 mm [@ricohimagingRicohGRIII2024]<!-- #specs -->; e obiettivo integrato da 18.3 mm (equivalente 28 mm), eliminando la complessità degli obiettivi intercambiabili.
 
-* **Massa**: 227 g corpo, 257 g completa con batteria [@ricohimagingRicohGRIII2024]<!-- #specs -->, l'opzione RGB più leggera
-* **Risoluzione**: sensore APS-C da 24 MP fornisce risoluzione adeguata per la mappatura
-* **Dimensioni**: form factor compatto 109.4 × 61.9 × 33.2 mm [@ricohimagingRicohGRIII2024]<!-- #specs -->
-* **Obiettivo**: obiettivo integrato da 18.3 mm (equivalente 28 mm) elimina la complessità degli obiettivi intercambiabili
-
-La **MicaSense RedEdge-MX** è mantenuta come alternativa se è richiesta capacità multispettrale per l'analisi geologica [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. A 232 g, fornisce imaging a cinque bande (blu, verde, rosso, red-edge, NIR) adatto per l'identificazione minerale.
+La MicaSense RedEdge-MX è mantenuta come alternativa se è richiesta capacità multispettrale per l'analisi geologica [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. A 232 g, fornisce imaging a cinque bande (blu, verde, rosso, red-edge, NIR) adatto per l'identificazione minerale.
 
 Le DJI Zenmuse P1 e Phase One iXM-100 sono respinte per massa superiore al target di 600 g di un fattore due o più. Il sistema termico DJI Zenmuse H20T è respinto poiché l'imaging termico non è un requisito di missione primario.
 
@@ -69,11 +64,7 @@ La Ricoh GR III non specifica un intervallo di temperatura operativa, indicando 
 
 La missione di relay telecomunicazioni richiede un sistema radio capace di estendere la portata di comunicazione tra gli astronauti EVA in superficie e la stazione base dell'habitat. In base all'allocazione radio del 40% dal budget payload di 1.00 kg, il target di massa radio è circa 400 g.
 
-I requisiti operativi includono:
-
-* Portata: corrispondere o superare il raggio operativo di 50 km
-* Temperatura: operazione alle temperature superficiali marziane (−60 a +20 °C)
-* Potenza: minimizzare il consumo energetico per l'autonomia della batteria
+I requisiti operativi includono: portata corrispondente o superiore al raggio operativo di 50 km, tolleranza termica per le condizioni superficiali marziane da −60 a +20 °C, e consumo energetico minimo per l'autonomia della batteria.
 
 #### Valutazione dei candidati
 
@@ -81,7 +72,7 @@ I requisiti operativi includono:
 
 : Analisi trade-off selezione radio {#tbl:radio-selection}
 
-| Radio | Massa (g) | Portata (km) | Temp. (°C) | Valutazione |
+| Radio | Massa (g) | Portata (km) | Temp. (°C) | Stato |
 |:------|:--------:|:----------:|:----------------:|:------:|
 | RFD900x | 14.5 | > 40 | −40 a +85 | Selezionata |
 | Microhard pMDDL2450 (chiuso) | 165 | N.D. | −40 a +85 | Alternativa |
@@ -91,15 +82,9 @@ I requisiti operativi includono:
 
 #### Motivazione della selezione
 
-La **RFD900x** è selezionata come radio primaria in base a:
+La RFD900x è selezionata come radio primaria in base a: massa di 14.5 g, l'opzione più leggera e ben sotto il target di 400 g [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; portata superiore a 40 km in linea di vista, soddisfacendo il raggio operativo di 50 km con ottimizzazione antenna [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; intervallo di temperatura operativa da −40 a +85 °C, superando i requisiti della superficie marziana; consumo massimo di 5 W a 1 W di trasmissione; e ampio utilizzo in applicazioni UAV con firmware open-source SiK.
 
-* **Massa**: 14.5 g è l'opzione più leggera, ben sotto il target di 400 g [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Portata**: >40 km in linea di vista soddisfa il raggio operativo di 50 km con ottimizzazione antenna [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Temperatura**: intervallo operativo da −40 a +85 °C supera i requisiti della superficie marziana
-* **Potenza**: 5 W di consumo massimo a 1 W di trasmissione
-* **Heritage**: ampiamente usata in applicazioni UAV con firmware open-source SiK
-
-La **Microhard pMDDL2450** è mantenuta come alternativa se è richiesto throughput dati maggiore (25 Mbps vs 0.75 Mbps) per potenziali applicazioni di video relay [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
+La Microhard pMDDL2450 è mantenuta come alternativa se è richiesto throughput dati maggiore (25 Mbps vs 0.75 Mbps) per potenziali applicazioni di video relay [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
 
 I sistemi radio mesh (Rajant, Silvus, Persistent Systems) sono respinti poiché la funzionalità mesh non è richiesta per una missione relay con singolo UAV. La loro massa di 400-700 g consumerebbe l'intero budget radio senza vantaggio per il profilo di missione.
 
@@ -138,11 +123,7 @@ I componenti selezionati producono una massa payload totale di **0.42 kg**, ben 
 
 $$f_\text{payload,effettivo} = \frac{m_\text{payload}}{MTOW} = \frac{0.422}{10.00} = 0.042 = 4.2\%$$
 
-Questo rappresenta una **riduzione del 58%** dal budget allocato, fornendo margine per:
-
-* Payload aggiuntivo se i requisiti di missione si espandono
-* Componenti di gestione termica per l'operazione marziana
-* Flessibilità di iterazione progettuale
+Questo rappresenta una riduzione del 58% dal budget allocato, fornendo margine per payload aggiuntivo se i requisiti di missione si espandono, componenti di gestione termica per l'operazione marziana e flessibilità di iterazione progettuale.
 
 La riduzione della massa payload rialloca 0.58 kg ad altre categorie di sistema, potenzialmente aumentando la capacità batteria per autonomia estesa.
 

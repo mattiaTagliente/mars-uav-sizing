@@ -45,10 +45,7 @@ However, maintaining the baseline 3.50 kg battery mass is recommended to preserv
 | Total hover | 3181 | 8 × 375 = 3000 | −6% |
 | Total cruise | 318 | 2 × 350 = 700 | +120% |
 
-The hover power margin is slightly negative (−6%), indicating the SunnySky V4006-380 motors operate near their rated power during hover. This is acceptable for the short hover duration (2 minutes total per flight) but requires:
-
-* Adequate thermal design for motor cooling in the thin Mars atmosphere
-* Consideration of the MAD 4008 EEE alternative (88 g, 400 W) if testing reveals thermal issues
+The hover power margin is slightly negative (−6%), indicating the SunnySky V4006-380 motors operate near their rated power during hover. This is acceptable for the short hover duration (2 minutes total per flight) but requires adequate thermal design for motor cooling in the thin Mars atmosphere and consideration of the MAD 4008 EEE alternative (88 g, 400 W) if testing reveals thermal issues.
 
 The cruise power margin is substantial (+120%), confirming the T-Motor AT2312-1150 motors are adequately sized with significant thermal headroom.
 
@@ -97,24 +94,21 @@ Round-trip range: 115.3 km, exceeding the 100 km requirement by 15%.
 
 | Requirement | Target | Achieved | Status |
 |:------------|-------:|---------:|:------:|
-| MTOW | 10.00 kg | 8.60 kg | ✓ Pass |
-| Endurance | ≥ 60 min | 89.5 min | ✓ Pass |
-| Range | ≥ 100 km | 115.3 km | ✓ Pass |
-| Operational radius | ≥ 50 km | 57.7 km | ✓ Pass |
-| Payload capacity | ≥ 1.0 kg | 0.42 kg (used) | ✓ Pass |
-| VTOL capability | Required | QuadPlane | ✓ Pass |
+| MTOW | 10.00 kg | 8.60 kg | Pass |
+| Endurance | ≥ 60 min | 89.5 min | Pass |
+| Range | ≥ 100 km | 115.3 km | Pass |
+| Operational radius | ≥ 50 km | 57.7 km | Pass |
+| Payload capacity | ≥ 1.0 kg | 0.42 kg (used) | Pass |
+| VTOL capability | Required | QuadPlane | Pass |
 
 All mission requirements are satisfied with positive margins. The design point is verified as feasible with the selected commercial components.
 
 ### Design sensitivities
 
-The key sensitivities identified during verification:
+The key sensitivities identified during verification are:
 
-1. **Hover motor sizing**: The 6% power deficit requires thermal verification in Mars atmosphere conditions. Upgrading to the MAD 4008 EEE (88 g, 400 W) would add 176 g to the propulsion mass while providing adequate power margin.
-
-2. **Battery temperature**: The solid-state battery operating range (−20°C minimum) does not cover the coldest Mars surface conditions. Active thermal management is mandatory.
-
-3. **Camera thermal control**: The Ricoh GR III lacks cold-weather specifications. Qualification testing or an insulated enclosure with heating is required.
-
-4. **Mass growth**: The 1.40 kg mass margin provides buffer for design growth during detailed design, thermal control systems, and structural reinforcement if required.
+1. Hover motor sizing: the 6% power deficit requires thermal verification in Mars atmosphere conditions. Upgrading to the MAD 4008 EEE (88 g, 400 W) would add 176 g to the propulsion mass while providing adequate power margin.
+2. Battery temperature: the solid-state battery operating range (−20°C minimum) does not cover the coldest Mars surface conditions. Active thermal management is mandatory.
+3. Camera thermal control: the Ricoh GR III lacks cold-weather specifications. Qualification testing or an insulated enclosure with heating is required.
+4. Mass growth: the 1.40 kg mass margin provides buffer for design growth during detailed design, thermal control systems, and structural reinforcement if required.
 

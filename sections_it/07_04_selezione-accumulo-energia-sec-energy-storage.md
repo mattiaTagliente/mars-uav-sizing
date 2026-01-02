@@ -24,7 +24,7 @@ I requisiti energetici sono derivati dall'analisi QuadPlane in @sec:hybrid-vtol-
 
 : Analisi trade-off selezione tecnologia batteria {#tbl:battery-selection}
 
-| Tecnologia | Energia spec. (Wh/kg) | Temp. (°C) | Cicli vita | Valutazione |
+| Tecnologia | Energia spec. (Wh/kg) | Temp. (°C) | Cicli vita | Stato |
 |:-----------|:--------------------:|:----------------:|:----------:|:------:|
 | Li-ion stato solido | 270 | −20 a +60 | 1000 | Selezionata |
 | Li-ion semi-solido | 180 | −20 a +45 | 500 | Alternativa |
@@ -33,29 +33,15 @@ I requisiti energetici sono derivati dall'analisi QuadPlane in @sec:hybrid-vtol-
 
 ### Motivazione della selezione
 
-Le **batterie litio-ione a stato solido** sono selezionate in base a:
+Le batterie litio-ione a stato solido sono selezionate in base a: energia specifica di 270 Wh/kg, superando il requisito di 200 Wh/kg del 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; intervallo di temperatura da −20 a +60 °C, fornendo tolleranza base al freddo [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; vita ciclica di 1000 cicli all'80% DoD, supportando una campagna missione lunga; e costruzione con elettrolita solido, riducendo il rischio di thermal runaway nell'habitat marziano.
 
-* **Energia specifica**: 270 Wh/kg supera il requisito di 200 Wh/kg del 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Intervallo temperatura**: da −20 a +60 °C fornisce tolleranza base al freddo [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Vita ciclica**: 1000 cicli all'80% DoD supporta campagna missione lunga
-* **Sicurezza**: elettrolita solido riduce il rischio di thermal runaway nell'habitat marziano
+La tecnologia litio-ione semi-solido è mantenuta come alternativa se la disponibilità stato solido è limitata. A 180 Wh/kg, soddisfa comunque i requisiti di missione con margine ridotto.
 
-La tecnologia **litio-ione semi-solido** è mantenuta come alternativa se la disponibilità stato solido è limitata. A 180 Wh/kg, soddisfa comunque i requisiti di missione con margine ridotto.
-
-Le batterie LiPo standard sono respinte per:
-
-* Energia specifica inferiore (130-150 Wh/kg)
-* Intervallo temperatura operativa ristretto (tipicamente 0 a +40 °C senza preriscaldamento)
-* Vita ciclica più breve (circa 300 cicli)
+Le batterie LiPo standard sono respinte per energia specifica inferiore (130-150 Wh/kg), intervallo di temperatura operativa ristretto (tipicamente 0 a +40 °C senza preriscaldamento) e vita ciclica più breve (circa 300 cicli).
 
 ### Considerazioni termiche marziane
 
-L'intervallo operativo batteria stato solido (−20°C minimo) non copre completamente le temperature superficiali marziane (−60 a +20 °C). La strategia di gestione termica batteria include:
-
-* Vano batteria isolato per ridurre la perdita di calore
-* Elementi riscaldanti resistivi attivati durante i periodi di cold soak
-* Condizionamento batteria pre-volo nell'hangar habitat
-* Operazioni di volo limitate alla finestra termica diurna
+L'intervallo operativo batteria stato solido (−20°C minimo) non copre completamente le temperature superficiali marziane (−60 a +20 °C). La strategia di gestione termica batteria include un vano batteria isolato per ridurre la perdita di calore, elementi riscaldanti resistivi attivati durante i periodi di cold soak, condizionamento batteria pre-volo nell'hangar habitat e operazioni di volo limitate alla finestra termica diurna.
 
 La massa del sistema di controllo termico è allocata nella frazione di massa avionica/sistemi.
 

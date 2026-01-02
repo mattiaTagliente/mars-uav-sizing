@@ -62,7 +62,29 @@ wind:
 # ==============================================================================
 # Solar Irradiance on Mars
 # ==============================================================================
+# Source: NASA technical memos, MER mission data, web search 2026-01-02
+#
+# DESIGN PHILOSOPHY: Panel sizing uses WORST-CASE conditions (aphelion + typical
+# dust) rather than optimistic clear-sky noon values. This ensures the system
+# can provide adequate charging throughout the Martian year.
 solar:
-  constant_mars: 589.0         # W/m², Solar constant at 1.52 AU
-  surface_clear: 500.0         # W/m², At noon, clear day
-  surface_dusty: 300.0         # W/m², During dusty conditions
+  # Orbital variation
+  constant_mars: 589.0           # W/m², Solar constant at mean orbital distance (1.52 AU)
+  perihelion: 717.0              # W/m², Closest approach (1.38 AU)
+  aphelion: 493.0                # W/m², Farthest point (1.67 AU) - DESIGN BASIS
+  
+  # Surface irradiance (after atmospheric attenuation)
+  # Clear-sky values - NOT for design use
+  surface_clear_noon: 500.0      # W/m², Peak at noon, clear atmosphere
+  
+  # Design values - conservative for panel sizing
+  # Aphelion with typical dust optical depth (tau ~0.5)
+  surface_aphelion_dusty: 350.0  # W/m², Design value for sizing
+  
+  # Operational limits
+  surface_dust_storm: 100.0      # W/m², During major dust events (fallback to nuclear)
+  
+  # Daily insolation parameters
+  effective_sun_hours: 6.0       # h/sol, Usable daylight for power generation
+  avg_incidence_factor: 0.7      # Cosine losses for fixed-tilt mounting
+

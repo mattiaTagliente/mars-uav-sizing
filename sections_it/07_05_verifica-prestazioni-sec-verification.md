@@ -45,10 +45,7 @@ Tuttavia, si raccomanda di mantenere la massa batteria baseline di 3.50 kg per p
 | Hovering totale | 3181 | 8 × 375 = 3000 | −6% |
 | Crociera totale | 318 | 2 × 350 = 700 | +120% |
 
-Il margine di potenza hovering è leggermente negativo (−6%), indicando che i motori SunnySky V4006-380 operano vicino alla loro potenza nominale durante l'hovering. Questo è accettabile per la breve durata dell'hovering (2 minuti totali per volo) ma richiede:
-
-* Progetto termico adeguato per il raffreddamento motori nell'atmosfera rarefatta marziana
-* Considerazione dell'alternativa MAD 4008 EEE (88 g, 400 W) se i test rivelano problemi termici
+Il margine di potenza hovering è leggermente negativo (−6%), indicando che i motori SunnySky V4006-380 operano vicino alla loro potenza nominale durante l'hovering. Questo è accettabile per la breve durata dell'hovering (2 minuti totali per volo) ma richiede progetto termico adeguato per il raffreddamento motori nell'atmosfera rarefatta marziana e considerazione dell'alternativa MAD 4008 EEE (88 g, 400 W) se i test rivelano problemi termici.
 
 Il margine di potenza crociera è sostanziale (+120%), confermando che i motori T-Motor AT2312-1150 sono adeguatamente dimensionati con significativo headroom termico.
 
@@ -97,24 +94,21 @@ Raggio andata-ritorno: 115.3 km, superando il requisito di 100 km del 15%.
 
 | Requisito | Target | Raggiunto | Stato |
 |:------------|-------:|---------:|:------:|
-| MTOW | 10.00 kg | 8.60 kg | ✓ Conforme |
-| Autonomia | ≥ 60 min | 89.5 min | ✓ Conforme |
-| Raggio | ≥ 100 km | 115.3 km | ✓ Conforme |
-| Raggio operativo | ≥ 50 km | 57.7 km | ✓ Conforme |
-| Capacità payload | ≥ 1.0 kg | 0.42 kg (usato) | ✓ Conforme |
-| Capacità VTOL | Richiesta | QuadPlane | ✓ Conforme |
+| MTOW | 10.00 kg | 8.60 kg | Conforme |
+| Autonomia | ≥ 60 min | 89.5 min | Conforme |
+| Raggio | ≥ 100 km | 115.3 km | Conforme |
+| Raggio operativo | ≥ 50 km | 57.7 km | Conforme |
+| Capacità payload | ≥ 1.0 kg | 0.42 kg (usato) | Conforme |
+| Capacità VTOL | Richiesta | QuadPlane | Conforme |
 
 Tutti i requisiti di missione sono soddisfatti con margini positivi. Il punto di progetto è verificato come fattibile con i componenti commerciali selezionati.
 
 ### Sensibilità di progetto
 
-Le sensibilità chiave identificate durante la verifica:
+Le sensibilità chiave identificate durante la verifica sono:
 
-1. **Dimensionamento motori hovering**: Il deficit di potenza del 6% richiede verifica termica nelle condizioni atmosferiche marziane. Il passaggio al MAD 4008 EEE (88 g, 400 W) aggiungerebbe 176 g alla massa propulsione fornendo margine di potenza adeguato.
-
-2. **Temperatura batteria**: L'intervallo operativo batteria stato solido (−20°C minimo) non copre le condizioni superficiali marziane più fredde. La gestione termica attiva è obbligatoria.
-
-3. **Controllo termico camera**: La Ricoh GR III non ha specifiche per basse temperature. Sono richiesti test di qualifica o un involucro isolato con riscaldamento.
-
-4. **Crescita massa**: Il margine di massa di 1.40 kg fornisce buffer per la crescita progettuale durante la progettazione di dettaglio, sistemi di controllo termico e rinforzo strutturale se richiesto.
+1. Dimensionamento motori hovering: il deficit di potenza del 6% richiede verifica termica nelle condizioni atmosferiche marziane. Il passaggio al MAD 4008 EEE (88 g, 400 W) aggiungerebbe 176 g alla massa propulsione fornendo margine di potenza adeguato.
+2. Temperatura batteria: l'intervallo operativo batteria stato solido (−20°C minimo) non copre le condizioni superficiali marziane più fredde. La gestione termica attiva è obbligatoria.
+3. Controllo termico camera: la Ricoh GR III non ha specifiche per basse temperature. Sono richiesti test di qualifica o un involucro isolato con riscaldamento.
+4. Crescita massa: il margine di massa di 1.40 kg fornisce buffer per la crescita progettuale durante la progettazione di dettaglio, sistemi di controllo termico e rinforzo strutturale se richiesto.
 

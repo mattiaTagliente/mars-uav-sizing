@@ -3596,7 +3596,7 @@ The solar power system provides energy for UAV charging independent of habitat p
 
 #### Mars solar irradiance
 
-The solar energy available on Mars differs significantly from Earth due to orbital distance and atmospheric effects:
+The solar energy available on Mars differs significantly from Earth due to orbital distance and atmospheric effects [@nasagoddardspaceflightcenterMarsFactSheet2024]<!-- #orbital -->:
 
 : Mars solar irradiance parameters {#tbl:mars-irradiance}
 
@@ -3606,10 +3606,12 @@ The solar energy available on Mars differs significantly from Earth due to orbit
 | Perihelion irradiance | 717 W/m² | Closest approach to Sun |
 | Aphelion irradiance | 493 W/m² | Farthest from Sun |
 | Clear-sky surface irradiance (noon) | 500 W/m² | Atmospheric attenuation included |
+| Design irradiance (aphelion + dust) | 350 W/m² | Sizing basis for panel area |
 | Effective sunlight hours | 6 h/sol | Usable daylight for power generation |
 | Average incidence factor | 0.7 | Cosine losses for fixed-tilt panels |
 
-The Martian atmosphere, though thin (approximately 1% of Earth's pressure), attenuates solar radiation through absorption by CO₂ and scattering by suspended dust. In Arcadia Planitia at the operational latitude, the mean annual irradiance is approximately 130 W/m². However, for panel sizing, the design uses the clear-day noon irradiance of 500 W/m² as the peak value, reduced by the average incidence factor for daily energy calculations.
+
+**Design philosophy**: Panel sizing uses **worst-case conditions** (aphelion + typical dust loading, 350 W/m²) rather than optimistic clear-sky noon values (500 W/m²). This ensures the system can provide adequate charging throughout the Martian year, including during winter and periods of elevated atmospheric dust.
 
 #### Solar cell selection
 
@@ -3638,29 +3640,42 @@ Space-grade triple-junction solar cells are evaluated for the habitat-integrated
 
 #### Panel sizing
 
-**Power output per unit area:**
+Panel sizing uses the conservative design irradiance (350 W/m², aphelion + typical dust) to ensure year-round operability.
 
-$$P_\text{peak} = \eta_\text{cell} \times I_\text{surface} = 0.33 \times 500 = 165 \text{ W/m}^2$$
+**Power output per unit area (at design irradiance):**
+
+$$P_\text{design} = \eta_\text{cell} \times I_\text{design} = 0.33 \times 350 = 115.5 \text{ W/m}^2$$
 
 **Daily energy yield:**
 
-$$E_\text{panel} = P_\text{peak} \times t_\text{sun} \times \cos\theta_\text{avg} = 165 \times 6 \times 0.7 = 693 \text{ Wh/m}^2/\text{sol}$$
+$$E_\text{panel} = P_\text{design} \times t_\text{sun} \times \cos\theta_\text{avg} = 115.5 \times 6 \times 0.7 = 485.1 \text{ Wh/m}^2/\text{sol}$$
 
 **Energy requirement per charge cycle:**
 
 $$E_\text{charge} = \frac{756 \text{ Wh}}{0.90} = 840 \text{ Wh}$$ (including charger efficiency)
 
-**Required panel area:**
+**Minimum panel area:**
 
-$$A_\text{panel} = \frac{E_\text{charge}}{E_\text{panel}} = \frac{840}{693} = 1.21 \text{ m}^2$$
+$$A_\text{min} = \frac{E_\text{charge}}{E_\text{panel}} = \frac{840}{485.1} = 1.73 \text{ m}^2$$
 
-**Design margin (×1.5 for dust and degradation):**
+**Design margin (×1.5 for cell degradation and operational margin):**
 
-$$A_\text{design} = 1.21 \times 1.5 = 1.82 \text{ m}^2 \approx 2.0 \text{ m}^2$$
+$$A_\text{design} = 1.73 \times 1.5 = 2.60 \text{ m}^2 \approx 3.0 \text{ m}^2$$
+
+The panel area is rounded up to 3.0 m² to ensure the daily solar energy generation (1455 Wh) comfortably exceeds the buffer capacity requirement.
 
 #### Buffer battery storage
 
 The solar panel generates energy only during daylight hours, while UAV charging may be required at any time (including overnight turnaround or after evening missions). A buffer battery stores the solar energy for on-demand charging.
+
+**Design decision: same battery technology as UAV**
+
+The buffer battery uses the **same solid-state lithium-ion technology** as the UAV battery (CGBT SLD1 series, 270 Wh/kg) rather than conventional Li-ion cells (180 Wh/kg). This decision provides:
+
+1. **Logistics simplification**: Same battery chemistry means shared spares, charging equipment, and handling procedures
+2. **Proven Mars compatibility**: The CGBT solid-state battery was already selected for UAV operations based on its wide temperature range (-20 to +60°C)
+3. **Mass reduction**: 270 vs 180 Wh/kg reduces buffer mass by 33%
+4. **Operational flexibility**: UAV battery packs can serve as buffer spares if needed, enabling battery rotation to even out cycle wear
 
 **Buffer battery sizing:**
 
@@ -3670,11 +3685,12 @@ The solar panel generates energy only during daylight hours, while UAV charging 
 |:----------|------:|:------------|
 | UAV battery capacity | 945 Wh | @sec:energy-storage |
 | Energy per charge cycle | 756 Wh | 80% depth of discharge |
-| Charger efficiency | 90% | | 
+| Charger efficiency | 90% | |
 | Energy required from buffer | 840 Wh | 756 / 0.90 |
 | Night reserve factor | 1.5 | One overnight charge + margin |
 | Buffer battery capacity | 1260 Wh | 840 × 1.5 |
-| Buffer battery mass (180 Wh/kg) | 7.0 kg | Li-ion cells |
+| Buffer battery energy density | 270 Wh/kg | Same as UAV (solid-state Li-ion) |
+| Buffer battery mass | 4.67 kg | 1260 / 270 |
 
 The 1260 Wh buffer battery allows one complete UAV charge during nighttime or dust storm conditions when no solar input is available. The factor of 1.5 provides margin for battery degradation and system losses. During extended dust storms (weeks to months), charging falls back to habitat nuclear power.
 
@@ -3682,10 +3698,10 @@ The 1260 Wh buffer battery allows one complete UAV charge during nighttime or du
 
 During a typical sol:
 
-1. **Daytime (6 h effective)**: Solar panels generate 1386 Wh (2.0 m² × 693 Wh/m²)
+1. **Daytime (6 h effective)**: Solar panels generate 1455 Wh (3.0 m² × 485.1 Wh/m²)
 2. **Buffer charging**: 1260 Wh stored in buffer battery
 3. **UAV charging (2–3 h)**: 840 Wh delivered to UAV battery (756 Wh stored after losses)
-4. **Excess energy**: Approximately 126 Wh returned to habitat grid
+4. **Excess energy**: Approximately 195 Wh returned to habitat grid
 
 : Solar power system specifications {#tbl:solar-spec}
 
@@ -3693,17 +3709,18 @@ During a typical sol:
 |:----------|------:|:-----|
 | Cell technology | SolAero IMM-α | - |
 | Cell efficiency | 33 | % |
-| Panel area | 2.0 | m² |
-| Peak power output | 330 | W |
-| Daily energy yield | 1386 | Wh/sol |
-| Panel mass | 1.0 | kg |
+| Panel area | 3.0 | m² |
+| Peak power output | 346 | W |
+| Daily energy yield | 1455 | Wh/sol |
+| Panel mass | 1.47 | kg |
 | Buffer battery capacity | 1260 | Wh |
-| Buffer battery mass | 7.0 | kg |
+| Buffer battery mass | 4.67 | kg |
+| Buffer battery technology | Solid-state Li-ion (same as UAV) | - |
 | Mounting | Habitat roof, fixed tilt | - |
 
 ### Summary
 
-The hangar infrastructure enables one complete UAV charge cycle per sol under clear-sky conditions. The 2.0 m² solar array with 1260 Wh buffer battery provides energy independence for daily operations. The pressurised air jet system in the airlock removes Martian dust before the UAV enters the maintenance bay. The 6 m airlock width accommodates the full 4.01 m wingspan without requiring wing folding mechanisms. During dust storm conditions, charging falls back to habitat nuclear power or is deferred until conditions improve.
+The hangar infrastructure enables one complete UAV charge cycle per sol under worst-case (aphelion + dust) conditions. The 3.0 m² solar array with 1260 Wh buffer battery provides energy independence for daily operations. The pressurised air jet system in the airlock removes Martian dust before the UAV enters the maintenance bay. The 6 m airlock width accommodates the full 4.01 m wingspan without requiring wing folding mechanisms. During dust storm conditions, charging falls back to habitat nuclear power or is deferred until conditions improve.
 
 ## Operations concept {#sec:operations-concept}
 

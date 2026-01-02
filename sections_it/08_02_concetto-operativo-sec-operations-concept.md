@@ -26,15 +26,15 @@ Una tipica sortita UAV consiste nelle seguenti fasi:
 | 12. Ispezione post-volo | Baia pressurizzata | 30 min | Download dati, controllo sistema |
 | 13. Ricarica batteria | Baia pressurizzata | 2-3 h | Ricarica a piena capacità |
 
-**Durata totale sortita**: 2.5-4.5 ore (fasi a terra), 1-2 ore (fasi di volo).
+Durata totale sortita: 2.5-4.5 ore (fasi a terra), 1-2 ore (fasi di volo).
 
 ### Ruoli dell'equipaggio
 
 Le operazioni UAV richiedono coinvolgimento minimo dell'equipaggio grazie alla capacità di volo autonomo:
 
-**Operatore UAV (1 persona)**: Responsabile della pianificazione missione, monitoraggio volo e analisi dati. Le operazioni sono condotte dall'interno dell'habitat usando la stazione di controllo a terra.
+Operatore UAV (1 persona): Responsabile della pianificazione missione, monitoraggio volo e analisi dati. Le operazioni sono condotte dall'interno dell'habitat usando la stazione di controllo a terra.
 
-**Supporto EVA (opzionale)**: Per manutenzione non di routine o operazioni di recupero fuori dalla baia pressurizzata.
+Supporto EVA (opzionale): Per manutenzione non di routine o operazioni di recupero fuori dalla baia pressurizzata.
 
 ### Ritmo operativo
 
@@ -52,12 +52,7 @@ Con due UAV pronti al volo, le operazioni giornaliere sono fattibili con voli al
 
 ### Operazioni di contingenza
 
-Le procedure di contingenza affrontano i modi di guasto prevedibili:
-
-* **Decollo abortito**: L'UAV rimane sulla piattaforma; l'equipaggio recupera tramite procedura airlock
-* **Emergenza in volo**: Ritorno autonomo alla base; atterraggio di emergenza su terreno pianeggiante alternativo
-* **Perdita comunicazioni**: Ritorno alla base pre-programmato dopo timeout (configurabile, default 5 min)
-* **Guasto atterraggio**: Zona di atterraggio secondaria designata; recupero EVA se richiesto
+Le procedure di contingenza affrontano i modi di guasto prevedibili: decollo abortito (l'UAV rimane sulla piattaforma e l'equipaggio recupera tramite procedura airlock); emergenza in volo (ritorno autonomo alla base o atterraggio di emergenza su terreno pianeggiante alternativo); perdita comunicazioni (ritorno alla base pre-programmato dopo timeout configurabile, default 5 min); e guasto atterraggio (zona di atterraggio secondaria designata con recupero EVA se richiesto).
 
 ### Programma manutenzione
 

@@ -24,7 +24,7 @@ The energy requirements are derived from the QuadPlane analysis in @sec:hybrid-v
 
 : Battery technology selection trade-off analysis {#tbl:battery-selection}
 
-| Technology | Spec. energy (Wh/kg) | Temp. range (°C) | Cycle life | Rating |
+| Technology | Spec. energy (Wh/kg) | Temp. range (°C) | Cycle life | Status |
 |:-----------|:--------------------:|:----------------:|:----------:|:------:|
 | Solid-state Li-ion | 270 | −20 to +60 | 1000 | Selected |
 | Semi-solid Li-ion | 180 | −20 to +45 | 500 | Alternative |
@@ -33,29 +33,15 @@ The energy requirements are derived from the QuadPlane analysis in @sec:hybrid-v
 
 ### Selection rationale
 
-**Solid-state lithium-ion batteries** are selected based on:
+Solid-state lithium-ion batteries are selected based on: specific energy of 270 Wh/kg, exceeding the 200 Wh/kg requirement by 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; temperature range of −20 to +60 °C, providing baseline cold tolerance [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; cycle life of 1000 cycles at 80% DoD, supporting a long mission campaign; and solid electrolyte construction, reducing thermal runaway risk in the Mars habitat.
 
-* **Specific energy**: 270 Wh/kg exceeds the 200 Wh/kg requirement by 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Temperature range**: −20 to +60 °C provides baseline cold tolerance [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->
-* **Cycle life**: 1000 cycles at 80% DoD supports long mission campaign
-* **Safety**: solid electrolyte reduces thermal runaway risk in Mars habitat
+The semi-solid lithium-ion technology is retained as an alternative if solid-state availability is limited. At 180 Wh/kg, it still meets mission requirements with reduced margin.
 
-The **semi-solid lithium-ion** technology is retained as an alternative if solid-state availability is limited. At 180 Wh/kg, it still meets mission requirements with reduced margin.
-
-Standard LiPo batteries are rejected due to:
-
-* Lower specific energy (130-150 Wh/kg)
-* Narrower operating temperature (typically 0 to +40 °C without preheating)
-* Shorter cycle life (approximately 300 cycles)
+Standard LiPo batteries are rejected due to lower specific energy (130-150 Wh/kg), narrower operating temperature (typically 0 to +40 °C without preheating), and shorter cycle life (approximately 300 cycles).
 
 ### Mars thermal considerations
 
-The solid-state battery operating range (−20 to +60 °C) does not fully cover Mars surface temperatures (−60 to +20 °C). The battery thermal management strategy includes:
-
-* Insulated battery compartment to reduce heat loss
-* Resistive heating elements activated during cold soak periods
-* Pre-flight battery conditioning in the habitat hangar
-* Flight operations limited to daytime thermal window
+The solid-state battery operating range (−20 to +60 °C) does not fully cover Mars surface temperatures (−60 to +20 °C). The battery thermal management strategy includes an insulated battery compartment to reduce heat loss, resistive heating elements activated during cold soak periods, pre-flight battery conditioning in the habitat hangar, and flight operations limited to the daytime thermal window.
 
 The thermal control system mass is allocated within the avionics/systems mass fraction.
 

@@ -26,15 +26,15 @@ A typical UAV sortie consists of the following phases:
 | 12. Post-flight inspection | Pressurised bay | 30 min | Data download, system check |
 | 13. Battery charging | Pressurised bay | 2-3 h | Recharge to full capacity |
 
-**Total sortie duration**: 2.5-4.5 hours (ground phases), 1-2 hours (flight phases).
+Total sortie duration: 2.5-4.5 hours (ground phases), 1-2 hours (flight phases).
 
 ### Crew roles
 
 UAV operations require minimal crew involvement due to autonomous flight capability:
 
-**UAV operator (1 person)**: Responsible for mission planning, flight monitoring, and data analysis. Operations are conducted from inside the habitat using ground control station.
+UAV operator (1 person): Responsible for mission planning, flight monitoring, and data analysis. Operations are conducted from inside the habitat using ground control station.
 
-**EVA support (optional)**: For non-routine maintenance or recovery operations outside the pressurised bay.
+EVA support (optional): For non-routine maintenance or recovery operations outside the pressurised bay.
 
 ### Operational tempo
 
@@ -52,12 +52,7 @@ With two flight-ready UAVs, daily operations are feasible with alternating fligh
 
 ### Contingency operations
 
-Contingency procedures address foreseeable failure modes:
-
-* **Aborted takeoff**: UAV remains on platform; crew retrieves via airlock procedure
-* **In-flight emergency**: Autonomous return-to-base; emergency landing at alternate flat terrain
-* **Communication loss**: Pre-programmed return-to-base after timeout (configurable, default 5 min)
-* **Landing failure**: Secondary landing zone designated; EVA recovery if required
+Contingency procedures address foreseeable failure modes: aborted takeoff (UAV remains on platform and crew retrieves via airlock procedure); in-flight emergency (autonomous return-to-base or emergency landing at alternate flat terrain); communication loss (pre-programmed return-to-base after configurable timeout, default 5 min); and landing failure (secondary landing zone designated with EVA recovery if required).
 
 ### Maintenance schedule
 

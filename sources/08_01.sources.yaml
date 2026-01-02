@@ -18,3 +18,10 @@ azurspacesolarpowerAzurSpace3G30CAdvanced2023:
     excerpt: "3G30C-Advanced: 30% BOL, 86 mg/cm2, 150um, InGaP/GaAs/Ge on Ge"
     context: "Azur Space 3G30C-Advanced triple-junction solar cell datasheet"
     verified: true
+
+nasagoddardspaceflightcenterMarsFactSheet2024:
+  orbital:
+    excerpt: "Solar constant 589 W/m2, perihelion 717, aphelion 493 W/m2"
+    context: "Mars orbital parameters and solar irradiance at different orbital positions"
+    verified: true
+

@@ -20,7 +20,7 @@ Allocating approximately 60% to the camera and 40% to the radio system yields a 
 
 : Camera selection trade-off analysis {#tbl:camera-selection}
 
-| Camera | Mass (g) | Resolution | Temp. range (°C) | Rating |
+| Camera | Mass (g) | Resolution | Temp. range (°C) | Status |
 |:-------|:--------:|:-----------|:----------------:|:------:|
 | Ricoh GR III | 227-257 | 24 MP (APS-C) | N.A. | Selected |
 | MicaSense RedEdge-MX | 232 | 1.2 MP/band (5 bands) | N.A. | Alternative |
@@ -32,14 +32,9 @@ Note: N.A. indicates operating temperature not specified by manufacturer.
 
 #### Selection rationale
 
-The **Ricoh GR III** is selected as the primary camera based on:
+The Ricoh GR III is selected as the primary camera based on: mass of 227 g body and 257 g complete with battery [@ricohimagingRicohGRIII2024]<!-- #specs -->, the lightest RGB option; 24 MP APS-C sensor resolution, adequate for mapping; compact dimensions of 109.4 × 61.9 × 33.2 mm [@ricohimagingRicohGRIII2024]<!-- #specs -->; and integrated 18.3 mm lens (28 mm equivalent), eliminating interchangeable lens complexity.
 
-* **Mass**: 227 g body, 257 g complete with battery [@ricohimagingRicohGRIII2024]<!-- #specs -->, the lightest RGB option
-* **Resolution**: 24 MP APS-C sensor provides adequate resolution for mapping
-* **Dimensions**: 109.4 × 61.9 × 33.2 mm compact form factor [@ricohimagingRicohGRIII2024]<!-- #specs -->
-* **Lens**: Integrated 18.3 mm lens (28 mm equivalent) eliminates interchangeable lens complexity
-
-The **MicaSense RedEdge-MX** is retained as an alternative if multispectral capability is required for geological analysis [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. At 232 g, it provides five-band imaging (blue, green, red, red-edge, NIR) suitable for mineral identification.
+The MicaSense RedEdge-MX is retained as an alternative if multispectral capability is required for geological analysis [@micasenseMicaSenseRedEdgeMXIntegration2020]<!-- #specs -->. At 232 g, it provides five-band imaging (blue, green, red, red-edge, NIR) suitable for mineral identification.
 
 The DJI Zenmuse P1 and Phase One iXM-100 are rejected due to mass exceeding the 600 g target by a factor of two or more. The DJI Zenmuse H20T thermal system is rejected as thermal imaging is not a primary mission requirement.
 
@@ -69,11 +64,7 @@ The Ricoh GR III does not specify an operating temperature range, indicating con
 
 The telecommunication relay mission requires a radio system capable of extending communication range between surface EVA astronauts and the habitat ground station. Based on the 40% radio allocation from the 1.00 kg payload budget, the radio mass target is approximately 400 g.
 
-Operating requirements include:
-
-* Range: match or exceed the 50 km operational radius
-* Temperature: operation at Mars surface temperatures (−60 to +20 °C)
-* Power: minimise power consumption for battery endurance
+Operating requirements include: range matching or exceeding the 50 km operational radius, temperature tolerance for Mars surface conditions (−60 to +20 °C), and minimal power consumption for battery endurance.
 
 #### Candidate evaluation
 
@@ -81,7 +72,7 @@ Operating requirements include:
 
 : Radio selection trade-off analysis {#tbl:radio-selection}
 
-| Radio | Mass (g) | Range (km) | Temp. range (°C) | Rating |
+| Radio | Mass (g) | Range (km) | Temp. range (°C) | Status |
 |:------|:--------:|:----------:|:----------------:|:------:|
 | RFD900x | 14.5 | > 40 | −40 to +85 | Selected |
 | Microhard pMDDL2450 (enclosed) | 165 | N.A. | −40 to +85 | Alternative |
@@ -91,15 +82,9 @@ Operating requirements include:
 
 #### Selection rationale
 
-The **RFD900x** is selected as the primary radio based on:
+The RFD900x is selected as the primary radio based on: mass of 14.5 g, the lightest option and well under the 400 g target [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; range exceeding 40 km line-of-sight, meeting the 50 km operational radius with antenna optimisation [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->; operating temperature range of −40 to +85 °C, exceeding Mars surface requirements; maximum power consumption of 5 W at 1 W transmit; and wide use in UAV applications with open-source SiK firmware.
 
-* **Mass**: 14.5 g is the lightest option, well under the 400 g target [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Range**: >40 km line-of-sight range meets the 50 km operational radius with antenna optimisation [@rfdesignRFD900xModemSpecifications2024]<!-- #specs -->
-* **Temperature**: −40 to +85 °C operating range exceeds Mars surface requirements
-* **Power**: 5 W maximum power consumption at 1 W transmit
-* **Heritage**: widely used in UAV applications with open-source SiK firmware
-
-The **Microhard pMDDL2450** is retained as an alternative if higher data throughput is required (25 Mbps vs 0.75 Mbps) for potential video relay applications [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
+The Microhard pMDDL2450 is retained as an alternative if higher data throughput is required (25 Mbps vs 0.75 Mbps) for potential video relay applications [@microhardPMDDL2450MiniatureMIMO2025]<!-- #specs -->.
 
 The mesh radio systems (Rajant, Silvus, Persistent Systems) are rejected as mesh functionality is not required for a single UAV relay mission. Their mass of 400-700 g would consume the entire radio budget with no advantage for the mission profile.
 
@@ -138,11 +123,7 @@ The selected components yield a total payload mass of **0.42 kg**, well within t
 
 $$f_\text{payload,actual} = \frac{m_\text{payload}}{MTOW} = \frac{0.422}{10.00} = 0.042 = 4.2\%$$
 
-This represents a **58% reduction** from the allocated budget, providing margin for:
-
-* Additional payload if mission requirements expand
-* Thermal management components for Mars operation
-* Design iteration flexibility
+This represents a 58% reduction from the allocated budget, providing margin for additional payload if mission requirements expand, thermal management components for Mars operation, and design iteration flexibility.
 
 The payload mass reduction reallocates 0.58 kg to other system categories, potentially increasing battery capacity for extended endurance.
 
