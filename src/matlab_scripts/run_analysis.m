@@ -31,6 +31,18 @@ if ~isempty(args.analysis)
             mars_uav.section5.matching_chart.print_analysis();
         case 'comparative'
             mars_uav.section5.comparative.print_analysis();
+        case 'atmosphere'
+            mars_uav.section3.atmospheric_model.print_analysis();
+        case 'aerodynamics'
+            mars_uav.section4.aerodynamic_calculations.print_analysis();
+        case 'derived_requirements'
+            mars_uav.section4.derived_requirements.print_analysis();
+        case 'geometry'
+            mars_uav.section4.geometry_calculations.print_analysis();
+        case 'airfoil'
+            mars_uav.section6.airfoil_selection.print_airfoil_comparison();
+        case 'solar'
+            mars_uav.section8.solar_power.print_analysis();
         case 'propeller'
             mars_uav.section6.propeller_sizing.print_analysis();
         case 'tail'
@@ -49,12 +61,18 @@ switch string(args.section)
     case '5'
         print_header();
         results.section5 = run_section5_analyses(verbose);
+    case '3'
+        results.section3 = run_section3_analyses(verbose);
+    case '4'
+        results.section4 = run_section4_analyses(verbose);
     case '6'
         print_header();
         results.section6 = run_section6_analyses(verbose);
     case '7'
         print_header();
         results.section7 = run_section7_analyses(verbose);
+    case '8'
+        results.section8 = run_section8_analyses(verbose);
     otherwise
         error('run_analysis:UnknownSection', 'Sezione sconosciuta: %s', args.section);
 end
@@ -157,6 +175,59 @@ function results = run_section5_analyses(verbose)
     end
 end
 
+function results = run_section3_analyses(verbose)
+    results = struct();
+
+    fprintf('\n%s\n', repmat('-', 1, 80));
+    fprintf(' 3.1  MODELLO ATMOSFERICO\n');
+    fprintf('%s\n\n', repmat('-', 1, 80));
+    results.atmosphere = mars_uav.section3.atmospheric_model.arcadia_planitia_conditions();
+    if verbose
+        mars_uav.section3.atmospheric_model.print_analysis();
+    else
+        fmt = @(value, decimals) mars_uav.core.format_number(value, decimals);
+        fprintf('  Densita: %s kg/m^3\n', fmt(results.atmosphere.density_kg_m3, 5));
+        fprintf('  Temperatura: %s K\n', fmt(results.atmosphere.temperature_k, 1));
+    end
+end
+
+function results = run_section4_analyses(verbose)
+    results = struct();
+
+    fprintf('\n%s\n', repmat('-', 1, 80));
+    fprintf(' 4.7  CALCOLI AERODINAMICI\n');
+    fprintf('%s\n\n', repmat('-', 1, 80));
+    results.aerodynamics = mars_uav.section4.aerodynamic_calculations.drag_polar_analysis();
+    if verbose
+        mars_uav.section4.aerodynamic_calculations.print_analysis();
+    else
+        fmt = @(value, decimals) mars_uav.core.format_number(value, decimals);
+        fprintf('  (L/D)_max: %s\n', fmt(results.aerodynamics.ld_max, 2));
+    end
+
+    fprintf('\n%s\n', repmat('-', 1, 80));
+    fprintf(' 4.12  REQUISITI DERIVATI\n');
+    fprintf('%s\n\n', repmat('-', 1, 80));
+    results.derived = mars_uav.section4.derived_requirements.derived_requirements_analysis();
+    if verbose
+        mars_uav.section4.derived_requirements.print_analysis();
+    else
+        fmt = @(value, decimals) mars_uav.core.format_number(value, decimals);
+        fprintf('  W/S (stallo): %s N/m^2\n', fmt(results.derived.stall_wing_loading, 2));
+    end
+
+    fprintf('\n%s\n', repmat('-', 1, 80));
+    fprintf(' 4.5  CALCOLI GEOMETRIA\n');
+    fprintf('%s\n\n', repmat('-', 1, 80));
+    results.geometry = mars_uav.section4.geometry_calculations.geometry_analysis();
+    if verbose
+        mars_uav.section4.geometry_calculations.print_analysis();
+    else
+        fmt = @(value, decimals) mars_uav.core.format_number(value, decimals);
+        fprintf('  Superficie alare: %s m^2\n', fmt(results.geometry.wing_area_m2, 3));
+    end
+end
+
 function results = run_section6_analyses(verbose)
     results = struct();
 
@@ -216,6 +287,22 @@ function results = run_section7_analyses(verbose)
     else
         fprintf('  Massa totale propulsione: %s kg\n', ...
             mars_uav.core.format_number(results.mass.total_kg, 3));
+    end
+end
+
+function results = run_section8_analyses(verbose)
+    results = struct();
+
+    fprintf('\n%s\n', repmat('-', 1, 80));
+    fprintf(' 8.1  SISTEMA SOLARE\n');
+    fprintf('%s\n\n', repmat('-', 1, 80));
+    results.solar = mars_uav.section8.solar_power.get_solar_system_specs();
+    if verbose
+        mars_uav.section8.solar_power.print_analysis();
+    else
+        fmt = @(value, decimals) mars_uav.core.format_number(value, decimals);
+        fprintf('  Area pannelli: %s m^2\n', fmt(results.solar.panel_area_m2, 1));
+        fprintf('  Energia giornaliera: %s Wh\n', fmt(results.solar.daily_energy_wh, 0));
     end
 end
 

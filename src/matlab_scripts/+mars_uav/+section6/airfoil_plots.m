@@ -332,7 +332,7 @@ classdef airfoil_plots
             %PARSE_AIRFOIL_YAML Parsing minimale per airfoil_data.yaml.
             lines = readlines(file_path);
 
-            polars = struct('name', {}, 'alpha', {}, 'cl', {}, 'cd', {}, 'ld', {});
+            polars = struct('name', {}, 'reynolds', {}, 'alpha', {}, 'cl', {}, 'cd', {}, 'ld', {});
             in_airfoils = false;
             in_ld_data = false;
             ld_indent = 0;
@@ -357,9 +357,16 @@ classdef airfoil_plots
 
                 if startsWith(clean_line, '- name:')
                     polars = mars_uav.section6.airfoil_plots.flush_airfoil(polars, current, ld_points);
-                    current = struct('name', strtrim(strrep(clean_line, '- name:', '')));
+                    current = struct('name', strtrim(strrep(clean_line, '- name:', '')), 'reynolds', NaN);
                     ld_points = struct('alpha', {}, 'cl', {}, 'cd', {}, 'ld', {});
                     in_ld_data = false;
+                    continue;
+                end
+
+                if startsWith(clean_line, '- reynolds:') || startsWith(clean_line, 'reynolds:')
+                    value_text = strrep(clean_line, '- reynolds:', '');
+                    value_text = strrep(value_text, 'reynolds:', '');
+                    current.reynolds = str2double(strtrim(value_text));
                     continue;
                 end
 
@@ -427,6 +434,9 @@ classdef airfoil_plots
             %FLUSH_AIRFOIL Aggiunge il profilo corrente alla lista finale.
             if isempty(fieldnames(current))
                 return;
+            end
+            if ~isfield(current, 'reynolds')
+                current.reynolds = NaN;
             end
             if isempty(ld_points)
                 current.alpha = [];
