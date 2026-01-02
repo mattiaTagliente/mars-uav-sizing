@@ -6,7 +6,7 @@ Diversi concetti di UAV marziani sono stati proposti o dimostrati, fornendo dati
 
 NASA Ingenuity è un aeromobile a rotore da 1.8 kg che ha dimostrato il volo autonomo propulso su Marte, completando 72 voli con tempo di volo cumulativo di circa 129 minuti [@tzanetosIngenuityMarsHelicopter2022]<!-- #abs --> [@nasaIngenuityMarsHelicopter2024]<!-- #s:flights -->. Ingenuity ha convalidato tecnologie tra cui la navigazione autonoma, le prestazioni del rotore nell'atmosfera rarefatta e la sopravvivenza termica durante le notti marziane.
 
-![NASA Ingenuity Mars Helicopter sulla superficie marziana [@nasaIngenuityMarsHelicopter2024]<!-- #fig:ingenuity -->.](figures/ingenuity.jpg){#fig:ingenuity width=50%}
+![NASA Ingenuity Mars Helicopter sulla superficie marziana [@nasaIngenuityMarsHelicopter2024]<!-- #fig:ingenuity -->.](figures/shared/ingenuity.jpg){#fig:ingenuity width=50%}
 
 ARES era un aereo ad ala fissa da 175 kg proposto con propulsione a razzo, progettato per missioni di rilevamento regionale coprendo oltre 600 km a 1-2 km di altitudine [@braunDesignARESMars2006]<!-- #abs -->. ARES è stato finalista nel programma Mars Scout della NASA ma non è stato selezionato per il volo.
 

@@ -506,6 +506,8 @@ classdef plotting
             mars_uav.visualization.plotting.plot_ld_comparison([], ...
                 fullfile(output_dir, ['ld_comparison' suffix '.png']), false, lang);
 
+            mars_uav.section6.airfoil_plots.generate_all_airfoil_figures(output_dir, false, lang);
+
             fprintf('Tutte le figure (%s) salvate in %s\n', upper(lang), output_dir);
         end
 

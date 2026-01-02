@@ -99,11 +99,11 @@ The energy constraint is verified by explicit mission energy budget evaluation a
 
 Before examining each configuration individually, @fig:ld-comparison through @fig:endurance-comparison present the key performance metrics for all three candidate architectures.
 
-![Aerodynamic efficiency comparison across configurations. The rotorcraft equivalent L/D of 4.0 is limited by rotor forward flight inefficiency, while fixed-wing achieves 11.7. The hybrid VTOL achieves 10.5 due to stopped rotor drag penalty.](figures/ld_comparison.png){#fig:ld-comparison width=80%}
+![Aerodynamic efficiency comparison across configurations. The rotorcraft equivalent L/D of 4.0 is limited by rotor forward flight inefficiency, while fixed-wing achieves 11.7. The hybrid VTOL achieves 10.5 due to stopped rotor drag penalty.](figures/en/ld_comparison.png){#fig:ld-comparison width=80%}
 
-![Power requirements comparison. Hover power (3178 W) is identical for rotorcraft and hybrid VTOL. Cruise power varies with aerodynamic efficiency: rotorcraft 460 W, fixed-wing 286 W, hybrid VTOL 318 W.](figures/power_comparison.png){#fig:power-comparison width=85%}
+![Power requirements comparison. Hover power (3178 W) is identical for rotorcraft and hybrid VTOL. Cruise power varies with aerodynamic efficiency: rotorcraft 460 W, fixed-wing 286 W, hybrid VTOL 318 W.](figures/en/power_comparison.png){#fig:power-comparison width=85%}
 
-![Endurance comparison against the 60-minute requirement (dashed line). Rotorcraft marginally meets the requirement at 63.17 min. Fixed-wing achieves 120.5 min (with 20% energy reserve) but cannot satisfy VTOL requirement. Hybrid VTOL achieves 89.55 min with adequate margin.](figures/endurance_comparison.png){#fig:endurance-comparison width=80%}
+![Endurance comparison against the 60-minute requirement (dashed line). Rotorcraft marginally meets the requirement at 63.17 min. Fixed-wing achieves 120.5 min (with 20% energy reserve) but cannot satisfy VTOL requirement. Hybrid VTOL achieves 89.55 min with adequate margin.](figures/en/endurance_comparison.png){#fig:endurance-comparison width=80%}
 
 #### Rotorcraft constraint analysis
 
@@ -111,7 +111,7 @@ For the pure rotorcraft configuration, the matching chart axes must be adapted s
 
 The rotorcraft design space is limited by the small endurance margin. The hover-dominated energy budget (3178 W hover power for 2 min consumes 106.0 Wh) leaves 468.5 Wh for cruise (459.7 W forward flight). The configuration achieves 63.17 minutes endurance, a +5.284% margin above the 60-minute requirement.
 
-![Matching chart for the rotorcraft configuration. Power loading increases with disk loading according to actuator disk theory. The curve represents the hover constraint from @eq:hover-constraint. The design point (*) corresponds to the selected disk loading of 30 N/m².](figures/matching_chart_rotorcraft.png){#fig:matching-chart-rotorcraft width=85%}
+![Matching chart for the rotorcraft configuration. Power loading increases with disk loading according to actuator disk theory. The curve represents the hover constraint from @eq:hover-constraint. The design point (*) corresponds to the selected disk loading of 30 N/m².](figures/en/matching_chart_rotorcraft.png){#fig:matching-chart-rotorcraft width=85%}
 
 #### Fixed-wing constraint analysis
 
@@ -119,7 +119,7 @@ For the pure fixed-wing configuration, the matching chart shows a cruise constra
 
 The feasible region exists and offers excellent power efficiency (286.4 W cruise at 10.00 kg MTOW). However, this region is inaccessible because the aircraft cannot take off without a runway. The ground roll distance of approximately 1060 m ensures that no design point in the feasible region is operationally achievable.
 
-![Matching chart for the fixed-wing configuration. The cruise constraint curve (blue) shows minimum power loading decreasing toward optimal wing loading. The stall constraint (green vertical line) limits maximum wing loading. The design point (*) lies at the intersection of the cruise curve and stall constraint. Note the absence of a hover constraint, as fixed-wing aircraft cannot hover.](figures/matching_chart_fixed_wing.png){#fig:matching-chart-fixed-wing width=85%}
+![Matching chart for the fixed-wing configuration. The cruise constraint curve (blue) shows minimum power loading decreasing toward optimal wing loading. The stall constraint (green vertical line) limits maximum wing loading. The design point (*) lies at the intersection of the cruise curve and stall constraint. Note the absence of a hover constraint, as fixed-wing aircraft cannot hover.](figures/en/matching_chart_fixed_wing.png){#fig:matching-chart-fixed-wing width=85%}
 
 #### Hybrid VTOL constraint analysis
 
@@ -143,7 +143,7 @@ The feasible region lies above the hover constraint line, left of the stall cons
 
 The baseline design point is hover-dominated. The installed power is set entirely by hover requirements; cruise power is abundant. The wing sizing is determined by stall and aerodynamic efficiency considerations, independent of power.
 
-![Matching chart (constraint diagram) for the hybrid VTOL configuration. The hover constraint (horizontal red line) dominates, setting the minimum required power loading. The stall constraint (vertical green line) limits maximum wing loading. The cruise constraint (blue curve) is easily satisfied below the hover line. The design point (*) lies at the intersection of hover and stall constraints.](figures/matching_chart.png){#fig:matching-chart width=90%}
+![Matching chart (constraint diagram) for the hybrid VTOL configuration. The hover constraint (horizontal red line) dominates, setting the minimum required power loading. The stall constraint (vertical green line) limits maximum wing loading. The cruise constraint (blue curve) is easily satisfied below the hover line. The design point (*) lies at the intersection of hover and stall constraints.](figures/en/matching_chart.png){#fig:matching-chart width=90%}
 
 ### Baseline design point determination
 

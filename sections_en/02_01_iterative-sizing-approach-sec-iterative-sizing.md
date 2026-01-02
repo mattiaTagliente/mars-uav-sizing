@@ -13,7 +13,7 @@ The design process proceeds through four distinct phases, with feedback loops en
 
 @fig:sizing-loop illustrates the iterative nature of this process. Each iteration narrows the design space as component-level constraints emerge and requirements are progressively satisfied.
 
-![The iterative sizing loop for Mars UAV design.](figures/sizing_loop.jpg){#fig:sizing-loop}
+![The iterative sizing loop for Mars UAV design.](figures/en/sizing_loop.jpg){#fig:sizing-loop}
 
 ### Current study scope
 

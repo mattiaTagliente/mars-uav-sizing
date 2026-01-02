@@ -6,7 +6,7 @@ Arcadia Planitia is selected as the reference operating location. This region of
 
 Mars atmospheric flight occurs under conditions different from Earth [@desertAerodynamicDesignMartian2017]<!-- #s:mars-atmosphere -->. The thin CO₂ atmosphere exhibits surface pressures around 610 Pa mean, with significant variation depending on elevation and season. Surface temperatures average around 210 K with substantial diurnal swings. At the low elevations favorable for flight, atmospheric density remains approximately two orders of magnitude lower than Earth sea level, resulting in low Reynolds number aerodynamics and reduced lift generation. 
 
-![The area of Arcadia Planitia in the Mars geographical context [@esaArcadiaPlanitiaContext2025]<!-- #fig:arcadia -->.](figures/Arcadia_Planitia_in_context_pillars.png){#fig:arcadia-context width=50%}
+![The area of Arcadia Planitia in the Mars geographical context [@esaArcadiaPlanitiaContext2025]<!-- #fig:arcadia -->.](figures/shared/Arcadia_Planitia_in_context_pillars.png){#fig:arcadia-context width=50%}
 
 ### Mars atmosphere equations
 

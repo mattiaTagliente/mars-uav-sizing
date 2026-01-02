@@ -6,7 +6,7 @@ Arcadia Planitia è selezionata come località operativa di riferimento. Questa 
 
 Il volo atmosferico su Marte avviene in condizioni diverse dalla Terra [@desertAerodynamicDesignMartian2017]<!-- #s:mars-atmosphere -->. La sottile atmosfera di CO₂ presenta pressioni superficiali intorno a 610 Pa medi, con significativa variazione a seconda dell'elevazione e della stagione. Le temperature superficiali hanno una media di circa 210 K con notevoli escursioni diurne. Alle basse elevazioni favorevoli al volo, la densità atmosferica rimane approssimativamente due ordini di grandezza inferiore rispetto al livello del mare terrestre, risultando in aerodinamica a basso numero di Reynolds e ridotta generazione di portanza.
 
-![L'area di Arcadia Planitia nel contesto geografico marziano [@esaArcadiaPlanitiaContext2025]<!-- #fig:arcadia -->.](figures/Arcadia_Planitia_in_context_pillars.png){#fig:arcadia-context width=50%}
+![L'area di Arcadia Planitia nel contesto geografico marziano [@esaArcadiaPlanitiaContext2025]<!-- #fig:arcadia -->.](figures/shared/Arcadia_Planitia_in_context_pillars.png){#fig:arcadia-context width=50%}
 
 ### Equazioni dell'atmosfera marziana
 

@@ -18,7 +18,7 @@ La selezione del profilo alare è guidata da tre criteri primari, ponderati in b
 
 I sette profili candidati da @tbl:airfoil-comparison presentano caratteristiche prestazionali distinte al numero di Reynolds target. @fig:airfoil-ld-alpha presenta le curve di efficienza che mostrano come il rapporto portanza-resistenza varia con l'angolo di attacco.
 
-![Rapporto portanza-resistenza vs angolo di attacco per i profili candidati a Re ≈ 60,000. Mentre l'E387 raggiunge la massima efficienza di picco di (L/D)_max = 46.6, questo avviene molto vicino allo stallo. L'SD8000 raggiunge (L/D)_max = 45.4 con un margine maggiore rispetto allo stallo.](figures/airfoil_ld_alpha_it.png){#fig:airfoil-ld-alpha}
+![Rapporto portanza-resistenza vs angolo di attacco per i profili candidati a Re ≈ 60,000. Mentre l'E387 raggiunge la massima efficienza di picco di (L/D)_max = 46.6, questo avviene molto vicino allo stallo. L'SD8000 raggiunge (L/D)_max = 45.4 con un margine maggiore rispetto allo stallo.](figures/it/airfoil_ld_alpha_it.png){#fig:airfoil-ld-alpha}
 
 ### Confronto dei profili
 
@@ -53,11 +53,11 @@ L'SD8000 offre caratteristiche di resistenza superiori nell'intero intervallo op
 
 @fig:airfoil-polar presenta la polare di resistenza che mostra la relazione tra i coefficienti di portanza e resistenza. La resistenza costantemente inferiore dell'SD8000 è evidente nell'intervallo $C_L$ utilizzabile.
 
-![Polare di resistenza per i profili candidati a Re ≈ 60,000. L'SD8000 presenta una resistenza costantemente inferiore all'E387 nell'intervallo operativo.](figures/airfoil_polar_it.png){#fig:airfoil-polar}
+![Polare di resistenza per i profili candidati a Re ≈ 60,000. L'SD8000 presenta una resistenza costantemente inferiore all'E387 nell'intervallo operativo.](figures/it/airfoil_polar_it.png){#fig:airfoil-polar}
 
 Le curve di portanza in @fig:airfoil-cl-alpha mostrano le caratteristiche di stallo di ciascun profilo. L'angolo di stallo più tardivo dell'SD8000 (11.5° vs 10.2°) fornisce un margine aggiuntivo per un'operatività sicura.
 
-![Coefficiente di portanza vs angolo di attacco per i profili candidati a Re ≈ 60,000.](figures/airfoil_cl_alpha_it.png){#fig:airfoil-cl-alpha}
+![Coefficiente di portanza vs angolo di attacco per i profili candidati a Re ≈ 60,000.](figures/it/airfoil_cl_alpha_it.png){#fig:airfoil-cl-alpha}
 
 ### Motivazione della selezione
 

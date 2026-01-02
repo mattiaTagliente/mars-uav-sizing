@@ -154,4 +154,4 @@ The resulting propulsion architecture comprises 10 motors total: eight lift moto
 
 Compared to other VTOL approaches (tilt-rotor, tilt-wing, tail-sitter), the QuadPlane offers several advantages. The configuration requires no tilting actuators or variable-geometry components, resulting in simpler mechanisms with fewer failure modes. Hover and cruise use separate propulsion systems, decoupling the flight modes and simplifying control system design. The architecture benefits from extensive commercial flight heritage with mature autopilot support, reducing development risk. Finally, components are accessible and modular, enabling easier maintenance. These factors improve reliability in the Mars environment where maintenance capability is severely constrained.
 
-![Proposed QuadPlane concept with octocopter lift configuration and coaxial tractor cruise propellers.](figures/our_proposal_concept.jpg){#fig:concept-architecture width=70%}
+![Proposed QuadPlane concept with octocopter lift configuration and coaxial tractor cruise propellers.](figures/shared/our_proposal_concept.jpg){#fig:concept-architecture width=70%}

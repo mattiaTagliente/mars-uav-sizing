@@ -18,7 +18,7 @@ The airfoil selection is driven by three primary criteria, weighted by their imp
 
 The seven candidate airfoils from @tbl:airfoil-comparison exhibit distinct performance characteristics at the target Reynolds number. @fig:airfoil-ld-alpha presents the efficiency curves showing how lift-to-drag ratio varies with angle of attack.
 
-![Lift-to-drag ratio vs angle of attack for candidate airfoils at Re ≈ 60,000. While the E387 achieves the highest peak efficiency of (L/D)_max = 46.6, this occurs very close to stall. The SD8000 achieves (L/D)_max = 45.4 with a larger margin to stall.](figures/airfoil_ld_alpha_en.png){#fig:airfoil-ld-alpha}
+![Lift-to-drag ratio vs angle of attack for candidate airfoils at Re ≈ 60,000. While the E387 achieves the highest peak efficiency of (L/D)_max = 46.6, this occurs very close to stall. The SD8000 achieves (L/D)_max = 45.4 with a larger margin to stall.](figures/en/airfoil_ld_alpha_en.png){#fig:airfoil-ld-alpha}
 
 ### Airfoil comparison
 
@@ -53,11 +53,11 @@ The SD8000 offers superior drag characteristics across the entire operating rang
 
 @fig:airfoil-polar presents the drag polar showing the relationship between lift and drag coefficients. The SD8000's consistently lower drag is evident across the usable $C_L$ range.
 
-![Drag polar for candidate airfoils at Re ≈ 60,000. The SD8000 exhibits consistently lower drag than the E387 across the operating range.](figures/airfoil_polar_en.png){#fig:airfoil-polar}
+![Drag polar for candidate airfoils at Re ≈ 60,000. The SD8000 exhibits consistently lower drag than the E387 across the operating range.](figures/en/airfoil_polar_en.png){#fig:airfoil-polar}
 
 The lift curves in @fig:airfoil-cl-alpha show the stall characteristics of each airfoil. The SD8000's later stall angle (11.5° vs 10.2°) provides additional margin for safe operation.
 
-![Lift coefficient vs angle of attack for candidate airfoils at Re ≈ 60,000.](figures/airfoil_cl_alpha_en.png){#fig:airfoil-cl-alpha}
+![Lift coefficient vs angle of attack for candidate airfoils at Re ≈ 60,000.](figures/en/airfoil_cl_alpha_en.png){#fig:airfoil-cl-alpha}
 
 ### Selection rationale
 

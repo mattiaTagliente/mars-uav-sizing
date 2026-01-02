@@ -69,7 +69,7 @@ The boom-mounted inverted V consists of two tail surfaces angled upward from the
 
 The boom-mounted inverted U features a horizontal stabilizer connecting the two boom endpoints, with vertical stabilizers extending upward from each boom. CFD analysis found this configuration provided the highest critical angle (18° vs 15° for other configurations), good longitudinal stability, and favorable maneuverability for surveillance missions [@nugrohoPerformanceAnalysisEmpennage2022]<!-- #s:comparison -->. The inverted U boom configuration achieved good flight efficiency while the addition of a ventral fin further improved directional stability.
 
-![Side and rear views of five aircraft tail configurations: (a) fuselage-mounted conventional, (b) fuselage-mounted V-tail, (c) fuselage-mounted Y-tail, (d) boom-mounted inverted V, and (e) boom-mounted inverted U-shaped.](figures/tail_configurations.png){#fig:tail-configurations width=90%}
+![Side and rear views of five aircraft tail configurations: (a) fuselage-mounted conventional, (b) fuselage-mounted V-tail, (c) fuselage-mounted Y-tail, (d) boom-mounted inverted V, and (e) boom-mounted inverted U-shaped.](figures/en/tail_configurations.png){#fig:tail-configurations width=90%}
 
 ### Structural material trade-offs
 

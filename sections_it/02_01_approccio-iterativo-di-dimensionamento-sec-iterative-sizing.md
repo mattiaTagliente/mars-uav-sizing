@@ -13,7 +13,7 @@ Il processo di progettazione procede attraverso quattro fasi distinte, con cicli
 
 @fig:sizing-loop illustra la natura iterativa di questo processo. Ogni iterazione restringe lo spazio di progettazione man mano che emergono i vincoli a livello di componente e i requisiti vengono progressivamente soddisfatti.
 
-![Il ciclo iterativo di dimensionamento per la progettazione di UAV marziani.](figures/sizing_loop_it.jpg){#fig:sizing-loop}
+![Il ciclo iterativo di dimensionamento per la progettazione di UAV marziani.](figures/it/sizing_loop_it.jpg){#fig:sizing-loop}
 
 ### Ambito dello studio attuale
 

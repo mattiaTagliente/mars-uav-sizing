@@ -305,7 +305,7 @@ The matching chart methodology and constraint diagram analysis are presented in 
 | Available | - | - | 718.2 | - |
 | Margin | - | - | 216.6 | 43.2% |
 
-![Hybrid VTOL energy budget visualisation showing required energy (hover, transition, cruise, reserve) versus available battery energy. The 43% margin provides adequate safety buffer for mission operations.](figures/energy_budget.png){#fig:energy-budget width=80%}
+![Hybrid VTOL energy budget visualisation showing required energy (hover, transition, cruise, reserve) versus available battery energy. The 43% margin provides adequate safety buffer for mission operations.](figures/en/energy_budget.png){#fig:energy-budget width=80%}
 
 The analysis shows that despite the high power requirement during hover (3178 W), the short hover duration (2 min) limits hover energy to only 25% of the mission total. The transition phases (2 × 30 s) add a modest 2.4% energy overhead, explicitly accounted for based on literature data scaled from the 25 kg PW Chimera to 10 kg. The majority of energy (72%) is consumed during the extended cruise phase, where the fixed-wing configuration operates at moderate power (318 W).
 

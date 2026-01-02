@@ -6,7 +6,7 @@ Several Mars UAV concepts have been proposed or demonstrated, providing referenc
 
 NASA Ingenuity is a 1.8 kg rotorcraft that demonstrated autonomous powered flight on Mars, completing 72 flights with cumulative flight time of approximately 129 minutes [@tzanetosIngenuityMarsHelicopter2022]<!-- #abs --> [@nasaIngenuityMarsHelicopter2024]<!-- #s:flights -->. Ingenuity validated technologies including autonomous navigation, rotor performance in thin atmosphere, and thermal survival through Martian nights.
 
-![NASA Ingenuity Mars Helicopter on the Martian surface [@nasaIngenuityMarsHelicopter2024]<!-- #fig:ingenuity -->.](figures/ingenuity.jpg){#fig:ingenuity width=50%}
+![NASA Ingenuity Mars Helicopter on the Martian surface [@nasaIngenuityMarsHelicopter2024]<!-- #fig:ingenuity -->.](figures/shared/ingenuity.jpg){#fig:ingenuity width=50%}
 
 ARES was a proposed 175 kg fixed-wing aircraft with rocket propulsion, designed for regional survey missions covering over 600 km at 1-2 km altitude [@braunDesignARESMars2006]<!-- #abs -->. ARES was a finalist in NASA's Mars Scout program but was not selected for flight.
 

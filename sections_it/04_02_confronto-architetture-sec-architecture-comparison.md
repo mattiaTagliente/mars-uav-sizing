@@ -69,7 +69,7 @@ La V invertita montata sui bracci consiste in due superfici di coda angolate ver
 
 La U invertita montata sui bracci presenta uno stabilizzatore orizzontale che collega le due estremità dei bracci, con stabilizzatori verticali che si estendono verso l'alto da ciascun braccio. L'analisi CFD ha rilevato che questa configurazione forniva il più alto angolo critico (18° vs 15° per altre configurazioni), buona stabilità longitudinale e manovrabilità favorevole per missioni di sorveglianza [@nugrohoPerformanceAnalysisEmpennage2022]<!-- #s:comparison -->. La configurazione a U invertita sui bracci ha raggiunto una buona efficienza di volo mentre l'aggiunta di una pinna ventrale ha ulteriormente migliorato la stabilità direzionale.
 
-![Viste laterali e posteriori di cinque configurazioni di coda: (a) convenzionale montata su fusoliera, (b) V-tail montata su fusoliera, (c) Y-tail montata su fusoliera, (d) V invertita montata sui bracci, e (e) U invertita montata sui bracci.](figures/tail_configurations.png){#fig:tail-configurations width=90%}
+![Viste laterali e posteriori di cinque configurazioni di coda: (a) convenzionale montata su fusoliera, (b) V-tail montata su fusoliera, (c) Y-tail montata su fusoliera, (d) V invertita montata sui bracci, e (e) U invertita montata sui bracci.](figures/it/configurazioni_coda.jpg){#fig:tail-configurations width=90%}
 
 ### Compromessi sui materiali strutturali
 

@@ -303,7 +303,7 @@ La metodologia del diagramma di matching e l'analisi del diagramma dei vincoli s
 | Disponibile | - | - | 718.2 | - |
 | Margine | - | - | 216.6 | 43.2% |
 
-![Visualizzazione del bilancio energetico del VTOL ibrido che mostra l'energia richiesta (hovering, transizione, crociera, riserva) rispetto all'energia della batteria disponibile. Il margine del 43.2% fornisce un adeguato buffer di sicurezza per le operazioni di missione.](figures/energy_budget_it.png){#fig:energy-budget width=80%}
+![Visualizzazione del bilancio energetico del VTOL ibrido che mostra l'energia richiesta (hovering, transizione, crociera, riserva) rispetto all'energia della batteria disponibile. Il margine del 43.2% fornisce un adeguato buffer di sicurezza per le operazioni di missione.](figures/it/energy_budget_it.png){#fig:energy-budget width=80%}
 
 L'analisi mostra che nonostante l'alto requisito di potenza durante l'hovering (3178 W), la breve durata dell'hovering (2 min) limita l'energia di hovering al 25% del totale della missione. Le transizioni (2 × 30 s) aggiungono un 2.4% di energia, contabilizzata esplicitamente. La maggior parte dell'energia è consumata durante la fase di crociera estesa, dove la configurazione ad ala fissa opera a potenza moderata (318 W).
 

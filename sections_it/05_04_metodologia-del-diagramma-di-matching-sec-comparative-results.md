@@ -99,11 +99,11 @@ Il vincolo energetico è verificato mediante valutazione esplicita del bilancio 
 
 Prima di esaminare ogni configurazione individualmente, @fig:ld-comparison attraverso @fig:endurance-comparison presentano le metriche di prestazione chiave per tutte e tre le architetture candidate.
 
-![Confronto dell'efficienza aerodinamica tra le configurazioni. L'L/D equivalente del velivolo a rotore di 4.0 è limitato dall'inefficienza del volo avanzato del rotore, mentre l'ala fissa raggiunge 11.7. Il VTOL ibrido raggiunge 10.5 a causa della penalità di resistenza dei rotori fermi.](figures/ld_comparison_it.png){#fig:ld-comparison width=80%}
+![Confronto dell'efficienza aerodinamica tra le configurazioni. L'L/D equivalente del velivolo a rotore di 4.0 è limitato dall'inefficienza del volo avanzato del rotore, mentre l'ala fissa raggiunge 11.7. Il VTOL ibrido raggiunge 10.5 a causa della penalità di resistenza dei rotori fermi.](figures/it/ld_comparison_it.png){#fig:ld-comparison width=80%}
 
-![Confronto dei requisiti di potenza. La potenza di hovering (3178 W) è identica per velivolo a rotore e VTOL ibrido. La potenza di crociera varia con l'efficienza aerodinamica: velivolo a rotore 460 W, ala fissa 286 W, VTOL ibrido 318 W.](figures/power_comparison_it.png){#fig:power-comparison width=85%}
+![Confronto dei requisiti di potenza. La potenza di hovering (3178 W) è identica per velivolo a rotore e VTOL ibrido. La potenza di crociera varia con l'efficienza aerodinamica: velivolo a rotore 460 W, ala fissa 286 W, VTOL ibrido 318 W.](figures/it/power_comparison_it.png){#fig:power-comparison width=85%}
 
-![Confronto dell'autonomia rispetto al requisito di 60 minuti (linea tratteggiata). Il velivolo a rotore soddisfa marginalmente a 63.17 min. L'ala fissa raggiunge 120.5 min ma non può soddisfare il requisito VTOL. Il VTOL ibrido raggiunge 89.55 min con margine adeguato.](figures/endurance_comparison_it.png){#fig:endurance-comparison width=80%}
+![Confronto dell'autonomia rispetto al requisito di 60 minuti (linea tratteggiata). Il velivolo a rotore soddisfa marginalmente a 63.17 min. L'ala fissa raggiunge 120.5 min ma non può soddisfare il requisito VTOL. Il VTOL ibrido raggiunge 89.55 min con margine adeguato.](figures/it/endurance_comparison_it.png){#fig:endurance-comparison width=80%}
 
 #### Analisi dei vincoli del velivolo a rotore
 
@@ -111,7 +111,7 @@ Per la configurazione a velivolo a rotore puro, gli assi del diagramma di matchi
 
 Lo spazio di progetto del velivolo a rotore è limitato dal margine ridotto di autonomia. Il bilancio energetico dominato dall'hovering (potenza di hovering 3178 W per 2 min consuma 106.0 Wh) lascia 468.5 Wh per la crociera (459.7 W in volo avanzato). La configurazione raggiunge 63.17 minuti di autonomia, con un margine del +5.284% sopra il requisito di 60 minuti.
 
-![Diagramma di matching per la configurazione a rotore. Il carico di potenza aumenta con il carico del disco secondo la teoria del disco attuatore. La curva rappresenta il vincolo di hovering da @eq:hover-constraint. Il punto di progetto (*) corrisponde al carico del disco selezionato di 30 N/m².](figures/matching_chart_rotorcraft_it.png){#fig:matching-chart-rotorcraft width=85%}
+![Diagramma di matching per la configurazione a rotore. Il carico di potenza aumenta con il carico del disco secondo la teoria del disco attuatore. La curva rappresenta il vincolo di hovering da @eq:hover-constraint. Il punto di progetto (*) corrisponde al carico del disco selezionato di 30 N/m².](figures/it/matching_chart_rotorcraft_it.png){#fig:matching-chart-rotorcraft width=85%}
 
 #### Analisi dei vincoli dell'ala fissa
 
@@ -119,7 +119,7 @@ Per la configurazione ad ala fissa pura, il diagramma di matching mostra un vinc
 
 La regione fattibile esiste e offre eccellente efficienza di potenza (286.4 W in crociera a MTOW 10.00 kg). Tuttavia, questa regione è inaccessibile perché l'aeromobile non può decollare senza una pista. La distanza di corsa di decollo di circa 1060 m assicura che nessun punto di progetto nella regione fattibile sia raggiungibile operativamente.
 
-![Diagramma di matching per la configurazione ad ala fissa. La curva del vincolo di crociera (blu) mostra il carico di potenza minimo che diminuisce verso il carico alare ottimale. Il vincolo di stallo (linea verde verticale) limita il carico alare massimo. Il punto di progetto (*) si trova all'intersezione della curva di crociera e del vincolo di stallo. Si noti l'assenza di un vincolo di hovering, poiché gli aeromobili ad ala fissa non possono effettuare il volo stazionario.](figures/matching_chart_fixed_wing_it.png){#fig:matching-chart-fixed-wing width=85%}
+![Diagramma di matching per la configurazione ad ala fissa. La curva del vincolo di crociera (blu) mostra il carico di potenza minimo che diminuisce verso il carico alare ottimale. Il vincolo di stallo (linea verde verticale) limita il carico alare massimo. Il punto di progetto (*) si trova all'intersezione della curva di crociera e del vincolo di stallo. Si noti l'assenza di un vincolo di hovering, poiché gli aeromobili ad ala fissa non possono effettuare il volo stazionario.](figures/it/matching_chart_fixed_wing_it.png){#fig:matching-chart-fixed-wing width=85%}
 
 #### Analisi dei vincoli del VTOL ibrido
 
@@ -143,7 +143,7 @@ La regione fattibile si trova sopra la linea del vincolo di hovering, a sinistra
 
 Il punto di progetto di riferimento è dominato dall'hovering. La potenza installata è determinata interamente dai requisiti di hovering; la potenza di crociera è abbondante. Il dimensionamento dell'ala è determinato dalle considerazioni di stallo ed efficienza aerodinamica, indipendente dalla potenza.
 
-![Diagramma di matching (diagramma dei vincoli) per la configurazione VTOL ibrida. Il vincolo di hovering (linea rossa orizzontale) domina, stabilendo il carico di potenza minimo richiesto. Il vincolo di stallo (linea verde verticale) limita il carico alare massimo. Il vincolo di crociera (curva blu) è facilmente soddisfatto sotto la linea di hovering. Il punto di progetto (*) si trova all'intersezione dei vincoli di hovering e stallo.](figures/matching_chart_it.png){#fig:matching-chart width=90%}
+![Diagramma di matching (diagramma dei vincoli) per la configurazione VTOL ibrida. Il vincolo di hovering (linea rossa orizzontale) domina, stabilendo il carico di potenza minimo richiesto. Il vincolo di stallo (linea verde verticale) limita il carico alare massimo. Il vincolo di crociera (curva blu) è facilmente soddisfatto sotto la linea di hovering. Il punto di progetto (*) si trova all'intersezione dei vincoli di hovering e stallo.](figures/it/matching_chart_it.png){#fig:matching-chart width=90%}
 
 ### Determinazione del punto di progetto di riferimento
 
