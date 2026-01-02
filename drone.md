@@ -327,8 +327,8 @@ Hybrid designs combine dedicated lift rotors for VTOL with a fixed wing for crui
 
 For Mars operations where in-flight repair is impossible, single-fault tolerance is essential. This is achieved through coaxial configurations for both propulsion systems:
 
-* **Lift system**: Eight motors in four coaxial pairs (octocopter configuration), where each coaxial pair has counter-rotating rotors sharing a structural mount. This allows controlled landing with any single motor failed.
-* **Cruise system**: Two coaxial contra-rotating tractor propellers at the bow, driven by independent motors. Each motor is sized to provide 60% of nominal cruise thrust, allowing mission continuation with reduced performance if either motor fails.
+* Lift system: Eight motors in four coaxial pairs (octocopter configuration), where each coaxial pair has counter-rotating rotors sharing a structural mount. This allows controlled landing with any single motor failed.
+* Cruise system: Two coaxial contra-rotating tractor propellers at the bow, driven by independent motors. Each motor is sized to provide 60% of nominal cruise thrust, allowing mission continuation with reduced performance if either motor fails.
 
 This architecture achieves near-fixed-wing cruise efficiency while retaining VTOL capability. The mass penalty for the dual propulsion system (10 motors total: 8 lift plus 2 cruise) is typically 20-25% of MTOW based on the commercial references in @tbl:reference-vtol and accounting for the redundant cruise motors. This penalty is acceptable given the operational flexibility and fault tolerance gained.
 
@@ -806,7 +806,7 @@ The sensitivity to payload fraction selection:
 
 A baseline MTOW of 10 kg is adopted for initial sizing. This value will be refined through the constraint analysis in @sec:constraint-analysis, where power requirements, wing loading, and endurance constraints are evaluated simultaneously.
 
-The payload mass of 1.00 kg is a **fixed mission constraint** derived from the selected camera and radio relay components (@sec:payload-systems). This payload-driven sizing ensures that the mission payload requirement is satisfied by construction. Any configuration that cannot carry 1.00 kg within the 10.00 kg MTOW envelope is infeasible.
+The payload mass of 1.00 kg is a fixed mission constraint derived from the selected camera and radio relay components (@sec:payload-systems). This payload-driven sizing ensures that the mission payload requirement is satisfied by construction. Any configuration that cannot carry 1.00 kg within the 10.00 kg MTOW envelope is infeasible.
 
 ### Mass fraction validation
 
@@ -1808,8 +1808,6 @@ A value of $(L/D)$ = 10.50 is adopted for the QuadPlane analysis, accounting for
 
 #### Cruise power
 
-Using the values from @sec:derived-requirements:
-
 Using the values from @sec:derived-requirements ($V$ = 40.00 m/s, $(L/D)$ = 10.50, $\eta_\text{prop}$ = 0.5500, $\eta_\text{motor}$ = 0.8500, $\eta_\text{ESC}$ = 0.9500), the combined cruise efficiency is: $\eta_\text{cruise} = 0.5500 \times 0.8500 \times 0.9500 = 0.4436$.
 
 For the baseline MTOW = 10.00 kg (weight $W$ = 37.11 N):
@@ -1946,10 +1944,7 @@ The dual propulsion system mass can be estimated using the propulsion mass fract
 
 $$m_\text{propulsion} = f_\text{prop} \times MTOW = 0.2000 \times 10.00 = 2.000 \text{ kg}$$ {#eq:propulsion-mass-estimate}
 
-For QuadPlane configurations, the propulsion mass is divided between lift and cruise systems. Analysis of commercial reference data (@tbl:reference-vtol) suggests the following split:
-
-* Lift system: approximately 60-70% of propulsion mass
-* Cruise system: approximately 30-40% of propulsion mass
+For QuadPlane configurations, the propulsion mass is divided between lift and cruise systems. Analysis of commercial reference data (@tbl:reference-vtol) suggests that the lift system accounts for approximately 60-70% of propulsion mass, while the cruise system accounts for approximately 30-40%.
 
 Using a 70:30 split (appropriate for the octocopter lift configuration with 8 motors):
 
@@ -3432,9 +3427,7 @@ This section defines the ground infrastructure required to support UAV operation
 
 ## Habitat hangar {#sec:habitat-hangar}
 
-The UAV requires protected storage and maintenance facilities integrated with the Mars habitat. The hangar design accommodates the QuadPlane configuration specified in @sec:geometry-selection. @fig:hangar-schematic illustrates the three-zone hangar architecture.
-
-![UAV hangar facility schematic showing pressurised storage bay, airlock transition zone, and external launch platform](figures/hangar_schematic.png){#fig:hangar-schematic}
+The UAV requires protected storage and maintenance facilities integrated with the Mars habitat. The hangar design accommodates the QuadPlane configuration specified in @sec:geometry-selection.
 
 ### UAV dimensional envelope
 
@@ -3693,12 +3686,12 @@ This feasibility study has assessed the viability of deploying an autonomous UAV
 
 ## Summary of findings {#sec:summary-findings}
 
-The study evaluated three candidate architectures—rotorcraft, fixed-wing, and hybrid VTOL—through constraint-based sizing analysis. Key findings include:
+The study evaluated three candidate architectures (rotorcraft, fixed-wing, and hybrid VTOL) through constraint-based sizing analysis. Key findings include:
 
 * The QuadPlane hybrid architecture provides an effective compromise between VTOL capability and cruise efficiency, achieving a 49% energy margin over mission requirements
 * Low Reynolds number effects (Re ≈ 55,000) significantly impact aerodynamic design; the SD8000 airfoil offers consistent low-drag performance with adequate stall margin (4.6°)
 * Hover power dominates motor sizing; fixed-wing cruise power is substantially lower than hover power, favoring configurations that minimize hover duration
-* Current battery technology (150 Wh/kg) enables practical mission durations of approximately 90 minutes with 20% reserve
+* Solid-state lithium-ion battery technology (270 Wh/kg) enables practical mission durations of approximately 90 minutes with 20% reserve
 * The pure rotorcraft configuration is marginally feasible but offers limited operational margin; the fixed-wing configuration is not feasible without runway infrastructure
 
 ## Recommendations {#sec:recommendations}
@@ -3730,7 +3723,7 @@ Several critical subsystems were identified but deferred to subsequent design ph
 * Thermal management analysis: detailed thermal modeling for the extreme Mars diurnal temperature range (approximately −80 °C to −20 °C). Design of active heating systems for battery and avionics thermal protection during night storage and flight operations
 * Structural analysis and detailed design: finite element analysis of the airframe, wing, and boom structure. Vibration analysis for rotor-induced loads. Material qualification for the Mars radiation and thermal environment. Fuselage length trade-off analysis: the benchmark-median fuselage ratio (0.50) was adopted without detailed optimization; shorter fuselages reduce structural mass and wetted area while longer fuselages provide more tail moment arm (enabling smaller tail surfaces) and more internal volume margin. Quantitative analysis of these competing effects is needed to identify the optimal configuration
 
-These methodology improvements and subsystem analyses are essential prerequisites for advancing from feasibility to preliminary design review (PDR).
+These methodology improvements and subsystem analyses are necessary prerequisites for advancing from feasibility to preliminary design review (PDR).
 
 ---
 

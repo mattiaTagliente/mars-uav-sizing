@@ -327,8 +327,8 @@ I design ibridi combinano rotori di sollevamento dedicati per il VTOL con un'ala
 
 Per le operazioni marziane dove la riparazione in volo è impossibile, la tolleranza a singolo guasto è essenziale. Ciò si ottiene attraverso configurazioni coassiali per entrambi i sistemi propulsivi:
 
-* **Sistema di sollevamento**: Otto motori in quattro coppie coassiali (configurazione ottacottero), dove ogni coppia coassiale ha rotori controrotanti che condividono un supporto strutturale. Ciò consente un atterraggio controllato con qualsiasi singolo motore guasto.
-* **Sistema di crociera**: Due eliche trattrici coassiali controrotanti a prua, azionate da motori indipendenti. Ogni motore è dimensionato per fornire il 60% della spinta di crociera nominale, permettendo la continuazione della missione con prestazioni ridotte se uno dei motori si guasta.
+* Sistema di sollevamento: Otto motori in quattro coppie coassiali (configurazione ottacottero), dove ogni coppia coassiale ha rotori controrotanti che condividono un supporto strutturale. Ciò consente un atterraggio controllato con qualsiasi singolo motore guasto.
+* Sistema di crociera: Due eliche trattrici coassiali controrotanti a prua, azionate da motori indipendenti. Ogni motore è dimensionato per fornire il 60% della spinta di crociera nominale, permettendo la continuazione della missione con prestazioni ridotte se uno dei motori si guasta.
 
 Questa architettura raggiunge un'efficienza di crociera vicina all'ala fissa pur mantenendo la capacità VTOL. La penalità di massa per il sistema di propulsione duale (10 motori totali: 8 di sollevamento più 2 di crociera) è tipicamente il 20-25% dell'MTOW basato sui riferimenti commerciali in @tbl:reference-vtol e tenendo conto dei motori di crociera ridondanti. Questa penalità è accettabile data la flessibilità operativa e la tolleranza ai guasti guadagnate.
 
@@ -806,7 +806,7 @@ La sensibilità alla selezione della frazione di payload:
 
 Viene adottato un MTOW di base di 10 kg per il dimensionamento iniziale. Questo valore sarà affinato attraverso l'analisi dei vincoli in @sec:constraint-analysis, dove i requisiti di potenza, il carico alare e i vincoli di autonomia sono valutati simultaneamente.
 
-La massa del payload di 1.00 kg è un **vincolo di missione fisso** derivato dai componenti selezionati per camera e relè radio (@sec:payload-systems). Questo dimensionamento basato sul payload garantisce che il requisito di payload della missione sia soddisfatto per costruzione. Qualsiasi configurazione che non possa trasportare 1.00 kg entro l'involucro MTOW di 10.00 kg è non fattibile.
+La massa del payload di 1.00 kg è un vincolo di missione fisso derivato dai componenti selezionati per camera e relè radio (@sec:payload-systems). Questo dimensionamento basato sul payload garantisce che il requisito di payload della missione sia soddisfatto per costruzione. Qualsiasi configurazione che non possa trasportare 1.00 kg entro l'involucro MTOW di 10.00 kg è non fattibile.
 
 ### Validazione delle frazioni di massa
 
@@ -1808,8 +1808,6 @@ Un valore di $(L/D)$ = 10.50 è adottato per l'analisi del QuadPlane, tenendo co
 
 #### Potenza di crociera
 
-Utilizzando i valori da @sec:derived-requirements:
-
 Utilizzando i valori da @sec:derived-requirements ($V$ = 40.00 m/s, $(L/D)$ = 10.50, $\eta_\text{elica}$ = 0.5500, $\eta_\text{motore}$ = 0.8500, $\eta_\text{ESC}$ = 0.9500), l'efficienza di crociera combinata è: $\eta_\text{crociera} = 0.5500 \times 0.8500 \times 0.9500 = 0.4436$.
 
 Per l'MTOW di base = 10.00 kg (peso $W$ = 37.11 N):
@@ -1860,7 +1858,7 @@ Questo valore rappresenta circa il 9.4% dell'energia di hovering (106 Wh) o il 2
 
 #### Contesto della letteratura
 
-L'omissione dell'energia di transizione ? comune negli studi preliminari. Uno studio di simulazione NASA ha dichiarato esplicitamente che "il fabbisogno di potenza e il consumo energetico durante la transizione tra le fasi di volo sono stati ignorati in questo studio" [@kulkarniSimulationStudiesUrban2022]<!-- #s:simplification -->. Per il Mars UAV, dove i margini energetici determinano il successo della missione, la modellazione esplicita ? preferibile anche se semplificata.
+L'omissione dell'energia di transizione è comune negli studi preliminari. Uno studio di simulazione NASA ha dichiarato esplicitamente che "il fabbisogno di potenza e il consumo energetico durante la transizione tra le fasi di volo sono stati ignorati in questo studio" [@kulkarniSimulationStudiesUrban2022]<!-- #s:simplification -->. Per il Mars UAV, dove i margini energetici determinano il successo della missione, la modellazione esplicita è preferibile anche se semplificata.
 
 La teoria del corridoio di transizione per velivoli VTOL a tilt-rotor indica che le transizioni fattibili si collocano entro una regione limitata nello spazio velocità-angolo di beccheggio, vincolata dai limiti di stallo alle basse velocità e dalla potenza disponibile alle alte velocità [@zhaoDevelopmentMultimodeFlight2023]<!-- #s:corridor -->. Per un QuadPlane il corridoio è più semplice, ma i vincoli di equilibrio di portanza restano rilevanti.
 
@@ -1944,10 +1942,7 @@ La massa del sistema di propulsione doppia può essere stimata utilizzando la fr
 
 $$m_\text{propulsione} = f_\text{prop} \times MTOW = 0.2000 \times 10.00 = 2.000 \text{ kg}$$ {#eq:propulsion-mass-estimate}
 
-Per le configurazioni QuadPlane, la massa di propulsione è divisa tra i sistemi di sollevamento e crociera. L'analisi dei dati di riferimento commerciali (@tbl:reference-vtol) suggerisce la seguente ripartizione:
-
-* Sistema di sollevamento: approssimativamente 60-70% della massa di propulsione
-* Sistema di crociera: approssimativamente 30-40% della massa di propulsione
+Per le configurazioni QuadPlane, la massa di propulsione è divisa tra i sistemi di sollevamento e crociera. L'analisi dei dati di riferimento commerciali (@tbl:reference-vtol) suggerisce che il sistema di sollevamento rappresenta approssimativamente il 60-70% della massa di propulsione, mentre il sistema di crociera rappresenta approssimativamente il 30-40%.
 
 Utilizzando una ripartizione 70:30 (appropriata per la configurazione di sollevamento ottacottero con 8 motori):
 
@@ -3330,9 +3325,7 @@ Questa sezione definisce l'infrastruttura di terra richiesta per supportare le o
 
 ## Hangar dell'habitat {#sec:habitat-hangar}
 
-L'UAV richiede strutture di stoccaggio e manutenzione protette integrate con l'habitat marziano. Il progetto dell'hangar tiene conto della configurazione QuadPlane specificata in @sec:geometry-selection. La @fig:hangar-schematic illustra l'architettura dell'hangar a tre zone.
-
-![Schema della struttura hangar UAV che mostra la baia di stoccaggio pressurizzata, la zona di transizione dell'airlock e la piattaforma esterna di lancio](figures/hangar_schematic.png){#fig:hangar-schematic}
+L'UAV richiede strutture di stoccaggio e manutenzione protette integrate con l'habitat marziano. Il progetto dell'hangar tiene conto della configurazione QuadPlane specificata in @sec:geometry-selection. 
 
 ### Ingombro dimensionale dell'UAV
 
@@ -3590,12 +3583,12 @@ Questo studio di fattibilità ha valutato la possibilità di impiegare un UAV au
 
 ## Sintesi dei risultati {#sec:summary-findings}
 
-Lo studio ha valutato tre architetture candidate—velivolo a rotore, ad ala fissa e VTOL ibrido—attraverso un'analisi di dimensionamento basata su vincoli. I risultati chiave includono:
+Lo studio ha valutato tre architetture candidate (velivolo a rotore, ad ala fissa e VTOL ibrido) attraverso un'analisi di dimensionamento basata su vincoli. I risultati chiave includono:
 
 * L'architettura ibrida QuadPlane fornisce un compromesso efficace tra capacità VTOL e efficienza di crociera, raggiungendo un margine energetico del 49% rispetto ai requisiti di missione
 * Gli effetti a basso numero di Reynolds (Re ≈ 55,000) impattano significativamente il progetto aerodinamico; il profilo SD8000 offre prestazioni di resistenza consistenti con adeguato margine di stallo (4.6°)
 * La potenza di hovering domina il dimensionamento dei motori; la potenza di crociera ad ala fissa è sostanzialmente inferiore alla potenza di hovering, favorendo configurazioni che minimizzano la durata dell'hovering
-* L'attuale tecnologia delle batterie (150 Wh/kg) consente durate di missione pratiche di circa 90 minuti con riserva del 20%
+* La tecnologia delle batterie al litio a stato solido (270 Wh/kg) consente durate di missione pratiche di circa 90 minuti con riserva del 20%
 * La configurazione a solo rotore è marginalmente fattibile ma offre margine operativo limitato; la configurazione ad ala fissa non è fattibile senza infrastruttura di pista
 
 ## Raccomandazioni {#sec:recommendations}
@@ -3625,9 +3618,9 @@ Diversi sottosistemi critici sono stati identificati ma rinviati alle successive
 
 * Progettazione del sistema avionico: selezione e integrazione del controllore di volo, unità di misura inerziale, altimetro e sensori di dati aria appropriati per l'atmosfera marziana a bassa densità. Definizione dell'architettura del collegamento telemetrico tra UAV e habitat
 * Analisi della gestione termica: modellazione termica dettagliata per l'estremo intervallo di temperatura diurna marziana (circa da −80 °C a −20 °C). Progettazione di sistemi di riscaldamento attivo per la protezione termica di batteria e avionica durante lo stoccaggio notturno e le operazioni di volo
-* Analisi strutturale e progettazione di dettaglio: analisi agli elementi finiti della cellula, ala e struttura del boom. Analisi delle vibrazioni per i carichi indotti dal rotore. Qualificazione dei materiali per l'ambiente radiativo e termico marziano
+* Analisi strutturale e progettazione di dettaglio: analisi agli elementi finiti della cellula, ala e struttura del boom. Analisi delle vibrazioni per i carichi indotti dal rotore. Qualificazione dei materiali per l'ambiente radiativo e termico marziano. Analisi di trade-off della lunghezza della fusoliera: il rapporto di fusoliera mediano del benchmark (0.50) è stato adottato senza ottimizzazione dettagliata; fusoliere più corte riducono la massa strutturale e l'area bagnata mentre fusoliere più lunghe forniscono maggior braccio di momento della coda (consentendo superfici di coda più piccole) e maggior margine di volume interno. È necessaria un'analisi quantitativa di questi effetti in competizione per identificare la configurazione ottimale
 
-Questi miglioramenti metodologici e analisi dei sottosistemi sono prerequisiti essenziali per avanzare dalla fattibilità alla revisione del progetto preliminare (PDR).
+Questi miglioramenti metodologici e analisi dei sottosistemi sono prerequisiti necessari per avanzare dalla fattibilità alla revisione del progetto preliminare (PDR).
 
 ---
 
