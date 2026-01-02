@@ -176,7 +176,7 @@ Since $W = MTOW \times g_\text{Mars}$, the MTOW terms cancel:
 
 $$t_\text{endurance} = \frac{f_\text{batt} \times e_\text{spec} \times DoD \times \eta_\text{batt} \times (L/D) \times \eta_\text{cruise}}{g_\text{Mars} \times V}$$ {#eq:endurance-fixedwing}
 
-This is the endurance equation for fixed-wing configuration. Note that endurance is independent of MTOW for fixed mass fractions—the same result as for rotorcraft (@eq:endurance-simple).
+This is the endurance equation for fixed-wing configuration. Note that endurance is independent of MTOW for fixed mass fractions, the same result as for rotorcraft (@eq:endurance-simple).
 
 #### Endurance calculation
 
@@ -247,7 +247,7 @@ For the estimated ground roll, using the standard ground roll estimation with av
 
 $$S_\text{TO} = \frac{38.5^2}{2 \times 0.7000} = \frac{1482}{1.400} = 1059 \text{ m}$$ {#eq:takeoff-distance}
 
-The takeoff ground roll of approximately 1060 m is impractical for Mars operations—no prepared runway of this length exists or can reasonably be constructed near a habitat.
+The takeoff ground roll of approximately 1060 m is impractical for Mars operations: no prepared runway of this length exists or can reasonably be constructed near a habitat.
 
 Even with wing loading constrained by the stall speed requirement (13.82 N/m² at the design point), the required runway length is prohibitive. The problem is that low atmospheric density requires substantial ground roll distance regardless of wing sizing.
 

@@ -2,7 +2,7 @@
 
 ## Iterative sizing approach {#sec:iterative-sizing}
 
-The development of this Mars UAV follows an iterative sizing methodology that balances theoretical analysis with practical component constraints. Unlike conventional terrestrial aircraft design, where mature scaling laws and extensive databases exist, Mars aircraft design requires careful integration of limited flight heritage with scaled analysis from reference cases.
+The development of this Mars UAV follows an iterative sizing methodology that balances theoretical analysis with practical component constraints. Unlike conventional terrestrial aircraft design, where mature scaling laws and extensive databases exist, Mars aircraft design requires integration of limited flight heritage with scaled analysis from reference cases.
 
 The design process proceeds through four distinct phases, with feedback loops enabling refinement at each stage:
 
@@ -17,7 +17,7 @@ The design process proceeds through four distinct phases, with feedback loops en
 
 ### Current study scope
 
-This feasibility study represents the first iteration of the described four-phase cycle. Phases 1 (initial hypotheses) and 2 (preliminary sizing) are complete: reference data analysis establishes initial parameters (@sec:reference-data), constraint-based sizing determines the design point (@sec:constraint-analysis), and configuration trade-offs identify the hybrid VTOL as the selected architecture (@sec:architecture-selection). Phases 3 (component selection) and 4 (verification) are partially addressed through representative commercial components and analytical verification against mission requirements.
+This feasibility study represents the first iteration of the described four-phase cycle. Phases 1 (initial hypotheses) and 2 (preliminary sizing) are reported as follows: reference data analysis establishes initial parameters (@sec:reference-data), constraint-based sizing determines the design point (@sec:constraint-analysis), and configuration trade-offs identify the hybrid VTOL as the selected architecture (@sec:architecture-selection). Phases 3 (component selection) and 4 (verification) are addressed through representative commercial components and analytical verification against mission requirements.
 
 The numerical results presented in @sec:constraint-analysis are evaluated at a fixed baseline MTOW of 10.00 kg, derived from mass fraction analysis (@sec:initial-mass-estimate). This baseline case approach enables direct comparison of configuration performance under identical mass and energy constraints. A closed-loop sizing iteration—where MTOW is adjusted to exactly satisfy mission requirements—is deferred to subsequent design phases.
 

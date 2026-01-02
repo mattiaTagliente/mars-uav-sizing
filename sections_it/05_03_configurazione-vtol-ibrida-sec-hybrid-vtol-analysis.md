@@ -12,7 +12,7 @@ La configurazione QuadPlane consiste in due sistemi propulsivi distinti ottimizz
 
 Il sistema di sollevamento (per l'hovering) comprende quattro o più rotori elettrici in una disposizione quadricottero o simile, dimensionati solo per la spinta di hovering (operazione di breve durata), posizionati per minimizzare l'interferenza con l'aerodinamica dell'ala, e inattivi durante la crociera (fermi o ripiegati).
 
-Il sistema di crociera (per il volo avanzato) utilizza un'ala per la generazione di portanza ed eliche trattrici coassiali controrotanti per la spinta, dimensionato per una crociera efficiente a $(L/D)_\text{max}$, e inattivo durante l'hovering.
+Il sistema di crociera (per il volo avanzato) utilizza un'ala per la generazione di portanza ed eliche traenti coassiali controrotanti per la spinta, dimensionato per una crociera efficiente a $(L/D)_\text{max}$, e inattivo durante l'hovering.
 
 Questa architettura consente l'ottimizzazione disaccoppiata: ogni sistema propulsivo opera solo nel suo regime ottimale. I rotori di sollevamento sono dimensionati per la spinta di hovering senza compromessi per l'efficienza in volo avanzato, mentre l'ala e le eliche di crociera sono ottimizzati per la massima efficienza aerodinamica senza requisiti di capacità VTOL.
 

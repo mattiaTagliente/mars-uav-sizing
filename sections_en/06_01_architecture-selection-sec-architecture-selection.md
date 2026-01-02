@@ -8,7 +8,7 @@ This section consolidates the configuration comparison from the constraint analy
 
 #### Quantitative summary
 
-@tbl:config-comparison synthesises the analyses of the three candidate configurations—rotorcraft (@sec:rotorcraft-analysis), fixed-wing (@sec:fixed-wing-analysis), and hybrid VTOL (@sec:hybrid-vtol-analysis).
+@tbl:config-comparison synthesises the analyses of the three candidate configurations, rotorcraft (@sec:rotorcraft-analysis), fixed-wing (@sec:fixed-wing-analysis), and hybrid VTOL (@sec:hybrid-vtol-analysis).
 
 | Criterion | Rotorcraft | Fixed-Wing | Hybrid VTOL |
 |:----------|:----------:|:----------:|:-----------:|
@@ -51,7 +51,7 @@ $^b$ QuadPlane can glide in cruise mode if cruise motor fails, extending time fo
 
 : Aerodynamic efficiency comparison {#tbl:aerodynamic-efficiency-comparison}
 
-Fixed-wing and hybrid VTOL configurations share similar cruise efficiency because the QuadPlane uses wing lift during cruise. The 10% reduction in QuadPlane L/D (from 11.7 to 10.5) accounts for parasitic drag from the stopped lift rotors and their mounting hardware. Rotorcraft, constrained by rotor-borne flight throughout the mission, achieves only $(L/D)_\text{eff} \approx 4$—approximately one-third of fixed-wing efficiency.
+Fixed-wing and hybrid VTOL configurations share similar cruise efficiency because the QuadPlane uses wing lift during cruise. The 10% reduction in QuadPlane L/D (from 11.7 to 10.5) accounts for parasitic drag from the stopped lift rotors and their mounting hardware. Rotorcraft, constrained by rotor-borne flight throughout the mission, achieves only $(L/D)_\text{eff} \approx 4$, approximately one-third of fixed-wing efficiency.
 
 #### Power requirements comparison
 
@@ -63,7 +63,7 @@ Fixed-wing and hybrid VTOL configurations share similar cruise efficiency becaus
 
 : Power loading comparison {#tbl:power-requirements}
 
-For the hybrid VTOL, hover consumes 3178 W (85.7 W/N), but cruise requires only 318 W (8.6 W/N)—approximately ten times lower. This disparity fundamentally changes the energy equation when hover time is minimised.
+For the hybrid VTOL, hover consumes 3178 W (85.7 W/N), but cruise requires only 318 W (8.6 W/N), approximately ten times lower. This disparity fundamentally changes the energy equation when hover time is minimised.
 
 ### Elimination of alternatives
 

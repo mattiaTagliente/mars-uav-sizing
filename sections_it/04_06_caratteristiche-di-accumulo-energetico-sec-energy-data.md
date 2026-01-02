@@ -6,7 +6,7 @@ La selezione della tecnologia delle batterie è importante per l'autonomia dell'
 
 ### Specifiche batterie di riferimento {#sec:reference-battery-specs}
 
-La capacità e la tecnologia delle batterie variano tra i progetti. Le batterie al litio-ione allo stato solido e semi-solido stanno emergendo per applicazioni ad alta autonomia, offrendo migliore densità energetica e prestazioni a basse temperature.
+La capacità e la tecnologia delle batterie variano tra i progetti. Le batterie Li-Ion allo stato solido e semi-solido stanno emergendo per applicazioni ad alta autonomia, offrendo migliore densità energetica e prestazioni a basse temperature.
 
 : Specifiche batterie UAV di riferimento {#tbl:reference-battery}
 

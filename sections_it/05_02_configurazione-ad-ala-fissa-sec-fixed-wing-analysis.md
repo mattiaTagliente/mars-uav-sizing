@@ -176,7 +176,7 @@ Poiché $W = MTOW \times g_\text{Marte}$, i termini MTOW si cancellano:
 
 $$t_\text{autonomia} = \frac{f_\text{batt} \times e_\text{spec} \times DoD \times \eta_\text{batt} \times (L/D) \times \eta_\text{crociera}}{g_\text{Marte} \times V}$$ {#eq:endurance-fixedwing}
 
-Questa è l'equazione dell'autonomia per la configurazione ad ala fissa. Si noti che l'autonomia è indipendente dall'MTOW per frazioni di massa fisse—lo stesso risultato del velivolo a rotore (@eq:endurance-simple).
+Questa è l'equazione dell'autonomia per la configurazione ad ala fissa. Si noti che l'autonomia è indipendente dall'MTOW per frazioni di massa fisse, lo stesso risultato del velivolo a rotore (@eq:endurance-simple).
 
 #### Calcolo dell'autonomia
 
@@ -247,7 +247,7 @@ Per la stima della corsa di decollo, utilizzando la stima standard della corsa d
 
 $$S_\text{TO} = \frac{38.5^2}{2 \times 0.7000} = \frac{1482}{1.400} = 1059 \text{ m}$$ {#eq:takeoff-distance}
 
-La corsa di decollo di circa 1060 m è impraticabile per le operazioni su Marte—nessuna pista preparata di questa lunghezza esiste o può ragionevolmente essere costruita vicino a un habitat.
+La corsa di decollo di circa 1060 m è impraticabile per le operazioni su Marte: nessuna pista preparata di questa lunghezza esiste o può ragionevolmente essere costruita vicino a un habitat.
 
 Anche con il carico alare vincolato dal requisito di velocità di stallo (13.82 N/m² al punto di progetto), la lunghezza della pista richiesta è proibitiva. Il problema è che la bassa densità atmosferica richiede una distanza di corsa di decollo sostanziale indipendentemente dal dimensionamento dell'ala.
 

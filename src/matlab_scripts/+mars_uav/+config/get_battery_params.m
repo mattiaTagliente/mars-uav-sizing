@@ -1,0 +1,13 @@
+function batt = get_battery_params()
+%GET_BATTERY_PARAMS Restituisce i parametri batteria.
+
+spec = mars_uav.config.get_param('battery.specifications');
+util = mars_uav.config.get_param('battery.utilization');
+
+batt = struct( ...
+    'e_spec_Wh_kg', spec.specific_energy_Wh_kg, ...
+    'dod', util.depth_of_discharge, ...
+    'eta_discharge', util.discharge_efficiency ...
+);
+end
+

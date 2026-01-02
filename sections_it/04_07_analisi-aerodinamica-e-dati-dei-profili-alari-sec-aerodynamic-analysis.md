@@ -20,12 +20,12 @@ A numeri di Reynolds inferiori a 100,000, i calcoli dello strato limite XFOIL mo
 | Profilo | Re test | $C_{L,\text{max}}$ | $\alpha_\text{stallo}$ | $(L/D)_\text{max}$ | $C_L$ a $(L/D)_\text{max}$ | Fonte |
 |:--------|--------:|-------------------:|----------------------:|-------------------:|----------------------------:|:-------|
 | E387    |  61,000 |               1.22 |                 10.2° |               46.6 |                        1.20 | Vol. 1 |
-| SD8000  |  60.800 |               1.15 |                 11.5° |               45.4 |                        0.94 | Vol. 1 |
-| S7055   |  60.700 |               1.23 |                  9.7° |               41.6 |                        1.23 | Vol. 1 |
-| AG455ct |  60.157 |               1.06 |                  9.2° |               40.0 |                        0.56 | Vol. 5 |
-| SD7037B |  60.500 |               1.22 |                 11.1° |               36.6 |                        0.92 | Vol. 1 |
-| AG12    |  59.972 |               1.06 |                 10.3° |               34.6 |                        0.71 | Vol. 5 |
-| AG35-r  |  59.904 |               1.04 |                 11.4° |               30.7 |                        0.96 | Vol. 5 |
+| SD8000  |  60,800 |               1.15 |                 11.5° |               45.4 |                        0.94 | Vol. 1 |
+| S7055   |  60,700 |               1.23 |                  9.7° |               41.6 |                        1.23 | Vol. 1 |
+| AG455ct |  60,157 |               1.06 |                  9.2° |               40.0 |                        0.56 | Vol. 5 |
+| SD7037B |  60,500 |               1.22 |                 11.1° |               36.6 |                        0.92 | Vol. 1 |
+| AG12    |  59,972 |               1.06 |                 10.3° |               34.6 |                        0.71 | Vol. 5 |
+| AG35-r  |  59,904 |               1.04 |                 11.4° |               30.7 |                        0.96 | Vol. 5 |
 
 I profili riflessati della serie AG (AG455ct-02r, AG35-r) sono progettati per velivoli senza coda con caratteristiche di momento di beccheggio auto-stabilizzanti, che riduce la loro efficienza aerodinamica rispetto ai profili convenzionali con curvatura. Ai fini del dimensionamento, il coefficiente di portanza massimo è assunto pari a $C_{L,\text{max}}$ = 1.15 basato sul profilo SD8000 selezionato in @sec:airfoil-selection. L'SD8000 è scelto per il suo comportamento di resistenza coerente e il maggiore margine di stallo rispetto all'E387, che raggiunge un'efficienza di picco marginalmente superiore ma a un punto operativo molto vicino allo stallo.
 

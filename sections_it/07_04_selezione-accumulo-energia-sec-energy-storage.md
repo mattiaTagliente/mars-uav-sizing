@@ -33,9 +33,9 @@ I requisiti energetici sono derivati dall'analisi QuadPlane in @sec:hybrid-vtol-
 
 ### Motivazione della selezione
 
-Le batterie litio-ione a stato solido sono selezionate in base a: energia specifica di 270 Wh/kg, superando il requisito di 200 Wh/kg del 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; intervallo di temperatura da −20 a +60 °C, fornendo tolleranza base al freddo [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; vita ciclica di 1000 cicli all'80% DoD, supportando una campagna missione lunga; e costruzione con elettrolita solido, riducendo il rischio di thermal runaway nell'habitat marziano.
+Le batterie Li-Ion a stato solido sono selezionate in base a: energia specifica di 270 Wh/kg, superando il requisito di 200 Wh/kg del 35% [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; intervallo di temperatura da −20 a +60 °C, fornendo tolleranza base al freddo [@cgbtshenzhenchanggongbeitechnology222VUAVSolid2025]<!-- #specs -->; vita ciclica di 1000 cicli all'80% DoD, supportando una campagna missione lunga; e costruzione con elettrolita solido, riducendo il rischio di thermal runaway nell'habitat marziano.
 
-La tecnologia litio-ione semi-solido è mantenuta come alternativa se la disponibilità stato solido è limitata. A 180 Wh/kg, soddisfa comunque i requisiti di missione con margine ridotto.
+La tecnologia Li-Ion semi-solido è mantenuta come alternativa se la disponibilità stato solido è limitata. A 180 Wh/kg, soddisfa comunque i requisiti di missione con margine ridotto.
 
 Le batterie LiPo standard sono respinte per energia specifica inferiore (130-150 Wh/kg), intervallo di temperatura operativa ristretto (tipicamente 0 a +40 °C senza preriscaldamento) e vita ciclica più breve (circa 300 cicli).
 

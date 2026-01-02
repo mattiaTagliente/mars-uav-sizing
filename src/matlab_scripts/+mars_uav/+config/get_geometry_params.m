@@ -1,0 +1,13 @@
+function geom = get_geometry_params()
+%GET_GEOMETRY_PARAMS Restituisce i parametri geometrici.
+
+rotor = mars_uav.config.get_param('geometry.rotor');
+wing = mars_uav.config.get_param('geometry.wing');
+
+geom = struct( ...
+    'disk_loading', rotor.disk_loading_N_m2, ...
+    'taper_ratio', wing.taper_ratio, ...
+    'thickness_ratio', wing.thickness_ratio ...
+);
+end
+

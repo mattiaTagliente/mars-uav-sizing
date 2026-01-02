@@ -130,7 +130,7 @@ $$E_\text{cruise} = 318.5 \times (57.00/60.00) = 302.6 \text{ Wh}$$ {#eq:cruise-
 
 The transition from hover to cruise (and back) represents a distinct flight phase that is often omitted in preliminary feasibility studies. Recent literature emphasises that "the phase which consumes a big amount of electric energy is the transition from the vertical to the horizontal flight" [@goetzendorf-grabowskiOptimizationEnergyConsumption2022]<!-- #s:transition -->. Wind tunnel testing has revealed that simplified transition models significantly underestimate actual energy needs by not accounting for propeller drag effects in the airflow.
 
-A counter-intuitive finding from multi-mode flight simulation is that hybrid mode (during transition) can consume higher power than pure hover mode at certain airspeeds, because of the additional forward thrust required to maintain desired pitch angle while lift rotors remain active [@mathurMultiModeFlightSimulation2025]<!-- #s:hybrid-paradox -->. This phenomenon—termed the "hybrid mode power paradox"—means transition energy cannot be estimated by simple interpolation between hover and cruise power levels.
+A counter-intuitive finding from multi-mode flight simulation is that hybrid mode (during transition) can consume higher power than pure hover mode at certain airspeeds, because of the additional forward thrust required to maintain desired pitch angle while lift rotors remain active [@mathurMultiModeFlightSimulation2025]<!-- #s:hybrid-paradox -->. This phenomenon, termed the "hybrid mode power paradox", means transition energy cannot be estimated by simple interpolation between hover and cruise power levels.
 
 For the Mars UAV, transition dynamics are further complicated by the thin atmosphere and different gravity, affecting both aerodynamic forces and propulsion efficiency during the acceleration/deceleration phases.
 
@@ -178,7 +178,7 @@ The energy storage constraint is specific to hybrid VTOL, combining the power-in
 
 #### Total energy requirement
 
-The battery must provide energy for all flight phases—including the transition phases now explicitly modelled—plus an energy reserve:
+The battery must provide energy for all flight phases, including the transition phases now explicitly modelled, plus an energy reserve:
 
 $$E_\text{required} = E_\text{hover} + E_\text{transition} + E_\text{cruise} + E_\text{reserve}$$ {#eq:energy-required}
 
