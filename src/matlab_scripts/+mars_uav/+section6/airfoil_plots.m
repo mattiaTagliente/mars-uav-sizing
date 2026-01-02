@@ -53,7 +53,8 @@ classdef airfoil_plots
 
                 if strcmpi(name, highlight_airfoil)
                     [cl_max, idx_max] = max(cl);
-                    plot(ax, alpha(idx_max), cl_max, 'o', 'Color', color, 'MarkerSize', 8);
+                    plot(ax, alpha(idx_max), cl_max, 'o', 'Color', color, 'MarkerSize', 8, ...
+                        'HandleVisibility', 'off');
                     label = sprintf('$C_{L,%s}$ = %s', ...
                         mars_uav.section6.airfoil_plots.get_text('max_marker', lang), ...
                         mars_uav.core.format_number(cl_max, 2));
@@ -115,7 +116,8 @@ classdef airfoil_plots
 
                 if strcmpi(name, highlight_airfoil)
                     [cd_min, idx_min] = min(cd);
-                    plot(ax, alpha(idx_min), cd_min, 'o', 'Color', color, 'MarkerSize', 8);
+                    plot(ax, alpha(idx_min), cd_min, 'o', 'Color', color, 'MarkerSize', 8, ...
+                        'HandleVisibility', 'off');
                     label = sprintf('$C_{D,min}$ = %s', mars_uav.core.format_number(cd_min, 4));
                     text(ax, alpha(idx_min) + 2, cd_min + 0.01, label, 'Interpreter', 'latex', 'FontSize', 9);
                 end
@@ -177,7 +179,8 @@ classdef airfoil_plots
 
                 if strcmpi(name, highlight_airfoil)
                     [~, idx_max] = max(ld);
-                    plot(ax, cd(idx_max), cl(idx_max), 'o', 'Color', color, 'MarkerSize', 8);
+                    plot(ax, cd(idx_max), cl(idx_max), 'o', 'Color', color, 'MarkerSize', 8, ...
+                        'HandleVisibility', 'off');
                     text(ax, cd(idx_max) + 0.005, cl(idx_max) - 0.08, '$(L/D)_{max}$', ...
                         'Interpreter', 'latex', 'FontSize', 9);
                 end
@@ -240,7 +243,8 @@ classdef airfoil_plots
 
                 if strcmpi(name, highlight_airfoil) && ~isempty(ld_pos)
                     [ld_max, idx_max] = max(ld_pos);
-                    plot(ax, alpha_pos(idx_max), ld_max, 'o', 'Color', color, 'MarkerSize', 8);
+                    plot(ax, alpha_pos(idx_max), ld_max, 'o', 'Color', color, 'MarkerSize', 8, ...
+                        'HandleVisibility', 'off');
                     label = sprintf('$(L/D)_{max}$ = %s', mars_uav.core.format_number(ld_max, 1));
                     text(ax, alpha_pos(idx_max) - 3, ld_max + 3, label, 'Interpreter', 'latex', 'FontSize', 9);
                 end
