@@ -15,6 +15,13 @@ if /i "%~1"=="it" set "LANG=it"
 set "MATLAB_DIR=%ROOT_DIR%\src\matlab_scripts"
 set "FIG_DIR=%MATLAB_DIR%\figures"
 
+set "MARS_UAV_ROOT=%ROOT_DIR%"
+if exist "%ROOT_DIR%\src\mars_uav_sizing\config" (
+    set "MARS_UAV_CONFIG_DIR=%ROOT_DIR%\src\mars_uav_sizing\config"
+) else if exist "%MATLAB_DIR%\config" (
+    set "MARS_UAV_CONFIG_DIR=%MATLAB_DIR%\config"
+)
+
 if defined MATLAB_EXE (
     set "MATLAB_CMD=%MATLAB_EXE%"
 ) else (
@@ -36,7 +43,7 @@ if not defined MATLAB_CMD (
     exit /b 1
 )
 
-set "MATLAB_CMD_LINE=cd('%MATLAB_DIR%'); run_analysis('figures_lang','%LANG%','figures_output_dir','%FIG_DIR%');"
+set "MATLAB_CMD_LINE=restoredefaultpath; addpath(genpath('%MATLAB_DIR%')); cd('%MATLAB_DIR%'); run_analysis('figures_lang','%LANG%','figures_output_dir','%FIG_DIR%');"
 "%MATLAB_CMD%" -batch "%MATLAB_CMD_LINE%"
 
 exit /b %ERRORLEVEL%

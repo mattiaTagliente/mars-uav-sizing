@@ -58,6 +58,12 @@ end
 switch string(args.section)
     case 'all'
         results = run_all_analyses(verbose);
+    case '2'
+        print_header();
+        fprintf('\n%s\n', repmat('=', 1, 80));
+        fprintf(' SEZIONE 2: APPROCCIO ITERATIVO (NESSUN CALCOLO)\n');
+        fprintf('%s\n', repmat('=', 1, 80));
+        fprintf('  Nessun output numerico per la Sezione 2.\n');
     case '5'
         print_header();
         results.section5 = run_section5_analyses(verbose);
@@ -93,8 +99,8 @@ function print_header()
 
     fprintf('\n+%s+\n', repmat('=', 1, 78));
     fprintf('|%s|\n', center_text('STUDIO DI FATTIBILITA UAV MARTE (CASO BASE)', 78));
-    fprintf('|%s|\n', center_text('Sezione 5: Analisi dei vincoli', 78));
-    fprintf('|%s|\n', center_text('Modalita: DISACCOPPIATA - MTOW fissato', 78));
+    fprintf('|%s|\n', center_text('Analisi completa (Sezioni 3-8)', 78));
+    fprintf('|%s|\n', center_text('Modalita: Parametri da file YAML', 78));
     fprintf('+%s+\n\n', repmat('=', 1, 78));
 
     fprintf('  Esecuzione analisi: %s\n', timestamp);
@@ -312,6 +318,21 @@ function results = run_all_analyses(verbose)
     results = struct();
 
     fprintf('\n%s\n', repmat('=', 1, 80));
+    fprintf(' SEZIONE 2: APPROCCIO ITERATIVO (NESSUN CALCOLO)\n');
+    fprintf('%s\n', repmat('=', 1, 80));
+    fprintf('  Nessun output numerico per la Sezione 2.\n');
+
+    fprintf('\n%s\n', repmat('=', 1, 80));
+    fprintf(' SEZIONE 3: AMBIENTE OPERATIVO\n');
+    fprintf('%s\n', repmat('=', 1, 80));
+    results.section3 = run_section3_analyses(verbose);
+
+    fprintf('\n%s\n', repmat('=', 1, 80));
+    fprintf(' SEZIONE 4: DATI DI RIFERIMENTO\n');
+    fprintf('%s\n', repmat('=', 1, 80));
+    results.section4 = run_section4_analyses(verbose);
+
+    fprintf('\n%s\n', repmat('=', 1, 80));
     fprintf(' SEZIONE 5: ANALISI DEI VINCOLI\n');
     fprintf('%s\n', repmat('=', 1, 80));
     results.section5 = run_section5_analyses(verbose);
@@ -325,6 +346,11 @@ function results = run_all_analyses(verbose)
     fprintf(' SEZIONE 7: SELEZIONE COMPONENTI E VERIFICA\n');
     fprintf('%s\n', repmat('=', 1, 80));
     results.section7 = run_section7_analyses(verbose);
+
+    fprintf('\n%s\n', repmat('=', 1, 80));
+    fprintf(' SEZIONE 8: SISTEMA SOLARE\n');
+    fprintf('%s\n', repmat('=', 1, 80));
+    results.section8 = run_section8_analyses(verbose);
 
     fprintf('\n%s\n', repmat('=', 1, 80));
     fprintf(' ANALISI COMPLETATA\n');
