@@ -104,8 +104,6 @@ Un valore di $(L/D)$ = 10.50 è adottato per l'analisi del QuadPlane, tenendo co
 
 #### Potenza di crociera
 
-Utilizzando i valori da @sec:derived-requirements:
-
 Utilizzando i valori da @sec:derived-requirements ($V$ = 40.00 m/s, $(L/D)$ = 10.50, $\eta_\text{elica}$ = 0.5500, $\eta_\text{motore}$ = 0.8500, $\eta_\text{ESC}$ = 0.9500), l'efficienza di crociera combinata è: $\eta_\text{crociera} = 0.5500 \times 0.8500 \times 0.9500 = 0.4436$.
 
 Per l'MTOW di base = 10.00 kg (peso $W$ = 37.11 N):
@@ -156,7 +154,7 @@ Questo valore rappresenta circa il 9.4% dell'energia di hovering (106 Wh) o il 2
 
 #### Contesto della letteratura
 
-L'omissione dell'energia di transizione ? comune negli studi preliminari. Uno studio di simulazione NASA ha dichiarato esplicitamente che "il fabbisogno di potenza e il consumo energetico durante la transizione tra le fasi di volo sono stati ignorati in questo studio" [@kulkarniSimulationStudiesUrban2022]<!-- #s:simplification -->. Per il Mars UAV, dove i margini energetici determinano il successo della missione, la modellazione esplicita ? preferibile anche se semplificata.
+L'omissione dell'energia di transizione è comune negli studi preliminari. Uno studio di simulazione NASA ha dichiarato esplicitamente che "il fabbisogno di potenza e il consumo energetico durante la transizione tra le fasi di volo sono stati ignorati in questo studio" [@kulkarniSimulationStudiesUrban2022]<!-- #s:simplification -->. Per il Mars UAV, dove i margini energetici determinano il successo della missione, la modellazione esplicita è preferibile anche se semplificata.
 
 La teoria del corridoio di transizione per velivoli VTOL a tilt-rotor indica che le transizioni fattibili si collocano entro una regione limitata nello spazio velocità-angolo di beccheggio, vincolata dai limiti di stallo alle basse velocità e dalla potenza disponibile alle alte velocità [@zhaoDevelopmentMultimodeFlight2023]<!-- #s:corridor -->. Per un QuadPlane il corridoio è più semplice, ma i vincoli di equilibrio di portanza restano rilevanti.
 
@@ -240,10 +238,7 @@ La massa del sistema di propulsione doppia può essere stimata utilizzando la fr
 
 $$m_\text{propulsione} = f_\text{prop} \times MTOW = 0.2000 \times 10.00 = 2.000 \text{ kg}$$ {#eq:propulsion-mass-estimate}
 
-Per le configurazioni QuadPlane, la massa di propulsione è divisa tra i sistemi di sollevamento e crociera. L'analisi dei dati di riferimento commerciali (@tbl:reference-vtol) suggerisce la seguente ripartizione:
-
-* Sistema di sollevamento: approssimativamente 60-70% della massa di propulsione
-* Sistema di crociera: approssimativamente 30-40% della massa di propulsione
+Per le configurazioni QuadPlane, la massa di propulsione è divisa tra i sistemi di sollevamento e crociera. L'analisi dei dati di riferimento commerciali (@tbl:reference-vtol) suggerisce che il sistema di sollevamento rappresenta approssimativamente il 60-70% della massa di propulsione, mentre il sistema di crociera rappresenta approssimativamente il 30-40%.
 
 Utilizzando una ripartizione 70:30 (appropriata per la configurazione di sollevamento ottacottero con 8 motori):
 

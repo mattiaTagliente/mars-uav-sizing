@@ -104,8 +104,6 @@ A value of $(L/D)$ = 10.50 is adopted for the QuadPlane analysis, accounting for
 
 #### Cruise power
 
-Using the values from @sec:derived-requirements:
-
 Using the values from @sec:derived-requirements ($V$ = 40.00 m/s, $(L/D)$ = 10.50, $\eta_\text{prop}$ = 0.5500, $\eta_\text{motor}$ = 0.8500, $\eta_\text{ESC}$ = 0.9500), the combined cruise efficiency is: $\eta_\text{cruise} = 0.5500 \times 0.8500 \times 0.9500 = 0.4436$.
 
 For the baseline MTOW = 10.00 kg (weight $W$ = 37.11 N):
@@ -242,10 +240,7 @@ The dual propulsion system mass can be estimated using the propulsion mass fract
 
 $$m_\text{propulsion} = f_\text{prop} \times MTOW = 0.2000 \times 10.00 = 2.000 \text{ kg}$$ {#eq:propulsion-mass-estimate}
 
-For QuadPlane configurations, the propulsion mass is divided between lift and cruise systems. Analysis of commercial reference data (@tbl:reference-vtol) suggests the following split:
-
-* Lift system: approximately 60-70% of propulsion mass
-* Cruise system: approximately 30-40% of propulsion mass
+For QuadPlane configurations, the propulsion mass is divided between lift and cruise systems. Analysis of commercial reference data (@tbl:reference-vtol) suggests that the lift system accounts for approximately 60-70% of propulsion mass, while the cruise system accounts for approximately 30-40%.
 
 Using a 70:30 split (appropriate for the octocopter lift configuration with 8 motors):
 
