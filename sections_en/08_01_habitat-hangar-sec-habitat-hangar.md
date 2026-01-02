@@ -2,9 +2,7 @@
 
 ## Habitat hangar {#sec:habitat-hangar}
 
-The UAV requires protected storage and maintenance facilities integrated with the Mars habitat. The hangar design accommodates the QuadPlane configuration specified in @sec:geometry-selection. @fig:hangar-schematic illustrates the three-zone hangar architecture.
-
-![UAV hangar facility schematic showing pressurised storage bay, airlock transition zone, and external launch platform](figures/hangar_schematic.png){#fig:hangar-schematic}
+The UAV requires protected storage and maintenance facilities integrated with the Mars habitat. The hangar design accommodates the QuadPlane configuration specified in @sec:geometry-selection.
 
 ### UAV dimensional envelope
 

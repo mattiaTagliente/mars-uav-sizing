@@ -2,9 +2,7 @@
 
 ## Hangar dell'habitat {#sec:habitat-hangar}
 
-L'UAV richiede strutture di stoccaggio e manutenzione protette integrate con l'habitat marziano. Il progetto dell'hangar tiene conto della configurazione QuadPlane specificata in @sec:geometry-selection. La @fig:hangar-schematic illustra l'architettura dell'hangar a tre zone.
-
-![Schema della struttura hangar UAV che mostra la baia di stoccaggio pressurizzata, la zona di transizione dell'airlock e la piattaforma esterna di lancio](figures/hangar_schematic.png){#fig:hangar-schematic}
+L'UAV richiede strutture di stoccaggio e manutenzione protette integrate con l'habitat marziano. Il progetto dell'hangar tiene conto della configurazione QuadPlane specificata in @sec:geometry-selection. 
 
 ### Ingombro dimensionale dell'UAV
 

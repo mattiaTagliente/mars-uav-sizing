@@ -20,7 +20,7 @@ Several critical subsystems were identified but deferred to subsequent design ph
 * Thermal management analysis: detailed thermal modeling for the extreme Mars diurnal temperature range (approximately −80 °C to −20 °C). Design of active heating systems for battery and avionics thermal protection during night storage and flight operations
 * Structural analysis and detailed design: finite element analysis of the airframe, wing, and boom structure. Vibration analysis for rotor-induced loads. Material qualification for the Mars radiation and thermal environment. Fuselage length trade-off analysis: the benchmark-median fuselage ratio (0.50) was adopted without detailed optimization; shorter fuselages reduce structural mass and wetted area while longer fuselages provide more tail moment arm (enabling smaller tail surfaces) and more internal volume margin. Quantitative analysis of these competing effects is needed to identify the optimal configuration
 
-These methodology improvements and subsystem analyses are essential prerequisites for advancing from feasibility to preliminary design review (PDR).
+These methodology improvements and subsystem analyses are necessary prerequisites for advancing from feasibility to preliminary design review (PDR).
 
 ---
 

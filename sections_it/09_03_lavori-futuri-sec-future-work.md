@@ -18,9 +18,9 @@ Diversi sottosistemi critici sono stati identificati ma rinviati alle successive
 
 * Progettazione del sistema avionico: selezione e integrazione del controllore di volo, unità di misura inerziale, altimetro e sensori di dati aria appropriati per l'atmosfera marziana a bassa densità. Definizione dell'architettura del collegamento telemetrico tra UAV e habitat
 * Analisi della gestione termica: modellazione termica dettagliata per l'estremo intervallo di temperatura diurna marziana (circa da −80 °C a −20 °C). Progettazione di sistemi di riscaldamento attivo per la protezione termica di batteria e avionica durante lo stoccaggio notturno e le operazioni di volo
-* Analisi strutturale e progettazione di dettaglio: analisi agli elementi finiti della cellula, ala e struttura del boom. Analisi delle vibrazioni per i carichi indotti dal rotore. Qualificazione dei materiali per l'ambiente radiativo e termico marziano
+* Analisi strutturale e progettazione di dettaglio: analisi agli elementi finiti della cellula, ala e struttura del boom. Analisi delle vibrazioni per i carichi indotti dal rotore. Qualificazione dei materiali per l'ambiente radiativo e termico marziano. Analisi di trade-off della lunghezza della fusoliera: il rapporto di fusoliera mediano del benchmark (0.50) è stato adottato senza ottimizzazione dettagliata; fusoliere più corte riducono la massa strutturale e l'area bagnata mentre fusoliere più lunghe forniscono maggior braccio di momento della coda (consentendo superfici di coda più piccole) e maggior margine di volume interno. È necessaria un'analisi quantitativa di questi effetti in competizione per identificare la configurazione ottimale
 
-Questi miglioramenti metodologici e analisi dei sottosistemi sono prerequisiti essenziali per avanzare dalla fattibilità alla revisione del progetto preliminare (PDR).
+Questi miglioramenti metodologici e analisi dei sottosistemi sono prerequisiti necessari per avanzare dalla fattibilità alla revisione del progetto preliminare (PDR).
 
 ---
 
