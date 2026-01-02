@@ -395,17 +395,6 @@ classdef plotting
             text(2, available_energy, sprintf('%s Wh', mars_uav.core.format_number(available_energy, 0)), ...
                 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontWeight', 'bold');
 
-            margin_pct = (available_energy - total_required) / total_required * 100;
-            margin_text = mars_uav.core.format_number(abs(margin_pct), 0);
-            if margin_pct >= 0
-                margin_text = ['+' margin_text];
-            else
-                margin_text = ['-' margin_text];
-            end
-            text(1.5, (total_required + available_energy) / 2, ...
-                sprintf('%s: %s%%', mars_uav.visualization.plotting.get_text('margin', lang), margin_text), ...
-                'HorizontalAlignment', 'center', 'FontWeight', 'bold');
-
             hold off;
 
             if ~isempty(save_path)
