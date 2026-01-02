@@ -8,11 +8,11 @@ The matching chart, or constraint diagram, forms the analytical core of the sizi
 
 Different aircraft configurations require different constraint diagram formulations, reflecting their distinct performance drivers:
 
-* **Rotorcraft configurations** use a constraint diagram with power loading (P/W) on the vertical axis and **disk loading** (DL = T/A) on the horizontal axis. Since rotorcraft have no wing, wing loading is not a meaningful parameter. The hover power constraint dominates, with power loading increasing monotonically with disk loading according to actuator disk theory.
+* Rotorcraft configurations use a constraint diagram with power loading (P/W) on the vertical axis and disk loading (DL = T/A) on the horizontal axis. Since rotorcraft have no wing, wing loading is not a meaningful parameter. The hover power constraint dominates, with power loading increasing monotonically with disk loading according to actuator disk theory.
 
-* **Fixed-wing configurations** use power loading (P/W) versus **wing loading** (W/S) axes. The stall constraint appears as a vertical line limiting maximum wing loading, while the cruise constraint appears as a curve with minimum power at optimal wing loading. No hover constraint exists since fixed-wing aircraft cannot hover.
+* Fixed-wing configurations use power loading (P/W) versus wing loading (W/S) axes. The stall constraint appears as a vertical line limiting maximum wing loading, while the cruise constraint appears as a curve with minimum power at optimal wing loading. No hover constraint exists since fixed-wing aircraft cannot hover.
 
-* **Hybrid VTOL configurations** (QuadPlane) combine elements of both: wing loading applies to the cruise phase while disk loading applies to the hover phase. The constraint diagram uses P/W versus W/S axes, with the hover constraint appearing as a horizontal line (independent of wing loading) and the cruise and stall constraints as for fixed-wing.
+* Hybrid VTOL configurations (QuadPlane) combine elements of both: wing loading applies to the cruise phase while disk loading applies to the hover phase. The constraint diagram uses P/W versus W/S axes, with the hover constraint appearing as a horizontal line (independent of wing loading) and the cruise and stall constraints as for fixed-wing.
 
 This configuration-specific approach ensures that each architecture is evaluated in its natural constraint space, enabling meaningful comparison of feasibility margins.
 

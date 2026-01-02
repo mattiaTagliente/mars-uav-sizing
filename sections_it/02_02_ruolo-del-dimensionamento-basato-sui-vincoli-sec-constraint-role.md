@@ -8,11 +8,11 @@ Il diagramma di vincolo, o matching chart, costituisce il nucleo analitico della
 
 Diverse configurazioni di aeromobili richiedono formulazioni del diagramma di vincolo differenti, che riflettono i loro diversi fattori prestazionali:
 
-* **Configurazioni ad ala rotante** utilizzano un diagramma di vincolo con il carico di potenza (P/W) sull'asse verticale e il **carico del disco** (DL = T/A) sull'asse orizzontale. Poiché i velivoli ad ala rotante non hanno ali, il carico alare non è un parametro significativo. Il vincolo di potenza in hovering domina, con il carico di potenza che aumenta monotonicamente con il carico del disco secondo la teoria del disco attuatore.
+* Configurazioni ad ala rotante utilizzano un diagramma di vincolo con il carico di potenza (P/W) sull'asse verticale e il carico del disco (DL = T/A) sull'asse orizzontale. Poiché i velivoli ad ala rotante non hanno ali, il carico alare non è un parametro significativo. Il vincolo di potenza in hovering domina, con il carico di potenza che aumenta monotonicamente con il carico del disco secondo la teoria del disco attuatore.
 
-* **Configurazioni ad ala fissa** utilizzano il carico di potenza (P/W) in funzione del **carico alare** (W/S). Il vincolo di stallo appare come una linea verticale che limita il carico alare massimo, mentre il vincolo di crociera appare come una curva con potenza minima al carico alare ottimale. Non esiste alcun vincolo di hovering poiché gli aeromobili ad ala fissa non possono eseguire il volo stazionario.
+* Configurazioni ad ala fissa utilizzano il carico di potenza (P/W) in funzione del carico alare (W/S). Il vincolo di stallo appare come una linea verticale che limita il carico alare massimo, mentre il vincolo di crociera appare come una curva con potenza minima al carico alare ottimale. Non esiste alcun vincolo di hovering poiché gli aeromobili ad ala fissa non possono eseguire il volo stazionario.
 
-* **Configurazioni VTOL ibride** (QuadPlane) combinano elementi di entrambe: il carico alare si applica alla fase di crociera mentre il carico del disco si applica alla fase di hovering. Il diagramma di vincolo utilizza gli assi P/W rispetto a W/S, con il vincolo di hovering che appare come una linea orizzontale (indipendente dal carico alare) e i vincoli di crociera e stallo come per l'ala fissa.
+* Configurazioni VTOL ibride (QuadPlane) combinano elementi di entrambe: il carico alare si applica alla fase di crociera mentre il carico del disco si applica alla fase di hovering. Il diagramma di vincolo utilizza gli assi P/W rispetto a W/S, con il vincolo di hovering che appare come una linea orizzontale (indipendente dal carico alare) e i vincoli di crociera e stallo come per l'ala fissa.
 
 Questo approccio specifico per configurazione garantisce che ogni architettura sia valutata nel suo spazio di vincolo naturale, consentendo un confronto significativo dei margini di fattibilità.
 
