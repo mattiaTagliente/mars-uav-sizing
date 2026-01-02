@@ -80,7 +80,7 @@ La sensibilità alla selezione della frazione di payload:
 
 Viene adottato un MTOW di base di 10 kg per il dimensionamento iniziale. Questo valore sarà affinato attraverso l'analisi dei vincoli in @sec:constraint-analysis, dove i requisiti di potenza, il carico alare e i vincoli di autonomia sono valutati simultaneamente.
 
-La massa del payload di 1.00 kg è un **vincolo di missione fisso** derivato dai componenti selezionati per camera e relè radio (@sec:payload-systems). Questo dimensionamento basato sul payload garantisce che il requisito di payload della missione sia soddisfatto per costruzione. Qualsiasi configurazione che non possa trasportare 1.00 kg entro l'involucro MTOW di 10.00 kg è non fattibile.
+La massa del payload di 1.00 kg è un vincolo di missione fisso derivato dai componenti selezionati per camera e relè radio (@sec:payload-systems). Questo dimensionamento basato sul payload garantisce che il requisito di payload della missione sia soddisfatto per costruzione. Qualsiasi configurazione che non possa trasportare 1.00 kg entro l'involucro MTOW di 10.00 kg è non fattibile.
 
 ### Validazione delle frazioni di massa
 

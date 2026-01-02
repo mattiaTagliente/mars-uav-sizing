@@ -32,8 +32,8 @@ Hybrid designs combine dedicated lift rotors for VTOL with a fixed wing for crui
 
 For Mars operations where in-flight repair is impossible, single-fault tolerance is essential. This is achieved through coaxial configurations for both propulsion systems:
 
-* **Lift system**: Eight motors in four coaxial pairs (octocopter configuration), where each coaxial pair has counter-rotating rotors sharing a structural mount. This allows controlled landing with any single motor failed.
-* **Cruise system**: Two coaxial contra-rotating tractor propellers at the bow, driven by independent motors. Each motor is sized to provide 60% of nominal cruise thrust, allowing mission continuation with reduced performance if either motor fails.
+* Lift system: Eight motors in four coaxial pairs (octocopter configuration), where each coaxial pair has counter-rotating rotors sharing a structural mount. This allows controlled landing with any single motor failed.
+* Cruise system: Two coaxial contra-rotating tractor propellers at the bow, driven by independent motors. Each motor is sized to provide 60% of nominal cruise thrust, allowing mission continuation with reduced performance if either motor fails.
 
 This architecture achieves near-fixed-wing cruise efficiency while retaining VTOL capability. The mass penalty for the dual propulsion system (10 motors total: 8 lift plus 2 cruise) is typically 20-25% of MTOW based on the commercial references in @tbl:reference-vtol and accounting for the redundant cruise motors. This penalty is acceptable given the operational flexibility and fault tolerance gained.
 

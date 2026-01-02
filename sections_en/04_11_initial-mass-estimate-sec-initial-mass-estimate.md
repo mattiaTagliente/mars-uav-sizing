@@ -80,7 +80,7 @@ The sensitivity to payload fraction selection:
 
 A baseline MTOW of 10 kg is adopted for initial sizing. This value will be refined through the constraint analysis in @sec:constraint-analysis, where power requirements, wing loading, and endurance constraints are evaluated simultaneously.
 
-The payload mass of 1.00 kg is a **fixed mission constraint** derived from the selected camera and radio relay components (@sec:payload-systems). This payload-driven sizing ensures that the mission payload requirement is satisfied by construction. Any configuration that cannot carry 1.00 kg within the 10.00 kg MTOW envelope is infeasible.
+The payload mass of 1.00 kg is a fixed mission constraint derived from the selected camera and radio relay components (@sec:payload-systems). This payload-driven sizing ensures that the mission payload requirement is satisfied by construction. Any configuration that cannot carry 1.00 kg within the 10.00 kg MTOW envelope is infeasible.
 
 ### Mass fraction validation
 

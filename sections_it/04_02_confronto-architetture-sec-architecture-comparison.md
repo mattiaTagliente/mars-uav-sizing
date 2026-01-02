@@ -32,8 +32,8 @@ I design ibridi combinano rotori di sollevamento dedicati per il VTOL con un'ala
 
 Per le operazioni marziane dove la riparazione in volo è impossibile, la tolleranza a singolo guasto è essenziale. Ciò si ottiene attraverso configurazioni coassiali per entrambi i sistemi propulsivi:
 
-* **Sistema di sollevamento**: Otto motori in quattro coppie coassiali (configurazione ottacottero), dove ogni coppia coassiale ha rotori controrotanti che condividono un supporto strutturale. Ciò consente un atterraggio controllato con qualsiasi singolo motore guasto.
-* **Sistema di crociera**: Due eliche trattrici coassiali controrotanti a prua, azionate da motori indipendenti. Ogni motore è dimensionato per fornire il 60% della spinta di crociera nominale, permettendo la continuazione della missione con prestazioni ridotte se uno dei motori si guasta.
+* Sistema di sollevamento: Otto motori in quattro coppie coassiali (configurazione ottacottero), dove ogni coppia coassiale ha rotori controrotanti che condividono un supporto strutturale. Ciò consente un atterraggio controllato con qualsiasi singolo motore guasto.
+* Sistema di crociera: Due eliche trattrici coassiali controrotanti a prua, azionate da motori indipendenti. Ogni motore è dimensionato per fornire il 60% della spinta di crociera nominale, permettendo la continuazione della missione con prestazioni ridotte se uno dei motori si guasta.
 
 Questa architettura raggiunge un'efficienza di crociera vicina all'ala fissa pur mantenendo la capacità VTOL. La penalità di massa per il sistema di propulsione duale (10 motori totali: 8 di sollevamento più 2 di crociera) è tipicamente il 20-25% dell'MTOW basato sui riferimenti commerciali in @tbl:reference-vtol e tenendo conto dei motori di crociera ridondanti. Questa penalità è accettabile data la flessibilità operativa e la tolleranza ai guasti guadagnate.
 
